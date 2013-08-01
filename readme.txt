@@ -8,11 +8,11 @@ Stable tag: 1.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Give your customers a Supermarket / Department Store shopping experience. Sort and show products on the WooCommerce Shop page by category Ð auto show 'On Sale' or 'Featured' products first, Endless Scroll.
+Give your customers a Supermarket / Department Store shopping experience. Sort and show products on the WooCommerce Shop page by category - auto show 'On Sale' or 'Featured' products first, Endless Scroll.
   
 == Description ==
 
-Walk into any shop, Supermarket or Department store and what do you see Ð products organized and grouped in aisle and areas. 'Walk' into any WooCommerce store page and what does your customer / client see Ð an almost entirely random display of products sorted mostly by date of publishing.  That has always seemed crazy to us. What shop owner would just keep stacking new stock at the front of all the other stock in their shop in any order. None is the answer! So why is that exactly what all of our virtual WooCommerce stores do?
+Walk into any shop, Supermarket or Department store and what do you see - products organized and grouped in aisle and areas. 'Walk' into any WooCommerce store page and what does your customer / client see - an almost entirely random display of products sorted mostly by date of publishing.  That has always seemed crazy to us. What shop owner would just keep stacking new stock at the front of all the other stock in their shop in any order. None is the answer! So why is that exactly what all of our virtual WooCommerce stores do?
 
 We decided to build a plugin that would fix that. With WooCommerce Product Sort and Display installed you can:
 
@@ -68,7 +68,7 @@ Product positioning in a physical retail store is science. It is no different in
 This plugin has a Pro Version upgrade that add more functionality to this Free version. You will see all of the available upgrade features on the plugins admin panel, in the Yellow sidebar. Those Pro features include
 
 = Product Category Display Features =
-Upgrading to the Pro Version gives you all of the features that you get on the Shop page with the Lite Version applied to Product Categories, Subcategories and Product tag pages Ð plus more:
+Upgrading to the Pro Version gives you all of the features that you get on the Shop page with the Lite Version applied to Product Categories, Subcategories and Product tag pages - plus more:
 
 * Show Sub Categories with products on Parent Category page.
 * Set the number of products to show from Parent Cat with Endless Scroll - view more products.
@@ -147,7 +147,7 @@ The manual installation method involves downloading our plugin and uploading it 
 
 1. Show products by category on the WooCommerce Shop page.
 2. Use new Sort types to who your most important products where they should be - first up
-3. If your theme does not support endless scroll Ð activate the plugins Endless Scroll feature.
+3. If your theme does not support endless scroll - activate the plugins Endless Scroll feature.
 
  
 == Usage ==
