@@ -1,4 +1,4 @@
-== WooCommerce Product Sort and Display ==
+=== WooCommerce Product Sort and Display ===
 
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
