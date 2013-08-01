@@ -8,7 +8,7 @@ Stable tag: 1.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Give your customers a Supermarket / Department Store shopping experience. Sort and show products on the WooCommerce Shop page by category - auto show 'On Sale' or 'Featured' products first, Endless Scroll.
+Create a true Supermarket shopping experience. Sort and show products on Shop page by category - auto show On Sale or Featured first, Endless Scroll.
   
 == Description ==
 
