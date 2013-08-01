@@ -118,7 +118,7 @@ Upgrading to the Pro Version gives you all of the features that you get on the S
 
 [PRO Version](http://a3rev.com/shop/woocommerce-product-sort-and-display/) |
 [Documentation](http://docs.a3rev.com/user-guides/plugins-extensions/woocommerce/product-sort-and-display/) |
-[Support](https://a3rev.com/forums/forum/woocommerce-plugins/product-sort-and-display/)
+[Support](http://wordpress.org/support/plugin/woocommerce-product-sort-and-display/)
 
 
 == Installation ==
