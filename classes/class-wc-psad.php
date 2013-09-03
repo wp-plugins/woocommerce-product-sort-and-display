@@ -31,6 +31,7 @@ class WC_PSAD
 		
 		//Fix Responsi Theme.
 		add_action( 'woo_head', array( &$this, 'remove_responsi_action'), 11 );
+		add_action( 'a3rev_head', array( &$this, 'remove_responsi_action'), 11 );
 		add_action( 'wp_head', array( &$this, 'remove_woocommerce_pagination'), 10 );
 		add_action( 'woocommerce_after_shop_loop', array( &$this, 'woocommerce_pagination') );
 		
@@ -81,7 +82,7 @@ class WC_PSAD
 		<nav class="wc_pagination woo-pagination woocommerce-pagination">
 			<?php
 				echo paginate_links( apply_filters( 'woocommerce_pagination_args', array(
-					'base' 			=> str_replace( 999999999, '%#%', get_pagenum_link( 999999999 ) ),
+					'base' 			=> add_query_arg( 'paged', '%#%' ),
 					'format' 		=> '',
 					'current' 		=> max( 1, get_query_var('paged') ),
 					'total' 		=> $wp_query->max_num_pages,
@@ -106,7 +107,9 @@ class WC_PSAD
 			if($is_shop && get_option('psad_shop_page_enable') == 'yes'){
 				remove_action( 'woocommerce_after_shop_loop', 'woocommerce_pagination', 10 );
 				remove_action( 'woo_head', 'add_responsi_pagination_theme',11 );
+				remove_action( 'a3rev_head', 'add_responsi_pagination_theme',11 );
 				remove_action( 'woo_loop_after', 'responsi_pagination', 10, 0 );
+				remove_action( 'a3rev_loop_after', 'responsi_pagination', 10, 0 );
 				remove_action( 'responsi_catalog_ordering', 'woocommerce_catalog_ordering', 30 );
 			}
 		}
@@ -440,7 +443,7 @@ class WC_PSAD
 				'mid_size'		=> 3
 			);
 			if( $wp_rewrite->using_permalinks() && ! is_search() )
-				$defaults['base'] = user_trailingslashit( trailingslashit( add_query_arg( 'orderby', false, get_pagenum_link() ) ) . 'page/%#%' );
+				$defaults['base'] = user_trailingslashit( trailingslashit( add_query_arg( array( 'paged' => false, 'orderby' => false ) ) ) . 'page/%#%' );
 				
 			echo paginate_links( $defaults );
 			echo '</nav>';
@@ -455,6 +458,7 @@ class WC_PSAD
 				$psad_es_shop_bt_type = get_option( 'psad_es_shop_bt_type' );
 				$psad_es_shop_bt_text = esc_attr( stripslashes( get_option( 'psad_es_shop_link_text', '' ) ) );
 				$class = 'click_more_link';
+				$psad_es_shop_bt_class = '';
 				if ( $psad_es_shop_bt_type == 'button' ) { 
 					$class = 'click_more_button';
 					$psad_es_shop_bt_text = esc_attr( stripslashes( get_option( 'psad_es_shop_bt_text', '' ) ) );

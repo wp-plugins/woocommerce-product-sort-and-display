@@ -8,7 +8,7 @@ function wc_psad_install(){
 	//global $wp_rewrite;
 	WC_PSAD_Settings::set_setting();
 	WC_PSAD_Functions::auto_create_order_keys_all_products();
-	update_option('wc_psad_version', '1.0.0');
+	update_option('wc_psad_version', '1.0.1');
 	update_option('wc_psad_plugin', 'wc_psad');
 	delete_transient("wc_psad_update_info");
 	//$wp_rewrite->flush_rules();
@@ -30,7 +30,7 @@ add_action('init', 'psad_init');
 // Add text on right of Visit the plugin on Plugin manager page
 add_filter( 'plugin_row_meta', array('WC_PSAD_Settings_Hook', 'plugin_extra_links'), 10, 2 );
 
-update_option('wc_psad_version', '1.0.0');
+update_option('wc_psad_version', '1.0.1');
 
 global $wc_psad;
 $wc_psad = new WC_PSAD_Settings();

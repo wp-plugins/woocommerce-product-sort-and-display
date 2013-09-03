@@ -3,8 +3,8 @@
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
 Requires at least: 3.5
-Tested up to: 3.5.2
-Stable tag: 1.0.0
+Tested up to: 3.6
+Stable tag: 1.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -176,8 +176,18 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 == Changelog ==
 
+= 1.0.1 - 2013/09/03 =
+* Fixeds :
+	* Replaced get_pagenum_link() function with add_query_arg() function. Endless scroll not loading pages on sites with SSL redirects from https to http on shop and archive pages.
+	* Updated some prefixes to a3rev_ for compatibility with the a3revFramework.
+* Tweak :
+	* Tested for full compatibility with WordPress v3.6.0
+
 = 1.0.0 - 2013/07/23 =
 * First working release
 
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+Upgrade now for a page load bug fix on sites the have SSL
