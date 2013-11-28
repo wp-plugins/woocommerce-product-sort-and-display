@@ -178,7 +178,7 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 = 1.0.2 - 2013/11/28 =
 * Feature - Upgraded the plugin to the newly developed a3rev admin Framework with app style interface.
-* Feature - Admin panel Conditional logic and intuitive triggers. When setting is ON corresponding settings appear, OFF and they don’t show.
+* Feature - Admin panel Conditional logic and intuitive triggers. When setting is ON corresponding settings appear, OFF and they don't show.
 * Tweak - Moved admin from WooCommerce settings tab onto the WooCommerce menu items under the menu name Sort and Display.
 * Tweak - Sort & Display menus item tabs, Settings | Endless Scroll | View All & Count
 * Tweak - Endless Scroll tab has 3 sub menu items, Shop Page Scroll | Category Page Scroll | Parent Cat & Tag Page Scroll
