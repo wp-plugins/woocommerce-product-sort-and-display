@@ -117,26 +117,15 @@ nav.woo-pagination a:link, nav.woo-pagination a:visited, nav.woo-pagination a:ac
 
 /* Endless Scroll Style for Shop Page */
 <?php
+global $wc_psad_fonts_face, $wc_psad_admin_interface;
 $psad_es_shop_bt_type = get_option( 'psad_es_shop_bt_type' );
 // Button Style
 $psad_es_shop_bt_align = get_option( 'psad_es_shop_bt_align' );
 $psad_es_shop_bt_bg = get_option( 'psad_es_shop_bt_bg' );
 $psad_es_shop_bt_bg_from = get_option( 'psad_es_shop_bt_bg_from' );
 $psad_es_shop_bt_bg_to = get_option( 'psad_es_shop_bt_bg_to' );
-$psad_es_shop_bt_border_width = get_option( 'psad_es_shop_bt_border_width' );
-$psad_es_shop_bt_border_style = get_option( 'psad_es_shop_bt_border_style' );
-$psad_es_shop_bt_border_color = get_option( 'psad_es_shop_bt_border_color' );
-$psad_es_shop_bt_rounded = get_option( 'psad_es_shop_bt_rounded' );
-$psad_es_shop_bt_font_family = get_option( 'psad_es_shop_bt_font_family' );
-$psad_es_shop_bt_font_size = get_option( 'psad_es_shop_bt_font_size' );
-$psad_es_shop_bt_font_style = get_option( 'psad_es_shop_bt_font_style' );
-$psad_es_shop_bt_font_color = get_option( 'psad_es_shop_bt_font_color' );
 // Link Style
 $psad_es_shop_link_align = get_option( 'psad_es_shop_link_align' );
-$psad_es_shop_link_font_family = get_option( 'psad_es_shop_link_font_family' );
-$psad_es_shop_link_font_size = get_option( 'psad_es_shop_link_font_size' );
-$psad_es_shop_link_font_style = get_option( 'psad_es_shop_link_font_style' );
-$psad_es_shop_link_font_color = get_option( 'psad_es_shop_link_font_color' );
 $psad_es_shop_link_font_hover_color = get_option( 'psad_es_shop_link_font_hover_color' );
 ?>
 .endless_click_shop {
@@ -154,47 +143,23 @@ $psad_es_shop_link_font_hover_color = get_option( 'psad_es_shop_link_font_hover_
 	background: -moz-linear-gradient(center top, <?php echo $psad_es_shop_bt_bg_from;?> 0%, <?php echo $psad_es_shop_bt_bg_to;?> 100%) !important;
 	background: -moz-gradient(center top, <?php echo $psad_es_shop_bt_bg_from;?> 0%, <?php echo $psad_es_shop_bt_bg_to;?> 100%) !important;
 	
-		
 	/*Border*/
-	border: <?php echo $psad_es_shop_bt_border_width; ?>px <?php echo $psad_es_shop_bt_border_style; ?> <?php echo $psad_es_shop_bt_border_color; ?> !important;
-	-webkit-border-radius: <?php echo $psad_es_shop_bt_rounded; ?>px !important;
-	-moz-border-radius: <?php echo $psad_es_shop_bt_rounded; ?>px !important;
-	border-radius: <?php echo $psad_es_shop_bt_rounded; ?>px !important;
-
+	<?php echo $wc_psad_admin_interface->generate_border_css( get_option( 'psad_es_shop_bt_border' ) ); ?>
+	
+	/* Shadow */
+	<?php echo $wc_psad_admin_interface->generate_shadow_css( get_option( 'psad_es_shop_bt_shadow' ) ); ?>
+	
 	/* Font */
-	font-family: <?php echo $psad_es_shop_bt_font_family; ?> !important;
-	font-size: <?php echo $psad_es_shop_bt_font_size; ?>px !important;
-	color: <?php echo $psad_es_shop_bt_font_color; ?> !important;
-<?php if ( stristr($psad_es_shop_bt_font_style, 'bold') !== FALSE) { ?>
-	font-weight: bold !important;
-<?php } ?>
-<?php if ( stristr($psad_es_shop_bt_font_style, 'italic') !== FALSE) { ?>
-	font-style:italic !important;
-<?php } ?>
-<?php if ( $psad_es_shop_bt_font_style == 'normal') { ?>
-	font-weight: normal !important;
-	font-style: normal !important;
-<?php } ?>
+	<?php echo $wc_psad_fonts_face->generate_font_css( get_option( 'psad_es_shop_bt_font' ) ); ?>	
+	
+	padding: <?php echo get_option( 'psad_es_shop_bt_padding_tb' ); ?>px <?php echo get_option( 'psad_es_shop_bt_padding_lr' ); ?>px !important;
 
 	text-align:<?php echo $psad_es_shop_bt_align;?> !important;
-	padding: 7px 10px !important;
 	text-decoration: none !important;
 }
 .endless_click_shop a.click_more_link {
 	/* Font */
-	font-family: <?php echo $psad_es_shop_link_font_family; ?> !important;
-	font-size: <?php echo $psad_es_shop_link_font_size; ?>px !important;
-	color: <?php echo $psad_es_shop_link_font_color; ?> !important;
-<?php if ( stristr($psad_es_shop_link_font_style, 'bold') !== FALSE) { ?>
-	font-weight: bold !important;
-<?php } ?>
-<?php if ( stristr($psad_es_shop_link_font_style, 'italic') !== FALSE) { ?>
-	font-style:italic !important;
-<?php } ?>
-<?php if ( $psad_es_shop_link_font_style == 'normal') { ?>
-	font-weight: normal !important;
-	font-style: normal !important;
-<?php } ?>
+	<?php echo $wc_psad_fonts_face->generate_font_css( get_option( 'psad_es_shop_link_font' ) ); ?>
 
 	text-align:<?php echo $psad_es_shop_link_align;?> !important;
 }
@@ -210,20 +175,8 @@ $psad_es_category_item_bt_align = get_option( 'psad_es_category_item_bt_align' )
 $psad_es_category_item_bt_bg = get_option( 'psad_es_category_item_bt_bg' );
 $psad_es_category_item_bt_bg_from = get_option( 'psad_es_category_item_bt_bg_from' );
 $psad_es_category_item_bt_bg_to = get_option( 'psad_es_category_item_bt_bg_to' );
-$psad_es_category_item_bt_border_width = get_option( 'psad_es_category_item_bt_border_width' );
-$psad_es_category_item_bt_border_style = get_option( 'psad_es_category_item_bt_border_style' );
-$psad_es_category_item_bt_border_color = get_option( 'psad_es_category_item_bt_border_color' );
-$psad_es_category_item_bt_rounded = get_option( 'psad_es_category_item_bt_rounded' );
-$psad_es_category_item_bt_font_family = get_option( 'psad_es_category_item_bt_font_family' );
-$psad_es_category_item_bt_font_size = get_option( 'psad_es_category_item_bt_font_size' );
-$psad_es_category_item_bt_font_style = get_option( 'psad_es_category_item_bt_font_style' );
-$psad_es_category_item_bt_font_color = get_option( 'psad_es_category_item_bt_font_color' );
 // Link Style
 $psad_es_category_item_link_align = get_option( 'psad_es_category_item_link_align' );
-$psad_es_category_item_link_font_family = get_option( 'psad_es_category_item_link_font_family' );
-$psad_es_category_item_link_font_size = get_option( 'psad_es_category_item_link_font_size' );
-$psad_es_category_item_link_font_style = get_option( 'psad_es_category_item_link_font_style' );
-$psad_es_category_item_link_font_color = get_option( 'psad_es_category_item_link_font_color' );
 $psad_es_category_item_link_font_hover_color = get_option( 'psad_es_category_item_link_font_hover_color' );
 ?>
 .click_more_each_categories {
@@ -241,47 +194,23 @@ $psad_es_category_item_link_font_hover_color = get_option( 'psad_es_category_ite
 	background: -moz-linear-gradient(center top, <?php echo $psad_es_category_item_bt_bg_from;?> 0%, <?php echo $psad_es_category_item_bt_bg_to;?> 100%) !important;
 	background: -moz-gradient(center top, <?php echo $psad_es_category_item_bt_bg_from;?> 0%, <?php echo $psad_es_category_item_bt_bg_to;?> 100%) !important;
 	
-		
 	/*Border*/
-	border: <?php echo $psad_es_category_item_bt_border_width; ?>px <?php echo $psad_es_category_item_bt_border_style; ?> <?php echo $psad_es_category_item_bt_border_color; ?> !important;
-	-webkit-border-radius: <?php echo $psad_es_category_item_bt_rounded; ?>px !important;
-	-moz-border-radius: <?php echo $psad_es_category_item_bt_rounded; ?>px !important;
-	border-radius: <?php echo $psad_es_category_item_bt_rounded; ?>px !important;
-
+	<?php echo $wc_psad_admin_interface->generate_border_css( get_option( 'psad_es_category_item_bt_border' ) ); ?>
+	
+	/* Shadow */
+	<?php echo $wc_psad_admin_interface->generate_shadow_css( get_option( 'psad_es_view_all_bt_shadow' ) ); ?>
+	
 	/* Font */
-	font-family: <?php echo $psad_es_category_item_bt_font_family; ?> !important;
-	font-size: <?php echo $psad_es_category_item_bt_font_size; ?>px !important;
-	color: <?php echo $psad_es_category_item_bt_font_color; ?> !important;
-<?php if ( stristr($psad_es_category_item_bt_font_style, 'bold') !== FALSE) { ?>
-	font-weight: bold !important;
-<?php } ?>
-<?php if ( stristr($psad_es_category_item_bt_font_style, 'italic') !== FALSE) { ?>
-	font-style:italic !important;
-<?php } ?>
-<?php if ( $psad_es_category_item_bt_font_style == 'normal') { ?>
-	font-weight: normal !important;
-	font-style: normal !important;
-<?php } ?>
+	<?php echo $wc_psad_fonts_face->generate_font_css( get_option( 'psad_es_category_item_bt_font' ) ); ?>	
+	
+	padding: <?php echo get_option( 'psad_es_view_all_bt_padding_tb' ); ?>px <?php echo get_option( 'psad_es_view_all_bt_padding_lr' ); ?>px !important;
 
 	text-align:<?php echo $psad_es_category_item_bt_align;?> !important;
-	padding: 7px 10px !important;
 	text-decoration: none !important;
 }
 .click_more_each_categories a.click_more_link, .click_more_each_categories span.click_more_link {
 	/* Font */
-	font-family: <?php echo $psad_es_category_item_link_font_family; ?> !important;
-	font-size: <?php echo $psad_es_category_item_link_font_size; ?>px !important;
-	color: <?php echo $psad_es_category_item_link_font_color; ?> !important;
-<?php if ( stristr($psad_es_category_item_link_font_style, 'bold') !== FALSE) { ?>
-	font-weight: bold !important;
-<?php } ?>
-<?php if ( stristr($psad_es_category_item_link_font_style, 'italic') !== FALSE) { ?>
-	font-style:italic !important;
-<?php } ?>
-<?php if ( $psad_es_category_item_link_font_style == 'normal') { ?>
-	font-weight: normal !important;
-	font-style: normal !important;
-<?php } ?>
+	<?php echo $wc_psad_fonts_face->generate_font_css( get_option( 'psad_es_category_item_link_font' ) ); ?>
 
 	text-align:<?php echo $psad_es_category_item_link_align;?> !important;
 }
@@ -292,20 +221,19 @@ $psad_es_category_item_link_font_hover_color = get_option( 'psad_es_category_ite
 /* Separate Style */
 <?php
 $psad_seperator_enable = get_option('psad_seperator_enable');
-$psad_seperator_border_style = get_option('psad_seperator_border_style');
-$psad_seperator_border_width = get_option('psad_seperator_border_width');
-$psad_seperator_border_color = get_option('psad_seperator_border_color');
-$psad_seperator_padding_tb = get_option('psad_seperator_padding_tb');
+$psad_seperator_border = get_option('psad_seperator_border', array( 'width' => '1px', 'style' => 'solid', '#000000' ) );
+$psad_seperator_padding_top = get_option('psad_seperator_padding_top');
+$psad_seperator_padding_bottom = get_option('psad_seperator_padding_bottom');
 if ( $psad_seperator_enable == 'yes' ){
 ?>
 .psad_seperator {
 	/*Border*/
-	border-bottom: <?php echo $psad_seperator_border_width; ?>px <?php echo $psad_seperator_border_style; ?> <?php echo $psad_seperator_border_color; ?> !important;
-	margin: <?php echo $psad_seperator_padding_tb; ?>px 0px !important;
+	border-bottom: <?php echo $psad_seperator_border['width']; ?> <?php echo $psad_seperator_border['']; ?> <?php echo $psad_seperator_border['color']; ?> !important;
+	margin: <?php echo $psad_seperator_padding_top; ?>px 0px <?php echo $psad_seperator_padding_bottom; ?>px 0px  !important;
 }
 .wc_content {
 	/*Border*/
-	border-bottom: <?php echo $psad_seperator_border_width; ?>px <?php echo $psad_seperator_border_style; ?> <?php echo $psad_seperator_border_color; ?> !important;
+	border-bottom: <?php echo $psad_seperator_border['width']; ?> <?php echo $psad_seperator_border['']; ?> <?php echo $psad_seperator_border['color']; ?> !important;
 	padding-bottom:15px;
 }
 <?php } ?>
@@ -317,10 +245,7 @@ if ( $psad_seperator_enable == 'yes' ){
 }
 .product_categories_showing_count {
 	/* Font */
-	font-family: Arial, sans-serif !important;
-	font-size: 11px !important;
-	color: #000000 !important;
-	font-style:italic !important;
+	<?php echo $wc_psad_fonts_face->generate_font_css( get_option( 'psad_count_meta_font' ) ); ?>
 }
 .product_categories_showing_count {
 	margin-right:10px;	

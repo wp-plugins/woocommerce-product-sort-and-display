@@ -27,29 +27,29 @@ class WC_PSAD
 	}
 	
 	public function init () {
-		add_filter('loop_shop_per_page', array( &$this, 'limit_posts_per_page'),99);
+		add_filter('loop_shop_per_page', array( $this, 'limit_posts_per_page'),99);
 		
 		//Fix Responsi Theme.
-		add_action( 'woo_head', array( &$this, 'remove_responsi_action'), 11 );
-		add_action( 'a3rev_head', array( &$this, 'remove_responsi_action'), 11 );
-		add_action( 'wp_head', array( &$this, 'remove_woocommerce_pagination'), 10 );
-		add_action( 'woocommerce_after_shop_loop', array( &$this, 'woocommerce_pagination') );
+		add_action( 'woo_head', array( $this, 'remove_responsi_action'), 11 );
+		add_action( 'a3rev_head', array( $this, 'remove_responsi_action'), 11 );
+		add_action( 'wp_head', array( $this, 'remove_woocommerce_pagination'), 10 );
+		add_action( 'woocommerce_after_shop_loop', array( $this, 'woocommerce_pagination') );
 		
 		//Check if shop page
-		add_action( 'woocommerce_before_shop_loop', array( &$this, 'check_shop_page'), 1 );
+		add_action( 'woocommerce_before_shop_loop', array( $this, 'check_shop_page'), 1 );
 		
 		// For Shop page
-		add_action( 'woocommerce_before_shop_loop', array( &$this, 'start_remove_orderby_shop'), 2 );
-		add_action( 'woocommerce_before_shop_loop', array( &$this, 'end_remove_orderby_shop'), 40 );
-		add_action( 'woocommerce_before_shop_loop', array( &$this, 'dont_show_product_on_shop'), 41 );
-		add_action( 'woocommerce_after_shop_loop', array( &$this, 'rewrite_shop_page'), 12 );
+		add_action( 'woocommerce_before_shop_loop', array( $this, 'start_remove_orderby_shop'), 2 );
+		add_action( 'woocommerce_before_shop_loop', array( $this, 'end_remove_orderby_shop'), 40 );
+		add_action( 'woocommerce_before_shop_loop', array( $this, 'dont_show_product_on_shop'), 41 );
+		add_action( 'woocommerce_after_shop_loop', array( $this, 'rewrite_shop_page'), 12 );
 				
 		//Enqueue Script
-		add_action( 'woocommerce_after_shop_loop', array( &$this, 'psad_wp_enqueue_script'),12 );
+		add_action( 'woocommerce_after_shop_loop', array( $this, 'psad_wp_enqueue_script'),12 );
 		
 		// Add Custom style on frontend
-		add_action( 'wp_head', array( &$this, 'include_customized_style'), 11);
-		//add_action( 'woocommerce_after_shop_loop', array( &$this, 'psad_wp_enqueue_style'), 12 );
+		add_action( 'wp_head', array( $this, 'include_customized_style'), 11);
+		//add_action( 'woocommerce_after_shop_loop', array( $this, 'psad_wp_enqueue_style'), 12 );
 		
 	}
 	
@@ -68,6 +68,7 @@ class WC_PSAD
 		$is_shop = is_post_type_archive( 'product' );
 		if( ($is_shop && get_option('psad_shop_page_enable') == 'yes') ){
 			remove_action( 'woocommerce_after_shop_loop', 'woocommerce_pagination', 10 );
+			remove_action( 'woocommerce_after_main_content', 'canvas_commerce_pagination', 01, 0 );
 		}
 	}
 	
@@ -145,9 +146,9 @@ class WC_PSAD
 						jQuery('.pbc_content_click_more').show();
 						<?php
 						if(function_exists('add_responsi_pagination_theme')){
-							global $content_column;
+							global $content_column_grid;
 							?>
-							var content_column = <?php echo $content_column;?>;
+							var content_column = <?php echo $content_column_grid;?>;
 
 							jQuery('.box_content').imagesLoaded(function(){
 								jQuery(this).masonry({

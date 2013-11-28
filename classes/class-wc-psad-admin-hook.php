@@ -16,8 +16,29 @@ class WC_PSAD_Settings_Hook
 {
 	
 	public function __construct() {
-   		add_action( 'product_cat_add_form_fields', array( &$this, 'psad_add_category_fields'), 11 );
-		add_action( 'product_cat_edit_form', array( &$this, 'psad_edit_category_fields' ), 10, 1 );
+   		add_action( 'product_cat_add_form_fields', array( $this, 'psad_add_category_fields'), 11 );
+		add_action( 'product_cat_edit_form', array( $this, 'psad_edit_category_fields' ), 10, 1 );
+		
+		// Include google fonts into header
+		add_action( 'wp_head', array( $this, 'add_google_fonts'), 11 );
+	}
+	
+	public function add_google_fonts() {
+		global $wc_psad_fonts_face;
+		$psad_es_shop_bt_font 				= get_option( 'psad_es_shop_bt_font' );
+		$psad_es_shop_link_font 			= get_option( 'psad_es_shop_link_font' );
+		$psad_es_category_item_bt_font 		= get_option( 'psad_es_category_item_bt_font' );
+		$psad_es_category_item_link_font 	= get_option( 'psad_es_category_item_link_font' );
+		$google_fonts = array( 
+							$psad_es_shop_bt_font['face'], 
+							$psad_es_shop_link_font['face'], 
+							$psad_es_category_item_bt_font['face'],
+							$psad_es_category_item_link_font['face'],
+						);
+						
+		$google_fonts = apply_filters( 'wc_psad_google_fonts', $google_fonts );
+		
+		$wc_psad_fonts_face->generate_google_webfonts( $google_fonts );
 	}
 	
 	public function psad_add_category_fields(){
@@ -156,7 +177,6 @@ class WC_PSAD_Settings_Hook
 	
 	public function plugin_extension() {
 		$html = '';
-		$html .= '<div id="a3_plugin_panel_extensions">';
 		$html .= '<a href="http://a3rev.com/shop/" target="_blank" style="float:right;margin-top:5px; margin-left:10px;" ><img src="'.WC_PSAD_IMAGES_URL.'/a3logo.png" /></a>';
 		$html .= '<h3>'.__('Upgrade to Product Sort and Display Pro', 'wc_psad').'</h3>';
 		$html .= '<p>'.__("<strong>NOTE:</strong> All the functions inside the Yellow border on the plugins admin panel are extra functionality that is activated by upgrading to the Pro version", 'wc_psad').':</p>';
@@ -199,7 +219,6 @@ class WC_PSAD_Settings_Hook
 		$html .= '<li>* <a href="http://wordpress.org/plugins/page-views-count/" target="_blank">'.__('Page View Count', 'wc_psad').'</a></li>';
 		$html .= '</ul>';
 		$html .= '</p>';
-		$html .= '</div>';
 		return $html;
 	}
 	

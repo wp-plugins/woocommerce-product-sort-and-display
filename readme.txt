@@ -3,8 +3,8 @@
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
 Requires at least: 3.5
-Tested up to: 3.6
-Stable tag: 1.0.1
+Tested up to: 3.7.1
+Stable tag: 1.0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -27,9 +27,6 @@ We decided to build a plugin that would fix that. With WooCommerce Product Sort 
 = Why we built this Plugin =
 
 Product positioning in a physical retail store is science. It is no different in an online store - positioning products for when visitors 'step' into your online store is a crucial sales tool. We have always felt the Store page and Product Category pages product display is woefully random. The default WooCommerce Product sort gives little or no real control on positioning products. We have completely changed that with this plugin by allowing you to sort and position products by category on the shop page (on all pages on the Pro version).
-
-= Quick Feature Overview =
-
 
 = Shop Page Display Features =
 
@@ -61,7 +58,11 @@ Product positioning in a physical retail store is science. It is no different in
 
 * Enable/Disable a visual separator between each Product Category group of products.
 * WYSIWYG separator style editor.
-* Set padding in px above and below the separator.   
+* Set padding in px above and below the separator.  
+
+= Lite Version Support =
+
+As a Lite Version user please post all support requests to the plugins WordPress Support forum. We do not watch that forum and posting there you will be relying on another user for support not an a3rev team member. Pro Version Licence holders have 'write' access to the a3rev support forum and Lifetime priority support, not from support staff but from the developers. 
 
 = Pro Version Upgrade =
 
@@ -100,19 +101,20 @@ Upgrading to the Pro Version gives you all of the features that you get on the S
 = Intelligent Browsing =
 
 * Show the current number of products being viewed and total products in Category applies to all category pages.
-= Intelligent Browsing =
-
 * Show the current number of products being viewed and total products in Category.
 * Show count is auto updated on each endless scroll event for each category.
 * Show count is auto updated on each endless scroll event when view products in the parent category.
 * No more product to view message when all products are showing.
 
+= Priority Support =
+
+Please note that we do not provide support for our Lite Version plugins. Hundreds of thousands of plugin downloads has proven that vast majority of the support requests we get have nothing to do with our plugins but are related to bugs in the users theme or other plugins they have installed. We give priority support to those users who purchase a Pro Version license. In this plugins case, we offer a single payment, Lifetime License fee which includes access to and full support from the a3rev developers on the plugins support forum.
 
 = Localization =
 
 * English (default) - always included.
 *.po file (wc_psad.po) in languages folder for translations.
-* If you do a translation for your site please send it to us for inclusion in the plugin language folder. We'll acknowledge your work here. [Go here](http://a3rev.com/contact/) to send your translation files to us.
+* If you do a translation for your site please send it to us for inclusion in the plugin language folder. We'll acknowledge your work here. [Go here](http://a3rev.com/contact-us-page/) to send your translation files to us.
 
 = Plugin Resources =
 
@@ -154,17 +156,15 @@ The manual installation method involves downloading our plugin and uploading it 
 
 1. Install and activate the plugin
 
-2. On wp-admin click on WooCommerce > Settings > Sort & Display Tab
+2. On wp-admin click on WooCommerce > Sort & Display 
 
-3. Global Settings - apply to your whole site.
+3. Settings Tab - Turn Endless Scroll on for your shop page.
 
 4. Endless Scroll - active on Shop Page.
 
-5. Use the activated sub tabs features to add style to the feature on the front end.
+5. Go to Products > Categories and use drop and drag to sort the categories in the order you want them to display.
 
-6. Go to Products > categories and use drop and drag to sort the categories in the order you want them to display.
-
-7. Enjoy endlessly tweaking your stores product layout.
+6. Enjoy endlessly tweaking your stores product layout.
 
 
 == Frequently Asked Questions ==
@@ -176,18 +176,33 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 == Changelog ==
 
+= 1.0.2 - 2013/11/28 =
+* Feature - Upgraded the plugin to the newly developed a3rev admin Framework with app style interface.
+* Feature - Admin panel Conditional logic and intuitive triggers. When setting is ON corresponding settings appear, OFF and they donÕt show.
+* Tweak - Moved admin from WooCommerce settings tab onto the WooCommerce menu items under the menu name Sort and Display.
+* Tweak - Sort & Display menus item tabs, Settings | Endless Scroll | View All & Count
+* Tweak - Endless Scroll tab has 3 sub menu items, Shop Page Scroll | Category Page Scroll | Parent Cat & Tag Page Scroll
+* Tweak - View All & Count has 2 sub menu items, View All Products | Count Meta 
+* Tweak - New admin UI features check boxes replaced by switches, some dropdowns replaced by sliders.
+* Tweak - Tested 100% compatible with WordPress 3.7.1
+* Tweak - Tested 100% compatible with WooCommerce 2.0.20
+* Fix - Fix - $args->slug depreciated in WordPress 3.7, replace with $request = unserialize( $args['body']['request'] ); $request->slug
+* Fix - Plugins admin script and style not loading in Firefox with SSL on admin. Stripped http// and https// protocols so browser will use the protocol that the page was loaded with.
+* Fix - Full WP_DEBUG and all uncaught exceptions, errors, notifications and warnings fixed.
+
 = 1.0.1 - 2013/09/03 =
-* Fixeds :
-	* Replaced get_pagenum_link() function with add_query_arg() function. Endless scroll not loading pages on sites with SSL redirects from https to http on shop and archive pages.
-	* Updated some prefixes to a3rev_ for compatibility with the a3revFramework.
-* Tweak :
-	* Tested for full compatibility with WordPress v3.6.0
+* Tweak - Updated some prefixes to a3rev_ for compatibility with the a3revFramework.
+* Tweak - Tested for full compatibility with WordPress v3.6.0
+* Fix - Replaced get_pagenum_link() function with add_query_arg() function. Endless scroll not loading pages on sites with SSL redirects from https to http on shop and archive pages.
 
 = 1.0.0 - 2013/07/23 =
 * First working release
 
 
 == Upgrade Notice ==
+
+= 1.0.2 =
+Upgrade your plugin now to the new a3rev plugin framework and intuitive app style admin interface plus 6 associated tweaks and 3 bug fixes and full compatibility with WP 3.7.1 and Woocommerce 2.0.20. 
 
 = 1.0.1 =
 Upgrade now for a page load bug fix on sites the have SSL
