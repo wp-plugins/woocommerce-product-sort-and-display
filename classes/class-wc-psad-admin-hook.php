@@ -9,7 +9,9 @@
  * psad_add_category_fields()
  * psad_edit_category_fields()
  * psad_category_fields_save()
- *
+ * a3_wp_admin()
+ * plugin_extension()
+ * plugin_extra_links()
  */
 
 class WC_PSAD_Settings_Hook
@@ -44,7 +46,7 @@ class WC_PSAD_Settings_Hook
 	public function psad_add_category_fields(){
 		?>
         <style>
-			#a3_upgrade_area_box { border:2px solid #E6DB55;-webkit-border-radius:10px;-moz-border-radius:10px;-o-border-radius:10px; border-radius: 10px; padding:10px; position:relative}
+			#a3_upgrade_area_box { border:2px solid #E6DB55;-webkit-border-radius:10px;-moz-border-radius:10px;-o-border-radius:10px; border-radius: 10px; padding:10px; position:relative; margin-bottom:10px; }
 			#a3_upgrade_area_box legend {margin-left:4px; font-weight:bold;}
 		</style>
     	<fieldset id="a3_upgrade_area_box"><legend><?php _e('Upgrade to','wc_psad'); ?> <a href="<?php echo WC_PSAD_AUTHOR_URI; ?>" target="_blank"><?php _e('Pro Version', 'wc_psad'); ?></a> <?php _e('to activate', 'wc_psad'); ?></legend>
@@ -175,9 +177,13 @@ class WC_PSAD_Settings_Hook
         <?php
 	}
 	
+	public static function a3_wp_admin() {
+		wp_enqueue_style( 'a3rev-wp-admin-style', WC_PSAD_CSS_URL . '/a3_wp_admin.css' );
+	}
+	
 	public function plugin_extension() {
 		$html = '';
-		$html .= '<a href="http://a3rev.com/shop/" target="_blank" style="float:right;margin-top:5px; margin-left:10px;" ><img src="'.WC_PSAD_IMAGES_URL.'/a3logo.png" /></a>';
+		$html .= '<a href="http://a3rev.com/shop/" target="_blank" style="float:right;margin-top:5px; margin-left:10px;" ><div class="a3-plugin-ui-icon a3-plugin-ui-a3-rev-logo"></div></a>';
 		$html .= '<h3>'.__('Upgrade to Product Sort and Display Pro', 'wc_psad').'</h3>';
 		$html .= '<p>'.__("<strong>NOTE:</strong> All the functions inside the Yellow border on the plugins admin panel are extra functionality that is activated by upgrading to the Pro version", 'wc_psad').':</p>';
 		$html .= '<p>';

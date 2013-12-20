@@ -11,7 +11,7 @@ function wc_psad_install(){
 	$wc_psad_admin_init->set_default_settings();
 	
 	WC_PSAD_Functions::auto_create_order_keys_all_products();
-	update_option('wc_psad_lite_version', '1.0.2');
+	update_option('wc_psad_lite_version', '1.0.3');
 	update_option('wc_psad_plugin', 'wc_psad');
 	delete_transient("wc_psad_update_info");
 	//$wp_rewrite->flush_rules();
@@ -29,6 +29,9 @@ function psad_init() {
 
 // Add language
 add_action('init', 'psad_init');
+
+// Add custom style to dashboard
+add_action( 'admin_enqueue_scripts', array( 'WC_PSAD_Settings_Hook', 'a3_wp_admin' ) );
 
 // Add text on right of Visit the plugin on Plugin manager page
 add_filter( 'plugin_row_meta', array('WC_PSAD_Settings_Hook', 'plugin_extra_links'), 10, 2 );
@@ -53,7 +56,7 @@ function psad_upgrade_plugin () {
 		WC_PSAD_Functions::upgrade_version_1_0_2();
 	}
 	
-	update_option('wc_psad_lite_version', '1.0.2');
+	update_option('wc_psad_lite_version', '1.0.3');
 }
 
 ?>

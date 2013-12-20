@@ -133,7 +133,7 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 	/* Process when clean on deletion option is un selected */
 	/*-----------------------------------------------------------------------------------*/
 	public function after_save_settings() {
-		if ( ( isset( $_POST['bt_save_settings'] ) || isset( $_POST['bt_reset_settings'] ) ) && get_option( 'psad_clean_on_deletion' ) == 0  )  {
+		if ( ( isset( $_POST['bt_save_settings'] ) || isset( $_POST['bt_reset_settings'] ) ) && get_option( 'psad_lite_clean_on_deletion' ) == 0  )  {
 			$uninstallable_plugins = (array) get_option('uninstall_plugins');
 			unset($uninstallable_plugins[WC_PSAD_NAME]);
 			update_option('uninstall_plugins', $uninstallable_plugins);
@@ -468,7 +468,7 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 			array(  
 				'name' 		=> __( 'Clean up on Deletion', 'wc_psad' ),
 				'desc' 		=> __( 'On deletion (not deactivate) the plugin will completely remove all tables and data it created, leaving no trace it was ever here.', 'wc_psad'),
-				'id' 		=> 'psad_clean_on_deletion',
+				'id' 		=> 'psad_lite_clean_on_deletion',
 				'type' 		=> 'onoff_checkbox',
 				'default'	=> '0',
 				'separate_option'	=> true,

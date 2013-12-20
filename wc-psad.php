@@ -2,7 +2,7 @@
 /*
 Plugin Name: WooCommerce Product Sort and Display LITE
 Description: Take control of your WooCommerce Shop random product display with WooCommerce Show Products by Category. Sort and show products on Shop page by category with 'On Sale' or 'Featured' products showing first. Products showing and total products per category count for intelligent viewing.
-Version: 1.0.2
+Version: 1.0.3
 Author: A3 Revolution
 Author URI: http://www.a3rev.com/
 License: This software is under commercial license and copyright to A3 Revolution Software Development team
@@ -28,7 +28,7 @@ define('WC_PSAD_TEMPLATE_PATH', WC_PSAD_FILE_PATH . '/templates' );
 define('WC_PSAD_IMAGES_URL',  WC_PSAD_URL . '/assets/images' );
 define('WC_PSAD_JS_URL',  WC_PSAD_URL . '/assets/js' );
 define('WC_PSAD_CSS_URL',  WC_PSAD_URL . '/assets/css' );
-define('WC_PSAD_WP_TESTED', '3.7.1' );
+define('WC_PSAD_WP_TESTED', '3.8.0' );
 if(!defined("WC_PSAD_AUTHOR_URI"))
     define("WC_PSAD_AUTHOR_URI", "http://a3rev.com/shop/woocommerce-product-sort-and-display/");
 
@@ -50,8 +50,8 @@ include 'admin/wc-psad-init.php';
 */
 register_activation_hook(__FILE__,'wc_psad_install');
 
-function wc_psad_uninstall() {
-	if ( get_option('psad_clean_on_deletion') == 1 ) {
+function wc_psad_lite_uninstall() {
+	if ( get_option('psad_lite_clean_on_deletion') == 1 ) {
 		delete_option( 'psad_shop_page_enable' );
 		delete_option( 'psad_category_page_enable' );
 		delete_option( 'psad_tag_page_enable' );
@@ -205,7 +205,7 @@ function wc_psad_uninstall() {
 		delete_post_meta_by_key( '_psad_onsale_order' );
 		delete_post_meta_by_key( '_psad_featured_order' );
 		
-		delete_option( 'psad_clean_on_deletion' );
+		delete_option( 'psad_lite_clean_on_deletion' );
 		
 		$metadata = array('psad_category_per_page','psad_top_product_per_page', 'psad_shop_product_per_page', 'psad_product_per_page', 'psad_shop_product_show_type', 'psad_product_show_type', 'psad_category_product_nosub_per_page');
 		foreach ( $metadata as $meta_key ) {
@@ -213,7 +213,7 @@ function wc_psad_uninstall() {
 		}
 	}
 }
-if ( get_option('psad_clean_on_deletion') == 1 ) {
-	register_uninstall_hook( __FILE__, 'wc_psad_uninstall' );
+if ( get_option('psad_lite_clean_on_deletion') == 1 ) {
+	register_uninstall_hook( __FILE__, 'wc_psad_lite_uninstall' );
 }
 ?>
