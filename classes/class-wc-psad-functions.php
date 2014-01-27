@@ -43,15 +43,17 @@ class WC_PSAD_Functions
 		if ( $post->post_type != 'product' ) return $post_id;
 		
 		$product = get_product( $post );
-		if ( $product->is_on_sale() ) {
-			update_post_meta( $post_id, '_psad_onsale_order', 2 );
-		} else {
-			update_post_meta( $post_id, '_psad_onsale_order', 1 );
-		}
-		if ( $product->is_featured() ) {
-			update_post_meta( $post_id, '_psad_featured_order', 2 );
-		} else {
-			update_post_meta( $post_id, '_psad_featured_order', 1 );	
+		if ( $product ) {
+			if ( $product->is_on_sale() ) {
+				update_post_meta( $post_id, '_psad_onsale_order', 2 );
+			} else {
+				update_post_meta( $post_id, '_psad_onsale_order', 1 );
+			}
+			if ( $product->is_featured() ) {
+				update_post_meta( $post_id, '_psad_featured_order', 2 );
+			} else {
+				update_post_meta( $post_id, '_psad_featured_order', 1 );	
+			}
 		}
 	}
 	

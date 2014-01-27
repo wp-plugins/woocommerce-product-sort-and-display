@@ -181,7 +181,7 @@ class WC_PSAD_Settings_Hook
 		wp_enqueue_style( 'a3rev-wp-admin-style', WC_PSAD_CSS_URL . '/a3_wp_admin.css' );
 	}
 	
-	public function plugin_extension() {
+	public static function plugin_extension() {
 		$html = '';
 		$html .= '<a href="http://a3rev.com/shop/" target="_blank" style="float:right;margin-top:5px; margin-left:10px;" ><div class="a3-plugin-ui-icon a3-plugin-ui-a3-rev-logo"></div></a>';
 		$html .= '<h3>'.__('Upgrade to Product Sort and Display Pro', 'wc_psad').'</h3>';
@@ -228,7 +228,7 @@ class WC_PSAD_Settings_Hook
 		return $html;
 	}
 	
-	public function plugin_extra_links($links, $plugin_name) {
+	public static function plugin_extra_links($links, $plugin_name) {
 		if ( $plugin_name != WC_PSAD_NAME) {
 			return $links;
 		}

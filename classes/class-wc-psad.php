@@ -190,10 +190,12 @@ class WC_PSAD
 	
 	public function psad_wp_enqueue_script(){
 		global $is_shop;
+		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 		$enqueue_script = false;
 		if( $is_shop && get_option('psad_shop_page_enable') == 'yes' ) $enqueue_script = true;
 		if(!$enqueue_script) return;
 		wp_enqueue_script('jquery');
+		wp_enqueue_script( 'jquery-masonry' );
 		wp_register_script( 'jquery_infinitescroll', WC_PSAD_JS_URL.'/masonry/jquery.infinitescroll.min.js');
 		wp_enqueue_script( 'jquery_infinitescroll' );
 	}
@@ -241,6 +243,8 @@ class WC_PSAD
 	public function rewrite_shop_page() {
 		global $is_shop;
 		
+		$woocommerce_db_version = get_option( 'woocommerce_db_version', null );
+		
 		//Check rewrite this for shop page
 		if ( !$is_shop || get_option('psad_shop_page_enable') != 'yes' ) return;
 		
@@ -248,7 +252,7 @@ class WC_PSAD
 		global $woocommerce, $wp_query, $wp_rewrite;
 		
 		$enable_product_showing_count = get_option('psad_shop_enable_product_showing_count');
-		$product_ids_on_sale = woocommerce_get_product_ids_on_sale();
+		$product_ids_on_sale = ( ( version_compare( $woocommerce_db_version, '2.1', '<' ) ) ? woocommerce_get_product_ids_on_sale() : wc_get_product_ids_on_sale() );
 		$product_ids_on_sale[] = 0;
 		$global_psad_shop_product_per_page = get_option('psad_shop_product_per_page', 0);
 		$global_psad_shop_product_show_type = get_option('psad_shop_product_show_type', '');
@@ -399,7 +403,10 @@ class WC_PSAD
 					
 					woocommerce_product_loop_start();
 					while ( have_posts() ) : the_post();
-						woocommerce_get_template( 'content-product.php' );
+						if ( version_compare( $woocommerce_db_version, '2.1', '<' ) )
+							woocommerce_get_template( 'content-product.php' );
+						else
+							wc_get_template( 'content-product.php' );
 					endwhile; 
 					woocommerce_product_loop_end();
 					

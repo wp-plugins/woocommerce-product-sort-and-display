@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP e-Commerce Catalog Visibility Email inquiry PRO\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-28 15:17+0700\n"
-"PO-Revision-Date: 2013-11-28 15:17+0700\n"
+"POT-Creation-Date: 2014-01-27 17:39+0700\n"
+"PO-Revision-Date: 2014-01-27 17:39+0700\n"
 "Last-Translator: Nguyen Cong Tuan <mr.nguyencongtuan@gmail.com>\n"
 "Language-Team: a3rev\n"
 "MIME-Version: 1.0\n"
@@ -14,124 +14,76 @@ msgstr ""
 "X-Generator: Poedit 1.5.7\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: admin/admin-interface.php:120
+#: admin/admin-interface.php:125
 msgid "Settings successfully saved."
 msgstr ""
 
-#: admin/admin-interface.php:128
+#: admin/admin-interface.php:133
 msgid "Error: Settings can not save."
 msgstr ""
 
-#: admin/admin-interface.php:136
+#: admin/admin-interface.php:141
 msgid "Settings successfully reseted."
 msgstr ""
 
-#: admin/admin-interface.php:157
+#: admin/admin-interface.php:162
 msgid "Thin"
 msgstr ""
 
-#: admin/admin-interface.php:158
+#: admin/admin-interface.php:163
 msgid "Thin/Italic"
 msgstr ""
 
-#: admin/admin-interface.php:159 admin1/classes/class-wc-psad-admin.php:954
-#: admin1/classes/class-wc-psad-admin.php:1039
-#: admin1/classes/class-wc-psad-admin.php:1214
-#: admin1/classes/class-wc-psad-admin.php:1299
-#: admin1/classes/class-wc-psad-admin.php:1492
-#: admin1/classes/class-wc-psad-admin.php:1577
-#: admin1/classes/class-wc-psad-admin.php:1761
-#: admin1/classes/class-wc-psad-admin.php:1855
-#: admin1/classes/class-wc-psad-admin.php:1981
+#: admin/admin-interface.php:164
 msgid "Normal"
 msgstr ""
 
-#: admin/admin-interface.php:160 admin1/classes/class-wc-psad-admin.php:955
-#: admin1/classes/class-wc-psad-admin.php:1040
-#: admin1/classes/class-wc-psad-admin.php:1215
-#: admin1/classes/class-wc-psad-admin.php:1300
-#: admin1/classes/class-wc-psad-admin.php:1493
-#: admin1/classes/class-wc-psad-admin.php:1578
-#: admin1/classes/class-wc-psad-admin.php:1762
-#: admin1/classes/class-wc-psad-admin.php:1856
-#: admin1/classes/class-wc-psad-admin.php:1982
+#: admin/admin-interface.php:165
 msgid "Italic"
 msgstr ""
 
-#: admin/admin-interface.php:161 admin1/classes/class-wc-psad-admin.php:956
-#: admin1/classes/class-wc-psad-admin.php:1041
-#: admin1/classes/class-wc-psad-admin.php:1216
-#: admin1/classes/class-wc-psad-admin.php:1301
-#: admin1/classes/class-wc-psad-admin.php:1494
-#: admin1/classes/class-wc-psad-admin.php:1579
-#: admin1/classes/class-wc-psad-admin.php:1763
-#: admin1/classes/class-wc-psad-admin.php:1857
-#: admin1/classes/class-wc-psad-admin.php:1983
+#: admin/admin-interface.php:166
 msgid "Bold"
 msgstr ""
 
-#: admin/admin-interface.php:162 admin1/classes/class-wc-psad-admin.php:957
-#: admin1/classes/class-wc-psad-admin.php:1042
-#: admin1/classes/class-wc-psad-admin.php:1217
-#: admin1/classes/class-wc-psad-admin.php:1302
-#: admin1/classes/class-wc-psad-admin.php:1495
-#: admin1/classes/class-wc-psad-admin.php:1580
-#: admin1/classes/class-wc-psad-admin.php:1764
-#: admin1/classes/class-wc-psad-admin.php:1858
-#: admin1/classes/class-wc-psad-admin.php:1984
+#: admin/admin-interface.php:167
 msgid "Bold/Italic"
 msgstr ""
 
-#: admin/admin-interface.php:172 admin1/classes/class-wc-psad-admin.php:900
-#: admin1/classes/class-wc-psad-admin.php:1161
-#: admin1/classes/class-wc-psad-admin.php:1439
-#: admin1/classes/class-wc-psad-admin.php:1708
-#: admin1/classes/class-wc-psad-admin.php:1907
+#: admin/admin-interface.php:177
 msgid "Solid"
 msgstr ""
 
-#: admin/admin-interface.php:173 admin1/classes/class-wc-psad-admin.php:903
-#: admin1/classes/class-wc-psad-admin.php:1164
-#: admin1/classes/class-wc-psad-admin.php:1442
-#: admin1/classes/class-wc-psad-admin.php:1711
-#: admin1/classes/class-wc-psad-admin.php:1910
+#: admin/admin-interface.php:178
 msgid "Double"
 msgstr ""
 
-#: admin/admin-interface.php:174 admin1/classes/class-wc-psad-admin.php:902
-#: admin1/classes/class-wc-psad-admin.php:1163
-#: admin1/classes/class-wc-psad-admin.php:1441
-#: admin1/classes/class-wc-psad-admin.php:1710
-#: admin1/classes/class-wc-psad-admin.php:1909
+#: admin/admin-interface.php:179
 msgid "Dashed"
 msgstr ""
 
-#: admin/admin-interface.php:175 admin1/classes/class-wc-psad-admin.php:901
-#: admin1/classes/class-wc-psad-admin.php:1162
-#: admin1/classes/class-wc-psad-admin.php:1440
-#: admin1/classes/class-wc-psad-admin.php:1709
-#: admin1/classes/class-wc-psad-admin.php:1908
+#: admin/admin-interface.php:180
 msgid "Dotted"
 msgstr ""
 
-#: admin/admin-interface.php:176
+#: admin/admin-interface.php:181
 msgid "Groove"
 msgstr ""
 
-#: admin/admin-interface.php:177
+#: admin/admin-interface.php:182
 msgid "Ridge"
 msgstr ""
 
-#: admin/admin-interface.php:178
+#: admin/admin-interface.php:183
 msgid "Inset"
 msgstr ""
 
-#: admin/admin-interface.php:179
+#: admin/admin-interface.php:184
 msgid "Outset"
 msgstr ""
 
-#: admin/admin-interface.php:1214 admin/admin-interface.php:1304
-#: admin/admin-interface.php:1333
+#: admin/admin-interface.php:1294 admin/admin-interface.php:1384
+#: admin/admin-interface.php:1413
 #: admin/settings/cat-pages-scroll-settings.php:216
 #: admin/settings/global-settings.php:226
 #: admin/settings/global-settings.php:274
@@ -148,8 +100,8 @@ msgstr ""
 msgid "ON"
 msgstr ""
 
-#: admin/admin-interface.php:1215 admin/admin-interface.php:1305
-#: admin/admin-interface.php:1334
+#: admin/admin-interface.php:1295 admin/admin-interface.php:1385
+#: admin/admin-interface.php:1414
 #: admin/settings/cat-pages-scroll-settings.php:217
 #: admin/settings/global-settings.php:227
 #: admin/settings/global-settings.php:275
@@ -166,109 +118,126 @@ msgstr ""
 msgid "OFF"
 msgstr ""
 
-#: admin/admin-interface.php:1375
+#: admin/admin-interface.php:1455
 msgid "Width"
 msgstr ""
 
-#: admin/admin-interface.php:1377
+#: admin/admin-interface.php:1457
 msgid "Height"
 msgstr ""
 
-#: admin/admin-interface.php:1379
+#: admin/admin-interface.php:1459
 msgid "Hard Crop"
 msgstr ""
 
-#: admin/admin-interface.php:1457
+#: admin/admin-interface.php:1537
 msgid "-- Default Fonts --"
 msgstr ""
 
-#: admin/admin-interface.php:1468
+#: admin/admin-interface.php:1548
 msgid "-- Google Fonts --"
 msgstr ""
 
-#: admin/admin-interface.php:1509
+#: admin/admin-interface.php:1589
 msgid "Preview your customized typography settings"
 msgstr ""
 
-#: admin/admin-interface.php:1643 admin/admin-interface.php:1886
+#: admin/admin-interface.php:1723 admin/admin-interface.php:1982
 msgid "Preview your customized border settings"
 msgstr ""
 
-#: admin/admin-interface.php:1652 admin/admin-interface.php:1877
+#: admin/admin-interface.php:1732 admin/admin-interface.php:1973
 msgid "Rounded"
 msgstr ""
 
-#: admin/admin-interface.php:1653 admin/admin-interface.php:1878
+#: admin/admin-interface.php:1733 admin/admin-interface.php:1974
 msgid "Square"
 msgstr ""
 
-#: admin/admin-interface.php:1663 admin/admin-interface.php:1891
+#: admin/admin-interface.php:1743 admin/admin-interface.php:1987
 msgid "Top Left Corner"
 msgstr ""
 
-#: admin/admin-interface.php:1679 admin/admin-interface.php:1907
+#: admin/admin-interface.php:1763 admin/admin-interface.php:2007
 msgid "Top Right Corner"
 msgstr ""
 
-#: admin/admin-interface.php:1695 admin/admin-interface.php:1923
+#: admin/admin-interface.php:1783 admin/admin-interface.php:2027
 msgid "Bottom Right Corner"
 msgstr ""
 
-#: admin/admin-interface.php:1711 admin/admin-interface.php:1939
+#: admin/admin-interface.php:1803 admin/admin-interface.php:2047
 msgid "Bottom Left Corner"
 msgstr ""
 
-#: admin/admin-interface.php:1800
+#: admin/admin-interface.php:1896
 msgid "Preview your customized border styles settings"
 msgstr ""
 
-#: admin/admin-interface.php:1996
+#: admin/admin-interface.php:2108
 msgid "YES"
 msgstr ""
 
-#: admin/admin-interface.php:1997
+#: admin/admin-interface.php:2109
 msgid "NO"
 msgstr ""
 
-#: admin/admin-interface.php:2011
+#: admin/admin-interface.php:2123
 msgid "Horizontal Shadow"
 msgstr ""
 
-#: admin/admin-interface.php:2029
+#: admin/admin-interface.php:2141
 msgid "Vertical Shadow"
 msgstr ""
 
-#: admin/admin-interface.php:2047
+#: admin/admin-interface.php:2159
 msgid "Blur Distance"
 msgstr ""
 
-#: admin/admin-interface.php:2065
+#: admin/admin-interface.php:2177
 msgid "Spread Size"
 msgstr ""
 
-#: admin/admin-interface.php:2083
+#: admin/admin-interface.php:2195
 msgid "INNER"
 msgstr ""
 
-#: admin/admin-interface.php:2084
+#: admin/admin-interface.php:2196
 msgid "OUTER"
 msgstr ""
 
-#: admin/admin-interface.php:2102
+#: admin/admin-interface.php:2214
 msgid "Preview your customized box shadow settings"
 msgstr ""
 
-#: admin/admin-interface.php:2286
+#: admin/admin-interface.php:2402
 msgid "Save changes"
 msgstr ""
 
-#: admin/admin-interface.php:2287
+#: admin/admin-interface.php:2403
 msgid "Reset Settings"
+msgstr ""
+
+#: admin/admin-ui.php:127
+#, php-format
+msgid "Settings inside this yellow border are %s Features."
+msgstr ""
+
+#: admin/admin-ui.php:129
+#, php-format
+msgid ""
+"Upgrade to the <a href=\"%s\" target=\"_blank\">%s</a> to activate these "
+"settings."
+msgstr ""
+
+#: admin/admin-ui.php:131 admin/admin-ui.php:133
+#: classes/class-wc-psad-admin-hook.php:52
+#: classes/class-wc-psad-admin-hook.php:110
+msgid "Pro Version"
 msgstr ""
 
 #: admin/admin-pages/admin-sort-display-page.php:63
 #: admin/admin-pages/admin-sort-display-page.php:64
-#: admin1/classes/class-wc-psad-admin.php:219
 msgid "Sort & Display"
 msgstr ""
 
@@ -309,7 +278,6 @@ msgid "Category Page Scroll"
 msgstr ""
 
 #: admin/settings/cat-pages-scroll-settings.php:204
-#: admin1/classes/class-wc-psad-admin.php:745
 msgid "Category Page"
 msgstr ""
 
@@ -317,7 +285,6 @@ msgstr ""
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:208
 #: admin/settings/shop-page-scroll-settings.php:193
 #: admin/tabs/endless-scroll-tab.php:78
-#: admin1/classes/class-wc-psad-admin.php:411
 msgid "Endless Scroll"
 msgstr ""
 
@@ -330,9 +297,6 @@ msgstr ""
 #: admin/settings/cat-pages-scroll-settings.php:226
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:226
 #: admin/settings/shop-page-scroll-settings.php:211
-#: admin1/classes/class-wc-psad-admin.php:729
-#: admin1/classes/class-wc-psad-admin.php:758
-#: admin1/classes/class-wc-psad-admin.php:791
 msgid "Scroll Type"
 msgstr ""
 
@@ -345,9 +309,6 @@ msgstr ""
 #: admin/settings/cat-pages-scroll-settings.php:234
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:234
 #: admin/settings/shop-page-scroll-settings.php:219
-#: admin1/classes/class-wc-psad-admin.php:739
-#: admin1/classes/class-wc-psad-admin.php:768
-#: admin1/classes/class-wc-psad-admin.php:801
 msgid "Auto Scroll"
 msgstr ""
 
@@ -361,7 +322,6 @@ msgid ""
 msgstr ""
 
 #: admin/settings/cat-pages-scroll-settings.php:248
-#: admin1/classes/class-wc-psad-admin.php:1069
 msgid "Categories Endless Scroll on Click Style"
 msgstr ""
 
@@ -369,10 +329,6 @@ msgstr ""
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:248
 #: admin/settings/shop-page-scroll-settings.php:233
 #: admin/settings/view-all-products-settings.php:187
-#: admin1/classes/class-wc-psad-admin.php:812
-#: admin1/classes/class-wc-psad-admin.php:1073
-#: admin1/classes/class-wc-psad-admin.php:1333
-#: admin1/classes/class-wc-psad-admin.php:1611
 msgid "Button or Hyperlink Text"
 msgstr ""
 
@@ -387,10 +343,6 @@ msgstr ""
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:256
 #: admin/settings/shop-page-scroll-settings.php:241
 #: admin/settings/view-all-products-settings.php:195
-#: admin1/classes/class-wc-psad-admin.php:820
-#: admin1/classes/class-wc-psad-admin.php:1081
-#: admin1/classes/class-wc-psad-admin.php:1341
-#: admin1/classes/class-wc-psad-admin.php:1619
 msgid "Button"
 msgstr ""
 
@@ -398,26 +350,17 @@ msgstr ""
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:260
 #: admin/settings/shop-page-scroll-settings.php:245
 #: admin/settings/view-all-products-settings.php:224
-#: admin1/classes/class-wc-psad-admin.php:828
-#: admin1/classes/class-wc-psad-admin.php:1089
-#: admin1/classes/class-wc-psad-admin.php:1366
-#: admin1/classes/class-wc-psad-admin.php:1627
 msgid "Button Styling"
 msgstr ""
 
 #: admin/settings/cat-pages-scroll-settings.php:269
 #: admin/settings/shop-page-scroll-settings.php:250
 #: admin/settings/view-all-products-settings.php:229
-#: admin1/classes/class-wc-psad-admin.php:832
-#: admin1/classes/class-wc-psad-admin.php:1093
-#: admin1/classes/class-wc-psad-admin.php:1370
 msgid "Button Text"
 msgstr ""
 
 #: admin/settings/cat-pages-scroll-settings.php:270
 #: admin/settings/cat-pages-scroll-settings.php:358
-#: admin1/classes/class-wc-psad-admin.php:1094
-#: admin1/classes/class-wc-psad-admin.php:1249
 msgid "Text for Endless Scroll on Category page"
 msgstr ""
 
@@ -425,16 +368,7 @@ msgstr ""
 #: admin/settings/cat-pages-scroll-settings.php:361
 #: admin/settings/shop-page-scroll-settings.php:254
 #: admin/settings/shop-page-scroll-settings.php:342
-#: admin1/classes/class-wc-psad-admin.php:71
-#: admin1/classes/class-wc-psad-admin.php:114
-#: admin1/classes/class-wc-psad-admin.php:837
-#: admin1/classes/class-wc-psad-admin.php:838
-#: admin1/classes/class-wc-psad-admin.php:993
-#: admin1/classes/class-wc-psad-admin.php:994
-#: admin1/classes/class-wc-psad-admin.php:1098
-#: admin1/classes/class-wc-psad-admin.php:1099
-#: admin1/classes/class-wc-psad-admin.php:1253
-#: admin1/classes/class-wc-psad-admin.php:1254 classes/class-wc-psad.php:468
+#: classes/class-wc-psad.php:475
 msgid "Click More Categories"
 msgstr ""
 
@@ -442,10 +376,6 @@ msgstr ""
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:279
 #: admin/settings/shop-page-scroll-settings.php:257
 #: admin/settings/view-all-products-settings.php:236
-#: admin1/classes/class-wc-psad-admin.php:841
-#: admin1/classes/class-wc-psad-admin.php:1102
-#: admin1/classes/class-wc-psad-admin.php:1379
-#: admin1/classes/class-wc-psad-admin.php:1649
 msgid "Button Align"
 msgstr ""
 
@@ -457,14 +387,6 @@ msgstr ""
 #: admin/settings/shop-page-scroll-settings.php:351
 #: admin/settings/view-all-products-settings.php:242
 #: admin/settings/view-all-products-settings.php:331
-#: admin1/classes/class-wc-psad-admin.php:849
-#: admin1/classes/class-wc-psad-admin.php:1005
-#: admin1/classes/class-wc-psad-admin.php:1110
-#: admin1/classes/class-wc-psad-admin.php:1265
-#: admin1/classes/class-wc-psad-admin.php:1388
-#: admin1/classes/class-wc-psad-admin.php:1543
-#: admin1/classes/class-wc-psad-admin.php:1657
-#: admin1/classes/class-wc-psad-admin.php:1821
 msgid "Center"
 msgstr ""
 
@@ -476,14 +398,6 @@ msgstr ""
 #: admin/settings/shop-page-scroll-settings.php:352
 #: admin/settings/view-all-products-settings.php:243
 #: admin/settings/view-all-products-settings.php:332
-#: admin1/classes/class-wc-psad-admin.php:850
-#: admin1/classes/class-wc-psad-admin.php:1006
-#: admin1/classes/class-wc-psad-admin.php:1111
-#: admin1/classes/class-wc-psad-admin.php:1266
-#: admin1/classes/class-wc-psad-admin.php:1389
-#: admin1/classes/class-wc-psad-admin.php:1544
-#: admin1/classes/class-wc-psad-admin.php:1658
-#: admin1/classes/class-wc-psad-admin.php:1822
 msgid "Left"
 msgstr ""
 
@@ -495,14 +409,6 @@ msgstr ""
 #: admin/settings/shop-page-scroll-settings.php:353
 #: admin/settings/view-all-products-settings.php:244
 #: admin/settings/view-all-products-settings.php:333
-#: admin1/classes/class-wc-psad-admin.php:851
-#: admin1/classes/class-wc-psad-admin.php:1007
-#: admin1/classes/class-wc-psad-admin.php:1112
-#: admin1/classes/class-wc-psad-admin.php:1267
-#: admin1/classes/class-wc-psad-admin.php:1390
-#: admin1/classes/class-wc-psad-admin.php:1545
-#: admin1/classes/class-wc-psad-admin.php:1659
-#: admin1/classes/class-wc-psad-admin.php:1823
 msgid "Right"
 msgstr ""
 
@@ -538,10 +444,6 @@ msgstr ""
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:308
 #: admin/settings/shop-page-scroll-settings.php:286
 #: admin/settings/view-all-products-settings.php:265
-#: admin1/classes/class-wc-psad-admin.php:855
-#: admin1/classes/class-wc-psad-admin.php:1116
-#: admin1/classes/class-wc-psad-admin.php:1394
-#: admin1/classes/class-wc-psad-admin.php:1663
 msgid "Background Colour"
 msgstr ""
 
@@ -568,14 +470,6 @@ msgstr ""
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:315
 #: admin/settings/shop-page-scroll-settings.php:293
 #: admin/settings/view-all-products-settings.php:272
-#: admin1/classes/class-wc-psad-admin.php:864
-#: admin1/classes/class-wc-psad-admin.php:873
-#: admin1/classes/class-wc-psad-admin.php:1125
-#: admin1/classes/class-wc-psad-admin.php:1134
-#: admin1/classes/class-wc-psad-admin.php:1403
-#: admin1/classes/class-wc-psad-admin.php:1412
-#: admin1/classes/class-wc-psad-admin.php:1672
-#: admin1/classes/class-wc-psad-admin.php:1681
 msgid "Background Colour Gradient From"
 msgstr ""
 
@@ -597,10 +491,6 @@ msgstr ""
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:335
 #: admin/settings/shop-page-scroll-settings.php:313
 #: admin/settings/view-all-products-settings.php:293
-#: admin1/classes/class-wc-psad-admin.php:925
-#: admin1/classes/class-wc-psad-admin.php:1186
-#: admin1/classes/class-wc-psad-admin.php:1464
-#: admin1/classes/class-wc-psad-admin.php:1733
 msgid "Button Font"
 msgstr ""
 
@@ -615,10 +505,6 @@ msgstr ""
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:347
 #: admin/settings/shop-page-scroll-settings.php:325
 #: admin/settings/view-all-products-settings.php:305
-#: admin1/classes/class-wc-psad-admin.php:970
-#: admin1/classes/class-wc-psad-admin.php:1230
-#: admin1/classes/class-wc-psad-admin.php:1508
-#: admin1/classes/class-wc-psad-admin.php:1777
 msgid "CSS Class"
 msgstr ""
 
@@ -626,10 +512,6 @@ msgstr ""
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:348
 #: admin/settings/shop-page-scroll-settings.php:326
 #: admin/settings/view-all-products-settings.php:306
-#: admin1/classes/class-wc-psad-admin.php:971
-#: admin1/classes/class-wc-psad-admin.php:1231
-#: admin1/classes/class-wc-psad-admin.php:1509
-#: admin1/classes/class-wc-psad-admin.php:1778
 msgid "Enter your own button CSS class"
 msgstr ""
 
@@ -637,23 +519,12 @@ msgstr ""
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:355
 #: admin/settings/shop-page-scroll-settings.php:333
 #: admin/settings/view-all-products-settings.php:313
-#: admin1/classes/class-wc-psad-admin.php:984
-#: admin1/classes/class-wc-psad-admin.php:1244
-#: admin1/classes/class-wc-psad-admin.php:1522
-#: admin1/classes/class-wc-psad-admin.php:1791
 msgid "Linked Text Styling"
 msgstr ""
 
 #: admin/settings/cat-pages-scroll-settings.php:357
 #: admin/settings/shop-page-scroll-settings.php:338
 #: admin/settings/view-all-products-settings.php:318
-#: admin1/classes/class-wc-psad-admin.php:819
-#: admin1/classes/class-wc-psad-admin.php:988
-#: admin1/classes/class-wc-psad-admin.php:1080
-#: admin1/classes/class-wc-psad-admin.php:1248
-#: admin1/classes/class-wc-psad-admin.php:1340
-#: admin1/classes/class-wc-psad-admin.php:1526
-#: admin1/classes/class-wc-psad-admin.php:1618
 msgid "Linked Text"
 msgstr ""
 
@@ -661,10 +532,6 @@ msgstr ""
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:374
 #: admin/settings/shop-page-scroll-settings.php:345
 #: admin/settings/view-all-products-settings.php:325
-#: admin1/classes/class-wc-psad-admin.php:997
-#: admin1/classes/class-wc-psad-admin.php:1257
-#: admin1/classes/class-wc-psad-admin.php:1535
-#: admin1/classes/class-wc-psad-admin.php:1813
 msgid "Linked Text Align"
 msgstr ""
 
@@ -676,10 +543,6 @@ msgid "Hyperlink Font"
 msgstr ""
 
 #: admin/settings/cat-pages-scroll-settings.php:382
-#: admin1/classes/class-wc-psad-admin.php:1055
-#: admin1/classes/class-wc-psad-admin.php:1315
-#: admin1/classes/class-wc-psad-admin.php:1593
-#: admin1/classes/class-wc-psad-admin.php:1871
 msgid "Font Hover Colour"
 msgstr ""
 
@@ -696,19 +559,15 @@ msgid "Count Meta Settings successfully reseted."
 msgstr ""
 
 #: admin/settings/count-meta-settings.php:154
-#: admin1/classes/class-wc-psad-admin.php:417
 msgid "Count Meta"
 msgstr ""
 
 #: admin/settings/count-meta-settings.php:198
-#: admin1/classes/class-wc-psad-admin.php:1934
 msgid "Categories Count Meta Setup"
 msgstr ""
 
 #: admin/settings/count-meta-settings.php:202
 #: admin/settings/count-meta-settings.php:228
-#: admin1/classes/class-wc-psad-admin.php:341
-#: admin1/classes/class-wc-psad-admin.php:352
 msgid "Count Meta Text"
 msgstr ""
 
@@ -730,46 +589,37 @@ msgid "%d"
 msgstr ""
 
 #: admin/settings/count-meta-settings.php:214
-#: admin/settings/count-meta-settings.php:240
-#: admin1/classes/class-wc-psad-admin.php:343
-#: admin1/classes/class-wc-psad-admin.php:354 classes/class-wc-psad.php:393
+#: admin/settings/count-meta-settings.php:240 classes/class-wc-psad.php:397
 msgid "of"
 msgstr ""
 
-#: admin/settings/count-meta-settings.php:219
-#: admin1/classes/class-wc-psad-admin.php:343 classes/class-wc-psad.php:393
+#: admin/settings/count-meta-settings.php:219 classes/class-wc-psad.php:397
 msgid "products in this Category"
 msgstr ""
 
 #: admin/settings/count-meta-settings.php:224
-#: admin1/classes/class-wc-psad-admin.php:1941
 msgid "Tags Count Meta Setup"
 msgstr ""
 
 #: admin/settings/count-meta-settings.php:245
-#: admin1/classes/class-wc-psad-admin.php:354
 msgid "products in this Tag"
 msgstr ""
 
 #: admin/settings/count-meta-settings.php:251
-#: admin1/classes/class-wc-psad-admin.php:1948
 msgid "Count Meta Styling"
 msgstr ""
 
 #: admin/settings/count-meta-settings.php:255
-#: admin1/classes/class-wc-psad-admin.php:363
 msgid "Padding"
 msgstr ""
 
 #: admin/settings/count-meta-settings.php:260
 #: admin/settings/global-settings.php:451
-#: admin1/classes/class-wc-psad-admin.php:365
 msgid "Top"
 msgstr ""
 
 #: admin/settings/count-meta-settings.php:265
 #: admin/settings/global-settings.php:457
-#: admin1/classes/class-wc-psad-admin.php:366
 msgid "Bottom"
 msgstr ""
 
@@ -791,17 +641,14 @@ msgstr ""
 
 #: admin/settings/global-settings.php:168
 #: admin/tabs/global-settings-tab.php:78
-#: admin1/classes/class-wc-psad-admin.php:410
 msgid "Settings"
 msgstr ""
 
 #: admin/settings/global-settings.php:212
-#: admin1/classes/class-wc-psad-admin.php:644
 msgid "Shop Page Show Products by Category"
 msgstr ""
 
 #: admin/settings/global-settings.php:214
-#: admin1/classes/class-wc-psad-admin.php:646
 #, php-format
 msgid ""
 "These settings when activated over ride the WooCommerce <a target='_blank' "
@@ -810,7 +657,6 @@ msgstr ""
 
 #: admin/settings/global-settings.php:217
 #: admin/settings/shop-page-scroll-settings.php:189
-#: admin1/classes/class-wc-psad-admin.php:715
 msgid "Shop Page"
 msgstr ""
 
@@ -822,12 +668,10 @@ msgid ""
 msgstr ""
 
 #: admin/settings/global-settings.php:235
-#: admin1/classes/class-wc-psad-admin.php:657
 msgid "Categories Per Page"
 msgstr ""
 
 #: admin/settings/global-settings.php:236
-#: admin1/classes/class-wc-psad-admin.php:658
 msgid ""
 "Set the number of Category product groups to show per pagination or endless "
 "scroll event."
@@ -844,14 +688,12 @@ msgid "Default is [default_value]."
 msgstr ""
 
 #: admin/settings/global-settings.php:244
-#: admin1/classes/class-wc-psad-admin.php:666
-#: classes/class-wc-psad-admin-hook.php:54
-#: classes/class-wc-psad-admin-hook.php:113
+#: classes/class-wc-psad-admin-hook.php:56
+#: classes/class-wc-psad-admin-hook.php:115
 msgid "Products per Category"
 msgstr ""
 
 #: admin/settings/global-settings.php:245
-#: admin1/classes/class-wc-psad-admin.php:667
 msgid ""
 "Set the number of products to show per Category on Shop pages. Can over ride "
 "on a category by category basis from each category edit page."
@@ -860,20 +702,15 @@ msgstr ""
 #: admin/settings/global-settings.php:253
 #: admin/settings/global-settings.php:334
 #: admin/settings/global-settings.php:404
-#: admin1/classes/class-wc-psad-admin.php:582
-#: admin1/classes/class-wc-psad-admin.php:628
-#: admin1/classes/class-wc-psad-admin.php:675
-#: classes/class-wc-psad-admin-hook.php:59
-#: classes/class-wc-psad-admin-hook.php:90
-#: classes/class-wc-psad-admin-hook.php:120
-#: classes/class-wc-psad-admin-hook.php:163
+#: classes/class-wc-psad-admin-hook.php:61
+#: classes/class-wc-psad-admin-hook.php:92
+#: classes/class-wc-psad-admin-hook.php:122
+#: classes/class-wc-psad-admin-hook.php:165
 msgid "Product Sort"
 msgstr ""
 
 #: admin/settings/global-settings.php:254
 #: admin/settings/global-settings.php:335
-#: admin1/classes/class-wc-psad-admin.php:583
-#: admin1/classes/class-wc-psad-admin.php:676
 msgid ""
 "Product type can be set on a Category by category basis with the Pro version"
 msgstr ""
@@ -881,39 +718,30 @@ msgstr ""
 #: admin/settings/global-settings.php:260
 #: admin/settings/global-settings.php:340
 #: admin/settings/global-settings.php:409
-#: admin1/classes/class-wc-psad-admin.php:591
-#: admin1/classes/class-wc-psad-admin.php:636
-#: admin1/classes/class-wc-psad-admin.php:684
-#: classes/class-wc-psad-admin-hook.php:62
-#: classes/class-wc-psad-admin-hook.php:93
-#: classes/class-wc-psad-admin-hook.php:124
-#: classes/class-wc-psad-admin-hook.php:167
+#: classes/class-wc-psad-admin-hook.php:64
+#: classes/class-wc-psad-admin-hook.php:95
+#: classes/class-wc-psad-admin-hook.php:126
+#: classes/class-wc-psad-admin-hook.php:169
 msgid "Default (Recent)"
 msgstr ""
 
 #: admin/settings/global-settings.php:261
 #: admin/settings/global-settings.php:341
 #: admin/settings/global-settings.php:410
-#: admin1/classes/class-wc-psad-admin.php:592
-#: admin1/classes/class-wc-psad-admin.php:637
-#: admin1/classes/class-wc-psad-admin.php:685
-#: classes/class-wc-psad-admin-hook.php:63
-#: classes/class-wc-psad-admin-hook.php:94
-#: classes/class-wc-psad-admin-hook.php:125
-#: classes/class-wc-psad-admin-hook.php:168
+#: classes/class-wc-psad-admin-hook.php:65
+#: classes/class-wc-psad-admin-hook.php:96
+#: classes/class-wc-psad-admin-hook.php:127
+#: classes/class-wc-psad-admin-hook.php:170
 msgid "On Sale"
 msgstr ""
 
 #: admin/settings/global-settings.php:262
 #: admin/settings/global-settings.php:342
 #: admin/settings/global-settings.php:411
-#: admin1/classes/class-wc-psad-admin.php:593
-#: admin1/classes/class-wc-psad-admin.php:638
-#: admin1/classes/class-wc-psad-admin.php:686
-#: classes/class-wc-psad-admin-hook.php:64
-#: classes/class-wc-psad-admin-hook.php:95
-#: classes/class-wc-psad-admin-hook.php:126
-#: classes/class-wc-psad-admin-hook.php:169
+#: classes/class-wc-psad-admin-hook.php:66
+#: classes/class-wc-psad-admin-hook.php:97
+#: classes/class-wc-psad-admin-hook.php:128
+#: classes/class-wc-psad-admin-hook.php:171
 msgid "Featured"
 msgstr ""
 
@@ -928,12 +756,10 @@ msgid "ON to show product count under category title."
 msgstr ""
 
 #: admin/settings/global-settings.php:279
-#: admin1/classes/class-wc-psad-admin.php:533
 msgid "Parent / Child Category Page Settings"
 msgstr ""
 
 #: admin/settings/global-settings.php:282
-#: admin1/classes/class-wc-psad-admin.php:535
 #, php-format
 msgid ""
 "Please Go to the <a target='_blank' href='%s'>Catalog Tab</a> and set the "
@@ -952,48 +778,41 @@ msgid "Sort and display products by sub categories on Product category pages."
 msgstr ""
 
 #: admin/settings/global-settings.php:302
-#: admin1/classes/class-wc-psad-admin.php:546
-#: classes/class-wc-psad-admin-hook.php:70
-#: classes/class-wc-psad-admin-hook.php:135
+#: classes/class-wc-psad-admin-hook.php:72
+#: classes/class-wc-psad-admin-hook.php:137
 msgid "Category Products (No Sub Cats)"
 msgstr ""
 
 #: admin/settings/global-settings.php:303
 #: admin/settings/global-settings.php:397
-#: admin1/classes/class-wc-psad-admin.php:547
-#: admin1/classes/class-wc-psad-admin.php:620
-#: classes/class-wc-psad-admin-hook.php:72
-#: classes/class-wc-psad-admin-hook.php:138
+#: classes/class-wc-psad-admin-hook.php:74
+#: classes/class-wc-psad-admin-hook.php:140
 msgid "The number of products to show per Endless Scroll or pagination."
 msgstr ""
 
 #: admin/settings/global-settings.php:310
-#: admin1/classes/class-wc-psad-admin.php:555
-#: classes/class-wc-psad-admin-hook.php:75
-#: classes/class-wc-psad-admin-hook.php:142
+#: classes/class-wc-psad-admin-hook.php:77
+#: classes/class-wc-psad-admin-hook.php:144
 msgid "Parent Category Products"
 msgstr ""
 
 #: admin/settings/global-settings.php:311
-#: admin1/classes/class-wc-psad-admin.php:556
-#: classes/class-wc-psad-admin-hook.php:77
-#: classes/class-wc-psad-admin-hook.php:145
+#: classes/class-wc-psad-admin-hook.php:79
+#: classes/class-wc-psad-admin-hook.php:147
 msgid ""
 "Sets the number of Parent Category Products to show before Child Cat Product "
 "Groups."
 msgstr ""
 
 #: admin/settings/global-settings.php:318
-#: admin1/classes/class-wc-psad-admin.php:564
-#: classes/class-wc-psad-admin-hook.php:80
-#: classes/class-wc-psad-admin-hook.php:149
+#: classes/class-wc-psad-admin-hook.php:82
+#: classes/class-wc-psad-admin-hook.php:151
 msgid "Sub Categories Per Page"
 msgstr ""
 
 #: admin/settings/global-settings.php:319
-#: admin1/classes/class-wc-psad-admin.php:565
-#: classes/class-wc-psad-admin-hook.php:82
-#: classes/class-wc-psad-admin-hook.php:152
+#: classes/class-wc-psad-admin-hook.php:84
+#: classes/class-wc-psad-admin-hook.php:154
 msgid ""
 "Set the number of Sub Category product groups to show per pagination or "
 "endless scroll event."
@@ -1004,9 +823,8 @@ msgid "Products Per Sub Category"
 msgstr ""
 
 #: admin/settings/global-settings.php:327
-#: admin1/classes/class-wc-psad-admin.php:574
-#: classes/class-wc-psad-admin-hook.php:87
-#: classes/class-wc-psad-admin-hook.php:159
+#: classes/class-wc-psad-admin-hook.php:89
+#: classes/class-wc-psad-admin-hook.php:161
 msgid "Set the number of products to show per sub Category."
 msgstr ""
 
@@ -1015,7 +833,6 @@ msgid "Global Category Reset :"
 msgstr ""
 
 #: admin/settings/global-settings.php:362
-#: admin1/classes/class-wc-psad-admin.php:280
 msgid "Product Category Reset"
 msgstr ""
 
@@ -1026,12 +843,10 @@ msgid ""
 msgstr ""
 
 #: admin/settings/global-settings.php:374
-#: admin1/classes/class-wc-psad-admin.php:607
 msgid "Tag Page Settings"
 msgstr ""
 
 #: admin/settings/global-settings.php:378
-#: admin1/classes/class-wc-psad-admin.php:779
 msgid "Tag Page"
 msgstr ""
 
@@ -1040,19 +855,14 @@ msgid "Sort and Display Product tag pages."
 msgstr ""
 
 #: admin/settings/global-settings.php:396
-#: admin1/classes/class-wc-psad-admin.php:619
 msgid "Tag Products"
 msgstr ""
 
 #: admin/settings/global-settings.php:416
-#: admin1/classes/class-wc-psad-admin.php:700
-#: admin1/classes/class-wc-psad-admin.php:1885
 msgid "Visual Content Separator"
 msgstr ""
 
 #: admin/settings/global-settings.php:420
-#: admin1/classes/class-wc-psad-admin.php:416
-#: admin1/classes/class-wc-psad-admin.php:705
 msgid "Visual Separator"
 msgstr ""
 
@@ -1067,7 +877,6 @@ msgid "Seperator Border"
 msgstr ""
 
 #: admin/settings/global-settings.php:445
-#: admin1/classes/class-wc-psad-admin.php:1922
 msgid "Seperator Padding"
 msgstr ""
 
@@ -1076,7 +885,6 @@ msgid "House Keeping :"
 msgstr ""
 
 #: admin/settings/global-settings.php:469
-#: admin1/classes/class-wc-psad-admin.php:299
 msgid "Clean up on Deletion"
 msgstr ""
 
@@ -1111,12 +919,10 @@ msgid "On to activate the Endless Scroll feature for Products on Tag page."
 msgstr ""
 
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:244
-#: admin1/classes/class-wc-psad-admin.php:1607
 msgid "Parent Cat & Tag Products Endless Scroll on Click Style"
 msgstr ""
 
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:265
-#: admin1/classes/class-wc-psad-admin.php:1631
 msgid "Parent Cat Button Text"
 msgstr ""
 
@@ -1124,10 +930,6 @@ msgstr ""
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:273
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:361
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:368
-#: admin1/classes/class-wc-psad-admin.php:1632
-#: admin1/classes/class-wc-psad-admin.php:1641
-#: admin1/classes/class-wc-psad-admin.php:1796
-#: admin1/classes/class-wc-psad-admin.php:1805
 msgid "Text for Endless Scroll for Products"
 msgstr ""
 
@@ -1135,29 +937,18 @@ msgstr ""
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:276
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:364
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:371
-#: admin1/classes/class-wc-psad-admin.php:1636
-#: admin1/classes/class-wc-psad-admin.php:1637
-#: admin1/classes/class-wc-psad-admin.php:1645
-#: admin1/classes/class-wc-psad-admin.php:1646
-#: admin1/classes/class-wc-psad-admin.php:1800
-#: admin1/classes/class-wc-psad-admin.php:1801
-#: admin1/classes/class-wc-psad-admin.php:1809
-#: admin1/classes/class-wc-psad-admin.php:1810
 msgid "Click More Products"
 msgstr ""
 
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:272
-#: admin1/classes/class-wc-psad-admin.php:1640
 msgid "Tag More Product Button Text"
 msgstr ""
 
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:360
-#: admin1/classes/class-wc-psad-admin.php:1795
 msgid "Parent Cat Linked Text"
 msgstr ""
 
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:367
-#: admin1/classes/class-wc-psad-admin.php:1804
 msgid "Tag More Product Linked Text"
 msgstr ""
 
@@ -1189,14 +980,11 @@ msgid ""
 msgstr ""
 
 #: admin/settings/shop-page-scroll-settings.php:229
-#: admin1/classes/class-wc-psad-admin.php:808
 msgid "Shop Page Categories Endless Scroll on Click style"
 msgstr ""
 
 #: admin/settings/shop-page-scroll-settings.php:251
 #: admin/settings/shop-page-scroll-settings.php:339
-#: admin1/classes/class-wc-psad-admin.php:833
-#: admin1/classes/class-wc-psad-admin.php:989
 msgid "Text for Endless Scroll on shop page"
 msgstr ""
 
@@ -1213,50 +1001,37 @@ msgid "View All Products Settings successfully reseted."
 msgstr ""
 
 #: admin/settings/view-all-products-settings.php:139
-#: admin1/classes/class-wc-psad-admin.php:414
 msgid "View All Products"
 msgstr ""
 
 #: admin/settings/view-all-products-settings.php:183
-#: admin1/classes/class-wc-psad-admin.php:1329
 msgid "Style for View all Products link in each Category"
 msgstr ""
 
 #: admin/settings/view-all-products-settings.php:199
-#: admin1/classes/class-wc-psad-admin.php:1347
 msgid "View All Position"
 msgstr ""
 
 #: admin/settings/view-all-products-settings.php:203
-#: admin1/classes/class-wc-psad-admin.php:1351
 msgid "Show at"
 msgstr ""
 
 #: admin/settings/view-all-products-settings.php:210
-#: admin1/classes/class-wc-psad-admin.php:1357
 msgid "At top After Category product count meta"
 msgstr ""
 
 #: admin/settings/view-all-products-settings.php:216
-#: admin1/classes/class-wc-psad-admin.php:1358
 msgid "At Bottom under category products"
 msgstr ""
 
 #: admin/settings/view-all-products-settings.php:230
 #: admin/settings/view-all-products-settings.php:319
-#: admin1/classes/class-wc-psad-admin.php:1371
-#: admin1/classes/class-wc-psad-admin.php:1527
 msgid "Text for link in each category"
 msgstr ""
 
 #: admin/settings/view-all-products-settings.php:233
 #: admin/settings/view-all-products-settings.php:322
-#: admin1/classes/class-wc-psad-admin.php:143
-#: admin1/classes/class-wc-psad-admin.php:183
-#: admin1/classes/class-wc-psad-admin.php:1375
-#: admin1/classes/class-wc-psad-admin.php:1376
-#: admin1/classes/class-wc-psad-admin.php:1531
-#: admin1/classes/class-wc-psad-admin.php:1532 classes/class-wc-psad.php:297
+#: classes/class-wc-psad.php:301
 msgid "See more..."
 msgstr ""
 
@@ -1264,414 +1039,60 @@ msgstr ""
 msgid "View All & Count Meta"
 msgstr ""
 
-#: admin1/classes/class-wc-psad-admin.php:277
-msgid "Global Category Reset"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:283
-msgid ""
-"Check this box and Save Changes to reset all custom settings made in the "
-"'a3rev Category Page' settings on Product Categories."
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:296
-msgid "House Keeping"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:302
-msgid ""
-"Check this box and if you ever delete this plugin it will completely remove "
-"all tables and data it created, leaving no trace it was ever here."
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:343
-#: admin1/classes/class-wc-psad-admin.php:354 classes/class-wc-psad.php:393
-msgid "Currently viewing"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:412
-msgid "Shop Scroll"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:413
-msgid "Cat Scroll"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:415
-msgid "Parent Cat & Tag Scroll"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:538
-#: admin1/classes/class-wc-psad-admin.php:597
-#: admin1/classes/class-wc-psad-admin.php:611
-#: admin1/classes/class-wc-psad-admin.php:649
-#: admin1/classes/class-wc-psad-admin.php:690
-#: admin1/classes/class-wc-psad-admin.php:721
-#: admin1/classes/class-wc-psad-admin.php:750
-#: admin1/classes/class-wc-psad-admin.php:783
-msgid "Enable/Disable"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:539
-msgid ""
-"Check to activate sort and show products by sub categories on Product "
-"category pages."
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:547
-#: admin1/classes/class-wc-psad-admin.php:620
-msgid "Default is 12."
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:556
-#: admin1/classes/class-wc-psad-admin.php:565
-#: admin1/classes/class-wc-psad-admin.php:574
-#: admin1/classes/class-wc-psad-admin.php:658
-#: admin1/classes/class-wc-psad-admin.php:667
-msgid "Default is 3."
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:573
-#: classes/class-wc-psad-admin-hook.php:85
-#: classes/class-wc-psad-admin-hook.php:156
-msgid "Products per Sub Category"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:598
-#: admin1/classes/class-wc-psad-admin.php:691
-msgid "Show Product count under category Title."
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:612
-msgid "Check to activate sort Product tag pages."
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:650
-#, php-format
-msgid ""
-"Check to activate sort and show products by category on Shop pages. Sort "
-"categories by drop and drag at <a target='_blank' href='%s'>Product "
-"Categories</a>."
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:706
-msgid ""
-"Check to show a separator between each category group of products on Shop "
-"Page. Add custom Style under the Visual Content Separator sub nav."
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:722
-msgid ""
-"Check to activate the Endless Scroll feature for Category groups on Shop "
-"page."
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:730
-msgid ""
-"Add custom style for 'Click more' type from the Shop Page Scroll Sub Nav at "
-"top of page."
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:738
-#: admin1/classes/class-wc-psad-admin.php:767
-#: admin1/classes/class-wc-psad-admin.php:800
-msgid "Click more..."
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:751
-msgid ""
-"Check to activate the Endless Scroll feature for Sub Category groups on "
-"Category page."
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:759
-msgid ""
-"Add custom style for 'Click more' type from the Category Page Scroll Sub Nav "
-"at top of page."
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:774
-msgid ""
-"Note: To show a Parent Categories products and Sub cats with Products on a "
-"Parent Category URL you must have the Categories endless scroll feature "
-"activated. Also you must set the WooCommerce Display type to 'Show Both'. "
-"Once set Parent Category 'View More products' is Endless Scroll mode 'Click "
-"More' and can't be changed. Sub Categories of the Parent Category will show "
-"on the parent category page under the Parent Cat products and will use the "
-"global 'Scroll Type' mode you set here on this page."
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:784
-msgid "Check to activate the Endless Scroll feature for Products on Tag page."
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:792
-msgid ""
-"Add custom style for 'Click more' type from the Tag Page Scroll Sub Nav at "
-"top of page."
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:856
-#: admin1/classes/class-wc-psad-admin.php:865
-#: admin1/classes/class-wc-psad-admin.php:874
-#: admin1/classes/class-wc-psad-admin.php:908
-#: admin1/classes/class-wc-psad-admin.php:962
-#: admin1/classes/class-wc-psad-admin.php:1047
-#: admin1/classes/class-wc-psad-admin.php:1056
-#: admin1/classes/class-wc-psad-admin.php:1117
-#: admin1/classes/class-wc-psad-admin.php:1126
-#: admin1/classes/class-wc-psad-admin.php:1135
-#: admin1/classes/class-wc-psad-admin.php:1169
-#: admin1/classes/class-wc-psad-admin.php:1222
-#: admin1/classes/class-wc-psad-admin.php:1307
-#: admin1/classes/class-wc-psad-admin.php:1316
-#: admin1/classes/class-wc-psad-admin.php:1395
-#: admin1/classes/class-wc-psad-admin.php:1404
-#: admin1/classes/class-wc-psad-admin.php:1413
-#: admin1/classes/class-wc-psad-admin.php:1447
-#: admin1/classes/class-wc-psad-admin.php:1500
-#: admin1/classes/class-wc-psad-admin.php:1585
-#: admin1/classes/class-wc-psad-admin.php:1594
-#: admin1/classes/class-wc-psad-admin.php:1664
-#: admin1/classes/class-wc-psad-admin.php:1673
-#: admin1/classes/class-wc-psad-admin.php:1682
-#: admin1/classes/class-wc-psad-admin.php:1716
-#: admin1/classes/class-wc-psad-admin.php:1769
-#: admin1/classes/class-wc-psad-admin.php:1863
-#: admin1/classes/class-wc-psad-admin.php:1872
-#: admin1/classes/class-wc-psad-admin.php:1989
-msgid "Default"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:882
-#: admin1/classes/class-wc-psad-admin.php:1143
-#: admin1/classes/class-wc-psad-admin.php:1421
-#: admin1/classes/class-wc-psad-admin.php:1690
-msgid "Border Weight"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:892
-#: admin1/classes/class-wc-psad-admin.php:1153
-#: admin1/classes/class-wc-psad-admin.php:1431
-#: admin1/classes/class-wc-psad-admin.php:1700
-msgid "Border Style"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:907
-#: admin1/classes/class-wc-psad-admin.php:1168
-#: admin1/classes/class-wc-psad-admin.php:1446
-#: admin1/classes/class-wc-psad-admin.php:1715
-msgid "Border Colour"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:916
-#: admin1/classes/class-wc-psad-admin.php:1177
-#: admin1/classes/class-wc-psad-admin.php:1455
-#: admin1/classes/class-wc-psad-admin.php:1724
-msgid "Border Rounded"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:936
-#: admin1/classes/class-wc-psad-admin.php:1196
-#: admin1/classes/class-wc-psad-admin.php:1474
-#: admin1/classes/class-wc-psad-admin.php:1743
-msgid "Button Font Size"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:946
-#: admin1/classes/class-wc-psad-admin.php:1206
-#: admin1/classes/class-wc-psad-admin.php:1484
-#: admin1/classes/class-wc-psad-admin.php:1753
-msgid "Button Font Style"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:961
-#: admin1/classes/class-wc-psad-admin.php:1221
-#: admin1/classes/class-wc-psad-admin.php:1499
-#: admin1/classes/class-wc-psad-admin.php:1768
-msgid "Button Font Colour"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:1011
-#: admin1/classes/class-wc-psad-admin.php:1271
-#: admin1/classes/class-wc-psad-admin.php:1549
-#: admin1/classes/class-wc-psad-admin.php:1827
-#: admin1/classes/class-wc-psad-admin.php:1953
-msgid "Font"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:1021
-#: admin1/classes/class-wc-psad-admin.php:1281
-#: admin1/classes/class-wc-psad-admin.php:1559
-#: admin1/classes/class-wc-psad-admin.php:1837
-#: admin1/classes/class-wc-psad-admin.php:1963
-msgid "Font Size"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:1031
-#: admin1/classes/class-wc-psad-admin.php:1291
-#: admin1/classes/class-wc-psad-admin.php:1569
-#: admin1/classes/class-wc-psad-admin.php:1847
-#: admin1/classes/class-wc-psad-admin.php:1973
-msgid "Font Style"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:1046
-#: admin1/classes/class-wc-psad-admin.php:1306
-#: admin1/classes/class-wc-psad-admin.php:1584
-#: admin1/classes/class-wc-psad-admin.php:1862
-#: admin1/classes/class-wc-psad-admin.php:1988
-msgid "Font Colour"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:1889
-msgid "Seperator Weight"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:1899
-msgid "Seperator Style"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:1914
-msgid "Seperator Color"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:1923
-msgid "Above/Below"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2002
-#: admin1/classes/class-wc-psad-admin.php:2007
-msgid "px"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2013
-msgid "Arial"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2014
-msgid "Verdana"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2015
-msgid "Trebuchet"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2016
-msgid "Georgia"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2017
-msgid "Times New Roman"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2018
-msgid "Tahoma"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2019
-msgid "Palatino"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2020
-msgid "Helvetica*"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2021
-msgid "Calibri*"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2022
-msgid "Myriad Pro*"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2023
-msgid "Lucida"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2024
-msgid "Arial Black"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2025
-msgid "Gill Sans*"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2026
-msgid "Geneva*"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2027
-msgid "Impact"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2028
-msgid "Courier"
-msgstr ""
-
-#: admin1/classes/class-wc-psad-admin.php:2029
-msgid "Century Gothic"
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:50
-#: classes/class-wc-psad-admin-hook.php:108
+#: classes/class-wc-psad-admin-hook.php:52
+#: classes/class-wc-psad-admin-hook.php:110
 msgid "Upgrade to"
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:50
-#: classes/class-wc-psad-admin-hook.php:108
-msgid "Pro Version"
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:50
-#: classes/class-wc-psad-admin-hook.php:108
-msgid "to activate"
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:51
-#: classes/class-wc-psad-admin-hook.php:109
-msgid "a3rev Shop Page Categories"
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:52
 #: classes/class-wc-psad-admin-hook.php:110
+msgid "to activate"
+msgstr ""
+
+#: classes/class-wc-psad-admin-hook.php:53
+#: classes/class-wc-psad-admin-hook.php:111
+msgid "a3rev Shop Page Categories"
+msgstr ""
+
+#: classes/class-wc-psad-admin-hook.php:54
+#: classes/class-wc-psad-admin-hook.php:112
 msgid ""
 "The WooCommerce 'Display type' settings above do not apply to Shop page "
 "Categories. They do apply to the a3rev Category Page settings below."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:56
-#: classes/class-wc-psad-admin-hook.php:116
+#: classes/class-wc-psad-admin-hook.php:58
+#: classes/class-wc-psad-admin-hook.php:118
 msgid "Set the number of products to show per Category on Shop pages."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:56
-#: classes/class-wc-psad-admin-hook.php:72
-#: classes/class-wc-psad-admin-hook.php:77
-#: classes/class-wc-psad-admin-hook.php:82
-#: classes/class-wc-psad-admin-hook.php:87
-#: classes/class-wc-psad-admin-hook.php:116
-#: classes/class-wc-psad-admin-hook.php:138
-#: classes/class-wc-psad-admin-hook.php:145
-#: classes/class-wc-psad-admin-hook.php:152
-#: classes/class-wc-psad-admin-hook.php:159
+#: classes/class-wc-psad-admin-hook.php:58
+#: classes/class-wc-psad-admin-hook.php:74
+#: classes/class-wc-psad-admin-hook.php:79
+#: classes/class-wc-psad-admin-hook.php:84
+#: classes/class-wc-psad-admin-hook.php:89
+#: classes/class-wc-psad-admin-hook.php:118
+#: classes/class-wc-psad-admin-hook.php:140
+#: classes/class-wc-psad-admin-hook.php:147
+#: classes/class-wc-psad-admin-hook.php:154
+#: classes/class-wc-psad-admin-hook.php:161
 msgid "Empty to use global settings."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:61
-#: classes/class-wc-psad-admin-hook.php:92
-#: classes/class-wc-psad-admin-hook.php:123
-#: classes/class-wc-psad-admin-hook.php:166
+#: classes/class-wc-psad-admin-hook.php:63
+#: classes/class-wc-psad-admin-hook.php:94
+#: classes/class-wc-psad-admin-hook.php:125
+#: classes/class-wc-psad-admin-hook.php:168
 msgid "Global Settings"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:67
-#: classes/class-wc-psad-admin-hook.php:131
+#: classes/class-wc-psad-admin-hook.php:69
+#: classes/class-wc-psad-admin-hook.php:133
 msgid "a3rev Category Page"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:68
-#: classes/class-wc-psad-admin-hook.php:132
+#: classes/class-wc-psad-admin-hook.php:70
+#: classes/class-wc-psad-admin-hook.php:134
 msgid ""
 "'Display type' settings: Select 'Both' to show Parent Cat products and Child "
 "Cats with Products on the one page. Select 'Products' if this category has "
@@ -1679,135 +1100,140 @@ msgid ""
 "and Products. Then use the settings below to configure the product display."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:181
+#: classes/class-wc-psad-admin-hook.php:87
+#: classes/class-wc-psad-admin-hook.php:158
+msgid "Products per Sub Category"
+msgstr ""
+
+#: classes/class-wc-psad-admin-hook.php:187
 msgid "Upgrade to Product Sort and Display Pro"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:182
+#: classes/class-wc-psad-admin-hook.php:188
 msgid ""
 "<strong>NOTE:</strong> All the functions inside the Yellow border on the "
 "plugins admin panel are extra functionality that is activated by upgrading "
 "to the Pro version"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:184
+#: classes/class-wc-psad-admin-hook.php:190
 msgid "WooCommerce Product Sort and Display Pro"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:185
+#: classes/class-wc-psad-admin-hook.php:191
 msgid "Activates these advanced Features"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:188
+#: classes/class-wc-psad-admin-hook.php:194
 msgid "Sort by 'On Sale' on all Product Category pages."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:189
+#: classes/class-wc-psad-admin-hook.php:195
 msgid "Sort by 'Featured' on all Product Category pages."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:190
+#: classes/class-wc-psad-admin-hook.php:196
 msgid "Category by Category Sort and Display settings for Shop page."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:191
+#: classes/class-wc-psad-admin-hook.php:197
 msgid "Category by Category Sort and display settings for Product Cat pages."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:192
+#: classes/class-wc-psad-admin-hook.php:198
 msgid "Endless Scroll feature for the entire store (Category pages)."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:193
+#: classes/class-wc-psad-admin-hook.php:199
 msgid "Category pages Endless Scroll on Click WYSIWYG style editor."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:194
+#: classes/class-wc-psad-admin-hook.php:200
 msgid ""
 "Parent Category page show parent cat products and Child Cats with products."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:195
+#: classes/class-wc-psad-admin-hook.php:201
 msgid "Set number of products to show on parent cat before sub cats."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:196
+#: classes/class-wc-psad-admin-hook.php:202
 msgid "WYSIWYG count meta styling and position."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:197
+#: classes/class-wc-psad-admin-hook.php:203
 msgid "Lifetime priority same day support."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:200
+#: classes/class-wc-psad-admin-hook.php:206
 msgid "View this plugins"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:200
+#: classes/class-wc-psad-admin-hook.php:206
 msgid "documentation"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:201
+#: classes/class-wc-psad-admin-hook.php:207
 msgid "Visit this plugins"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:201
+#: classes/class-wc-psad-admin-hook.php:207
 msgid "support forum"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:202
+#: classes/class-wc-psad-admin-hook.php:208
 msgid "More FREE a3rev WooCommerce Plugins"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:205
+#: classes/class-wc-psad-admin-hook.php:211
 msgid "WooCommerce Dynamic Products Gallery"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:206
+#: classes/class-wc-psad-admin-hook.php:212
 msgid "WooCommerce Predictive Search"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:207
+#: classes/class-wc-psad-admin-hook.php:213
 msgid "WooCommerce Compare Products"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:208
+#: classes/class-wc-psad-admin-hook.php:214
 msgid "WooCommerce Widget Product Slideshow"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:209
+#: classes/class-wc-psad-admin-hook.php:215
 msgid "WooCommerce Email Inquiry & Cart Options"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:210
+#: classes/class-wc-psad-admin-hook.php:216
 msgid "WooCommerce Email Inquiry Ultimate (Pro Only)"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:211
+#: classes/class-wc-psad-admin-hook.php:217
 msgid "WooCommerce Quotes and Orders (Pro Only)"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:214
+#: classes/class-wc-psad-admin-hook.php:220
 msgid "FREE a3rev WordPress Plugins"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:217
+#: classes/class-wc-psad-admin-hook.php:223
 msgid "Contact Us Page - Contact People"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:218
+#: classes/class-wc-psad-admin-hook.php:224
 msgid "WordPress Email Template"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:219
+#: classes/class-wc-psad-admin-hook.php:225
 msgid "Page View Count"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:229
+#: classes/class-wc-psad-admin-hook.php:235
 msgid "Documentation"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:230
+#: classes/class-wc-psad-admin-hook.php:236
 msgid "Support"
 msgstr ""
 
@@ -1819,6 +1245,10 @@ msgstr ""
 msgid "Loading the next set of Categories..."
 msgstr ""
 
-#: classes/class-wc-psad.php:410
+#: classes/class-wc-psad.php:397
+msgid "Currently viewing"
+msgstr ""
+
+#: classes/class-wc-psad.php:417
 msgid "No more products to view in this category"
 msgstr ""
