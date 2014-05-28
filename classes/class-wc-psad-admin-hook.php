@@ -208,6 +208,7 @@ class WC_PSAD_Settings_Hook
 		$html .= '<h3>'.__('More FREE a3rev WooCommerce Plugins', 'wc_psad').'</h3>';
 		$html .= '<p>';
 		$html .= '<ul style="padding-left:10px;">';
+		$html .= '<li>* <a href="http://wordpress.org/plugins/woocommerce-products-quick-view/" target="_blank">'.__('WooCommerce Products Quick View', 'wc_psad').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/woocommerce-dynamic-gallery/" target="_blank">'.__('WooCommerce Dynamic Products Gallery', 'wc_psad').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/woocommerce-predictive-search/" target="_blank">'.__('WooCommerce Predictive Search', 'wc_psad').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/woocommerce-compare-products/" target="_blank">'.__('WooCommerce Compare Products', 'wc_psad').'</a></li>';
@@ -220,6 +221,7 @@ class WC_PSAD_Settings_Hook
 		$html .= '<h3>'.__('FREE a3rev WordPress Plugins', 'wc_psad').'</h3>';
 		$html .= '<p>';
 		$html .= '<ul style="padding-left:10px;">';
+		$html .= '<li>* <a href="http://wordpress.org/plugins/a3-responsive-slider/" target="_blank">'.__('a3 Responsive Slider * New released!', 'wc_psad').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/contact-us-page-contact-people/" target="_blank">'.__('Contact Us Page - Contact People', 'wc_psad').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/wp-email-template/" target="_blank">'.__('WordPress Email Template', 'wc_psad').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/page-views-count/" target="_blank">'.__('Page View Count', 'wc_psad').'</a></li>';

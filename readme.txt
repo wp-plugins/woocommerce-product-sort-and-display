@@ -3,8 +3,8 @@
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
 Requires at least: 3.7
-Tested up to: 3.9
-Stable tag: 1.0.4.1
+Tested up to: 3.9.1
+Stable tag: 1.0.4.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -189,6 +189,15 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 == Changelog ==
 
+= 1.0.4.2 - 2014/05/28 =
+* Tweak - Added remove_all_filters('mce_external_plugins'); before call to wp_editor to remove extension scripts from other plugins.
+* Tweak - Updated Framework help text font for consistency.
+* Tweak - Changed add_filter( 'gettext', array( $this, 'change_button_text' ), null, 2 ); to add_filter( 'gettext', array( $this, 'change_button_text' ), null, 3 );
+* Tweak - Update change_button_text() function from ( $original == 'Insert into Post' ) to ( is_admin() && $original === 'Insert into Post' )
+* Tweak : Added support for placeholder feature for input, email , password , text area types
+* Tweak - Tested 100% compatible with WooCommerce Version 2.1.9
+* Tweak - Tested 100% compatible with WordPress Version 3.9.1
+
 = 1.0.4.1 - 2014/04/14 =
 * Tweak - Tested and updated for full WordPress version 3.9 compatibility.
 * Tweak - Updated Masonry script to work with WP 3.9 with backward compatibility to WP v 3.7
@@ -234,6 +243,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.0.4.2 =
+Update now for 5 Framework code tweaks and full compatibility with WooCommerce version 2.1.9 and WordPress version 3.9.1
 
 = 1.0.4.1 =
 Important Upgrade! Upgrade now for full compatibility with WordPress version 3.9 and backwards to WP v3.7
