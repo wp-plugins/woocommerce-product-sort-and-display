@@ -2,9 +2,9 @@
 
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
-Requires at least: 3.5
-Tested up to: 3.8.1
-Stable tag: 1.0.4
+Requires at least: 3.7
+Tested up to: 3.9
+Stable tag: 1.0.4.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -75,7 +75,7 @@ All a3rev Lite Version plugins have exactly the same admin interface as the Pro 
 
 = Lite Version Support =
 
-As a Lite Version user please post all support requests to the plugins WordPress Support forum. We do not watch that forum and posting there you will be relying on another user for support, not an a3rev team member. Upgrading to a Pro Version Licence gives 'write' access to the a3rev support forum and hence Lifetime priority support as part of the License.
+As a Lite Version user please post all support requests to the plugins WordPress Support forum. We do not watch that forum and posting there you will be relying on another user for support, not an a3rev team member. Upgrading to a Pro Version License gives 'write' access to the a3rev support forum and hence Lifetime priority support as part of the License.
 
 = Pro Version Upgrade =
 
@@ -140,8 +140,8 @@ Please note that we do not provide support for our Lite Version plugins. Hundred
 
 = Minimum Requirements =
 
-* WordPress 3.5.2
-* WooCommerce v2.0 and later.
+* WordPress 3.7
+* WooCommerce v2.1 and later.
 * PHP version 5.2.4 or greater
 * MySQL version 5.0 or greater
  
@@ -189,6 +189,10 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 == Changelog ==
 
+= 1.0.4.1 - 2014/04/14 =
+* Tweak - Tested and updated for full WordPress version 3.9 compatibility.
+* Tweak - Updated Masonry script to work with WP 3.9 with backward compatibility to WP v 3.7
+
 = 1.0.4 - 2014/01/27 =
 * Feature - Upgraded for 100% compatibility with WooCommerce Version 2.1 with backward compatibility to Version 2.0
 * Feature - Added all required code so plugin can work with WooCommerce Version 2.1 refactored code.
@@ -230,6 +234,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.0.4.1 =
+Important Upgrade! Upgrade now for full compatibility with WordPress version 3.9 and backwards to WP v3.7
 
 = 1.0.4 =
 Upgrade now for full compatibility with WooCommerce Version 2.1 and WordPress version 3.8.1. Includes full backward compatibly with WooCommerce versions 2.0 to 2.0.20.
