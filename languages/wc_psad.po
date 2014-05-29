@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Product Sort and Display\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-28 16:35+0700\n"
-"PO-Revision-Date: 2014-05-28 16:35+0700\n"
+"POT-Creation-Date: 2014-05-29 09:30+0700\n"
+"PO-Revision-Date: 2014-05-29 09:30+0700\n"
 "Last-Translator: Nguyen Cong Tuan <mr.nguyencongtuan@gmail.com>\n"
 "Language-Team: a3rev\n"
 "Language: en\n"
@@ -233,7 +233,7 @@ msgstr ""
 #: admin/admin-ui.php:129
 #, php-format
 msgid ""
-"Upgrade to the <a href=\"%s\" target=\"_blank\">%s</a> to activate these "
+"Trail the <a href=\"%s\" target=\"_blank\">%s</a> for Free to activate these "
 "settings."
 msgstr ""
 
@@ -1122,120 +1122,146 @@ msgstr ""
 msgid "WooCommerce Product Sort and Display Pro"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:191
-msgid "Activates these advanced Features"
+#: classes/class-wc-psad-admin-hook.php:192
+#, php-format
+msgid ""
+"Trial the <a href=\"%s\" target=\"_blank\">Full Pro Version for Free</a>"
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:194
-msgid "Sort by 'On Sale' on all Product Category pages."
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:195
-msgid "Sort by 'Featured' on all Product Category pages."
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:196
-msgid "Category by Category Sort and Display settings for Shop page."
+msgid "Activates these advanced Features"
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:197
-msgid "Category by Category Sort and display settings for Product Cat pages."
+msgid "Sort by 'On Sale' on all Product Category pages."
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:198
-msgid "Endless Scroll feature for the entire store (Category pages)."
+msgid "Sort by 'Featured' on all Product Category pages."
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:199
-msgid "Category pages Endless Scroll on Click WYSIWYG style editor."
+msgid "Category by Category Sort and Display settings for Shop page."
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:200
+msgid "Category by Category Sort and display settings for Product Cat pages."
+msgstr ""
+
+#: classes/class-wc-psad-admin-hook.php:201
+msgid "Endless Scroll feature for the entire store (Category pages)."
+msgstr ""
+
+#: classes/class-wc-psad-admin-hook.php:202
+msgid "Category pages Endless Scroll on Click WYSIWYG style editor."
+msgstr ""
+
+#: classes/class-wc-psad-admin-hook.php:203
 msgid ""
 "Parent Category page show parent cat products and Child Cats with products."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:201
+#: classes/class-wc-psad-admin-hook.php:204
 msgid "Set number of products to show on parent cat before sub cats."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:202
+#: classes/class-wc-psad-admin-hook.php:205
 msgid "WYSIWYG count meta styling and position."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:203
-msgid "Lifetime priority same day support."
+#: classes/class-wc-psad-admin-hook.php:206
+#, php-format
+msgid ""
+"Immediate access to the plugins <a href=\"%s\" target=\"_blank\">a3rev "
+"support forum</a>"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:206
+#: classes/class-wc-psad-admin-hook.php:209
 msgid "View this plugins"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:206
+#: classes/class-wc-psad-admin-hook.php:209
 msgid "documentation"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:207
+#: classes/class-wc-psad-admin-hook.php:210
 msgid "Visit this plugins"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:207
+#: classes/class-wc-psad-admin-hook.php:210
 msgid "support forum"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:208
+#: classes/class-wc-psad-admin-hook.php:211
 msgid "More FREE a3rev WooCommerce Plugins"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:211
-msgid "WooCommerce Dynamic Products Gallery"
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:212
-msgid "WooCommerce Predictive Search"
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:213
-msgid "WooCommerce Compare Products"
-msgstr ""
-
 #: classes/class-wc-psad-admin-hook.php:214
-msgid "WooCommerce Widget Product Slideshow"
+msgid "WooCommerce Products Quick View"
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:215
-msgid "WooCommerce Email Inquiry & Cart Options"
+msgid "WooCommerce Dynamic Products Gallery"
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:216
-msgid "WooCommerce Email Inquiry Ultimate (Pro Only)"
+msgid "WooCommerce Predictive Search"
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:217
-msgid "WooCommerce Quotes and Orders (Pro Only)"
+msgid "WooCommerce Compare Products"
+msgstr ""
+
+#: classes/class-wc-psad-admin-hook.php:218
+msgid "WooCommerce Widget Product Slideshow"
+msgstr ""
+
+#: classes/class-wc-psad-admin-hook.php:219
+msgid "WooCommerce Email Inquiry & Cart Options"
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:220
-msgid "FREE a3rev WordPress Plugins"
+msgid "WooCommerce Email Inquiry Ultimate"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:223
-msgid "Contact Us Page - Contact People"
+#: classes/class-wc-psad-admin-hook.php:220
+#: classes/class-wc-psad-admin-hook.php:221
+msgid "(Free Trial)"
+msgstr ""
+
+#: classes/class-wc-psad-admin-hook.php:221
+msgid "WooCommerce Quotes and Orders"
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:224
+msgid "FREE a3rev WordPress Plugins"
+msgstr ""
+
+#: classes/class-wc-psad-admin-hook.php:227
+msgid "a3 Responsive Slider"
+msgstr ""
+
+#: classes/class-wc-psad-admin-hook.php:227
+msgid "New Release!"
+msgstr ""
+
+#: classes/class-wc-psad-admin-hook.php:228
+msgid "Contact Us Page - Contact People"
+msgstr ""
+
+#: classes/class-wc-psad-admin-hook.php:229
 msgid "WordPress Email Template"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:225
+#: classes/class-wc-psad-admin-hook.php:230
 msgid "Page View Count"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:235
+#: classes/class-wc-psad-admin-hook.php:240
 msgid "Documentation"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:236
+#: classes/class-wc-psad-admin-hook.php:241
 msgid "Support"
 msgstr ""
 

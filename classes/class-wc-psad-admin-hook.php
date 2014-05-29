@@ -187,7 +187,10 @@ class WC_PSAD_Settings_Hook
 		$html .= '<h3>'.__('Upgrade to Product Sort and Display Pro', 'wc_psad').'</h3>';
 		$html .= '<p>'.__("<strong>NOTE:</strong> All the functions inside the Yellow border on the plugins admin panel are extra functionality that is activated by upgrading to the Pro version", 'wc_psad').':</p>';
 		$html .= '<p>';
-		$html .= '<h3 style="margin-bottom:5px;">* <a href="'.WC_PSAD_AUTHOR_URI.'" target="_blank">'.__('WooCommerce Product Sort and Display Pro', 'wc_psad').'</a></h3>';
+		$html .= '<h3 style="margin-bottom:5px;">'.__('WooCommerce Product Sort and Display Pro', 'wc_psad').'</h3>';
+		$html .= '<p>';
+		$html .= '* '. sprintf( __('Trial the <a href="%s" target="_blank">Full Pro Version for Free</a>', 'wc_psad'), WC_PSAD_AUTHOR_URI );
+		$html .= '</p>';
 		$html .= '<div><strong>'.__('Activates these advanced Features', 'wc_psad').':</strong></div>';
 		$html .= '<p>';
 		$html .= '<ul style="padding-left:10px;">';
@@ -200,7 +203,7 @@ class WC_PSAD_Settings_Hook
 		$html .= '<li>7. '.__('Parent Category page show parent cat products and Child Cats with products.', 'wc_psad').'</li>';
 		$html .= '<li>8. '.__("Set number of products to show on parent cat before sub cats.", 'wc_psad').'</li>';
 		$html .= '<li>9. '.__("WYSIWYG count meta styling and position.", 'wc_psad').'</li>';
-		$html .= '<li>10. '.__("Lifetime priority same day support.", 'wc_psad').'</li>';
+		$html .= '<li>10. '. sprintf( __('Immediate access to the plugins <a href="%s" target="_blank">a3rev support forum</a>', 'wc_psad'), 'https://a3rev.com/forums/forum/woocommerce-plugins/product-sort-and-display/' ).'</li>';
 		$html .= '</ul>';
 		$html .= '</p>';
 		$html .= '<h3>'.__('View this plugins', 'wc_psad').' <a href="http://docs.a3rev.com/user-guides/plugins-extensions/woocommerce/product-sort-and-display/" target="_blank">'.__('documentation', 'wc_psad').'</a></h3>';
@@ -214,14 +217,14 @@ class WC_PSAD_Settings_Hook
 		$html .= '<li>* <a href="http://wordpress.org/plugins/woocommerce-compare-products/" target="_blank">'.__('WooCommerce Compare Products', 'wc_psad').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/woo-widget-product-slideshow/" target="_blank">'.__('WooCommerce Widget Product Slideshow', 'wc_psad').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/woocommerce-email-inquiry-cart-options/" target="_blank">'.__('WooCommerce Email Inquiry & Cart Options', 'wc_psad').'</a></li>';
-		$html .= '<li>* <a href="http://a3rev.com/shop/woocommerce-email-inquiry-ultimate/" target="_blank">'.__('WooCommerce Email Inquiry Ultimate (Pro Only)', 'wc_psad').'</a></li>';
-		$html .= '<li>* <a href="http://a3rev.com/shop/woocommerce-quotes-and-orders/" target="_blank">'.__('WooCommerce Quotes and Orders (Pro Only)', 'wc_psad').'</a></li>';
+		$html .= '<li>* <a href="http://a3rev.com/shop/woocommerce-email-inquiry-ultimate/" target="_blank">'.__('WooCommerce Email Inquiry Ultimate', 'wc_psad').'</a> &nbsp;&nbsp;&nbsp;'.__( '(Free Trial)' , 'wc_psad' ).'</li>';
+		$html .= '<li>* <a href="http://a3rev.com/shop/woocommerce-quotes-and-orders/" target="_blank">'.__('WooCommerce Quotes and Orders', 'wc_psad').'</a> &nbsp;&nbsp;&nbsp;'.__( '(Free Trial)' , 'wc_psad' ).'</li>';
 		$html .= '</ul>';
 		$html .= '</p>';
 		$html .= '<h3>'.__('FREE a3rev WordPress Plugins', 'wc_psad').'</h3>';
 		$html .= '<p>';
 		$html .= '<ul style="padding-left:10px;">';
-		$html .= '<li>* <a href="http://wordpress.org/plugins/a3-responsive-slider/" target="_blank">'.__('a3 Responsive Slider * New released!', 'wc_psad').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/plugins/a3-responsive-slider/" target="_blank">'.__('a3 Responsive Slider', 'wc_psad').'</a> &nbsp;&nbsp;&nbsp;'.__( 'New Release!' , 'wc_psad' ).'</li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/contact-us-page-contact-people/" target="_blank">'.__('Contact Us Page - Contact People', 'wc_psad').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/wp-email-template/" target="_blank">'.__('WordPress Email Template', 'wc_psad').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/page-views-count/" target="_blank">'.__('Page View Count', 'wc_psad').'</a></li>';
