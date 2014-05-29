@@ -117,6 +117,8 @@ class WC_PSAD
 	}	
 					
 	public function psad_endless_scroll_shop($show_click_more = true){
+		global $wp_version;
+		$cur_wp_version = preg_replace('/-.*$/', '', $wp_version);
 		?>
 		<script type="text/javascript">
 			jQuery(window).load(function(){
@@ -151,10 +153,17 @@ class WC_PSAD
 							var content_column = <?php echo $content_column_grid;?>;
 
 							jQuery('.box_content').imagesLoaded(function(){
-								jQuery(this).masonry({
+								jQuery('.box_content').masonry({
 								  itemSelector: '.box_item',
+								  <?php if ( version_compare( $cur_wp_version, '3.9', '<' ) ) { ?>
 								  columnWidth: jQuery('.box_content').width()/content_column,
-								  isAnimated: !Modernizr.csstransitions
+								  <?php } else { ?>
+								  columnWidth: jQuery('#main').width()/content_column,
+								  <?php } ?>
+								  transitionDuration:0.7,
+								  hiddenStyle: { opacity: 0, transform: 'translateY(100%)'},
+				  	  			  visibleStyle: { opacity: 1, transform: 'scale(1)'},
+					  			  "gutter": (jQuery('.box_content').width()-jQuery('#main').width())/content_column
 								});
 								//Fix Display Table-Cell
 								jQuery('body #main .box_item .entry-item .thumbnail a img').attr('width','').attr('height','');
@@ -391,7 +400,7 @@ class WC_PSAD
 					}
 					$term_link_sub_html = get_term_link( $category->slug, 'product_cat' );
 					echo '<div id="products_categories_row_'.$category->term_id.'" class="products_categories_row">';
-					echo '<div class="custom_box responsi_title"><h1 class="title pbc_title">'.$term_link_html.'<a href="'.$term_link_sub_html.'">' .$category->name.'</a></h1>';
+					echo '<div class="custom_box custom_box_archive responsi_title"><h1 class="title pbc_title">'.$term_link_html.'<a href="'.$term_link_sub_html.'">' .$category->name.'</a></h1>';
 					if ( $enable_product_showing_count == 'yes' || ( $count_posts_get < $total_posts && $psad_es_category_item_bt_position == 'top' ) ) {
 						echo '<div class="product_categories_showing_count_container">';
 						if ( $enable_product_showing_count == 'yes' ) echo '<span class="product_categories_showing_count">'.__('Currently viewing', 'wc_psad'). ' 1 - ' .$count_posts_get.' '.__('of', 'wc_psad'). ' '. $total_posts .' '. __('products in this Category', 'wc_psad').'</span> ';
