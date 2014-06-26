@@ -211,7 +211,7 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 			array(
             	'name' 		=> __( 'Shop Page Show Products by Category', 'wc_psad' ),
                 'type' 		=> 'heading',
-                'desc' 		=> sprintf( __("These settings when activated over ride the WooCommerce <a target='_blank' href='%s'>Catalog Options</a> shop page settings.", 'wc_psad'), admin_url( 'admin.php?page=woocommerce_settings&tab=catalog', 'relative' ) ),
+                'desc' 		=> sprintf( __("These settings when activated over ride the WooCommerce <a target='_blank' href='%s'>Product Options</a> shop page settings.", 'wc_psad'), admin_url( 'admin.php?page=wc-settings&tab=products', 'relative' ) ),
            	),
 			array(  
 				'name' 		=> __( 'Shop Page', 'wc_psad' ),
@@ -231,6 +231,18 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
                 'type' 		=> 'heading',
 				'class'		=> 'psad_shop_page_enable_container',
            	),
+			array(  
+				'name' 		=> __( 'Empty Parent Categories', 'wc_psad' ),
+				'desc' 		=> __("ON and when Parent Cat has no products assigned to it, products from Child Cats of that Parent will be displayed. If none found the Category is not displayed.", 'wc_psad'),
+				'id' 		=> 'psad_shop_drill_down',
+				'default'	=> 'yes',
+				'type' 		=> 'onoff_checkbox',
+				'free_version'		=> true,
+				'checked_value'		=> 'yes',
+				'unchecked_value'	=> 'no',
+				'checked_label'		=> __( 'ON', 'wc_psad' ),
+				'unchecked_label' 	=> __( 'OFF', 'wc_psad' ),
+			),
 			array(  
 				'name' 		=> __( 'Categories Per Page', 'wc_psad' ),
 				'desc' 		=> __('Set the number of Category product groups to show per pagination or endless scroll event.', 'wc_psad'). ' '. __('Default is [default_value].', 'wc_psad'),
@@ -298,6 +310,28 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
                 'type' 		=> 'heading',
 				'class'		=> 'psad_category_page_enable_container',
            	),
+			array(  
+				'name' 		=> __( 'Empty Parent Categories', 'wc_psad' ),
+				'desc' 		=> __("ON and when Parent Cat has no products assigned to it, products from Child Cats of that Parent will be displayed. If none found the Category is not displayed.", 'wc_psad'),
+				'id' 		=> 'psad_category_drill_down',
+				'default'	=> 'yes',
+				'type' 		=> 'onoff_checkbox',
+				'checked_value'		=> 'yes',
+				'unchecked_value'	=> 'no',
+				'checked_label'		=> __( 'ON', 'wc_psad' ),
+				'unchecked_label' 	=> __( 'OFF', 'wc_psad' ),
+			),
+			array(  
+				'name' 		=> __( 'Parent / Child Title', 'wc_psad' ),
+				'desc' 		=> __("ON to show Child Category title as Parent / Child title breadcrumb. OFF to only show Child Cat name.", 'wc_psad'),
+				'id' 		=> 'psad_show_parent_title',
+				'default'	=> 'yes',
+				'type' 		=> 'onoff_checkbox',
+				'checked_value'		=> 'yes',
+				'unchecked_value'	=> 'no',
+				'checked_label'		=> __( 'ON', 'wc_psad' ),
+				'unchecked_label' 	=> __( 'OFF', 'wc_psad' ),
+			),
 			array(  
 				'name' 		=> __( 'Category Products (No Sub Cats)', 'wc_psad' ),
 				'desc' 		=> __("The number of products to show per Endless Scroll or pagination.", 'wc_psad'). ' '. __('Default is [default_value].', 'wc_psad'),
@@ -505,33 +539,37 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 			$(".psad_tag_page_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
 		}	
 		if ( $("input.psad_seperator_enable:checked").val() == 'yes') {
-			$(".psad_seperator_enable_container").show();
+			$(".psad_seperator_enable_container").css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
 		} else {
-			$(".psad_seperator_enable_container").hide();
+			$(".psad_seperator_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
 		}	
 			
 		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_shop_page_enable', function( event, value, status ) {
+			$(".psad_shop_page_enable_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
 			if ( status == 'true' ) {
-				$(".psad_shop_page_enable_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} ).slideDown();
+				$(".psad_shop_page_enable_container").slideDown();
 			} else {
 				$(".psad_shop_page_enable_container").slideUp();
 			}
 		});
 		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_category_page_enable', function( event, value, status ) {
+			$(".psad_category_page_enable_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
 			if ( status == 'true' ) {
-				$(".psad_category_page_enable_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} ).slideDown();
+				$(".psad_category_page_enable_container").slideDown();
 			} else {
 				$(".psad_category_page_enable_container").slideUp();
 			}
 		});
 		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_tag_page_enable', function( event, value, status ) {
+			$(".psad_tag_page_enable_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
 			if ( status == 'true' ) {
-				$(".psad_tag_page_enable_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} ).slideDown();
+				$(".psad_tag_page_enable_container").slideDown();
 			} else {
 				$(".psad_tag_page_enable_container").slideUp();
 			}
 		});
 		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_seperator_enable', function( event, value, status ) {
+			$(".psad_seperator_enable_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
 			if ( status == 'true' ) {
 				$(".psad_seperator_enable_container").slideDown();
 			} else {

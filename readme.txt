@@ -4,7 +4,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
 Requires at least: 3.7
 Tested up to: 3.9.1
-Stable tag: 1.0.4.3
+Stable tag: 1.0.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -21,6 +21,7 @@ We decided to build a plugin that would fix that. With WooCommerce Product Sort 
 * Sort products to show by category on shop page.
 * Sort category order on shop page by drag and drop.
 * Set the number of products to show per category on the shop page with link to view all.
+* If Parent Category has no products attached to it - will show products from the Parents Child Categories.
 * Set to auto show all current 'On Sale' products first in each category on the shop page.
 * Set to auto show all 'featured' products in each category on the shop page.
 * Intelligent Navigation shows customers the total number of products in the category they are viewing with a link to view all.
@@ -58,9 +59,9 @@ We decided to build a plugin that would fix that. With WooCommerce Product Sort 
 * WYSIWYG separator style editor.
 * Set padding in px above and below the separator.  
 
-= Mobile Responsive App style admin interface =
+= Live Shop Demo =
 
-Like WordPress we believe that a3rev plugin users should be able to configure and tweak our plugins settings while on the go, right from their mobile or tablet. This plugins features an app style admin interface with Switches and a smart interface that hides associated settings when a feature is not turned ON.
+Visit [Dixie Sourenirs](http://dixiesouvenirs.com/shop-here/) to see how the plugin allows you to set up your Shop page product display on a live store. Thanks to the site owner Colin Slark for permission to link to his shop page. 
 
 = Mobile Responsive App style admin interface =
 
@@ -76,15 +77,12 @@ Like WordPress we believe that a3rev plugin users should be able to configure an
 * The Pro Version settings are all active on the admin panels But do not save and are not applied to the front end.
 * Upgrading to the Pro version activates all the Pro version Features and Settings and removes the Yellow side bar and borders.
 
-= Lite Version Support =
+>= Premium Support =
 
-* As a Lite Version user please post all support requests to the plugins WordPress Support forum.
-* We do not watch that forum and posting there you will be relying on another user for support, not an a3rev team member.
-* Upgrading to a Pro Version Trail Licence gives 'write' access to the a3rev support forum.
+>The a3rev team does not provide support for the WooCommerce Product Sort and Display plugin on the WordPress.org forums. One on one developer support is available via the plugins [a3rev support forum](https://a3rev.com/forums/forum/woocommerce-plugins/product-sort-and-display/) to people who have purchased a [WooCommerce Product Sort and Display Pro](http://a3rev.com/shop/woocommerce-product-sort-and-display/) plugin License.
 
-= Pro Version Upgrade =
+>The Pro Version has lots of extra features (listed below) that coupled with developer support might be well worth your investment!
 
-Upgrading to the Pro Version gives you all of the features that you get on the Shop page with the Lite Version applied to Product Categories, Subcategories and Product tag pages - plus more:
 
 = a3rev Free Trial Evaluations =
 
@@ -99,12 +97,18 @@ Upgrading to the Pro Version gives you all of the features that you get on the S
 
 * Show Sub Categories with products on Parent Category page.
 * Set the number of products to show from Parent Cat with Endless Scroll - view more products.
-* Set the number of products to show per sub category, globally (applies to all) or on an individual sub category basis.
-* Set which products show first from sub category - On Sale, Featured of the default latest. Set globally and on individual sub cats.
+* If Parent Category has no products and have many levels of Child Cats, show set number of products from child Cats to show under parent Title (before first level Child cats)
+* Set the number of products to show per first level Child category, globally (applies to all) or on an individual sub category basis.
+* Set Parent Cat to show no products - just show Child cats and products.
+* Set which products show first from Child category - On Sale, Featured of the default latest. Set globally and on individual sub cats.
 * Set how many sub category groups of products show before pagination or endless scroll loads.
 * Activate Endless scroll feature for your product category pages.
 * Select Auto Endless Scroll or Scroll on Click.
 * Full Scroll on click feature custom style (button or linked text) and position settings.
+
+= Live Site Pro Features Demo =
+
+Visit [Dixie Souvenirs](http://dixiesouvenirs.com/product-category/flags/) site to see the Pro Version only Product Category Sort and Display features on a Live site. Thanks to the site owner Colin Slark for permission to link to his site.
 
 = More Shop Page Display features =
 
@@ -198,6 +202,14 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 == Changelog ==
 
+= 1.0.5 - 2014/06/26 =
+* Feature - When Parent Category has no products on Shop page, set to show products from the Parents Child Cats.
+* Feature - Added Empty Parent Categories feature ON | OFF switch for Shop Page.
+* Tweak - Updated admin pages help text links to WooCommerce admin panel which have changed in recent updates.
+* Tweak - Updated chosen js script to latest version 1.1.0 on the a3rev Plugin Framework 
+* Tweak - Tested 100% compatible with WooCommerce version 2.1.11 
+* Fix - Pagination link breaking. Added str_replace( 'page/'.$page , '', pagination_link ); to trip page/[number]
+
 = 1.0.4.3 - 2014/05/29 =
 * Tweak - Updated the plugins wordpress.org description.
 * Tweak - Updated the plugins admin panel yellow sidebar text.
@@ -256,6 +268,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.0.5 =
+Upgrade now for 2 New Features, 2 framework code tweaks, 1 bug fix and full compatibility with WooCommerce version 2.1.11
 
 = 1.0.4.3 =
 Minor version update - missed 2 tweaks from yesterdays version 1.0.4.2 release.

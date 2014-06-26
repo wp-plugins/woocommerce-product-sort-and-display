@@ -32,6 +32,14 @@ class WC_PSAD_Admin_UI
 	 */
 	public $plugin_name = 'wc_sort_display';
 	
+	public $is_free_plugin = true;
+	
+	/**
+	 * @var string
+	 * You must change to correct class name that you are working
+	 */
+	public $class_name = 'WC_PSAD';
+	
 	/**
 	 * @var string
 	 * You must change to correct pro plugin page url on a3rev site

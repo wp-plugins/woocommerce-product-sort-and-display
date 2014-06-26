@@ -342,7 +342,10 @@ class WC_PSAD
 					$wp_query->query_vars['no_found_rows'] = 1;
 					$wp_query->query_vars['post_status'] = 'publish';
 					$wp_query->query_vars['post_type'] = 'product';
-					$wp_query->query_vars['meta_query'] = $woocommerce->query->get_meta_query();
+					if ( version_compare( $woocommerce_db_version, '2.1', '>' ) ) 
+						$wp_query->query_vars['meta_query'] = WC()->query->get_meta_query();
+					else 
+						$wp_query->query_vars['meta_query'] = $woocommerce->query->get_meta_query();
 					$wp_query->query_vars['meta_query'][] = array(
 						'key' => '_featured',
 						'value' => 'yes'
@@ -365,7 +368,7 @@ class WC_PSAD
 					'tax_query' 			=> array(
 						array(
 							'taxonomy' 		=> 'product_cat',
-							'terms' => $category->slug ,
+							'terms' 		=> $category->slug ,
 							'include_children' => false ,
 							'field' 		=> 'slug',
 							'operator' 		=> 'IN'
@@ -386,7 +389,30 @@ class WC_PSAD
 				}
 				
 				$products = query_posts( $product_args );
+				
+				$psad_shop_drill_down = get_option('psad_shop_drill_down', 'yes');
+				$have_products = false;
+				
 				if ( have_posts() ) {
+					$have_products = true;	
+				} elseif ( $psad_shop_drill_down == 'yes' ) {
+					$product_args['tax_query'] = array(
+						array(
+							'taxonomy' 		=> 'product_cat',
+							'terms' 		=> $category->slug ,
+							'include_children' => true ,
+							'field' 		=> 'slug',
+							'operator' 		=> 'IN'
+						)
+					);
+					$products = query_posts( $product_args );
+					
+					if ( have_posts() ) {
+						$have_products = true;	
+					}
+				}
+				
+				if ( $have_products ) {
 					$total_posts = $wp_query->found_posts;
 					$count_posts_get = count($products);
 				
@@ -460,7 +486,7 @@ class WC_PSAD
 				'mid_size'		=> 3
 			);
 			if( $wp_rewrite->using_permalinks() && ! is_search() )
-				$defaults['base'] = user_trailingslashit( trailingslashit( add_query_arg( array( 'paged' => false, 'orderby' => false ) ) ) . 'page/%#%' );
+				$defaults['base'] = user_trailingslashit( trailingslashit( str_replace( 'page/'.$page , '' , add_query_arg( array( 'paged' => false, 'orderby' => false ) ) ) ) . 'page/%#%' );
 				
 			echo paginate_links( $defaults );
 			echo '</nav>';
