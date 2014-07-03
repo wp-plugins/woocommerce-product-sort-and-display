@@ -187,10 +187,7 @@ class WC_PSAD_Settings_Hook
 		$html .= '<h3>'.__('Upgrade to Product Sort and Display Pro', 'wc_psad').'</h3>';
 		$html .= '<p>'.__("<strong>NOTE:</strong> All the functions inside the Yellow border on the plugins admin panel are extra functionality that is activated by upgrading to the Pro version", 'wc_psad').':</p>';
 		$html .= '<p>';
-		$html .= '<h3 style="margin-bottom:5px;">'.__('WooCommerce Product Sort and Display Pro', 'wc_psad').'</h3>';
-		$html .= '<p>';
-		$html .= '* '. sprintf( __('Trial the <a href="%s" target="_blank">Full Pro Version for Free</a>', 'wc_psad'), WC_PSAD_AUTHOR_URI );
-		$html .= '</p>';
+		$html .= '<h3 style="margin-bottom:5px;"><a href="'.WC_PSAD_AUTHOR_URI.'" target="_blank">'.__('WooCommerce Product Sort and Display Pro', 'wc_psad').'</a></h3>';
 		$html .= '<div><strong>'.__('Activates these advanced Features', 'wc_psad').':</strong></div>';
 		$html .= '<p>';
 		$html .= '<ul style="padding-left:10px;">';

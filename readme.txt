@@ -4,7 +4,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
 Requires at least: 3.7
 Tested up to: 3.9.1
-Stable tag: 1.0.5
+Stable tag: 1.0.5.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -84,15 +84,6 @@ Visit [Dixie Sourenirs](http://dixiesouvenirs.com/shop-here/) to see how the plu
 >The Pro Version has lots of extra features (listed below) that coupled with developer support might be well worth your investment!
 
 
-= a3rev Free Trial Evaluations =
-
-* Try the [full Pro Version for free](http://a3rev.com/shop/woocommerce-product-sort-and-display/).
-* a3rev try before you buy
-* No credit card required.
-* 60 day no qusetions asked money back guarantee on all licenses upgraded from trail to Lifetime Licenses.
-* Add additional sites to a Lifetime License when you require them at a 30% discount.
-* Immediate access to developer support from the plugins a3rev support forum.
-
 = Pro Version Advanced Features =
 
 * Show Sub Categories with products on Parent Category page.
@@ -144,7 +135,7 @@ Visit [Dixie Souvenirs](http://dixiesouvenirs.com/product-category/flags/) site 
 
 = Plugin Resources =
 
-[PRO Version Free Trial](http://a3rev.com/shop/woocommerce-product-sort-and-display/) |
+[PRO Version](http://a3rev.com/shop/woocommerce-product-sort-and-display/) |
 [Documentation](http://docs.a3rev.com/user-guides/plugins-extensions/woocommerce/product-sort-and-display/) |
 [Lite Version Support](http://wordpress.org/support/plugin/woocommerce-product-sort-and-display/)
 
@@ -201,6 +192,10 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Changelog ==
+
+= 1.0.5.1 - 2014/07/03 =
+* Tweak - Updated plugins description and dashboard text for details about plugin upgrade version.
+* Tweak - Checked for full compatibility with WooCommerce Version 2.1.12
 
 = 1.0.5 - 2014/06/26 =
 * Feature - When Parent Category has no products on Shop page, set to show products from the Parents Child Cats.
@@ -268,6 +263,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.0.5.1 =
+Update your plugin now for tweaks for full compatibility with WooCommerce Version 2.1.12
 
 = 1.0.5 =
 Upgrade now for 2 New Features, 2 framework code tweaks, 1 bug fix and full compatibility with WooCommerce version 2.1.11
