@@ -18,11 +18,24 @@ class WC_PSAD_Settings_Hook
 {
 	
 	public function __construct() {
+		
+		// Include script
+		$this->include_script();
+		
    		add_action( 'product_cat_add_form_fields', array( $this, 'psad_add_category_fields'), 11 );
 		add_action( 'product_cat_edit_form', array( $this, 'psad_edit_category_fields' ), 10, 1 );
 		
 		// Include google fonts into header
 		add_action( 'wp_head', array( $this, 'add_google_fonts'), 11 );
+		
+		// AJAX hide yellow message dontshow
+		add_action('wp_ajax_psad_yellow_message_dontshow', array( $this, 'psad_yellow_message_dontshow' ) );
+		add_action('wp_ajax_nopriv_psad_yellow_message_dontshow', array( $this, 'psad_yellow_message_dontshow' ) );
+		
+		// AJAX hide yellow message dismiss
+		add_action('wp_ajax_psad_yellow_message_dismiss', array( $this, 'psad_yellow_message_dismiss' ) );
+		add_action('wp_ajax_nopriv_psad_yellow_message_dismiss', array( $this, 'psad_yellow_message_dismiss' ) );
+		
 	}
 	
 	public function add_google_fonts() {
@@ -43,13 +56,89 @@ class WC_PSAD_Settings_Hook
 		$wc_psad_fonts_face->generate_google_webfonts( $google_fonts );
 	}
 	
-	public function psad_add_category_fields(){
+	/**
+	 * Include script and style to show plugin framework for Category page.
+	 *
+	 */
+	public function include_script( ) {
+		if ( ! in_array( basename( $_SERVER['PHP_SELF'] ), array( 'edit-tags.php' ) ) ) return;
+		if ( ! isset( $_REQUEST['taxonomy'] ) || ! in_array( $_REQUEST['taxonomy'], array( 'product_cat' ) ) ) return;
+		
+		global $wc_psad_admin_interface;
+		add_action( 'admin_footer', array( $wc_psad_admin_interface, 'admin_script_load' ) );
+		add_action( 'admin_footer', array( $wc_psad_admin_interface, 'admin_css_load' ) );
+		add_action( 'admin_footer', array( $this, 'include_custom_style' ) );
+		add_action( 'admin_footer', array( $this, 'include_custom_script' ) );
+	}
+	
+	/**
+	 * Include script to append the Compare Feature meta fields into Product Attribute page.
+	 *
+	 */
+	public function include_custom_style( ) {
 		?>
         <style>
-			#a3_upgrade_area_box { border:2px solid #E6DB55;-webkit-border-radius:10px;-moz-border-radius:10px;-o-border-radius:10px; border-radius: 10px; padding:10px; position:relative; margin-bottom:10px; }
-			#a3_upgrade_area_box legend {margin-left:4px; font-weight:bold;}
+		.psad_plugin_meta_upgrade_area_box { border:2px solid #E6DB55;-webkit-border-radius:10px;-moz-border-radius:10px;-o-border-radius:10px; border-radius: 10px; padding:0 10px; margin:10px 0; position:relative}
+		div.a3rev_panel_container {
+			border-top:1px dotted #666;
+			border-bottom:1px dotted #666;
+			margin-bottom:20px;
+		}
+		tr.psad-category-field-start {
+			border-top:1px dotted #666;
+		}
+		tr.psad-category-field-end {
+			border-bottom:1px dotted #666;
+		}
+		.a3rev_panel_container label {
+			padding: 0 !important;	
+		}
+		.psad_category_page_enable_message_container p {
+			font-style:normal;
+			color: inherit;	
+		}
+		.psad_category_page_enable_message_container {
+		<?php if ( get_option( 'psad_category_page_enable_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
+		<?php if ( !isset($_SESSION) ) { @session_start(); } if ( isset( $_SESSION['psad_category_page_enable_message_dismiss'] ) ) echo 'display: none !important;'; ?>
+		}
+		#a3_upgrade_area_box { border:2px solid #E6DB55;-webkit-border-radius:10px;-moz-border-radius:10px;-o-border-radius:10px; border-radius: 10px; padding:10px; position:relative; margin-bottom:10px; }
+		#a3_upgrade_area_box legend {margin-left:4px; font-weight:bold;}
 		</style>
-    	<fieldset id="a3_upgrade_area_box"><legend><?php _e('Upgrade to','wc_psad'); ?> <a href="<?php echo WC_PSAD_AUTHOR_URI; ?>" target="_blank"><?php _e('Pro Version', 'wc_psad'); ?></a> <?php _e('to activate', 'wc_psad'); ?></legend>
+	<?php
+    }
+	
+	public function include_custom_script() {
+	?>
+    	<script type="text/javascript">
+		(function($) {
+	
+			$(document).ready(function() {
+				
+				if ( $("input.psad_category_page_enable:checked").val() == 'yes') {
+					$(".psad_category_page_enable_container").css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
+				} else {
+					$(".psad_category_page_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
+				}
+					
+				$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_category_page_enable', function( event, value, status ) {
+					$(".psad_category_page_enable_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
+					if ( status == 'true' ) {
+						$(".psad_category_page_enable_container").slideDown();
+					} else {
+						$(".psad_category_page_enable_container").slideUp();
+					}
+				});
+			});
+			
+		})(jQuery);
+		</script>
+    <?php
+	}
+	
+	public function psad_add_category_fields(){
+		?>
+        <div class="a3rev_panel_container">
+        <div class="psad_plugin_meta_upgrade_area_box"><?php global $wc_psad_admin_init; $wc_psad_admin_init->upgrade_top_message(true); ?>
         <h3><?php _e('a3rev Shop Page Categories', 'wc_psad'); ?></h3>
         <div><?php _e("The WooCommerce 'Display type' settings above do not apply to Shop page Categories. They do apply to the a3rev Category Page settings below.", 'wc_psad'); ?></div>
         <div class="form-field">
@@ -67,7 +156,13 @@ class WC_PSAD_Settings_Hook
             </select>
         </div>
         <h3><?php _e('a3rev Category Page', 'wc_psad'); ?></h3>
-        <div><?php _e("'Display type' settings: Select 'Both' to show Parent Cat products and Child Cats with Products on the one page. Select 'Products' if this category has just products. Select 'Subcategories' to show just this Categories Sub cats and Products. Then use the settings below to configure the product display.", 'wc_psad'); ?></div>
+        <div class="form-field">
+            <input type="checkbox" class="psad_category_page_enable a3rev-ui-onoff_checkbox" id="psad_category_page_enable" name="psad_category_page_enable" value="yes" style="width:auto;" /> <label for="psad_category_page_enable"><?php _e( 'ON to activate Sort and Display products features on this Product category page.', 'wc_psad' ); ?></label>
+        </div>
+        <div class="psad_category_page_enable_container">
+        <div class="psad_category_page_enable_message_container">
+        <?php echo $this->psad_category_page_enable_message(); ?>
+        </div>
         <div class="form-field">
             <label for="psad_category_product_nosub_per_page"><?php _e( 'Category Products (No Sub Cats)', 'wc_psad' ); ?></label>
             <input disabled="disabled" id="psad_category_product_nosub_per_page" name="psad_category_product_nosub_per_page" type="text" style="width:120px;" value="" />
@@ -97,17 +192,16 @@ class WC_PSAD_Settings_Hook
                 <option value="featured"><?php _e( 'Featured', 'wc_psad' ); ?></option>
             </select>
         </div>
-        </fieldset>
+		</div>
+        </div>
+        </div>
 		<?php
 	}
 	
 	public function psad_edit_category_fields($term){
 		?>
-        <style>
-			#a3_upgrade_area_box { border:2px solid #E6DB55;-webkit-border-radius:10px;-moz-border-radius:10px;-o-border-radius:10px; border-radius: 10px; padding:10px; position:relative}
-			#a3_upgrade_area_box legend {margin-left:4px; font-weight:bold;}
-		</style>
-        <fieldset id="a3_upgrade_area_box"><legend><?php _e('Upgrade to','wc_psad'); ?> <a href="<?php echo WC_PSAD_AUTHOR_URI; ?>" target="_blank"><?php _e('Pro Version', 'wc_psad'); ?></a> <?php _e('to activate', 'wc_psad'); ?></legend>
+        <div class="a3rev_panel_container">
+        <div class="psad_plugin_meta_upgrade_area_box"><?php global $wc_psad_admin_init; $wc_psad_admin_init->upgrade_top_message(true); ?>
         <h3><?php _e('a3rev Shop Page Categories', 'wc_psad'); ?></h3>
 		<div><?php _e("The WooCommerce 'Display type' settings above do not apply to Shop page Categories. They do apply to the a3rev Category Page settings below.", 'wc_psad'); ?></div>
         <table class="form-table">
@@ -131,7 +225,17 @@ class WC_PSAD_Settings_Hook
             </tr>
 		</table>
         <h3><?php _e('a3rev Category Page', 'wc_psad'); ?></h3>
-		<div><?php _e("'Display type' settings: Select 'Both' to show Parent Cat products and Child Cats with Products on the one page. Select 'Products' if this category has just products. Select 'Subcategories' to show just this Categories Sub cats and Products. Then use the settings below to configure the product display.", 'wc_psad'); ?></div>
+        <table class="form-table">
+            <tr class="form-field">
+            <td colspan="2" style="padding:10px 0;">
+                <input type="checkbox" class="psad_category_page_enable a3rev-ui-onoff_checkbox" id="psad_category_page_enable" name="psad_category_page_enable" value="yes" style="width:auto;" /> <label for="psad_category_page_enable"><?php _e( 'ON to activate Sort and Display products features on this Product category page.', 'wc_psad' ); ?></label>
+            </td>
+            </tr>
+        </table>
+		<div class="psad_category_page_enable_container">
+        <div class="psad_category_page_enable_message_container">
+            <?php echo $this->psad_category_page_enable_message(); ?>
+        </div>
         <table class="form-table">
         	<tr class="form-field">
             <th scope="row" valign="top"><label for="psad_category_product_nosub_per_page"><?php _e( 'Category Products (No Sub Cats)', 'wc_psad' ); ?></label></th>
@@ -173,8 +277,71 @@ class WC_PSAD_Settings_Hook
             </td>
             </tr>
         </table>
-        </fieldset>
+        </div>
+        </div>
+        </div>
         <?php
+	}
+	
+	public function psad_category_page_enable_message() {
+		global $wc_psad_admin_init;
+		$psad_category_page_enable_message = '<p>* '.sprintf( __( "ON | OFF switch over-rides any <a href='%s' target='_blank'>Global Parent / Child Category Page Settings</a> for this Product Category. OFF to use the the WooCommerce 'Display type' for this Category page.", 'wc_psad' ), 'admin.php?page=wc-sort-display').'</p>
+		<p>* '.__( "Set WooCommerce 'Display type' settings: Select 'Both' to enable showing Parent Cat products and Child Cats with Products on this Category page.", 'wc_psad' ).'</p>
+		<p>* '.__( "Use the settings below to configure the Sort and Display feature for this Category page.", 'wc_psad' ).'</p>
+		<div style="clear:both"></div>
+		<a class="psad_category_page_enable_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wc_psad' ).'</a>
+		<a class="psad_category_page_enable_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wc_psad' ).'</a>
+		<div style="clear:both"></div>';
+		echo $wc_psad_admin_init->blue_message_box( $psad_category_page_enable_message, '100%' ); 
+		?>
+<script>
+(function($) {
+$(document).ready(function() {
+	
+	$(document).on( "click", ".psad_category_page_enable_message_dontshow", function(){
+		$(".psad_category_page_enable_message_tr").slideUp();
+		$(".psad_category_page_enable_message_container").slideUp();
+		var data = {
+				action: 		"psad_yellow_message_dontshow",
+				option_name: 	"psad_category_page_enable_message_dontshow",
+				security: 		"<?php echo wp_create_nonce("psad_yellow_message_dontshow"); ?>"
+			};
+		$.post( "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>", data);
+	});
+	
+	$(document).on( "click", ".psad_category_page_enable_message_dismiss", function(){
+		$(".psad_category_page_enable_message_tr").slideUp();
+		$(".psad_category_page_enable_message_container").slideUp();
+		var data = {
+				action: 		"psad_yellow_message_dismiss",
+				session_name: 	"psad_category_page_enable_message_dismiss",
+				security: 		"<?php echo wp_create_nonce("psad_yellow_message_dismiss"); ?>"
+			};
+		$.post( "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>", data);
+	});
+});
+})(jQuery);
+</script>
+			</td>
+		</tr>
+    <?php
+	
+	}
+	
+	public function psad_yellow_message_dontshow() {
+		check_ajax_referer( 'psad_yellow_message_dontshow', 'security' );
+		$option_name   = $_REQUEST['option_name'];
+		update_option( $option_name, 1 );
+		die();
+	}
+	
+	public function psad_yellow_message_dismiss() {
+		check_ajax_referer( 'psad_yellow_message_dismiss', 'security' );
+		$session_name   = $_REQUEST['session_name'];
+		update_option( $session_name, 1 );
+		if ( !isset($_SESSION) ) { @session_start(); } 
+		$_SESSION[$session_name] = 1 ;
+		die();
 	}
 	
 	public static function a3_wp_admin() {
@@ -214,8 +381,8 @@ class WC_PSAD_Settings_Hook
 		$html .= '<li>* <a href="http://wordpress.org/plugins/woocommerce-compare-products/" target="_blank">'.__('WooCommerce Compare Products', 'wc_psad').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/woo-widget-product-slideshow/" target="_blank">'.__('WooCommerce Widget Product Slideshow', 'wc_psad').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/plugins/woocommerce-email-inquiry-cart-options/" target="_blank">'.__('WooCommerce Email Inquiry & Cart Options', 'wc_psad').'</a></li>';
-		$html .= '<li>* <a href="http://a3rev.com/shop/woocommerce-email-inquiry-ultimate/" target="_blank">'.__('WooCommerce Email Inquiry Ultimate', 'wc_psad').'</a> &nbsp;&nbsp;&nbsp;'.__( '(Free Trial)' , 'wc_psad' ).'</li>';
-		$html .= '<li>* <a href="http://a3rev.com/shop/woocommerce-quotes-and-orders/" target="_blank">'.__('WooCommerce Quotes and Orders', 'wc_psad').'</a> &nbsp;&nbsp;&nbsp;'.__( '(Free Trial)' , 'wc_psad' ).'</li>';
+		$html .= '<li>* <a href="http://a3rev.com/shop/woocommerce-email-inquiry-ultimate/" target="_blank">'.__('WooCommerce Email Inquiry Ultimate', 'wc_psad').'</a></li>';
+		$html .= '<li>* <a href="http://a3rev.com/shop/woocommerce-quotes-and-orders/" target="_blank">'.__('WooCommerce Quotes and Orders', 'wc_psad').'</a></li>';
 		$html .= '</ul>';
 		$html .= '</p>';
 		$html .= '<h3>'.__('FREE a3rev WordPress Plugins', 'wc_psad').'</h3>';

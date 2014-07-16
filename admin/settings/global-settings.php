@@ -295,7 +295,7 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
            	),
 			array(  
 				'name' 		=> __( 'Product Categories', 'wc_psad' ),
-				'desc' 		=> __("Sort and display products by sub categories on Product category pages.", 'wc_psad'),
+				'desc' 		=> __("Sort and display products by sub categories on Product category pages. Feature can be turned ON and OFF from each Category page independent of this Global setting.", 'wc_psad'),
 				'class'		=> 'psad_category_page_enable',
 				'id' 		=> 'psad_category_page_enable',
 				'default'	=> 'no',
