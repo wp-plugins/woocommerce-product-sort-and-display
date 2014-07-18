@@ -164,6 +164,14 @@ class WC_PSAD_Settings_Hook
         <?php echo $this->psad_category_page_enable_message(); ?>
         </div>
         <div class="form-field">
+        	<label for="psad_category_drill_down"><?php _e( 'Empty Parent Categories', 'wc_psad' ); ?></label>
+            <input type="checkbox" class="psad_category_drill_down a3rev-ui-onoff_checkbox" id="psad_category_drill_down" name="psad_category_drill_down" value="yes" style="width:auto;" /> <label for="psad_category_drill_down"><?php _e( 'ON and when Parent Cat has no products assigned to it, products from Child Cats of that Parent will be displayed. If none found the Category is not displayed.', 'wc_psad' ); ?></label>
+        </div>
+        <div class="form-field">
+        	<label for="psad_show_parent_title"><?php _e( 'Parent / Child Title', 'wc_psad' ); ?></label>
+            <input type="checkbox" class="psad_show_parent_title a3rev-ui-onoff_checkbox" id="psad_show_parent_title" name="psad_show_parent_title" value="yes" style="width:auto;" /> <label for="psad_show_parent_title"><?php _e( 'ON to show Child Category title as Parent / Child title breadcrumb. OFF to only show Child Cat name.', 'wc_psad' ); ?></label>
+        </div>
+        <div class="form-field">
             <label for="psad_category_product_nosub_per_page"><?php _e( 'Category Products (No Sub Cats)', 'wc_psad' ); ?></label>
             <input disabled="disabled" id="psad_category_product_nosub_per_page" name="psad_category_product_nosub_per_page" type="text" style="width:120px;" value="" />
             <p class="description"><?php _e("The number of products to show per Endless Scroll or pagination.", 'wc_psad'); ?> <?php _e('Empty to use global settings.', 'wc_psad'); ?></p>
@@ -179,9 +187,16 @@ class WC_PSAD_Settings_Hook
             <p class="description"><?php _e('Set the number of Sub Category product groups to show per pagination or endless scroll event.', 'wc_psad'); ?> <?php _e('Empty to use global settings.', 'wc_psad'); ?></p>
         </div>
         <div class="form-field">
-            <label for="psad_product_per_page"><?php _e( 'Products per Sub Category', 'wc_psad' ); ?></label>
+        	<label for="psad_cat_enable_product_showing_count"><?php _e( 'Product Count', 'wc_psad' ); ?></label>
+            <input type="checkbox" class="psad_cat_enable_product_showing_count a3rev-ui-onoff_checkbox" id="psad_cat_enable_product_showing_count" name="psad_cat_enable_product_showing_count" value="yes" style="width:auto;" /> <label for="psad_cat_enable_product_showing_count"><?php _e( 'ON to show product count under category title.', 'wc_psad' ); ?></label>
+        </div>
+        </div>
+        <h3><?php _e('One Level Up Display', 'wc_psad'); ?></h3>
+        <div><?php _e('Settings apply to this categories display on its Parent Category Page <strong>IF</strong> this Category is a Sub Category.', 'wc_psad' ); ?></div>
+        <div class="form-field">
+            <label for="psad_product_per_page"><?php _e( 'Number of Product Displayed', 'wc_psad' ); ?></label>
             <input disabled="disabled" id="psad_product_per_page" name="psad_product_per_page" type="text" style="width:120px;" value="" />
-            <p class="description"><?php _e("Set the number of products to show per sub Category.", 'wc_psad'); ?> <?php _e('Empty to use global settings.', 'wc_psad'); ?></p>
+            <p class="description"><?php _e("Number of products displayed for this category on its Parent Category page <strong>WHEN</strong> Parent has Sort and Display Feature activated.", 'wc_psad'); ?></p>
         </div>
         <div class="form-field">
             <label for="psad_product_show_type"><?php _e( 'Product Sort', 'wc_psad' ); ?></label>
@@ -190,7 +205,7 @@ class WC_PSAD_Settings_Hook
                 <option value="none"><?php _e( 'Default (Recent)', 'wc_psad' ); ?></option>
                 <option value="onsale"><?php _e( 'On Sale', 'wc_psad' ); ?></option>
                 <option value="featured"><?php _e( 'Featured', 'wc_psad' ); ?></option>
-            </select>
+            </select> <p class="description"><?php _e("Applies to this Category products on Parent Cat Page <strong>WHEN</strong> Parent has Sort and Display Feature activated.", 'wc_psad'); ?></p>
         </div>
 		</div>
         </div>
@@ -238,6 +253,18 @@ class WC_PSAD_Settings_Hook
         </div>
         <table class="form-table">
         	<tr class="form-field">
+            <th scope="row" valign="top"><label for="psad_category_drill_down"><?php _e( 'Empty Parent Categories', 'wc_psad' ); ?></label></th>
+            <td>
+                <input type="checkbox" class="psad_category_drill_down a3rev-ui-onoff_checkbox" id="psad_category_drill_down" name="psad_category_drill_down" value="yes" style="width:auto;" /> <label for="psad_category_drill_down"><?php _e( 'ON and when Parent Cat has no products assigned to it, products from Child Cats of that Parent will be displayed. If none found the Category is not displayed.', 'wc_psad' ); ?></label>
+            </td>
+            </tr>
+            <tr class="form-field">
+            <th scope="row" valign="top"><label for="psad_show_parent_title"><?php _e( 'Parent / Child Title', 'wc_psad' ); ?></label></th>
+            <td>
+                <input type="checkbox" class="psad_show_parent_title a3rev-ui-onoff_checkbox" id="psad_show_parent_title" name="psad_show_parent_title" value="yes" style="width:auto;" /> <label for="psad_show_parent_title"><?php _e( 'ON to show Child Category title as Parent / Child title breadcrumb. OFF to only show Child Cat name.', 'wc_psad' ); ?></label>
+            </td>
+            </tr>
+        	<tr class="form-field">
             <th scope="row" valign="top"><label for="psad_category_product_nosub_per_page"><?php _e( 'Category Products (No Sub Cats)', 'wc_psad' ); ?></label></th>
             <td>
                 <input disabled="disabled" id="psad_category_product_nosub_per_page" name="psad_category_product_nosub_per_page" type="text" style="width:120px;" value="" />
@@ -259,10 +286,21 @@ class WC_PSAD_Settings_Hook
             </td>
             </tr>
             <tr class="form-field">
-            <th scope="row" valign="top"><label for="psad_product_per_page"><?php _e( 'Products per Sub Category', 'wc_psad' ); ?></label></th>
+            <th scope="row" valign="top"><label for="psad_cat_enable_product_showing_count"><?php _e( 'Product Count', 'wc_psad' ); ?></label></th>
+            <td>
+                <input type="checkbox" class="psad_cat_enable_product_showing_count a3rev-ui-onoff_checkbox" id="psad_cat_enable_product_showing_count" name="psad_cat_enable_product_showing_count" value="yes" style="width:auto;" /> <label for="psad_cat_enable_product_showing_count"><?php _e( 'ON to show product count under category title.', 'wc_psad' ); ?></label>
+            </td>
+            </tr>
+        </table>    
+        </div>
+        <h3><?php _e('One Level Up Display', 'wc_psad'); ?></h3>
+        <div><?php _e("Settings apply to this categories display on its Parent Category Page <strong>IF</strong> this Category is a Sub Category.", 'wc_psad'); ?></div>
+        <table class="form-table">
+            <tr class="form-field">
+            <th scope="row" valign="top"><label for="psad_product_per_page"><?php _e( 'Number of Product Displayed', 'wc_psad' ); ?></label></th>
             <td>
                 <input disabled="disabled" id="psad_product_per_page" name="psad_product_per_page" type="text" style="width:120px;" value="" />
-                <p class="description"><?php _e("Set the number of products to show per sub Category.", 'wc_psad'); ?> <?php _e('Empty to use global settings.', 'wc_psad'); ?></p>
+                <p class="description"><?php _e("Number of products displayed for this category on its Parent Category page <strong>WHEN</strong> Parent has Sort and Display Feature activated.", 'wc_psad'); ?> <?php _e('Empty to use global settings.', 'wc_psad'); ?></p>
             </td>
             </tr>
             <tr class="form-field">
@@ -273,11 +311,10 @@ class WC_PSAD_Settings_Hook
                     <option value="none"><?php _e( 'Default (Recent)', 'wc_psad' ); ?></option>
                     <option value="onsale"><?php _e( 'On Sale', 'wc_psad' ); ?></option>
                     <option value="featured"><?php _e( 'Featured', 'wc_psad' ); ?></option>
-                </select>
+                </select> <p class="description"><?php _e("Applies to this Category products on Parent Cat Page <strong>WHEN</strong> Parent has Sort and Display Feature activated.", 'wc_psad'); ?></p>
             </td>
             </tr>
         </table>
-        </div>
         </div>
         </div>
         <?php

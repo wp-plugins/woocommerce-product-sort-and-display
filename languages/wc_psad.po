@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Product Sort and Display\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-16 13:36+0700\n"
-"PO-Revision-Date: 2014-07-16 13:36+0700\n"
+"POT-Creation-Date: 2014-07-18 09:57+0700\n"
+"PO-Revision-Date: 2014-07-18 09:57+0700\n"
 "Last-Translator: Nguyen Cong Tuan <mr.nguyencongtuan@gmail.com>\n"
 "Language-Team: a3rev\n"
 "Language: en\n"
@@ -93,11 +93,11 @@ msgstr ""
 #: admin/settings/global-settings.php:305
 #: admin/settings/global-settings.php:321
 #: admin/settings/global-settings.php:332
-#: admin/settings/global-settings.php:387
-#: admin/settings/global-settings.php:403
-#: admin/settings/global-settings.php:420
-#: admin/settings/global-settings.php:463
-#: admin/settings/global-settings.php:512
+#: admin/settings/global-settings.php:367
+#: admin/settings/global-settings.php:409
+#: admin/settings/global-settings.php:426
+#: admin/settings/global-settings.php:469
+#: admin/settings/global-settings.php:518
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:216
 #: admin/settings/shop-page-scroll-settings.php:201
 #: admin/settings/view-all-products-settings.php:211
@@ -114,11 +114,11 @@ msgstr ""
 #: admin/settings/global-settings.php:306
 #: admin/settings/global-settings.php:322
 #: admin/settings/global-settings.php:333
-#: admin/settings/global-settings.php:388
-#: admin/settings/global-settings.php:404
-#: admin/settings/global-settings.php:421
-#: admin/settings/global-settings.php:464
-#: admin/settings/global-settings.php:513
+#: admin/settings/global-settings.php:368
+#: admin/settings/global-settings.php:410
+#: admin/settings/global-settings.php:427
+#: admin/settings/global-settings.php:470
+#: admin/settings/global-settings.php:519
 #: admin/settings/parent-cat-tag-page-scroll-settings.php:217
 #: admin/settings/shop-page-scroll-settings.php:202
 #: admin/settings/view-all-products-settings.php:212
@@ -620,12 +620,12 @@ msgid "Padding"
 msgstr ""
 
 #: admin/settings/count-meta-settings.php:260
-#: admin/settings/global-settings.php:485
+#: admin/settings/global-settings.php:491
 msgid "Top"
 msgstr ""
 
 #: admin/settings/count-meta-settings.php:265
-#: admin/settings/global-settings.php:491
+#: admin/settings/global-settings.php:497
 msgid "Bottom"
 msgstr ""
 
@@ -675,11 +675,15 @@ msgstr ""
 
 #: admin/settings/global-settings.php:235
 #: admin/settings/global-settings.php:314
+#: classes/class-wc-psad-admin-hook.php:167
+#: classes/class-wc-psad-admin-hook.php:256
 msgid "Empty Parent Categories"
 msgstr ""
 
 #: admin/settings/global-settings.php:236
 #: admin/settings/global-settings.php:315
+#: classes/class-wc-psad-admin-hook.php:168
+#: classes/class-wc-psad-admin-hook.php:258
 msgid ""
 "ON and when Parent Cat has no products assigned to it, products from Child "
 "Cats of that Parent will be displayed. If none found the Category is not "
@@ -701,14 +705,13 @@ msgstr ""
 #: admin/settings/global-settings.php:337
 #: admin/settings/global-settings.php:345
 #: admin/settings/global-settings.php:353
-#: admin/settings/global-settings.php:361
-#: admin/settings/global-settings.php:431
+#: admin/settings/global-settings.php:437
 msgid "Default is [default_value]."
 msgstr ""
 
 #: admin/settings/global-settings.php:256
 #: classes/class-wc-psad-admin-hook.php:145
-#: classes/class-wc-psad-admin-hook.php:209
+#: classes/class-wc-psad-admin-hook.php:224
 msgid "Products per Category"
 msgstr ""
 
@@ -719,58 +722,61 @@ msgid ""
 msgstr ""
 
 #: admin/settings/global-settings.php:265
-#: admin/settings/global-settings.php:368
-#: admin/settings/global-settings.php:438
+#: admin/settings/global-settings.php:385
+#: admin/settings/global-settings.php:444
 #: classes/class-wc-psad-admin-hook.php:150
-#: classes/class-wc-psad-admin-hook.php:187
-#: classes/class-wc-psad-admin-hook.php:216
-#: classes/class-wc-psad-admin-hook.php:269
+#: classes/class-wc-psad-admin-hook.php:202
+#: classes/class-wc-psad-admin-hook.php:231
+#: classes/class-wc-psad-admin-hook.php:307
 msgid "Product Sort"
 msgstr ""
 
 #: admin/settings/global-settings.php:266
-#: admin/settings/global-settings.php:369
 msgid ""
 "Product type can be set on a Category by category basis with the Pro version"
 msgstr ""
 
 #: admin/settings/global-settings.php:272
-#: admin/settings/global-settings.php:374
-#: admin/settings/global-settings.php:443
+#: admin/settings/global-settings.php:391
+#: admin/settings/global-settings.php:449
 #: classes/class-wc-psad-admin-hook.php:153
-#: classes/class-wc-psad-admin-hook.php:190
-#: classes/class-wc-psad-admin-hook.php:220
-#: classes/class-wc-psad-admin-hook.php:273
+#: classes/class-wc-psad-admin-hook.php:205
+#: classes/class-wc-psad-admin-hook.php:235
+#: classes/class-wc-psad-admin-hook.php:311
 msgid "Default (Recent)"
 msgstr ""
 
 #: admin/settings/global-settings.php:273
-#: admin/settings/global-settings.php:375
-#: admin/settings/global-settings.php:444
+#: admin/settings/global-settings.php:392
+#: admin/settings/global-settings.php:450
 #: classes/class-wc-psad-admin-hook.php:154
-#: classes/class-wc-psad-admin-hook.php:191
-#: classes/class-wc-psad-admin-hook.php:221
-#: classes/class-wc-psad-admin-hook.php:274
+#: classes/class-wc-psad-admin-hook.php:206
+#: classes/class-wc-psad-admin-hook.php:236
+#: classes/class-wc-psad-admin-hook.php:312
 msgid "On Sale"
 msgstr ""
 
 #: admin/settings/global-settings.php:274
-#: admin/settings/global-settings.php:376
-#: admin/settings/global-settings.php:445
+#: admin/settings/global-settings.php:393
+#: admin/settings/global-settings.php:451
 #: classes/class-wc-psad-admin-hook.php:155
-#: classes/class-wc-psad-admin-hook.php:192
-#: classes/class-wc-psad-admin-hook.php:222
-#: classes/class-wc-psad-admin-hook.php:275
+#: classes/class-wc-psad-admin-hook.php:207
+#: classes/class-wc-psad-admin-hook.php:237
+#: classes/class-wc-psad-admin-hook.php:313
 msgid "Featured"
 msgstr ""
 
 #: admin/settings/global-settings.php:278
-#: admin/settings/global-settings.php:380
+#: admin/settings/global-settings.php:360
+#: classes/class-wc-psad-admin-hook.php:190
+#: classes/class-wc-psad-admin-hook.php:289
 msgid "Product Count"
 msgstr ""
 
 #: admin/settings/global-settings.php:279
-#: admin/settings/global-settings.php:381
+#: admin/settings/global-settings.php:361
+#: classes/class-wc-psad-admin-hook.php:191
+#: classes/class-wc-psad-admin-hook.php:291
 msgid "ON to show product count under category title."
 msgstr ""
 
@@ -800,127 +806,157 @@ msgid ""
 msgstr ""
 
 #: admin/settings/global-settings.php:325
+#: classes/class-wc-psad-admin-hook.php:171
+#: classes/class-wc-psad-admin-hook.php:262
 msgid "Parent / Child Title"
 msgstr ""
 
 #: admin/settings/global-settings.php:326
+#: classes/class-wc-psad-admin-hook.php:172
+#: classes/class-wc-psad-admin-hook.php:264
 msgid ""
 "ON to show Child Category title as Parent / Child title breadcrumb. OFF to "
 "only show Child Cat name."
 msgstr ""
 
 #: admin/settings/global-settings.php:336
-#: classes/class-wc-psad-admin-hook.php:167
-#: classes/class-wc-psad-admin-hook.php:241
+#: classes/class-wc-psad-admin-hook.php:175
+#: classes/class-wc-psad-admin-hook.php:268
 msgid "Category Products (No Sub Cats)"
 msgstr ""
 
 #: admin/settings/global-settings.php:337
-#: admin/settings/global-settings.php:431
-#: classes/class-wc-psad-admin-hook.php:169
-#: classes/class-wc-psad-admin-hook.php:244
+#: admin/settings/global-settings.php:437
+#: classes/class-wc-psad-admin-hook.php:177
+#: classes/class-wc-psad-admin-hook.php:271
 msgid "The number of products to show per Endless Scroll or pagination."
 msgstr ""
 
 #: admin/settings/global-settings.php:344
-#: classes/class-wc-psad-admin-hook.php:172
-#: classes/class-wc-psad-admin-hook.php:248
+#: classes/class-wc-psad-admin-hook.php:180
+#: classes/class-wc-psad-admin-hook.php:275
 msgid "Parent Category Products"
 msgstr ""
 
 #: admin/settings/global-settings.php:345
-#: classes/class-wc-psad-admin-hook.php:174
-#: classes/class-wc-psad-admin-hook.php:251
+#: classes/class-wc-psad-admin-hook.php:182
+#: classes/class-wc-psad-admin-hook.php:278
 msgid ""
 "Sets the number of Parent Category Products to show before Child Cat Product "
 "Groups."
 msgstr ""
 
 #: admin/settings/global-settings.php:352
-#: classes/class-wc-psad-admin-hook.php:177
-#: classes/class-wc-psad-admin-hook.php:255
+#: classes/class-wc-psad-admin-hook.php:185
+#: classes/class-wc-psad-admin-hook.php:282
 msgid "Sub Categories Per Page"
 msgstr ""
 
 #: admin/settings/global-settings.php:353
-#: classes/class-wc-psad-admin-hook.php:179
-#: classes/class-wc-psad-admin-hook.php:258
+#: classes/class-wc-psad-admin-hook.php:187
+#: classes/class-wc-psad-admin-hook.php:285
 msgid ""
 "Set the number of Sub Category product groups to show per pagination or "
 "endless scroll event."
 msgstr ""
 
-#: admin/settings/global-settings.php:360
-msgid "Products Per Sub Category"
+#: admin/settings/global-settings.php:372
+#: classes/class-wc-psad-admin-hook.php:194
+#: classes/class-wc-psad-admin-hook.php:296
+msgid "One Level Up Display"
 msgstr ""
 
-#: admin/settings/global-settings.php:361
-#: classes/class-wc-psad-admin-hook.php:184
-#: classes/class-wc-psad-admin-hook.php:265
-msgid "Set the number of products to show per sub Category."
+#: admin/settings/global-settings.php:374
+#: classes/class-wc-psad-admin-hook.php:195
+#: classes/class-wc-psad-admin-hook.php:297
+msgid ""
+"Settings apply to this categories display on its Parent Category Page "
+"<strong>IF</strong> this Category is a Sub Category."
 msgstr ""
 
-#: admin/settings/global-settings.php:392
+#: admin/settings/global-settings.php:377
+#: classes/class-wc-psad-admin-hook.php:197
+#: classes/class-wc-psad-admin-hook.php:300
+msgid "Number of Product Displayed"
+msgstr ""
+
+#: admin/settings/global-settings.php:378
+#: classes/class-wc-psad-admin-hook.php:199
+#: classes/class-wc-psad-admin-hook.php:303
+msgid ""
+"Number of products displayed for this category on its Parent Category page "
+"<strong>WHEN</strong> Parent has Sort and Display Feature activated."
+msgstr ""
+
+#: admin/settings/global-settings.php:386
+#: classes/class-wc-psad-admin-hook.php:208
+#: classes/class-wc-psad-admin-hook.php:314
+msgid ""
+"Applies to this Category products on Parent Cat Page <strong>WHEN</strong> "
+"Parent has Sort and Display Feature activated."
+msgstr ""
+
+#: admin/settings/global-settings.php:398
 msgid "Global Category Reset :"
 msgstr ""
 
-#: admin/settings/global-settings.php:396
+#: admin/settings/global-settings.php:402
 msgid "Product Category Reset"
 msgstr ""
 
-#: admin/settings/global-settings.php:397
+#: admin/settings/global-settings.php:403
 msgid ""
 "On to reset all custom settings made in the 'a3rev Category Page' settings "
 "on Product Categories."
 msgstr ""
 
-#: admin/settings/global-settings.php:408
+#: admin/settings/global-settings.php:414
 msgid "Tag Page Settings"
 msgstr ""
 
-#: admin/settings/global-settings.php:412
+#: admin/settings/global-settings.php:418
 msgid "Tag Page"
 msgstr ""
 
-#: admin/settings/global-settings.php:413
+#: admin/settings/global-settings.php:419
 msgid "Sort and Display Product tag pages."
 msgstr ""
 
-#: admin/settings/global-settings.php:430
+#: admin/settings/global-settings.php:436
 msgid "Tag Products"
 msgstr ""
 
-#: admin/settings/global-settings.php:450
+#: admin/settings/global-settings.php:456
 msgid "Visual Content Separator"
 msgstr ""
 
-#: admin/settings/global-settings.php:454
+#: admin/settings/global-settings.php:460
 msgid "Visual Separator"
 msgstr ""
 
-#: admin/settings/global-settings.php:455
+#: admin/settings/global-settings.php:461
 msgid ""
 "On to show a separator between each category group of products on Shop Page. "
 "Add custom Style under the Visual Content Separator sub nav."
 msgstr ""
 
-#: admin/settings/global-settings.php:472
+#: admin/settings/global-settings.php:478
 msgid "Seperator Border"
 msgstr ""
 
-#: admin/settings/global-settings.php:479
+#: admin/settings/global-settings.php:485
 msgid "Seperator Padding"
 msgstr ""
 
-#: admin/settings/global-settings.php:499
+#: admin/settings/global-settings.php:505
 msgid "House Keeping :"
 msgstr ""
 
-#: admin/settings/global-settings.php:503
+#: admin/settings/global-settings.php:509
 msgid "Clean up on Deletion"
 msgstr ""
 
-#: admin/settings/global-settings.php:504
+#: admin/settings/global-settings.php:510
 msgid ""
 "On deletion (not deactivate) the plugin will completely remove all tables "
 "and data it created, leaving no trace it was ever here."
@@ -1072,60 +1108,54 @@ msgid "View All & Count Meta"
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:142
-#: classes/class-wc-psad-admin-hook.php:205
+#: classes/class-wc-psad-admin-hook.php:220
 msgid "a3rev Shop Page Categories"
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:143
-#: classes/class-wc-psad-admin-hook.php:206
+#: classes/class-wc-psad-admin-hook.php:221
 msgid ""
 "The WooCommerce 'Display type' settings above do not apply to Shop page "
 "Categories. They do apply to the a3rev Category Page settings below."
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:147
-#: classes/class-wc-psad-admin-hook.php:212
+#: classes/class-wc-psad-admin-hook.php:227
 msgid "Set the number of products to show per Category on Shop pages."
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:147
-#: classes/class-wc-psad-admin-hook.php:169
-#: classes/class-wc-psad-admin-hook.php:174
-#: classes/class-wc-psad-admin-hook.php:179
-#: classes/class-wc-psad-admin-hook.php:184
-#: classes/class-wc-psad-admin-hook.php:212
-#: classes/class-wc-psad-admin-hook.php:244
-#: classes/class-wc-psad-admin-hook.php:251
-#: classes/class-wc-psad-admin-hook.php:258
-#: classes/class-wc-psad-admin-hook.php:265
+#: classes/class-wc-psad-admin-hook.php:177
+#: classes/class-wc-psad-admin-hook.php:182
+#: classes/class-wc-psad-admin-hook.php:187
+#: classes/class-wc-psad-admin-hook.php:227
+#: classes/class-wc-psad-admin-hook.php:271
+#: classes/class-wc-psad-admin-hook.php:278
+#: classes/class-wc-psad-admin-hook.php:285
+#: classes/class-wc-psad-admin-hook.php:303
 msgid "Empty to use global settings."
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:152
-#: classes/class-wc-psad-admin-hook.php:189
-#: classes/class-wc-psad-admin-hook.php:219
-#: classes/class-wc-psad-admin-hook.php:272
+#: classes/class-wc-psad-admin-hook.php:204
+#: classes/class-wc-psad-admin-hook.php:234
+#: classes/class-wc-psad-admin-hook.php:310
 msgid "Global Settings"
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:158
-#: classes/class-wc-psad-admin-hook.php:227
+#: classes/class-wc-psad-admin-hook.php:242
 msgid "a3rev Category Page"
 msgstr ""
 
 #: classes/class-wc-psad-admin-hook.php:160
-#: classes/class-wc-psad-admin-hook.php:231
+#: classes/class-wc-psad-admin-hook.php:246
 msgid ""
 "ON to activate Sort and Display products features on this Product category "
 "page."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:182
-#: classes/class-wc-psad-admin-hook.php:262
-msgid "Products per Sub Category"
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:288
+#: classes/class-wc-psad-admin-hook.php:325
 #, php-format
 msgid ""
 "ON | OFF switch over-rides any <a href='%s' target='_blank'>Global Parent / "
@@ -1133,175 +1163,170 @@ msgid ""
 "the WooCommerce 'Display type' for this Category page."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:289
+#: classes/class-wc-psad-admin-hook.php:326
 msgid ""
 "Set WooCommerce 'Display type' settings: Select 'Both' to enable showing "
 "Parent Cat products and Child Cats with Products on this Category page."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:290
+#: classes/class-wc-psad-admin-hook.php:327
 msgid ""
 "Use the settings below to configure the Sort and Display feature for this "
 "Category page."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:292
+#: classes/class-wc-psad-admin-hook.php:329
 msgid "Don't show again"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:293
+#: classes/class-wc-psad-admin-hook.php:330
 msgid "Dismiss"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:354
+#: classes/class-wc-psad-admin-hook.php:391
 msgid "Upgrade to Product Sort and Display Pro"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:355
+#: classes/class-wc-psad-admin-hook.php:392
 msgid ""
 "<strong>NOTE:</strong> All the functions inside the Yellow border on the "
 "plugins admin panel are extra functionality that is activated by upgrading "
 "to the Pro version"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:357
+#: classes/class-wc-psad-admin-hook.php:394
 msgid "WooCommerce Product Sort and Display Pro"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:358
+#: classes/class-wc-psad-admin-hook.php:395
 msgid "Activates these advanced Features"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:361
+#: classes/class-wc-psad-admin-hook.php:398
 msgid "Sort by 'On Sale' on all Product Category pages."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:362
+#: classes/class-wc-psad-admin-hook.php:399
 msgid "Sort by 'Featured' on all Product Category pages."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:363
+#: classes/class-wc-psad-admin-hook.php:400
 msgid "Category by Category Sort and Display settings for Shop page."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:364
+#: classes/class-wc-psad-admin-hook.php:401
 msgid "Category by Category Sort and display settings for Product Cat pages."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:365
+#: classes/class-wc-psad-admin-hook.php:402
 msgid "Endless Scroll feature for the entire store (Category pages)."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:366
+#: classes/class-wc-psad-admin-hook.php:403
 msgid "Category pages Endless Scroll on Click WYSIWYG style editor."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:367
+#: classes/class-wc-psad-admin-hook.php:404
 msgid ""
 "Parent Category page show parent cat products and Child Cats with products."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:368
+#: classes/class-wc-psad-admin-hook.php:405
 msgid "Set number of products to show on parent cat before sub cats."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:369
+#: classes/class-wc-psad-admin-hook.php:406
 msgid "WYSIWYG count meta styling and position."
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:370
+#: classes/class-wc-psad-admin-hook.php:407
 #, php-format
 msgid ""
 "Immediate access to the plugins <a href=\"%s\" target=\"_blank\">a3rev "
 "support forum</a>"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:373
+#: classes/class-wc-psad-admin-hook.php:410
 msgid "View this plugins"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:373
+#: classes/class-wc-psad-admin-hook.php:410
 msgid "documentation"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:374
+#: classes/class-wc-psad-admin-hook.php:411
 msgid "Visit this plugins"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:374
+#: classes/class-wc-psad-admin-hook.php:411
 msgid "support forum"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:375
+#: classes/class-wc-psad-admin-hook.php:412
 msgid "More FREE a3rev WooCommerce Plugins"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:378
+#: classes/class-wc-psad-admin-hook.php:415
 msgid "WooCommerce Products Quick View"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:379
+#: classes/class-wc-psad-admin-hook.php:416
 msgid "WooCommerce Dynamic Products Gallery"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:380
+#: classes/class-wc-psad-admin-hook.php:417
 msgid "WooCommerce Predictive Search"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:381
+#: classes/class-wc-psad-admin-hook.php:418
 msgid "WooCommerce Compare Products"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:382
+#: classes/class-wc-psad-admin-hook.php:419
 msgid "WooCommerce Widget Product Slideshow"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:383
+#: classes/class-wc-psad-admin-hook.php:420
 msgid "WooCommerce Email Inquiry & Cart Options"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:384
+#: classes/class-wc-psad-admin-hook.php:421
 msgid "WooCommerce Email Inquiry Ultimate"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:384
-#: classes/class-wc-psad-admin-hook.php:385
-msgid "(Free Trial)"
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:385
+#: classes/class-wc-psad-admin-hook.php:422
 msgid "WooCommerce Quotes and Orders"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:388
+#: classes/class-wc-psad-admin-hook.php:425
 msgid "FREE a3rev WordPress Plugins"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:391
+#: classes/class-wc-psad-admin-hook.php:428
 msgid "a3 Responsive Slider"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:391
+#: classes/class-wc-psad-admin-hook.php:428
 msgid "New Release!"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:392
+#: classes/class-wc-psad-admin-hook.php:429
 msgid "Contact Us Page - Contact People"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:393
+#: classes/class-wc-psad-admin-hook.php:430
 msgid "WordPress Email Template"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:394
+#: classes/class-wc-psad-admin-hook.php:431
 msgid "Page View Count"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:404
+#: classes/class-wc-psad-admin-hook.php:441
 msgid "Documentation"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:405
+#: classes/class-wc-psad-admin-hook.php:442
 msgid "Support"
 msgstr ""
 

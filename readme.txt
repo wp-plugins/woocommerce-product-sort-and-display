@@ -4,7 +4,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
 Requires at least: 3.7
 Tested up to: 3.9.1
-Stable tag: 1.0.5.2
+Stable tag: 1.0.5.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -193,6 +193,10 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 == Changelog ==
 
+= 1.0.5.3 - 2014/07/18 =
+* Tweak - Update to Product Category create and edit page Sort and display settings in line with Pro version new features for synch.
+* Tweak - On Product category create and edit pages One Level Up Display settings now always show even when Sort and display features are OFF.
+
 = 1.0.5.2 - 2014/07/16 = 
 * Tweak - Added ON | OFF button for Sort and Display Pro Version feature activation on product category pages
 * Tweak - On Product category create and edit pages set switch to OFF to hide Pro settings for better UI.
@@ -267,6 +271,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.0.5.3 =
+Minor version upgrade to keep the Lite Version in synch with Pro version upgrade.
 
 = 1.0.5.2 =
 Minor version upgrade. Improved Product Cat create and edit pages UI for lite version users.

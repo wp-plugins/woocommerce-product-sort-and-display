@@ -10,7 +10,7 @@ function wc_psad_install(){
 	$wc_psad_admin_init->set_default_settings();
 	
 	WC_PSAD_Functions::auto_create_order_keys_all_products();
-	update_option('wc_psad_lite_version', '1.0.5.2');
+	update_option('wc_psad_lite_version', '1.0.5.3');
 	update_option('wc_psad_plugin', 'wc_psad');
 	delete_transient("wc_psad_update_info");
 	
@@ -54,8 +54,8 @@ function psad_upgrade_plugin () {
 		update_option('wc_psad_lite_version', '1.0.2');
 		WC_PSAD_Functions::upgrade_version_1_0_2();
 	}
-	
-	update_option('wc_psad_lite_version', '1.0.5.2');
+
+	update_option('wc_psad_lite_version', '1.0.5.3');
 }
 
 ?>

@@ -357,8 +357,25 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 				'default'	=> '3'
 			),
 			array(  
-				'name' => __( 'Products Per Sub Category', 'wc_psad' ),
-				'desc' 		=> __('Set the number of products to show per sub Category.', 'wc_psad'). ' '. __('Default is [default_value].', 'wc_psad'),
+				'name' 		=> __( 'Product Count', 'wc_psad' ),
+				'desc' 		=> __("ON to show product count under category title.", 'wc_psad'),
+				'id' 		=> 'psad_cat_enable_product_showing_count',
+				'default'	=> 'yes',
+				'type' 		=> 'onoff_checkbox',
+				'checked_value'		=> 'yes',
+				'unchecked_value'	=> 'no',
+				'checked_label'		=> __( 'ON', 'wc_psad' ),
+				'unchecked_label' 	=> __( 'OFF', 'wc_psad' ),
+			),
+			
+			array(
+            	'name' 		=> __( 'One Level Up Display', 'wc_psad' ),
+                'type' 		=> 'heading',
+                'desc' 		=> __("Settings apply to this categories display on its Parent Category Page <strong>IF</strong> this Category is a Sub Category.", 'wc_psad'),
+           	),
+			array(  
+				'name' 		=> __( 'Number of Product Displayed', 'wc_psad' ),
+				'desc' 		=> __('Number of products displayed for this category on its Parent Category page <strong>WHEN</strong> Parent has Sort and Display Feature activated.', 'wc_psad'),
 				'id' 		=> 'psad_product_per_page',
 				'type' 		=> 'text',
 				'css' 		=> 'width:40px;',
@@ -366,7 +383,7 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 			),
 			array(  
 				'name' 		=> __( "Product Sort", 'wc_psad' ),
-				'desc' 		=> __('Product type can be set on a Category by category basis with the Pro version', 'wc_psad'),
+				'desc' 		=> __('Applies to this Category products on Parent Cat Page <strong>WHEN</strong> Parent has Sort and Display Feature activated.', 'wc_psad'),
 				'id' 		=> 'psad_product_show_type',
 				'type' 		=> 'select',
 				'default'	=> 'none',
@@ -375,17 +392,6 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 						'onsale'		=> __( 'On Sale', 'wc_psad' ) ,
 						'featured'		=> __( 'Featured', 'wc_psad' ) ,
 					),
-			),
-			array(  
-				'name' 		=> __( 'Product Count', 'wc_psad' ),
-				'desc' 		=> __("ON to show product count under category title.", 'wc_psad'),
-				'id' 		=> 'psad_cat_enable_product_showing_count',
-				'default'	=> 'no',
-				'type' 		=> 'onoff_checkbox',
-				'checked_value'		=> 'yes',
-				'unchecked_value'	=> 'no',
-				'checked_label'		=> __( 'ON', 'wc_psad' ),
-				'unchecked_label' 	=> __( 'OFF', 'wc_psad' ),
 			),
 			
 			array(
