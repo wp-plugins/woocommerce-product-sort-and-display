@@ -2,9 +2,9 @@
 
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
-Requires at least: 3.7
-Tested up to: 3.9.1
-Stable tag: 1.0.5.3
+Requires at least: 3.8
+Tested up to: 3.9.2
+Stable tag: 1.1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -57,7 +57,13 @@ We decided to build a plugin that would fix that. With WooCommerce Product Sort 
 
 * Enable/Disable a visual separator between each Product Category group of products.
 * WYSIWYG separator style editor.
-* Set padding in px above and below the separator.  
+* Set padding in px above and below the separator. 
+
+>= Sass #dynamic {stytlesheets}=
+
+>* All front style is built in [Sass](http://sass-lang.com/) with #dynamic {stylesheets}
+>* All admin panel display is created with Sass.
+>* Sass loads faster in all browsers that CSS. 
 
 = Live Shop Demo =
 
@@ -193,6 +199,13 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 == Changelog ==
 
+= 1.1.0 - 2014/09/04 = 
+* Feature - Converted all front end CSS #dynamic {stylesheets} to Sass #dynamic {stylesheets} for faster loading.
+* Feature - Convert all back end CSS to Sass.
+* Tweak - Tested 100% compatible with WooCommerce Version 2.2 and backwards to version 2.1
+* Tweak - use wc_get_product() function instead of get_product() function when site is using WooCommerce Version 2.2
+* Tweak - Updated google font face in plugin framework.
+
 = 1.0.5.3 - 2014/07/18 =
 * Tweak - Update to Product Category create and edit page Sort and display settings in line with Pro version new features for synch.
 * Tweak - On Product category create and edit pages One Level Up Display settings now always show even when Sort and display features are OFF.
@@ -271,6 +284,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+Major version upgrade. Full front end and back end conversion to Sass and Tweaks for full compatibility with soon to be released WooCommerce 2.2
 
 = 1.0.5.3 =
 Minor version upgrade to keep the Lite Version in synch with Pro version upgrade.

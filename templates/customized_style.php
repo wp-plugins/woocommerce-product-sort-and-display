@@ -254,8 +254,8 @@ if ( $psad_seperator_enable == 'yes' ){
 /* Hide Pagination of Shop Page */
 <?php 
 $psad_endless_scroll_category_shop = get_option('psad_endless_scroll_category_shop', '' );
-if ( is_post_type_archive( 'product' ) && get_option('psad_shop_page_enable', '' ) == 'yes' && $psad_endless_scroll_category_shop == 'yes' ) { 
+if ( get_option('psad_shop_page_enable', '' ) == 'yes' && $psad_endless_scroll_category_shop == 'yes' ) { 
 ?>
-.wc_content .woocommerce-pagination, .pbc_content .woocommerce-pagination,.wc_content nav, .woocommerce-pagination, .woo-pagination {display:none !important;}
+.woocommerce.post-type-archive-product .wc_content .woocommerce-pagination, .woocommerce.post-type-archive-product .pbc_content .woocommerce-pagination,.woocommerce.post-type-archive-product .wc_content nav, .woocommerce.post-type-archive-product .woocommerce-pagination, .woocommerce.post-type-archive-product .woo-pagination {display:none !important;}
 <?php } ?>
 </style>

@@ -218,11 +218,12 @@ class WC_PSAD
 	}
 	
 	public function include_customized_style(){
-		global $is_shop;
-		$enqueue_style = false;
-		if ( is_post_type_archive( 'product' ) && get_option('psad_shop_page_enable') == 'yes' ) $enqueue_style = true;
-		if ( $enqueue_style) {
-			include( WC_PSAD_TEMPLATE_PATH. '/customized_style.php' );
+		if ( is_post_type_archive( 'product' ) && get_option('psad_shop_page_enable', '' ) == 'yes' && get_option('psad_endless_scroll_category_shop', '' ) == 'yes' ) { 
+	?>
+    <style>
+	.wc_content .woocommerce-pagination, .pbc_content .woocommerce-pagination,.wc_content nav, .woocommerce-pagination, .woo-pagination {display:none !important;}
+	</style>
+	<?php 
 		}
 	}
 	
