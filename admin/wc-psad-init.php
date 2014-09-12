@@ -9,8 +9,12 @@ function wc_psad_install(){
 	global $wc_psad_admin_init;
 	$wc_psad_admin_init->set_default_settings();
 	
+	// Build sass
+	global $wc_psad_less;
+	$wc_psad_less->plugin_build_sass();
+	
 	WC_PSAD_Functions::auto_create_order_keys_all_products();
-	update_option('wc_psad_lite_version', '1.0.4');
+	update_option('wc_psad_lite_version', '1.1.0');
 	update_option('wc_psad_plugin', 'wc_psad');
 	delete_transient("wc_psad_update_info");
 	
@@ -55,7 +59,14 @@ function psad_upgrade_plugin () {
 		WC_PSAD_Functions::upgrade_version_1_0_2();
 	}
 	
-	update_option('wc_psad_lite_version', '1.0.4');
+	if ( version_compare( get_option( 'wc_psad_lite_version') , '1.1.0' ) === -1 ) {
+		// Build sass
+		global $wc_psad_less;
+		$wc_psad_less->plugin_build_sass();
+		update_option('wc_psad_lite_version', '1.1.0');
+	}
+	
+	update_option('wc_psad_lite_version', '1.1.0');
 }
 
 ?>
