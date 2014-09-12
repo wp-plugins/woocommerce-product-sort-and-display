@@ -3,16 +3,16 @@
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
 Requires at least: 3.8
-Tested up to: 3.9.2
-Stable tag: 1.1.0
+Tested up to: 4.0
+Stable tag: 1.1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Create a true Supermarket shopping experience. Sort and show products on Shop page by category - auto show On Sale or Featured first, Endless Scroll.
-  
+
 == Description ==
 
-Walk into any shop, Supermarket or Department store and what do you see - products organized and grouped in aisle and areas. 'Walk' into any WooCommerce store page and what does your customer / client see - an almost entirely random display of products sorted mostly by date of publishing.  
+Walk into any shop, Supermarket or Department store and what do you see - products organized and grouped in aisle and areas. 'Walk' into any WooCommerce store page and what does your customer / client see - an almost entirely random display of products sorted mostly by date of publishing.
 
 That has always seemed crazy to us. What shop owner would just keep stacking new stock at the front of all the other stock in their shop in any order. None is the answer! So why is that exactly what all of our virtual WooCommerce stores do?
 
@@ -25,14 +25,14 @@ We decided to build a plugin that would fix that. With WooCommerce Product Sort 
 * Set to auto show all current 'On Sale' products first in each category on the shop page.
 * Set to auto show all 'featured' products in each category on the shop page.
 * Intelligent Navigation shows customers the total number of products in the category they are viewing with a link to view all.
-* Endless Scroll feature (option) for seamless customer scrolling through the entire shop page makes for quick and very easy shop browsing.  
+* Endless Scroll feature (option) for seamless customer scrolling through the entire shop page makes for quick and very easy shop browsing.
 
 = Shop Page Display Features =
 
 * Show products by Category group.
 * Use WooCommerce Product Categories to sort display order by drag and drop.
 * Set the number of products to show per category.
-* Set which products show first from the category - On Sale, Featured of the default latest. 
+* Set which products show first from the category - On Sale, Featured of the default latest.
 * Set how many category group of products show before pagination or endless scroll loads.
 * Activate Endless scroll feature for your shop page.
 * Select Auto Endless Scroll or Scroll on Click.
@@ -57,17 +57,17 @@ We decided to build a plugin that would fix that. With WooCommerce Product Sort 
 
 * Enable/Disable a visual separator between each Product Category group of products.
 * WYSIWYG separator style editor.
-* Set padding in px above and below the separator. 
+* Set padding in px above and below the separator.
 
 >= Sass #dynamic {stytlesheets}=
 
 >* All front style is built in [Sass](http://sass-lang.com/) with #dynamic {stylesheets}
 >* All admin panel display is created with Sass.
->* Sass loads faster in all browsers that CSS. 
+>* Sass loads faster in all browsers that CSS.
 
 = Live Shop Demo =
 
-Visit [Dixie Sourenirs](http://dixiesouvenirs.com/shop-here/) to see how the plugin allows you to set up your Shop page product display on a live store. Thanks to the site owner Colin Slark for permission to link to his shop page. 
+Visit [Dixie Sourenirs](http://dixiesouvenirs.com/shop-here/) to see how the plugin allows you to set up your Shop page product display on a live store. Thanks to the site owner Colin Slark for permission to link to his shop page.
 
 = Mobile Responsive App style admin interface =
 
@@ -111,7 +111,7 @@ Visit [Dixie Souvenirs](http://dixiesouvenirs.com/product-category/flags/) site 
 
 * Set number of products to display in Categories on a category by category basis (over rides the global setting).
 * Filter the products to show for each category independent of the Global settings on a category by category basis.
-* WYSIWYG Scroll on click feature custom style (button or linked text) and position settings. 
+* WYSIWYG Scroll on click feature custom style (button or linked text) and position settings.
 
 = Additional Endless Scroll Features =
 
@@ -154,7 +154,7 @@ Visit [Dixie Souvenirs](http://dixiesouvenirs.com/product-category/flags/) site 
 * WooCommerce 2.1 and later.
 * PHP version 5.2.4 or greater
 * MySQL version 5.0 or greater
- 
+
 = Automatic installation =
 
 Automatic installation is the easiest option as WordPress handles the file transfers itself and you don't even need to leave your web browser. To do an automatic install of WooCommerce Product Sort and Display, log in to your WordPress admin panel, navigate to the Plugins menu and click Add New. Search WooCommerce Product Sort and Display. Click install.
@@ -174,12 +174,12 @@ The manual installation method involves downloading our plugin and uploading it 
 2. Use new Sort types to who your most important products where they should be - first up
 3. If your theme does not support endless scroll - activate the plugins Endless Scroll feature.
 
- 
+
 == Usage ==
 
 1. Install and activate the plugin
 
-2. On wp-admin click on WooCommerce > Sort & Display 
+2. On wp-admin click on WooCommerce > Sort & Display
 
 3. Settings Tab - Turn Endless Scroll on for your shop page.
 
@@ -199,7 +199,13 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 == Changelog ==
 
-= 1.1.0 - 2014/09/04 = 
+= 1.1.1 - 2014/09/12 =
+* Tweak - Tested 100% compatible with WooCommerce 2.2.2
+* Tweak - Tested 100% compatible with WordPress Version 4.0
+* Tweak - Added WordPress plugin icon
+* Fix - Changed __DIR__ to dirname( __FILE__ ) for Sass script so that on some server __DIR___ is not defined
+
+= 1.1.0 - 2014/09/04 =
 * Feature - Converted all front end CSS #dynamic {stylesheets} to Sass #dynamic {stylesheets} for faster loading.
 * Feature - Convert all back end CSS to Sass.
 * Tweak - Tested 100% compatible with WooCommerce Version 2.2 and backwards to version 2.1
@@ -210,7 +216,7 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 * Tweak - Update to Product Category create and edit page Sort and display settings in line with Pro version new features for synch.
 * Tweak - On Product category create and edit pages One Level Up Display settings now always show even when Sort and display features are OFF.
 
-= 1.0.5.2 - 2014/07/16 = 
+= 1.0.5.2 - 2014/07/16 =
 * Tweak - Added ON | OFF button for Sort and Display Pro Version feature activation on product category pages
 * Tweak - On Product category create and edit pages set switch to OFF to hide Pro settings for better UI.
 
@@ -222,8 +228,8 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 * Feature - When Parent Category has no products on Shop page, set to show products from the Parents Child Cats.
 * Feature - Added Empty Parent Categories feature ON | OFF switch for Shop Page.
 * Tweak - Updated admin pages help text links to WooCommerce admin panel which have changed in recent updates.
-* Tweak - Updated chosen js script to latest version 1.1.0 on the a3rev Plugin Framework 
-* Tweak - Tested 100% compatible with WooCommerce version 2.1.11 
+* Tweak - Updated chosen js script to latest version 1.1.0 on the a3rev Plugin Framework
+* Tweak - Tested 100% compatible with WooCommerce version 2.1.11
 * Fix - Pagination link breaking. Added str_replace( 'page/'.$page , '', pagination_link ); to trip page/[number]
 
 = 1.0.4.3 - 2014/05/29 =
@@ -266,7 +272,7 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 * Tweak - Moved admin from WooCommerce settings tab onto the WooCommerce menu items under the menu name Sort and Display.
 * Tweak - Sort & Display menus item tabs, Settings | Endless Scroll | View All & Count
 * Tweak - Endless Scroll tab has 3 sub menu items, Shop Page Scroll | Category Page Scroll | Parent Cat & Tag Page Scroll
-* Tweak - View All & Count has 2 sub menu items, View All Products | Count Meta 
+* Tweak - View All & Count has 2 sub menu items, View All Products | Count Meta
 * Tweak - New admin UI features check boxes replaced by switches, some dropdowns replaced by sliders.
 * Tweak - Tested 100% compatible with WordPress 3.7.1
 * Tweak - Tested 100% compatible with WooCommerce 2.0.20
@@ -284,6 +290,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+Upgrade now for full 1 Sass bug fix and full compatibility with WooCommerce Version 2.2.2 and WordPress 4.0
 
 = 1.1.0 =
 Major version upgrade. Full front end and back end conversion to Sass and Tweaks for full compatibility with soon to be released WooCommerce 2.2
@@ -316,7 +325,7 @@ Upgrade now for full compatibility with WooCommerce Version 2.1 and WordPress ve
 Upgrade now for full a3rev Plugin Framework compatibility with WordPress version 3.8.0 and backwards. New admin interface full mobile and tablet responsive display.
 
 = 1.0.2 =
-Upgrade your plugin now to the new a3rev plugin framework and intuitive app style admin interface plus 6 associated tweaks and 3 bug fixes and full compatibility with WP 3.7.1 and Woocommerce 2.0.20. 
+Upgrade your plugin now to the new a3rev plugin framework and intuitive app style admin interface plus 6 associated tweaks and 3 bug fixes and full compatibility with WP 3.7.1 and Woocommerce 2.0.20.
 
 = 1.0.1 =
 Upgrade now for a page load bug fix on sites the have SSL
