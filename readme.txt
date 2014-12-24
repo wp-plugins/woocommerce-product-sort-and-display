@@ -3,8 +3,8 @@
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
 Requires at least: 3.8
-Tested up to: 4.0
-Stable tag: 1.1.1
+Tested up to: 4.1
+Stable tag: 1.1.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -199,6 +199,13 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 == Changelog ==
 
+= 1.1.2 - 2014/12/24 =
+* Tweak - Added support for product card image lazy load when [a3 Lazy Load plugin](https://wordpress.org/plugins/a3-lazy-load/) is installed.
+* Tweak - Updated plugin to be 100% compatible with WooCommerce Version 2.2.10
+* Tweak - Tested 100% compatible with WordPress Version 4.1
+* Tweak - Added link to a3 Lazy Load and a3 Portfolio plugins on admin dashboard yellow sidebar.
+* Fix - Infinite scroll bug on URLs that end with -#
+
 = 1.1.1 - 2014/09/12 =
 * Tweak - Tested 100% compatible with WooCommerce 2.2.2
 * Tweak - Tested 100% compatible with WordPress Version 4.0
@@ -290,6 +297,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.1.2 =
+Upgrade now for Infinite Scroll bug fix, plus support for a3 Lazy Load and full compatibility with WooCommerce 2.2.10 and WordPress 4.1
 
 = 1.1.1 =
 Upgrade now for full 1 Sass bug fix and full compatibility with WooCommerce Version 2.2.2 and WordPress 4.0

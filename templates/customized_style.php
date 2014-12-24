@@ -221,19 +221,19 @@ $psad_es_category_item_link_font_hover_color = get_option( 'psad_es_category_ite
 /* Separate Style */
 <?php
 $psad_seperator_enable = get_option('psad_seperator_enable');
-$psad_seperator_border = get_option('psad_seperator_border', array( 'width' => '1px', 'style' => 'solid', '#000000' ) );
+$psad_seperator_border = get_option('psad_seperator_border', array( 'width' => '1px', 'style' => 'solid', 'color' => '#000000' ) );
 $psad_seperator_padding_top = get_option('psad_seperator_padding_top');
 $psad_seperator_padding_bottom = get_option('psad_seperator_padding_bottom');
 if ( $psad_seperator_enable == 'yes' ){
 ?>
 .psad_seperator {
 	/*Border*/
-	border-bottom: <?php echo $psad_seperator_border['width']; ?> <?php echo $psad_seperator_border['']; ?> <?php echo $psad_seperator_border['color']; ?> !important;
+	border-bottom: <?php echo $psad_seperator_border['width']; ?> <?php echo $psad_seperator_border['style']; ?> <?php echo $psad_seperator_border['color']; ?> !important;
 	margin: <?php echo $psad_seperator_padding_top; ?>px 0px <?php echo $psad_seperator_padding_bottom; ?>px 0px  !important;
 }
 .wc_content {
 	/*Border*/
-	border-bottom: <?php echo $psad_seperator_border['width']; ?> <?php echo $psad_seperator_border['']; ?> <?php echo $psad_seperator_border['color']; ?> !important;
+	border-bottom: <?php echo $psad_seperator_border['width']; ?> <?php echo $psad_seperator_border['style']; ?> <?php echo $psad_seperator_border['color']; ?> !important;
 	padding-bottom:15px;
 }
 <?php } ?>
