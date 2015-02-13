@@ -2,7 +2,7 @@
 /*
 Plugin Name: WooCommerce Product Sort and Display LITE
 Description: Take control of your WooCommerce Shop random product display with WooCommerce Show Products by Category. Sort and show products on Shop page by category with 'On Sale' or 'Featured' products showing first. Products showing and total products per category count for intelligent viewing.
-Version: 1.1.2
+Version: 1.1.3
 Author: A3 Revolution
 Author URI: http://www.a3rev.com/
 License: This software is under commercial license and copyright to A3 Revolution Software Development team
@@ -22,7 +22,7 @@ define('WC_PSAD_FILE_PATH', dirname(__FILE__));
 define('WC_PSAD_DIR_NAME', basename(WC_PSAD_FILE_PATH));
 define('WC_PSAD_FOLDER', dirname(plugin_basename(__FILE__)));
 define('WC_PSAD_URL', untrailingslashit(plugins_url('/', __FILE__)));
-define('WC_PSAD_DIR', WP_CONTENT_DIR . '/plugins/' . WC_PSAD_FOLDER);
+define('WC_PSAD_DIR', WP_PLUGIN_DIR . '/' . WC_PSAD_FOLDER);
 define('WC_PSAD_NAME', plugin_basename(__FILE__));
 define('WC_PSAD_TEMPLATE_PATH', WC_PSAD_FILE_PATH . '/templates');
 define('WC_PSAD_IMAGES_URL', WC_PSAD_URL . '/assets/images');
