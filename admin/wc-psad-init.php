@@ -17,7 +17,7 @@ function wc_psad_install()
     $wc_psad_less->plugin_build_sass();
 
     WC_PSAD_Functions::auto_create_order_keys_all_products();
-    update_option('wc_psad_lite_version', '1.1.4');
+    update_option('wc_psad_lite_version', '1.1.5');
     update_option('wc_psad_plugin', 'wc_psad');
     delete_transient("wc_psad_update_info");
 
@@ -72,6 +72,6 @@ function psad_upgrade_plugin()
         update_option('wc_psad_lite_version', '1.1.0');
     }
 
-    update_option('wc_psad_lite_version', '1.1.4');
+    update_option('wc_psad_lite_version', '1.1.5');
 }
 ?>
