@@ -236,7 +236,7 @@ class WC_PSAD_Category_Page_Scroll_Settings extends WC_PSAD_Admin_UI
 			),
 			array(
                 'type' 		=> 'heading',
-				'desc'		=> sprintf( __( "<strong>Note:</strong> Set the <a target='_blank' href='%s'>WooCommerce Display type</a> to 'Show Both'. Sub Categories of the Parent Category will show on the parent category page under the Parent Cat products and will use the global 'Scroll Type' mode you set here on this page." , 'wc_psad' ), admin_url( 'admin.php?page=woocommerce_settings&tab=catalog', 'relative' ) ),
+				'desc'		=> sprintf( __( "<strong>Note:</strong> Set the <a target='_blank' href='%s'>WooCommerce Display type</a> to 'Show Both'. Sub Categories of the Parent Category will show on the parent category page under the Parent Cat products and will use the global 'Scroll Type' mode you set here on this page." , 'wc_psad' ), admin_url( 'admin.php?page=wc-settings&tab=products', 'relative' ) ),
            	),
 			
 			array(
