@@ -117,18 +117,24 @@ class WC_PSAD
 	}	
 					
 	public function psad_endless_scroll_shop($show_click_more = true){
+		global $wp_version;
+		$cur_wp_version = preg_replace('/-.*$/', '', $wp_version);
 		?>
 		<script type="text/javascript">
 			jQuery(window).load(function(){
 				//pbc infinitescroll
 				var pbc_nextPage;
 				var pbc_currentPage = jQuery('.pbc_pagination span.current').html();
-				jQuery('.pbc_pagination').find('a.page-numbers').each(function(index){
-					if(jQuery(this).html() == (parseInt(pbc_currentPage) + 1)){
-						pbc_nextPage = jQuery(this);
-					}
-				});
-			
+
+				var pageNumbers = jQuery('.pbc_pagination').find('a.page-numbers');
+				if(pageNumbers.length > 0){
+					pageNumbers.each(function(index){
+						if(jQuery(this).html() == (parseInt(pbc_currentPage) + 1)){
+							pbc_nextPage = jQuery(this);
+						}
+					});
+				}
+
 				if(pbc_nextPage){
 					jQuery('.pbc_content').infinitescroll({
 						navSelector  : 'nav.pbc_pagination',
@@ -138,7 +144,16 @@ class WC_PSAD
 							finishedMsg: '<?php _e( 'No more categories to load.', 'wc_psad');?>',
 							msgText:"<em><?php _e( 'Loading the next set of Categories...', 'wc_psad');?></em>",
 							img: '<?php echo WC_PSAD_JS_URL;?>/masonry/loading-black.gif'
-						}
+						},
+						path:function generatePageUrl(pbc_currentPage){
+							var pageNumbers = jQuery('.pbc_pagination').find('a.page-numbers');
+							var url      = window.location.href;
+							if ( url.indexOf("?") > -1 ) {
+	                        	return [url+"&paged="+pbc_currentPage] ;
+	                        } else {
+	                        	return [url+"?paged="+pbc_currentPage] ;
+	                        }
+	                    }
 					},function( newElements ) {
 						var $newElems = jQuery( newElements ).css({ opacity: 0 });
 						$newElems.animate({ opacity: 1 });
@@ -151,11 +166,22 @@ class WC_PSAD
 							var content_column = <?php echo $content_column_grid;?>;
 
 							jQuery('.box_content').imagesLoaded(function(){
-								jQuery(this).masonry({
+								<?php if ( function_exists( 'a3_lazy_load_enable' ) ) { ?>
+								jQuery(window).lazyLoadXT();
+								<?php } else { ?>
+								jQuery('.box_content').masonry({
 								  itemSelector: '.box_item',
+								  <?php if ( version_compare( $cur_wp_version, '3.9', '<' ) ) { ?>
 								  columnWidth: jQuery('.box_content').width()/content_column,
-								  isAnimated: !Modernizr.csstransitions
+								  <?php } else { ?>
+								  columnWidth: jQuery('#main').width()/content_column,
+								  <?php } ?>
+								  transitionDuration:0.7,
+								  hiddenStyle: { opacity: 0, transform: 'translateY(100%)'},
+				  	  			  visibleStyle: { opacity: 1, transform: 'scale(1)'},
+					  			  "gutter": (jQuery('.box_content').width()-jQuery('#main').width())/content_column
 								});
+								<?php } ?>
 								//Fix Display Table-Cell
 								jQuery('body #main .box_item .entry-item .thumbnail a img').attr('width','').attr('height','');
 								var thumbs = jQuery('.box_content').find('.thumbnail_container');
@@ -169,6 +195,11 @@ class WC_PSAD
 					});
 					<?php if($show_click_more){?>
 					jQuery(window).unbind('.infscr');
+					<?php } ?>
+					<?php if ( function_exists( 'a3_lazy_load_enable' ) ) { ?>
+					jQuery(window).on('lazyload', function(){
+						jQuery('.box_content').masonry('reload');
+					}).lazyLoadXT({});
 					<?php } ?>
 					jQuery('.pbc_content_click_more a').click(function(){
 						jQuery('.pbc_content_click_more').hide();
@@ -209,11 +240,12 @@ class WC_PSAD
 	}
 	
 	public function include_customized_style(){
-		global $is_shop;
-		$enqueue_style = false;
-		if ( is_post_type_archive( 'product' ) && get_option('psad_shop_page_enable') == 'yes' ) $enqueue_style = true;
-		if ( $enqueue_style) {
-			include( WC_PSAD_TEMPLATE_PATH. '/customized_style.php' );
+		if ( is_post_type_archive( 'product' ) && get_option('psad_shop_page_enable', '' ) == 'yes' && get_option('psad_endless_scroll_category_shop', '' ) == 'yes' ) { 
+	?>
+    <style>
+	.wc_content .woocommerce-pagination, .pbc_content .woocommerce-pagination,.wc_content nav, .woocommerce-pagination, .woo-pagination {display:none !important;}
+	</style>
+	<?php 
 		}
 	}
 	
@@ -267,13 +299,13 @@ class WC_PSAD
 		$psad_shop_category_per_page = get_option('psad_shop_category_per_page', 0);
 		if ( $psad_shop_category_per_page <= 0 ) $psad_shop_category_per_page = 3;
 		$args = array(
-			'parent' => $parent_id,
-			'child_of'		=> $parent_id,
-			'menu_order'	=> 'ASC',
-			'hide_empty'	=> 1,
-			'hierarchical'	=> 1,
-			'taxonomy'		=> 'product_cat',
-			'pad_counts'	=> 1
+			'parent'       => $parent_id,
+			'child_of'     => $parent_id,
+			'menu_order'   => 'ASC',
+			'hide_empty'   => 1,
+			'hierarchical' => 1,
+			'taxonomy'     => 'product_cat',
+			'pad_counts'   => 1
 		);
 		
 		$product_categories = get_categories( $args  );
@@ -306,7 +338,8 @@ class WC_PSAD
 		echo '<div style="clear:both;"></div>';
 		echo '<div class="pbc_content">';
 		if ( $product_categories ) {
-			
+			$product_categories = array_values( $product_categories );
+
 			for ( $i = $current ; $i < $to ; ++$i ) {
 				
 				$category = $product_categories[$i];
@@ -333,7 +366,10 @@ class WC_PSAD
 					$wp_query->query_vars['no_found_rows'] = 1;
 					$wp_query->query_vars['post_status'] = 'publish';
 					$wp_query->query_vars['post_type'] = 'product';
-					$wp_query->query_vars['meta_query'] = $woocommerce->query->get_meta_query();
+					if ( version_compare( $woocommerce_db_version, '2.1', '>' ) ) 
+						$wp_query->query_vars['meta_query'] = WC()->query->get_meta_query();
+					else 
+						$wp_query->query_vars['meta_query'] = $woocommerce->query->get_meta_query();
 					$wp_query->query_vars['meta_query'][] = array(
 						'key' => '_featured',
 						'value' => 'yes'
@@ -356,7 +392,7 @@ class WC_PSAD
 					'tax_query' 			=> array(
 						array(
 							'taxonomy' 		=> 'product_cat',
-							'terms' => $category->slug ,
+							'terms' 		=> $category->slug ,
 							'include_children' => false ,
 							'field' 		=> 'slug',
 							'operator' 		=> 'IN'
@@ -377,7 +413,30 @@ class WC_PSAD
 				}
 				
 				$products = query_posts( $product_args );
+				
+				$psad_shop_drill_down = get_option('psad_shop_drill_down', 'yes');
+				$have_products = false;
+				
 				if ( have_posts() ) {
+					$have_products = true;	
+				} elseif ( $psad_shop_drill_down == 'yes' ) {
+					$product_args['tax_query'] = array(
+						array(
+							'taxonomy' 		=> 'product_cat',
+							'terms' 		=> $category->slug ,
+							'include_children' => true ,
+							'field' 		=> 'slug',
+							'operator' 		=> 'IN'
+						)
+					);
+					$products = query_posts( $product_args );
+					
+					if ( have_posts() ) {
+						$have_products = true;	
+					}
+				}
+				
+				if ( $have_products ) {
 					$total_posts = $wp_query->found_posts;
 					$count_posts_get = count($products);
 				
@@ -391,7 +450,7 @@ class WC_PSAD
 					}
 					$term_link_sub_html = get_term_link( $category->slug, 'product_cat' );
 					echo '<div id="products_categories_row_'.$category->term_id.'" class="products_categories_row">';
-					echo '<div class="custom_box responsi_title"><h1 class="title pbc_title">'.$term_link_html.'<a href="'.$term_link_sub_html.'">' .$category->name.'</a></h1>';
+					echo '<div class="custom_box custom_box_archive responsi_title"><h1 class="title pbc_title">'.$term_link_html.'<a href="'.$term_link_sub_html.'">' .$category->name.'</a></h1>';
 					if ( $enable_product_showing_count == 'yes' || ( $count_posts_get < $total_posts && $psad_es_category_item_bt_position == 'top' ) ) {
 						echo '<div class="product_categories_showing_count_container">';
 						if ( $enable_product_showing_count == 'yes' ) echo '<span class="product_categories_showing_count">'.__('Currently viewing', 'wc_psad'). ' 1 - ' .$count_posts_get.' '.__('of', 'wc_psad'). ' '. $total_posts .' '. __('products in this Category', 'wc_psad').'</span> ';
@@ -451,7 +510,7 @@ class WC_PSAD
 				'mid_size'		=> 3
 			);
 			if( $wp_rewrite->using_permalinks() && ! is_search() )
-				$defaults['base'] = user_trailingslashit( trailingslashit( add_query_arg( array( 'paged' => false, 'orderby' => false ) ) ) . 'page/%#%' );
+				$defaults['base'] = user_trailingslashit( trailingslashit( str_replace( 'page/'.$page , '' , add_query_arg( array( 'paged' => false, 'orderby' => false ) ) ) ) . 'page/%#%' );
 				
 			echo paginate_links( $defaults );
 			echo '</nav>';
