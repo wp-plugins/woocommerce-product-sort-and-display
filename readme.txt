@@ -199,6 +199,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 == Changelog ==
 
+= 1.1.6 - 2015/04/23 =
+* Fix - Move the output of <code>add_query_arg()</code> into <code>esc_url()</code> function to fix the XSS vulnerability identified in WordPress 4.1.2 security upgrade
+
 = 1.1.5 - 2015/04/21 =
 * Tweak - Tested and Tweaked for full compatibility with WordPress Version 4.2.0
 * Tweak - Tested and Tweaked for full compatibility with WooCommerce Version 2.3.8
@@ -311,6 +314,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.1.6 =
+Important Security Patch! - please run this update now. Fixes XSS vulnerability declared and patched in WordPress Security update v 4.1.2
 
 = 1.1.5 =
 Maintenance upgrade. Code tweaks for full compatibility with WordPress 4.2.0 and WooCommerce 2.3.8
