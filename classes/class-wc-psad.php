@@ -82,8 +82,9 @@ class WC_PSAD
 		?>
 		<nav class="wc_pagination woo-pagination woocommerce-pagination">
 			<?php
+				// fixed for 4.1.2
 				echo paginate_links( apply_filters( 'woocommerce_pagination_args', array(
-					'base' 			=> add_query_arg( 'paged', '%#%' ),
+					'base' 			=> esc_url( add_query_arg( 'paged', '%#%' ) ),
 					'format' 		=> '',
 					'current' 		=> max( 1, get_query_var('paged') ),
 					'total' 		=> $wp_query->max_num_pages,
@@ -498,8 +499,9 @@ class WC_PSAD
 		
 		if ( ceil($total / $numOfItems) > 1 ){
 			echo '<nav class="pagination woo-pagination woocommerce-pagination pbc_pagination">';
+			// fixed for 4.1.2
 			$defaults = array(
-				'base' => add_query_arg( 'paged', '%#%' ),
+				'base' => esc_url( add_query_arg( 'paged', '%#%' ) ),
 				'format' => '',
 				'total' => ceil($total / $numOfItems),
 				'current' => $page,
@@ -510,7 +512,7 @@ class WC_PSAD
 				'mid_size'		=> 3
 			);
 			if( $wp_rewrite->using_permalinks() && ! is_search() )
-				$defaults['base'] = user_trailingslashit( trailingslashit( str_replace( 'page/'.$page , '' , add_query_arg( array( 'paged' => false, 'orderby' => false ) ) ) ) . 'page/%#%' );
+				$defaults['base'] = user_trailingslashit( trailingslashit( str_replace( 'page/'.$page , '' , esc_url( add_query_arg( array( 'paged' => false, 'orderby' => false ) ) ) ) ) . 'page/%#%' );
 				
 			echo paginate_links( $defaults );
 			echo '</nav>';
