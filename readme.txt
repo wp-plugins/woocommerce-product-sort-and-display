@@ -3,8 +3,8 @@
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
 Requires at least: 3.8
-Tested up to: 4.2.0
-Stable tag: 1.1.6
+Tested up to: 4.2.2
+Stable tag: 1.1.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -199,6 +199,14 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 == Changelog ==
 
+= 1.1.7 - 2015/05/30 =
+* Tweak - Tested for full compatibility with WordPress Version 4.2.2
+* Tweak - Tested and Tweaked for full compatibility with WooCommerce Version 2.3.9
+* Tweak - Changed Permission 777 to 755 for style folder inside the uploads folder
+* Tweak - Chmod 644 for dynamic style and .less files from uploads folder
+* Fix - Update url of dynamic stylesheet in uploads folder to the format //domain.com/ so it's always is correct when loaded as http or https
+* Fix - Sass compile path not saving on windows xampp
+
 = 1.1.6 - 2015/04/23 =
 * Fix - Move the output of <code>add_query_arg()</code> into <code>esc_url()</code> function to fix the XSS vulnerability identified in WordPress 4.1.2 security upgrade
 
@@ -314,6 +322,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.1.7 =
+Maintenance Upgrade. 2 bugs fix and 2 security Tweaks, full compatibility with WordPress 4.2.2 and WooCommerce 2.3.9
 
 = 1.1.6 =
 Important Security Patch! - please run this update now. Fixes XSS vulnerability declared and patched in WordPress Security update v 4.1.2
