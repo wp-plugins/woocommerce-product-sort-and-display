@@ -4,7 +4,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
 Requires at least: 3.8
 Tested up to: 4.2.2
-Stable tag: 1.1.7
+Stable tag: 1.1.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -199,6 +199,11 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 == Changelog ==
 
+= 1.1.8 - 2015/06/04 =
+* Tweak - Tested for full compatibility with WooCommerce Version 2.3.10
+* Tweak - Security Hardening. Removed all php file_put_contents functions in the plugin framework and replace with the WP_Filesystem API
+* Tweak - Security Hardening. Removed all php file_get_contents functions in the plugin framework and replace with the WP_Filesystem API
+
 = 1.1.7 - 2015/05/30 =
 * Tweak - Tested for full compatibility with WordPress Version 4.2.2
 * Tweak - Tested and Tweaked for full compatibility with WooCommerce Version 2.3.9
@@ -322,6 +327,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.1.8 =
+Important Maintenance Upgrade. 2 x major a3rev Plugin Framework Security Hardening Tweaks plus full compatibility with WooCommerce 2.3.10
 
 = 1.1.7 =
 Maintenance Upgrade. 2 bugs fix and 2 security Tweaks, full compatibility with WordPress 4.2.2 and WooCommerce 2.3.9
