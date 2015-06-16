@@ -17,9 +17,13 @@ function wc_psad_install()
     $wc_psad_less->plugin_build_sass();
 
     WC_PSAD_Functions::auto_create_order_keys_all_products();
-    update_option('wc_psad_lite_version', '1.1.8');
+    update_option('wc_psad_lite_version', '1.2.0');
     update_option('wc_psad_plugin', 'wc_psad');
     delete_transient("wc_psad_update_info");
+    delete_metadata( 'user', 0, $wc_psad_admin_init->plugin_name . '-' . 'psad_plugin_framework_box' . '-' . 'opened', '', true );
+
+    // Remove house keeping option of another version
+    delete_option('psad_clean_on_deletion');
 
     update_option('wc_psad_just_installed', true);
 }
@@ -48,7 +52,7 @@ global $wc_psad_admin_init;
 $wc_psad_admin_init->init();
 
 // Add upgrade notice to Dashboard pages
-add_filter($wc_psad_admin_init->plugin_name . '_plugin_extension', array('WC_PSAD_Settings_Hook', 'plugin_extension'));
+add_filter($wc_psad_admin_init->plugin_name . '_plugin_extension_boxes', array('WC_PSAD_Settings_Hook', 'plugin_extension_box'));
 
 $wc_psad_setting_hook = new WC_PSAD_Settings_Hook();
 
@@ -65,13 +69,13 @@ function psad_upgrade_plugin()
     }
 
     if (version_compare(get_option('wc_psad_lite_version'), '1.1.0') === -1) {
+        update_option('wc_psad_lite_version', '1.1.0');
 
         // Build sass
         global $wc_psad_less;
         $wc_psad_less->plugin_build_sass();
-        update_option('wc_psad_lite_version', '1.1.0');
     }
 
-    update_option('wc_psad_lite_version', '1.1.8');
+    update_option('wc_psad_lite_version', '1.2.0');
 }
 ?>

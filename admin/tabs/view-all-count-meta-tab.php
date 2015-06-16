@@ -103,8 +103,7 @@ class WC_PSAD_View_All_Count_Meta_Tab extends WC_PSAD_Admin_UI
 	public function settings_include() {
 		
 		// Includes Settings file
-		include_once( $this->admin_plugin_dir() . '/settings/view-all-products-settings.php' );
-		include_once( $this->admin_plugin_dir() . '/settings/count-meta-settings.php' );
+		include_once( $this->admin_plugin_dir() . '/settings/view-all-count-meta-settings.php' );
 		
 	}
 	
@@ -116,7 +115,7 @@ class WC_PSAD_View_All_Count_Meta_Tab extends WC_PSAD_Admin_UI
 		global $wc_psad_admin_init;
 		
 		$this->plugin_extension_start();
-		$wc_psad_admin_init->admin_settings_tab( $this->parent_page, $this->tab_data() );
+		wc_psad_view_all_count_meta_settings_form();
 		$this->plugin_extension_end();
 		
 	}

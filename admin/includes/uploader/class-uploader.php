@@ -82,6 +82,9 @@ class WC_PSAD_Uploader extends WC_PSAD_Admin_UI
 	public function uploader_style () {
 		wp_enqueue_style( 'thickbox' );
 		wp_enqueue_style( 'a3-uploader-style', $this->admin_uploader_url() . '/uploader.css' );
+		if ( is_rtl() ) {
+			wp_enqueue_style( 'a3-uploader-style-rtl', $this->admin_uploader_url() . '/uploader.rtl.css' );
+		}
 	}
 	
 	/*-----------------------------------------------------------------------------------*/

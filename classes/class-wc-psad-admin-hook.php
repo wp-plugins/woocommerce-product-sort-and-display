@@ -78,18 +78,6 @@ class WC_PSAD_Settings_Hook
 	public function include_custom_style( ) {
 		?>
         <style>
-		.psad_plugin_meta_upgrade_area_box { border:2px solid #E6DB55;-webkit-border-radius:10px;-moz-border-radius:10px;-o-border-radius:10px; border-radius: 10px; padding:0 10px; margin:10px 0; position:relative}
-		div.a3rev_panel_container {
-			border-top:1px dotted #666;
-			border-bottom:1px dotted #666;
-			margin-bottom:20px;
-		}
-		tr.psad-category-field-start {
-			border-top:1px dotted #666;
-		}
-		tr.psad-category-field-end {
-			border-bottom:1px dotted #666;
-		}
 		.a3rev_panel_container label {
 			padding: 0 !important;	
 		}
@@ -98,30 +86,27 @@ class WC_PSAD_Settings_Hook
 			color: inherit;	
 		}
 		.psad_category_page_enable_message_container {
-		<?php if ( get_option( 'psad_category_page_enable_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
-		<?php if ( !isset($_SESSION) ) { @session_start(); } if ( isset( $_SESSION['psad_category_page_enable_message_dismiss'] ) ) echo 'display: none !important;'; ?>
+			<?php if ( get_option( 'psad_category_page_enable_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
+			<?php if ( !isset($_SESSION) ) @session_start(); ?>
+			<?php if ( isset( $_SESSION['psad_category_page_enable_message_dismiss'] ) ) echo 'display: none !important;'; ?>
 		}
-		#a3_upgrade_area_box { border:2px solid #E6DB55;-webkit-border-radius:10px;-moz-border-radius:10px;-o-border-radius:10px; border-radius: 10px; padding:10px; position:relative; margin-bottom:10px; }
-		#a3_upgrade_area_box legend {margin-left:4px; font-weight:bold;}
 		</style>
 	<?php
     }
-	
+
 	public function include_custom_script() {
 	?>
     	<script type="text/javascript">
 		(function($) {
-	
+
 			$(document).ready(function() {
-				
-				if ( $("input.psad_category_page_enable:checked").val() == 'yes') {
-					$(".psad_category_page_enable_container").css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
-				} else {
-					$(".psad_category_page_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
+
+				if ( $("input.psad_category_page_enable:checked").val() != 'yes') {
+					$(".psad_category_page_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
 				}
-					
+
 				$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_category_page_enable', function( event, value, status ) {
-					$(".psad_category_page_enable_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
+					$(".psad_category_page_enable_container").attr('style','display:none;');
 					if ( status == 'true' ) {
 						$(".psad_category_page_enable_container").slideDown();
 					} else {
@@ -129,18 +114,18 @@ class WC_PSAD_Settings_Hook
 					}
 				});
 			});
-			
+
 		})(jQuery);
 		</script>
     <?php
 	}
-	
+
 	public function psad_add_category_fields(){
+		global $wc_psad_admin_interface;
 		?>
         <div class="a3rev_panel_container">
-        <div class="psad_plugin_meta_upgrade_area_box"><?php global $wc_psad_admin_init; $wc_psad_admin_init->upgrade_top_message(true); ?>
-        <h3><?php _e('a3rev Shop Page Categories', 'wc_psad'); ?></h3>
-        <div><?php _e("The WooCommerce 'Display type' settings above do not apply to Shop page Categories. They do apply to the a3rev Category Page settings below.", 'wc_psad'); ?></div>
+
+		<?php ob_start(); ?>
         <div class="form-field">
             <label for="psad_shop_product_per_page"><?php _e( 'Products per Category', 'wc_psad' ); ?></label>
             <input disabled="disabled" id="psad_shop_product_per_page" name="psad_shop_product_per_page" type="text" style="width:120px;" value="" />
@@ -155,7 +140,18 @@ class WC_PSAD_Settings_Hook
                 <option value="featured"><?php _e( 'Featured', 'wc_psad' ); ?></option>
             </select>
         </div>
-        <h3><?php _e('a3rev Category Page', 'wc_psad'); ?></h3>
+        <?php
+        $settings_html = ob_get_clean();
+        $wc_psad_admin_interface->panel_box( $settings_html, array(
+        	'name' 		=> __( 'a3rev Shop Page Categories', 'wc_psad' ),
+        	'desc'		=> __("The WooCommerce 'Display type' settings above do not apply to Shop page Categories. They do apply to the a3rev Category Page settings below.", 'wc_psad'),
+        	'class'		=> 'pro_feature_fields',
+        	'id'		=> 'psad_shop_page_categories_box',
+			'is_box'	=> true,
+		) );
+        ?>
+
+        <?php ob_start(); ?>
         <div class="form-field">
             <input type="checkbox" class="psad_category_page_enable a3rev-ui-onoff_checkbox" id="psad_category_page_enable" name="psad_category_page_enable" value="yes" style="width:auto;" /> <label for="psad_category_page_enable"><?php _e( 'ON to activate Sort and Display products features on this Product category page.', 'wc_psad' ); ?></label>
         </div>
@@ -191,8 +187,17 @@ class WC_PSAD_Settings_Hook
             <input type="checkbox" class="psad_cat_enable_product_showing_count a3rev-ui-onoff_checkbox" id="psad_cat_enable_product_showing_count" name="psad_cat_enable_product_showing_count" value="yes" style="width:auto;" /> <label for="psad_cat_enable_product_showing_count"><?php _e( 'ON to show product count under category title.', 'wc_psad' ); ?></label>
         </div>
         </div>
-        <h3><?php _e('One Level Up Display', 'wc_psad'); ?></h3>
-        <div><?php _e('Settings apply to this categories display on its Parent Category Page <strong>IF</strong> this Category is a Sub Category.', 'wc_psad' ); ?></div>
+        <?php
+        $settings_html = ob_get_clean();
+        $wc_psad_admin_interface->panel_box( $settings_html, array(
+        	'name' 		=> __( 'a3rev Category Page', 'wc_psad' ),
+        	'class'		=> 'pro_feature_fields',
+        	'id'		=> 'psad_category_page_box',
+			'is_box'	=> true,
+		) );
+        ?>
+
+        <?php ob_start(); ?>
         <div class="form-field">
             <label for="psad_product_per_page"><?php _e( 'Number of Product Displayed', 'wc_psad' ); ?></label>
             <input disabled="disabled" id="psad_product_per_page" name="psad_product_per_page" type="text" style="width:120px;" value="" />
@@ -207,18 +212,26 @@ class WC_PSAD_Settings_Hook
                 <option value="featured"><?php _e( 'Featured', 'wc_psad' ); ?></option>
             </select> <p class="description"><?php _e("Applies to this Category products on Parent Cat Page <strong>WHEN</strong> Parent has Sort and Display Feature activated.", 'wc_psad'); ?></p>
         </div>
-		</div>
-        </div>
+        <?php
+        $settings_html = ob_get_clean();
+        $wc_psad_admin_interface->panel_box( $settings_html, array(
+        	'name' 		=> __( 'One Level Up Display', 'wc_psad' ),
+        	'desc'		=> __('Settings apply to this categories display on its Parent Category Page <strong>IF</strong> this Category is a Sub Category.', 'wc_psad' ),
+        	'class'		=> 'pro_feature_fields',
+        	'id'		=> 'psad_one_level_display_box',
+			'is_box'	=> true,
+		) );
+        ?>
         </div>
 		<?php
 	}
-	
+
 	public function psad_edit_category_fields($term){
+		global $wc_psad_admin_interface;
 		?>
         <div class="a3rev_panel_container">
-        <div class="psad_plugin_meta_upgrade_area_box"><?php global $wc_psad_admin_init; $wc_psad_admin_init->upgrade_top_message(true); ?>
-        <h3><?php _e('a3rev Shop Page Categories', 'wc_psad'); ?></h3>
-		<div><?php _e("The WooCommerce 'Display type' settings above do not apply to Shop page Categories. They do apply to the a3rev Category Page settings below.", 'wc_psad'); ?></div>
+
+        <?php ob_start(); ?>
         <table class="form-table">
             <tr class="form-field">
             <th scope="row" valign="top"><label for="psad_shop_product_per_page"><?php _e( 'Products per Category', 'wc_psad' ); ?></label></th>
@@ -239,7 +252,18 @@ class WC_PSAD_Settings_Hook
             </td>
             </tr>
 		</table>
-        <h3><?php _e('a3rev Category Page', 'wc_psad'); ?></h3>
+		<?php
+        $settings_html = ob_get_clean();
+        $wc_psad_admin_interface->panel_box( $settings_html, array(
+        	'name' 		=> __( 'a3rev Shop Page Categories', 'wc_psad' ),
+        	'desc'		=> __("The WooCommerce 'Display type' settings above do not apply to Shop page Categories. They do apply to the a3rev Category Page settings below.", 'wc_psad'),
+        	'class'		=> 'pro_feature_fields',
+        	'id'		=> 'psad_shop_page_categories_box',
+			'is_box'	=> true,
+		) );
+        ?>
+
+		<?php ob_start(); ?>
         <table class="form-table">
             <tr class="form-field">
             <td colspan="2" style="padding:10px 0;">
@@ -291,10 +315,19 @@ class WC_PSAD_Settings_Hook
                 <input type="checkbox" class="psad_cat_enable_product_showing_count a3rev-ui-onoff_checkbox" id="psad_cat_enable_product_showing_count" name="psad_cat_enable_product_showing_count" value="yes" style="width:auto;" /> <label for="psad_cat_enable_product_showing_count"><?php _e( 'ON to show product count under category title.', 'wc_psad' ); ?></label>
             </td>
             </tr>
-        </table>    
+        </table>
         </div>
-        <h3><?php _e('One Level Up Display', 'wc_psad'); ?></h3>
-        <div><?php _e("Settings apply to this categories display on its Parent Category Page <strong>IF</strong> this Category is a Sub Category.", 'wc_psad'); ?></div>
+        <?php
+        $settings_html = ob_get_clean();
+        $wc_psad_admin_interface->panel_box( $settings_html, array(
+        	'name' 		=> __( 'a3rev Category Page', 'wc_psad' ),
+        	'class'		=> 'pro_feature_fields',
+        	'id'		=> 'psad_category_page_box',
+			'is_box'	=> true,
+		) );
+        ?>
+
+        <?php ob_start(); ?>
         <table class="form-table">
             <tr class="form-field">
             <th scope="row" valign="top"><label for="psad_product_per_page"><?php _e( 'Number of Product Displayed', 'wc_psad' ); ?></label></th>
@@ -315,7 +348,17 @@ class WC_PSAD_Settings_Hook
             </td>
             </tr>
         </table>
-        </div>
+        <?php
+        $settings_html = ob_get_clean();
+        $wc_psad_admin_interface->panel_box( $settings_html, array(
+        	'name' 		=> __( 'One Level Up Display', 'wc_psad' ),
+        	'desc'		=> __('Settings apply to this categories display on its Parent Category Page <strong>IF</strong> this Category is a Sub Category.', 'wc_psad' ),
+        	'class'		=> 'pro_feature_fields',
+        	'id'		=> 'psad_one_level_display_box',
+			'is_box'	=> true,
+		) );
+        ?>
+
         </div>
         <?php
 	}
@@ -385,55 +428,42 @@ $(document).ready(function() {
 		wp_enqueue_style( 'a3rev-wp-admin-style', WC_PSAD_CSS_URL . '/a3_wp_admin.css' );
 	}
 	
-	public static function plugin_extension() {
-		$html = '';
-		$html .= '<a href="http://a3rev.com/shop/" target="_blank" style="float:right;margin-top:5px; margin-left:10px;" ><div class="a3-plugin-ui-icon a3-plugin-ui-a3-rev-logo"></div></a>';
-		$html .= '<h3>'.__('Upgrade to Product Sort and Display Pro', 'wc_psad').'</h3>';
-		$html .= '<p>'.__("<strong>NOTE:</strong> All the functions inside the Yellow border on the plugins admin panel are extra functionality that is activated by upgrading to the Pro version", 'wc_psad').':</p>';
-		$html .= '<p>';
-		$html .= '<h3 style="margin-bottom:5px;"><a href="'.WC_PSAD_AUTHOR_URI.'" target="_blank">'.__('WooCommerce Product Sort and Display Pro', 'wc_psad').'</a></h3>';
-		$html .= '<div><strong>'.__('Activates these advanced Features', 'wc_psad').':</strong></div>';
-		$html .= '<p>';
-		$html .= '<ul style="padding-left:10px;">';
-		$html .= '<li>1. '.__("Sort by 'On Sale' on all Product Category pages.", 'wc_psad').'</li>';
-		$html .= '<li>2. '.__("Sort by 'Featured' on all Product Category pages.", 'wc_psad').'</li>';
-		$html .= '<li>3. '.__('Category by Category Sort and Display settings for Shop page.', 'wc_psad').'</li>';
-		$html .= '<li>4. '.__('Category by Category Sort and display settings for Product Cat pages.', 'wc_psad').'</li>';
-		$html .= '<li>5. '.__('Endless Scroll feature for the entire store (Category pages).', 'wc_psad').'</li>';
-		$html .= '<li>6. '.__('Category pages Endless Scroll on Click WYSIWYG style editor.', 'wc_psad').'</li>';
-		$html .= '<li>7. '.__('Parent Category page show parent cat products and Child Cats with products.', 'wc_psad').'</li>';
-		$html .= '<li>8. '.__("Set number of products to show on parent cat before sub cats.", 'wc_psad').'</li>';
-		$html .= '<li>9. '.__("WYSIWYG count meta styling and position.", 'wc_psad').'</li>';
-		$html .= '<li>10. '. sprintf( __('Immediate access to the plugins <a href="%s" target="_blank">a3rev support forum</a>', 'wc_psad'), 'https://a3rev.com/forums/forum/woocommerce-plugins/product-sort-and-display/' ).'</li>';
-		$html .= '</ul>';
-		$html .= '</p>';
-		$html .= '<h3>'.__('View this plugins', 'wc_psad').' <a href="http://docs.a3rev.com/user-guides/plugins-extensions/woocommerce/product-sort-and-display/" target="_blank">'.__('documentation', 'wc_psad').'</a></h3>';
-		$html .= '<h3>'.__('Visit this plugins', 'wc_psad').' <a href="http://wordpress.org/support/plugin/woocommerce-product-sort-and-display/" target="_blank">'.__('support forum', 'wc_psad').'</a></h3>';
-		$html .= '<h3>'.__('More FREE a3rev WooCommerce Plugins', 'wc_psad').'</h3>';
-		$html .= '<p>';
-		$html .= '<ul style="padding-left:10px;">';
-		$html .= '<li>* <a href="http://wordpress.org/plugins/woocommerce-products-quick-view/" target="_blank">'.__('WooCommerce Products Quick View', 'wc_psad').'</a></li>';
-		$html .= '<li>* <a href="http://wordpress.org/plugins/woocommerce-dynamic-gallery/" target="_blank">'.__('WooCommerce Dynamic Products Gallery', 'wc_psad').'</a></li>';
-		$html .= '<li>* <a href="http://wordpress.org/plugins/woocommerce-predictive-search/" target="_blank">'.__('WooCommerce Predictive Search', 'wc_psad').'</a></li>';
-		$html .= '<li>* <a href="http://wordpress.org/plugins/woocommerce-compare-products/" target="_blank">'.__('WooCommerce Compare Products', 'wc_psad').'</a></li>';
-		$html .= '<li>* <a href="http://wordpress.org/plugins/woo-widget-product-slideshow/" target="_blank">'.__('WooCommerce Widget Product Slideshow', 'wc_psad').'</a></li>';
-		$html .= '<li>* <a href="http://wordpress.org/plugins/woocommerce-email-inquiry-cart-options/" target="_blank">'.__('WooCommerce Email Inquiry & Cart Options', 'wc_psad').'</a></li>';
-		$html .= '<li>* <a href="http://a3rev.com/shop/woocommerce-email-inquiry-ultimate/" target="_blank">'.__('WooCommerce Email Inquiry Ultimate', 'wc_psad').'</a></li>';
-		$html .= '<li>* <a href="http://a3rev.com/shop/woocommerce-quotes-and-orders/" target="_blank">'.__('WooCommerce Quotes and Orders', 'wc_psad').'</a></li>';
-		$html .= '</ul>';
-		$html .= '</p>';
-		$html .= '<h3>'.__('FREE a3rev WordPress Plugins', 'wc_psad').'</h3>';
-		$html .= '<p>';
-		$html .= '<ul style="padding-left:10px;">';
-		$html .= '<li>* <a href="https://wordpress.org/plugins/a3-lazy-load/" target="_blank">'.__('a3 Lazy Load', 'wc_psad').'</a> ('.__( 'WooCommerce Compatible' , 'wc_psad' ).')</li>';
-		$html .= '<li>* <a href="https://wordpress.org/plugins/a3-portfolio/" target="_blank">'.__('a3 Portfolio', 'wc_psad').'</a></li>';
-		$html .= '<li>* <a href="https://wordpress.org/plugins/a3-responsive-slider/" target="_blank">'.__('a3 Responsive Slider', 'wc_psad').'</a></li>';
-		$html .= '<li>* <a href="https://wordpress.org/plugins/contact-us-page-contact-people/" target="_blank">'.__('Contact Us Page - Contact People', 'wc_psad').'</a></li>';
-		$html .= '<li>* <a href="https://wordpress.org/plugins/wp-email-template/" target="_blank">'.__('WordPress Email Template', 'wc_psad').'</a></li>';
-		$html .= '<li>* <a href="https://wordpress.org/plugins/page-views-count/" target="_blank">'.__('Page View Count', 'wc_psad').'</a></li>';
-		$html .= '</ul>';
-		$html .= '</p>';
-		return $html;
+	public static function plugin_extension_box( $boxes = array() ) {
+		$support_box = '<a href="https://wordpress.org/support/plugin/woocommerce-product-sort-and-display" target="_blank" alt="'.__('Go to Support Forum', 'wc_psad').'"><img src="'.WC_PSAD_IMAGES_URL.'/go-to-support-forum.png" /></a>';
+		$boxes[] = array(
+			'content' => $support_box,
+			'css' => 'border: none; padding: 0; background: none;'
+		);
+
+		$first_box = '<a href="'.WC_PSAD_AUTHOR_URI.'" target="_blank" alt="'.__('WooCommerce Product Sort and Display Pro', 'wc_psad').'"><img src="'.WC_PSAD_IMAGES_URL.'/product-sort-and-display-pro.png" /></a>';
+		$boxes[] = array(
+			'content' => $first_box,
+			'css' => 'border: none; padding: 0; background: none;'
+		);
+
+		$second_box = '<a href="https://profiles.wordpress.org/a3rev/#content-plugins" target="_blank" alt="'.__('Free WooCommerce Plugins', 'wc_psad').'"><img src="'.WC_PSAD_IMAGES_URL.'/free-woocommerce-plugins.png" /></a>';
+
+		$boxes[] = array(
+			'content' => $second_box,
+			'css' => 'border: none; padding: 0; background: none;'
+		);
+
+		$third_box = '<a href="https://profiles.wordpress.org/a3rev/#content-plugins" target="_blank" alt="'.__('Free WordPress Plugins', 'wc_psad').'"><img src="'.WC_PSAD_IMAGES_URL.'/free-wordpress-plugins.png" /></a>';
+
+		$boxes[] = array(
+			'content' => $third_box,
+			'css' => 'border: none; padding: 0; background: none;'
+		);
+
+        $four_box = '<div style="margin-bottom: 5px; font-size: 12px;"><strong>' . __('Is this plugin is just what you needed? If so', 'wc_psad') . '</strong></div>';
+        $four_box .= '<a href="https://wordpress.org/support/view/plugin-reviews/woocommerce-product-sort-and-display#postform" target="_blank" alt="'.__('Submit Review for Plugin on WordPress', 'wc_psad').'"><img src="'.WC_PSAD_IMAGES_URL.'/a-5-star-rating-would-be-appreciated.png" /></a>';
+
+        $boxes[] = array(
+            'content' => $four_box,
+            'css' => 'border: none; padding: 0; background: none;'
+        );
+
+		return $boxes;
 	}
 	
 	public static function plugin_extra_links($links, $plugin_name) {

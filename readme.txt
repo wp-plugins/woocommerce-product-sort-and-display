@@ -4,7 +4,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
 Requires at least: 3.8
 Tested up to: 4.2.2
-Stable tag: 1.1.8
+Stable tag: 1.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -79,9 +79,9 @@ Visit [Dixie Sourenirs](http://dixiesouvenirs.com/shop-here/) to see how the plu
 = a3rev Plugins Lite & Pro Version Admin Interface =
 
 * All a3rev Lite Version plugins have exactly the same admin interface as the Pro Version.
-* Pro Version features and settings are inside of a Yellow border.
+* Pro Version setting boxes headers have Green background colour for easy identification.
 * The Pro Version settings are all active on the admin panels But do not save and are not applied to the front end.
-* Upgrading to the Pro version activates all the Pro version Features and Settings and removes the Yellow side bar and borders.
+* Upgrading to the Pro version activates all the Pro version Features and Settings and removes the Green settings box header background colour.
 
 >= Premium Support =
 
@@ -198,6 +198,21 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Changelog ==
+
+= 1.2.0 - 2015/06/16 =
+* Feature - Plugin framework Mobile First focus upgrade
+* Feature - Massive improvement in admin UI and UX in PC, tablet and mobile browsers
+* Feature - Introducing opening and closing Setting Boxes on admin panels.
+* Feature - Added Plugin Framework Customization settings. Control how the admin panel settings show when editing.
+* Feature - New interface has allowed us to do away with the 5 sub menus on the admin panel
+* Feature - Includes a script to automatically combine sub category tables into the Tabs main table when upgrading
+* Feature - Added Option to set Google Fonts API key to directly access latest fonts and font updates from Google
+* Feature - Pro Version setting boxes have a green background colour and are sorted to the bottom of each admin panel
+* Feature - Added full support for Right to Left RTL layout on plugins admin dashboard.
+* Feature - Added a 260px wide images to the right sidebar for support forum link, Documentation links.
+* Tweak - Updated a lot of admin panel Description and Help text
+* Tweak - Tested for full compatibility with WooCommerce Version 2.3.11
+* Fix - Check 'request_filesystem_credentials' function, if it does not exists then require the core php lib file from WP where it is defined
 
 = 1.1.8 - 2015/06/04 =
 * Tweak - Tested for full compatibility with WooCommerce Version 2.3.10
@@ -327,6 +342,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+Major Feature Upgrade. Massive admin panel UI and UX upgrade. Includes 8 new features, 1 bug fix plus full compatibility with WooCommerce Version 2.3.11
 
 = 1.1.8 =
 Important Maintenance Upgrade. 2 x major a3rev Plugin Framework Security Hardening Tweaks plus full compatibility with WooCommerce 2.3.10

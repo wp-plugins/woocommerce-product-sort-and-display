@@ -324,15 +324,12 @@ class WC_PSAD
 		$psad_es_category_item_bt_text = esc_attr( stripslashes( get_option( 'psad_es_category_item_link_text', '' ) ) );
 		$psad_es_category_item_bt_position = get_option('psad_es_category_item_bt_position', 'bottom');
 		
-		$psad_es_category_item_class = '';
 		$class = 'click_more_link';
 		if ( $psad_es_category_item_bt_type == 'button' ) {
 			$class = 'click_more_button';
 			$psad_es_category_item_bt_text = esc_attr( stripslashes( get_option( 'psad_es_category_item_bt_text', '' ) ) );
-			$psad_es_category_item_class = get_option( 'psad_es_category_item_class', '' );
 		}
 		if ( trim( $psad_es_category_item_bt_text ) == '' ) { $psad_es_category_item_bt_text = __('See more...', 'wc_psad'); }
-		if ( trim( $psad_es_category_item_class ) != '' ) { $class .= ' '.trim($psad_es_category_item_class); }
 		
 		echo '<div style="clear:both;"></div>';
 		echo '<div class="pbc_container">';
@@ -527,14 +524,11 @@ class WC_PSAD
 				$psad_es_shop_bt_type = get_option( 'psad_es_shop_bt_type' );
 				$psad_es_shop_bt_text = esc_attr( stripslashes( get_option( 'psad_es_shop_link_text', '' ) ) );
 				$class = 'click_more_link';
-				$psad_es_shop_bt_class = '';
 				if ( $psad_es_shop_bt_type == 'button' ) { 
 					$class = 'click_more_button';
 					$psad_es_shop_bt_text = esc_attr( stripslashes( get_option( 'psad_es_shop_bt_text', '' ) ) );
-					$psad_es_shop_bt_class = get_option( 'psad_es_shop_bt_class', '' );
 				}
 				if ( trim( $psad_es_shop_bt_text ) == '' ) { $psad_es_shop_bt_text = __('Click More Categories', 'wc_psad'); }
-				if ( trim($psad_es_shop_bt_class) != '' ) { $class .= ' '.trim($psad_es_shop_bt_class); }
 				echo '<div class="pbc_content_click_more custom_box endless_click_shop"><a href="#"><a class="categories_click '.$class.'" href="#">'.$psad_es_shop_bt_text.'</a></div>';
 			}
 		}

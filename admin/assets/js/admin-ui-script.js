@@ -19,6 +19,7 @@
 			if( $(this).attr('min') != undefined && $(this).attr('max') != undefined ) {
 
 				$(this).slider( { 
+								isRTL: true,
 								range: "min",
 								min: parseInt($(this).attr('min')), 
 								max: parseInt($(this).attr('max')), 
@@ -79,11 +80,18 @@
 								uncheckedLabel: unchecked_label,
 								onChange: function(elem, value) { 
 										var status = value.toString();
-										/* Apply for Border Corner */
 										if ( status == 'true' ) {
+											/* Apply for Border Corner */
 											elem.parents('.a3rev-ui-settings-control').find('.a3rev-ui-border-corner-value-container').slideDown();
+
+											/* Apply for Google API Key */
+											elem.parents('.forminp-google_api_key').find('.a3rev-ui-google-api-key-container').slideDown();
 										} else {
+											/* Apply for Border Corner */
 											elem.parents('.a3rev-ui-settings-control').find('.a3rev-ui-border-corner-value-container').slideUp();
+
+											/* Apply for Google API Key */
+											elem.parents('.forminp-google_api_key').find('.a3rev-ui-google-api-key-container').slideUp();
 										}
 										
 										$('input[name="' + input_name + '"]').trigger("a3rev-ui-onoff_checkbox-switch", [elem.val(), status]);
@@ -202,11 +210,48 @@
 		
 			return false;
 		});
-		
+
 		$('.a3rev_panel_container').each( function(i){
 			$(this).css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
-		})
-		
+		});
+
+		$('.a3rev_panel_box_inside').each( function(i){
+			if ( $(this).hasClass('box_open') ) {
+				$(this).css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
+			} else {
+				$(this).hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
+			}
+		});
+
 		$(document).trigger("a3rev-ui-script-loaded");
+
+		$(document).on('click', '.a3-plugin-ui-panel-box', function(){
+			var box_handle = $(this).parent('.a3rev_panel_box_handle');
+			var box_id     = box_handle.data('box-id');
+			var form_key   = box_handle.data('form-key');
+
+			var box_data = {
+				action:		a3_admin_ui_script_params.plugin + '_a3_admin_ui_event',
+				type: 		'open_close_panel_box',
+				form_key: 	form_key,
+				box_id: 	box_id,
+				is_open: 	0,
+				security:	a3_admin_ui_script_params.security
+			};
+
+			if( $(this).hasClass('box_open') ) {
+				box_data.is_open = 0;
+				$(this).removeClass('box_open');
+				box_handle.siblings('.a3rev_panel_box_inside').removeClass('box_open').slideUp(500);
+			} else {
+				box_data.is_open = 1;
+				$(this).addClass('box_open');
+				box_handle.siblings('.a3rev_panel_box_inside').addClass('box_open').slideDown(500);
+			}
+
+			if ( $(this).hasClass('enable_toggle_box_save') ) {
+				$.post( a3_admin_ui_script_params.ajax_url, box_data );
+			}
+		});
 	});
 })(jQuery);

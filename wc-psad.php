@@ -2,7 +2,7 @@
 /*
 Plugin Name: WooCommerce Product Sort and Display LITE
 Description: Take control of your WooCommerce Shop random product display with WooCommerce Show Products by Category. Sort and show products on Shop page by category with 'On Sale' or 'Featured' products showing first. Products showing and total products per category count for intelligent viewing.
-Version: 1.1.8
+Version: 1.2.0
 Author: A3 Revolution
 Author URI: http://www.a3rev.com/
 License: This software is under commercial license and copyright to A3 Revolution Software Development team
@@ -160,6 +160,7 @@ function wc_psad_lite_uninstall()
         delete_option('psad_es_category_item_link_font_style');
         delete_option('psad_es_category_item_link_font_color');
         delete_option('psad_es_category_item_link_font_hover_color');
+        delete_option('psad_count_meta_view_all_parent_products_align');
 
         delete_option('psad_es_category_item_bt_border');
         delete_option('psad_es_category_item_bt_font');
@@ -206,6 +207,17 @@ function wc_psad_lite_uninstall()
         delete_post_meta_by_key('_psad_featured_order');
 
         delete_option('psad_lite_clean_on_deletion');
+
+        // Delete Google Font
+        delete_option('wc_psad_google_api_key');
+        delete_option('wc_psad_google_api_key' . '_enable');
+        delete_transient('wc_psad_google_api_key' . '_status');
+        delete_option('wc_sort_display' . '_google_font_list');
+
+        delete_option('wc_psad_toggle_box_open');
+        delete_option('wc_sort_display' . '-custom-boxes');
+
+        delete_metadata( 'user', 0, 'wc_sort_display' . '-' . 'psad_plugin_framework_box' . '-' . 'opened', '', true );
 
         $metadata = array('psad_category_per_page', 'psad_top_product_per_page', 'psad_shop_product_per_page', 'psad_product_per_page', 'psad_shop_product_show_type', 'psad_product_show_type', 'psad_category_product_nosub_per_page');
         foreach ($metadata as $meta_key) {

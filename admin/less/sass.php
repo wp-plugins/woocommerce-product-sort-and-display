@@ -9,7 +9,7 @@ class WC_PSAD_Less
 	public $css_file_name = 'wc_sort_display';
 	public $plugin_folder = WC_PSAD_FOLDER;
 	public $plugin_dir = WC_PSAD_DIR;
-    
+
     /*-----------------------------------------------------------------------------------*/
     /* Constructor */
     /*-----------------------------------------------------------------------------------*/
@@ -41,6 +41,10 @@ class WC_PSAD_Less
         add_filter( 'filesystem_method', array( $this, 'custom_filesystem_method' ) );
 
         $form_url = wp_nonce_url( esc_url( add_query_arg( 'compile-sass', 'true' ) ), 'compile-sass' );
+
+        if ( ! function_exists( 'request_filesystem_credentials' ) ) {
+            require_once( ABSPATH . 'wp-admin/includes/file.php' );
+        }
 
         if ( false === ( $creds = request_filesystem_credentials( $form_url, '', false, false, null ) ) ) {
             return true;
