@@ -47,7 +47,7 @@ class WC_PSAD_Uploader extends WC_PSAD_Admin_UI
 		if ( is_admin() ) {
 			add_action( 'init', array( $this, 'uploader_init' ) );
 			add_action( 'admin_print_scripts', array( $this, 'inside_popup' ) );
-			add_filter( 'gettext', array( $this, 'change_button_text' ), null, 2 );
+			add_filter( 'gettext', array( $this, 'change_button_text' ), null, 3 );
 			
 			// include scripts to Admin UI Interface
 			add_action( $this->plugin_name . '_init_scripts', array( $this, 'uploader_js' ) );
@@ -82,6 +82,9 @@ class WC_PSAD_Uploader extends WC_PSAD_Admin_UI
 	public function uploader_style () {
 		wp_enqueue_style( 'thickbox' );
 		wp_enqueue_style( 'a3-uploader-style', $this->admin_uploader_url() . '/uploader.css' );
+		if ( is_rtl() ) {
+			wp_enqueue_style( 'a3-uploader-style-rtl', $this->admin_uploader_url() . '/uploader.rtl.css' );
+		}
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -181,10 +184,10 @@ class WC_PSAD_Uploader extends WC_PSAD_Admin_UI
 	/*-----------------------------------------------------------------------------------*/
 	/* Change the Button text on image popup */
 	/*-----------------------------------------------------------------------------------*/
-	public function change_button_text( $translation, $original ) {
+	public function change_button_text( $translation, $original, $domain ) {
 	    if ( isset( $_REQUEST['type'] ) ) { return $translation; }
 	    
-	    if ( $original == 'Insert into Post' ) {
+	    if ( is_admin() && $original === 'Insert into Post' ) {
 	    	$translation = __( 'Use this Image', 'wc_psad' );
 			if ( isset( $_REQUEST['title'] ) && $_REQUEST['title'] != '' ) { $translation =__( 'Use as', 'wc_psad' ).' '.esc_attr( $_REQUEST['title'] ); }
 	    }

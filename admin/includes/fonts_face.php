@@ -21,11 +21,11 @@ TABLE OF CONTENTS
 
 class WC_PSAD_Fonts_Face extends WC_PSAD_Admin_UI
 {
-	
+
 	/**
 	 * Window Default Fonts
 	 */
-	public $default_fonts = array( 
+	public $default_fonts = array(
 			'Arial, sans-serif'												=> 'Arial',
 			'Verdana, Geneva, sans-serif'									=> 'Verdana',
 			'Trebuchet MS, Tahoma, sans-serif'								=> 'Trebuchet',
@@ -44,7 +44,12 @@ class WC_PSAD_Fonts_Face extends WC_PSAD_Admin_UI
 			'Courier, Courier New, monospace'								=> 'Courier',
 			'Century Gothic, sans-serif'									=> 'Century Gothic',
 	);
-	
+
+	/**
+	 * Google API Key use to get dynamic list of fonts from google, you can create new API KEY to use from https://developers.google.com/fonts/docs/developer_api
+	 */
+	public $google_api_key = '';
+
 	/*-----------------------------------------------------------------------------------*/
 	/* Google Webfonts Array */
 	/* Documentation:
@@ -52,7 +57,7 @@ class WC_PSAD_Fonts_Face extends WC_PSAD_Admin_UI
 	/* name: The name of the Google Font.
 	/* variant: The Google Font API variants available for the font.
 	/*-----------------------------------------------------------------------------------*/
-	
+
 	// Available Google webfont names
 	public $google_fonts = array(	array( 'name' => "Cantarell", 'variant' => ':r,b,i,bi'),
 							array( 'name' => "Cardo", 'variant' => ''),
@@ -343,111 +348,278 @@ class WC_PSAD_Fonts_Face extends WC_PSAD_Admin_UI
 							array( 'name' => "Bitter", 'variant' => ':r,i,b'),
 							array( 'name' => "Asap", 'variant' => ':400,700,400italic,700italic'),
 							array( 'name' => "Bree Serif", 'variant' => '')
-							
+
 	);
-	
+
 	/*-----------------------------------------------------------------------------------*/
 	/* Fonts Face Constructor */
 	/*-----------------------------------------------------------------------------------*/
 	public function __construct() {
-		
+
+		// Enable Google Font API Key
+		if ( isset( $_POST[ $this->google_api_key_option . '_enable' ] ) ) {
+			$old_google_api_key_enable = get_option( $this->google_api_key_option . '_enable', 0 );
+
+			update_option( $this->google_api_key_option . '_enable', 1 );
+
+			$option_value = trim( $_POST[ $this->google_api_key_option ] );
+
+			$old_google_api_key_option = get_option( $this->google_api_key_option );
+
+			if ( 1 != $old_google_api_key_enable || $option_value != $old_google_api_key_option ) {
+
+				update_option( $this->google_api_key_option, $option_value );
+
+				// Clear cached of google api key status
+				delete_transient( $this->google_api_key_option . '_status' );
+			}
+
+		// Disable Google Font API Key
+		} elseif ( isset( $_POST[ $this->google_api_key_option ] ) ) {
+			$old_google_api_key_enable = get_option( $this->google_api_key_option . '_enable', 0 );
+
+			update_option( $this->google_api_key_option . '_enable', 0 );
+
+			$option_value = trim( $_POST[ $this->google_api_key_option ] );
+			update_option( $this->google_api_key_option, $option_value );
+
+			if ( 0 != $old_google_api_key_enable ) {
+				// Clear cached of google api key status
+				delete_transient( $this->google_api_key_option . '_status' );
+			}
+		}
+
+		$this->is_valid_google_api_key();
+
+		$google_fonts = get_option( $this->plugin_name . '_google_font_list', array() );
+
+		if ( ! is_array( $google_fonts ) || count( $google_fonts ) < 1 ) {
+			$google_fonts = apply_filters( $this->plugin_name . '_google_fonts', $this->google_fonts );
+		}
+
+		sort( $google_fonts );
+
+		$new_google_fonts = array();
+		foreach ( $google_fonts as $row ) {
+			$new_google_fonts[$row['name']]  = $row;
+		}
+
+		$this->google_fonts = $new_google_fonts;
+
 	}
-	
+
+	public function is_valid_google_api_key( $cache=true ) {
+		$is_valid = false;
+
+		$this->google_api_key  = get_option( $this->google_api_key_option, '' );
+		$google_api_key_enable = get_option( $this->google_api_key_option . '_enable', 0 );
+
+		if ( '' != trim( $this->google_api_key ) && 1 == $google_api_key_enable ) {
+
+			$google_api_key_status = get_transient( $this->google_api_key_option . '_status' );
+
+			if ( ! $cache ) {
+				$google_api_key_status = null;
+			}
+
+			if ( ! $google_api_key_status ) {
+				$respone_api = wp_remote_get( "https://www.googleapis.com/webfonts/v1/webfonts?sort=alpha&key=" . trim( $this->google_api_key ),
+					array(
+						'sslverify' => false,
+						'timeout'   => 45
+					)
+				);
+
+				$font_list = array();
+				$response_fonts = array();
+
+				// Check it is a valid request
+				if ( ! is_wp_error( $respone_api ) ) {
+
+					$json_string = get_magic_quotes_gpc() ? stripslashes( $respone_api['body'] ) : $respone_api['body'];
+					$response_fonts = json_decode( $json_string, true );
+
+					// Make sure that the valid response from google is not an error message
+					if ( ! isset( $response_fonts['error'] ) ) {
+						$google_api_key_status = 'valid';
+					} else {
+						$google_api_key_status = 'invalid';
+					}
+
+				} else {
+					$google_api_key_status = 'invalid';
+				}
+
+				// Get font list from default webfonts.json file of plugin
+				if ( 'invalid' == $google_api_key_status && file_exists( $this->admin_plugin_dir() . '/assets/webfonts/webfonts.json' ) ) {
+					$webfonts  = wp_remote_fopen( $this->admin_plugin_url() . '/assets/webfonts/webfonts.json' );
+					if ( false != $webfonts ) {
+						$json_string = get_magic_quotes_gpc() ? stripslashes( $webfonts ) : $webfonts;
+						$response_fonts = json_decode( $json_string, true );
+					}
+				}
+
+				// Saving the font list to database for get later
+				if ( is_array( $response_fonts )
+					&& isset( $response_fonts['items'] )
+					&& is_array( $response_fonts['items'] )
+					&& count( $response_fonts['items'] ) > 0 ) {
+
+					foreach ( $response_fonts['items'] as $font_item ) {
+						$variants = '';
+						$comma = '';
+						foreach ( $font_item['variants'] as $variant ) {
+							$variants .= $comma . trim( $variant );
+							$comma = ',';
+						}
+						if ( '' != trim( $variants ) ) {
+							$variants = ':' . $variants;
+						}
+
+						$font_list[] = array( 'name' => trim( $font_item['family'] ), 'variant' => $variants );
+					}
+				}
+
+				update_option( $this->plugin_name . '_google_font_list', $font_list );
+
+				//caching google api status for 24 hours
+				set_transient( $this->google_api_key_option . '_status', $google_api_key_status, 86400 );
+			}
+
+			if ( 'valid' == $google_api_key_status ) {
+				$is_valid = true;
+			}
+
+		} else {
+
+			$google_api_key_status = get_transient( $this->google_api_key_option . '_status' );
+
+			if ( ! $cache ) {
+				$google_api_key_status = null;
+			}
+
+			if ( ! $google_api_key_status ) {
+
+				$font_list = array();
+				$response_fonts = array();
+
+				// Get font list from default webfonts.json file of plugin
+				if ( file_exists( $this->admin_plugin_dir() . '/assets/webfonts/webfonts.json' ) ) {
+					$webfonts  = wp_remote_fopen( $this->admin_plugin_url() . '/assets/webfonts/webfonts.json' );
+					if ( false != $webfonts ) {
+						$json_string = get_magic_quotes_gpc() ? stripslashes( $webfonts ) : $webfonts;
+						$response_fonts = json_decode( $json_string, true );
+					}
+				}
+
+				// Saving the font list to database for get later
+				if ( is_array( $response_fonts )
+					&& isset( $response_fonts['items'] )
+					&& is_array( $response_fonts['items'] )
+					&& count( $response_fonts['items'] ) > 0 ) {
+
+					foreach ( $response_fonts['items'] as $font_item ) {
+						$variants = '';
+						$comma = '';
+						foreach ( $font_item['variants'] as $variant ) {
+							$variants .= $comma . trim( $variant );
+							$comma = ',';
+						}
+						if ( '' != trim( $variants ) ) {
+							$variants = ':' . $variants;
+						}
+
+						$font_list[] = array( 'name' => trim( $font_item['family'] ), 'variant' => $variants );
+					}
+				}
+
+				update_option( $this->plugin_name . '_google_font_list', $font_list );
+
+				//caching google api status for 24 hours
+				set_transient( $this->google_api_key_option . '_status', 'invalid', 86400 );
+
+			}
+		}
+
+		return $is_valid;
+	}
+
 	/*-----------------------------------------------------------------------------------*/
 	/* Get Window Default Fonts */
 	/*-----------------------------------------------------------------------------------*/
 	public function get_default_fonts() {
 		$default_fonts = apply_filters( $this->plugin_name . '_default_fonts', $this->default_fonts );
-		
+
 		asort( $default_fonts );
-		
+
 		return $default_fonts;
 	}
-	
+
 	/*-----------------------------------------------------------------------------------*/
 	/* Get Google Fonts */
 	/*-----------------------------------------------------------------------------------*/
 	public function get_google_fonts() {
-		$google_fonts = apply_filters( $this->plugin_name . '_google_fonts', $this->google_fonts );
-		
-		$hash = array();
-		foreach ( $google_fonts as $font_face ) {
-			$hash[$font_face["name"]] = $font_face;
-		}
-		
-		ksort($hash);
-		
-		$google_fonts = array();
-		foreach ( $hash as $record ) {
-			$google_fonts[] = $record;
-		}
-		
-		return $google_fonts;
+
+		return $this->google_fonts;
 	}
-	
+
 	/*-----------------------------------------------------------------------------------*/
 	/* generate_font_css() */
 	/* Generate font CSS for frontend */
 	/*-----------------------------------------------------------------------------------*/
 	public function generate_font_css( $option, $em = '1.2' ) {
+		$google_fonts = $this->get_google_fonts();
 
-		// Test if font-face is a Google font
-		foreach ( $this->get_google_fonts() as $font) {
-
-			// Add single quotation marks to font name and default arial sans-serif ending
-			if ( $option['face'] == $font['name'] ) 
-				$option['face'] = "'" . $option['face'] . "', arial, sans-serif";
-
-		} // END foreach
+		if ( array_key_exists( $option['face'], $google_fonts ) ) {
+			$option['face'] = "'" . $option['face'] . "', arial, sans-serif";
+		}
 
 		if ( !@$option['style'] && !@$option['size'] && !@$option['color'] )
 			return 'font-family: '.stripslashes($option["face"]).' !important;';
 		else
 			return 'font:'.$option['style'].' '.$option['size'].' '.stripslashes($option['face']).' !important; color:'.$option['color'].' !important;';
 	}
-	
-	
+
+
 	/*-----------------------------------------------------------------------------------*/
 	/* Google Webfonts Stylesheet Generator */
 	/*-----------------------------------------------------------------------------------*/
 	/*
 	INSTRUCTIONS: Needs to be loaded for the Google Fonts options to work for font options.
-	
+
 	add_action( 'wp_head', array( $this, 'generate_google_webfonts' ) );
 	*/
-	public function generate_google_webfonts( $google_fonts = array(), $echo = true ) {
+	public function generate_google_webfonts( $my_google_fonts = array(), $echo = true ) {
+		$google_fonts = $this->get_google_fonts();
+
 		$fonts = '';
 		$output = '';
 
 		// Go through the options
-		if ( is_array( $google_fonts ) ) {
-			foreach ( $google_fonts as $font_face ) {
-				// Go through the google font array
-				foreach ( $this->get_google_fonts() as $font) {
-					// Check if the google font name exists in the current "face" option
-					if ( $font_face == $font['name'] && !strstr( $fonts, $font['name'] ) ) {
-						// Add google font to output
-						$fonts .= $font['name'].$font['variant']."|";
-					} // End If Statement
-				} // End Foreach Loop
+		if ( is_array( $my_google_fonts ) ) {
+			foreach ( $my_google_fonts as $font_face ) {
+				// Check if the google font name exists in the current "face" option
+				if ( array_key_exists( $font_face, $google_fonts ) && !strstr( $fonts, $font_face ) ) {
+					$fonts .= $google_fonts[$font_face]['name'].$google_fonts[$font_face]['variant']."|";
+				}
 			} // End Foreach Loop
 
 			// Output google font css in header
-			if ( $fonts ) {
+			if ( trim( $fonts ) != '' ) {
 				$fonts = str_replace( " ","+",$fonts);
 				$output .= "\n<!-- Google Webfonts -->\n";
 				$output .= '<link href="http'. ( is_ssl() ? 's' : '' ) .'://fonts.googleapis.com/css?family=' . $fonts .'" rel="stylesheet" type="text/css" />'."\n";
 				$output = str_replace( '|"','"',$output);
 			}
 		}
-		
+
 		if ( $echo )
 			echo $output;
 		else
 			return $output;
-			
+
 	} // End generate_google_webfonts()
-		
+
 }
 
 global $wc_psad_fonts_face;

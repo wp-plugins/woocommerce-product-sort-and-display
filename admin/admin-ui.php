@@ -31,6 +31,18 @@ class WC_PSAD_Admin_UI
 	 * You must change to correct plugin name that you are working
 	 */
 	public $plugin_name = 'wc_sort_display';
+
+	public $google_api_key_option = 'wc_psad_google_api_key';
+
+	public $toggle_box_open_option = 'wc_psad_toggle_box_open';
+
+	public $is_free_plugin = true;
+
+	/**
+	 * @var string
+	 * You must change to correct class name that you are working
+	 */
+	public $class_name = 'WC_PSAD';
 	
 	/**
 	 * @var string
@@ -79,58 +91,88 @@ class WC_PSAD_Admin_UI
 		
 		return (array)$admin_pages;
 	}
-	
+
+	public function plugin_extension_boxes( $echo = false ) {
+
+		/**
+		 * extension_boxes
+		 * =============================================
+		 * array (
+		 *		'id'				=> 'box_id'						: Enter unique your box id
+		 *		'content'			=> 'html_content' 				: (required) Enter the html content to show inside the box
+		 * 		'css'				=> 'custom style'				: custom style for the box container
+		 * )
+		 *
+		 */
+		$extension_boxes = apply_filters( $this->plugin_name . '_plugin_extension_boxes', array() );
+
+		$output = '';
+		if ( is_array( $extension_boxes ) && count( $extension_boxes ) > 0 ) {
+			foreach ( $extension_boxes as $box ) {
+				if ( ! isset( $box['id'] ) ) $box['id'] = '';
+				if ( ! isset( $box['css'] ) ) $box['css'] = '';
+				if ( ! isset( $box['content'] ) ) $box['content'] = '';
+
+				$output .= '<div id="'. esc_attr( $box['id'] ) .'" class="a3_plugin_panel_extension_box" style="'. esc_attr( $box['css'] ) .'">';
+				$output .= $box['content'];
+				$output .= '</div>';
+			}
+		}
+
+		if ( $echo )
+			echo $output;
+		else
+			return $output;
+	}
+
 	/*-----------------------------------------------------------------------------------*/
 	/* plugin_extension_start() */
 	/* Start of yellow box on right for pro fields
 	/*-----------------------------------------------------------------------------------*/
 	public function plugin_extension_start( $echo = true ) {
 		$output = '<div id="a3_plugin_panel_container">';
+		$output .= '<div id="a3_plugin_panel_upgrade_area">';
+		$output .= '<div id="a3_plugin_panel_extensions">';
+		$output .= $this->plugin_extension_boxes( false );
+		$output .= '</div>';
+		$output .= '</div>';
 		$output .= '<div id="a3_plugin_panel_fields">';
-		
+
 		$output = apply_filters( $this->plugin_name . '_plugin_extension_start', $output );
-		
+
 		if ( $echo )
 			echo $output;
 		else
 			return $output;
 	}
-	
+
 	/*-----------------------------------------------------------------------------------*/
 	/* plugin_extension_start() */
 	/* End of yellow box on right for pro fields
 	/*-----------------------------------------------------------------------------------*/
 	public function plugin_extension_end( $echo = true ) {
 		$output = '</div>';
-		$output .= '<div id="a3_plugin_panel_upgrade_area">';
-		$output .= '<div id="a3_plugin_panel_extensions">';
-		$output .= apply_filters( $this->plugin_name . '_plugin_extension', '' );
 		$output .= '</div>';
-		$output .= '</div>';
-		$output .= '</div>';
-		
+
 		$output = apply_filters( $this->plugin_name . '_plugin_extension_end', $output );
-		
+
 		if ( $echo )
 			echo $output;
 		else
 			return $output;
-		
+
 	}
-	
+
 	/*-----------------------------------------------------------------------------------*/
 	/* upgrade_top_message() */
 	/* Show upgrade top message for pro fields
 	/*-----------------------------------------------------------------------------------*/
-	public function upgrade_top_message( $echo = false ) {
+	public function upgrade_top_message( $echo = false, $setting_id = '' ) {
 		$upgrade_top_message = sprintf( '<div class="pro_feature_top_message">' 
-			. __( 'Settings inside this yellow border are %s Features.', 'wc_psad' ) 
-			. '<br />' 
-			. __( 'Upgrade to the <a href="%s" target="_blank">%s</a> to activate these settings.', 'wc_psad' ) 
+			. __( 'Advanced Settings - Upgrade to the <a href="%s" target="_blank">%s License</a> to activate these settings.', 'wc_psad' ) 
 			. '</div>'
-			, apply_filters( $this->plugin_name . '_pro_version_name', __( 'Pro Version', 'wc_psad' ) )
-			, apply_filters( $this->plugin_name . '_pro_plugin_page_url', $this->pro_plugin_page_url )
-			, apply_filters( $this->plugin_name . '_pro_version_name', __( 'Pro Version', 'wc_psad' ) ) 
+			, apply_filters( $this->plugin_name . '_' . $setting_id . '_pro_plugin_page_url', apply_filters( $this->plugin_name . '_pro_plugin_page_url', $this->pro_plugin_page_url ) )
+			, apply_filters( $this->plugin_name . '_' . $setting_id . '_pro_version_name', apply_filters( $this->plugin_name . '_pro_version_name', __( 'Pro Version', 'wc_psad' ) ) )
 		);
 		
 		$upgrade_top_message = apply_filters( $this->plugin_name . '_upgrade_top_message', $upgrade_top_message );
