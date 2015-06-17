@@ -1,12 +1,12 @@
 <?php
 class Compile_Less_Sass {
-	
+
 	public function Compile_Less_Sass(){
 		$this->init();
 	}
 	public function init(){
 	}
-	
+
 	public function compileLessFile( $less_file = '', $css_file = '', $css_min_file = '' ){
 		global $wp_filesystem;
 
@@ -19,30 +19,30 @@ class Compile_Less_Sass {
 
 		// Write less file
     	if ( is_writable( $css_file ) && is_writable( $css_min_file ) ) {
-			
+
 			if ( ! class_exists( 'lessc' ) ){
 				include( dirname( __FILE__ ) . '/lib/lessc.inc.php' );
 			}
 			if ( ! class_exists( 'cssmin' ) ){
 				include( dirname( __FILE__ ) . '/lib/cssmin.inc.php' );
 			}
-		
+
 			try {
-				
+
 				$less         = new lessc;
-				
+
 				$compiled_css = $less->compileFile( $less_file );
-				
+
 				if ( $compiled_css != '' ){
 					$wp_filesystem->put_contents( $css_file, $compiled_css );
-					
+
 					$compiled_css_min = CssMin::minify( $compiled_css );
 					if ( $compiled_css_min != '' )
 						$wp_filesystem->put_contents( $css_min_file, $compiled_css_min );
 				}
-	
+
 			} catch ( exception $ex ) {
-				
+
 				//echo ( __( 'Could not compile .less:', 'sass' ) . ' ' . $ex->getMessage() );
 			}
 		}

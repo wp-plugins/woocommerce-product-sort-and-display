@@ -34,23 +34,23 @@ TABLE OF CONTENTS
 
 class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 {
-	
+
 	/*-----------------------------------------------------------------------------------*/
 	/* Admin Interface Constructor */
 	/*-----------------------------------------------------------------------------------*/
 	public function __construct() {
-		
+
 		$this->admin_includes();
-		
+
 		add_action( 'init', array( $this, 'init_scripts' ) );
 		add_action( 'init', array( $this, 'init_styles' ) );
 
 		// AJAX hide yellow message dontshow
 		add_action( 'wp_ajax_'.$this->plugin_name.'_a3_admin_ui_event', array( $this, 'a3_admin_ui_event' ) );
 		add_action( 'wp_ajax_nopriv_'.$this->plugin_name.'_a3_admin_ui_event', array( $this, 'a3_admin_ui_event' ) );
-		
+
 	}
-	
+
 	/*-----------------------------------------------------------------------------------*/
 	/* Init scripts */
 	/*-----------------------------------------------------------------------------------*/
@@ -60,10 +60,10 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 		if ( is_admin() && isset( $_REQUEST['page'] ) && in_array( $_REQUEST['page'], $admin_pages ) ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_script_load' ) );
 			do_action( $this->plugin_name . '_init_scripts' );
-		}
 
-		add_action( 'admin_print_scripts', array( $this, 'admin_localize_printed_scripts' ), 5 );
-		add_action( 'admin_print_footer_scripts', array( $this, 'admin_localize_printed_scripts' ), 5 );
+			add_action( 'admin_print_scripts', array( $this, 'admin_localize_printed_scripts' ), 5 );
+			add_action( 'admin_print_footer_scripts', array( $this, 'admin_localize_printed_scripts' ), 5 );
+		}
 	}
 	
 	/*-----------------------------------------------------------------------------------*/

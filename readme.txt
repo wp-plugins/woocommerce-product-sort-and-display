@@ -4,7 +4,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
 Requires at least: 3.8
 Tested up to: 4.2.2
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -199,6 +199,10 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 == Changelog ==
 
+= 1.2.1 - 2015/06/17 =
+* Tweak - Check if a3_admin_ui_script_params is defined to save status of settings box
+* Tweak - Added call 'admin_localize_printed_scripts' on setting panel page to avoid conflicts with other plugins built on a3 Plugin framework
+
 = 1.2.0 - 2015/06/16 =
 * Feature - Plugin framework Mobile First focus upgrade
 * Feature - Massive improvement in admin UI and UX in PC, tablet and mobile browsers
@@ -342,6 +346,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.2.1 =
+Maintenance Upgrade. 2 code Tweaks for new a3 Plugin Framework released in version 1.2.0
 
 = 1.2.0 =
 Major Feature Upgrade. Massive admin panel UI and UX upgrade. Includes 8 new features, 1 bug fix plus full compatibility with WooCommerce Version 2.3.11

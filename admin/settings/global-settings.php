@@ -598,25 +598,17 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 		} else {
 			$(".psad_explanation_message").hide();
 		}
-		if ( $("input.psad_shop_page_enable:checked").val() == 'yes') {
-			$(".psad_shop_page_enable_container").css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
-		} else {
-			$(".psad_shop_page_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
+		if ( $("input.psad_shop_page_enable:checked").val() != 'yes') {
+			$(".psad_shop_page_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
 		}
-		if ( $("input.psad_category_page_enable:checked").val() == 'yes') {
-			$(".psad_category_page_enable_container").css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
-		} else {
-			$(".psad_category_page_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
+		if ( $("input.psad_category_page_enable:checked").val() != 'yes') {
+			$(".psad_category_page_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
 		}
-		if ( $("input.psad_tag_page_enable:checked").val() == 'yes') {
-			$(".psad_tag_page_enable_container").css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
-		} else {
-			$(".psad_tag_page_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
+		if ( $("input.psad_tag_page_enable:checked").val() != 'yes') {
+			$(".psad_tag_page_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
 		}
-		if ( $("input.psad_seperator_enable:checked").val() == 'yes') {
-			$(".psad_seperator_enable_container").css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
-		} else {
-			$(".psad_seperator_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
+		if ( $("input.psad_seperator_enable:checked").val() != 'yes') {
+			$(".psad_seperator_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
 		}
 
 		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_explanation', function( event, value, status ) {
@@ -627,7 +619,7 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 			}
 		});
 		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_shop_page_enable', function( event, value, status ) {
-			$(".psad_shop_page_enable_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
+			$(".psad_shop_page_enable_container").attr('style','display:none;');
 			if ( status == 'true' ) {
 				$(".psad_shop_page_enable_container").slideDown();
 			} else {
@@ -635,7 +627,7 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 			}
 		});
 		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_category_page_enable', function( event, value, status ) {
-			$(".psad_category_page_enable_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
+			$(".psad_category_page_enable_container").attr('style','display:none;');
 			if ( status == 'true' ) {
 				$(".psad_category_page_enable_container").slideDown();
 			} else {
@@ -643,7 +635,7 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 			}
 		});
 		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_tag_page_enable', function( event, value, status ) {
-			$(".psad_tag_page_enable_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
+			$(".psad_tag_page_enable_container").attr('style','display:none;');
 			if ( status == 'true' ) {
 				$(".psad_tag_page_enable_container").slideDown();
 			} else {
@@ -651,7 +643,7 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 			}
 		});
 		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_seperator_enable', function( event, value, status ) {
-			$(".psad_seperator_enable_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
+			$(".psad_seperator_enable_container").attr('style','display:none;');
 			if ( status == 'true' ) {
 				$(".psad_seperator_enable_container").slideDown();
 			} else {

@@ -69,6 +69,8 @@ class WC_PSAD_Settings_Hook
 		add_action( 'admin_footer', array( $wc_psad_admin_interface, 'admin_css_load' ) );
 		add_action( 'admin_footer', array( $this, 'include_custom_style' ) );
 		add_action( 'admin_footer', array( $this, 'include_custom_script' ) );
+        add_action( 'admin_print_scripts', array( $wc_psad_admin_interface, 'admin_localize_printed_scripts' ), 5 );
+        add_action( 'admin_print_footer_scripts', array( $wc_psad_admin_interface, 'admin_localize_printed_scripts' ), 5 );
 	}
 	
 	/**
