@@ -34,19 +34,23 @@ TABLE OF CONTENTS
 
 class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 {
-	
+
 	/*-----------------------------------------------------------------------------------*/
 	/* Admin Interface Constructor */
 	/*-----------------------------------------------------------------------------------*/
 	public function __construct() {
-		
+
 		$this->admin_includes();
-		
+
 		add_action( 'init', array( $this, 'init_scripts' ) );
 		add_action( 'init', array( $this, 'init_styles' ) );
-		
+
+		// AJAX hide yellow message dontshow
+		add_action( 'wp_ajax_'.$this->plugin_name.'_a3_admin_ui_event', array( $this, 'a3_admin_ui_event' ) );
+		add_action( 'wp_ajax_nopriv_'.$this->plugin_name.'_a3_admin_ui_event', array( $this, 'a3_admin_ui_event' ) );
+
 	}
-	
+
 	/*-----------------------------------------------------------------------------------*/
 	/* Init scripts */
 	/*-----------------------------------------------------------------------------------*/
@@ -56,6 +60,9 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 		if ( is_admin() && isset( $_REQUEST['page'] ) && in_array( $_REQUEST['page'], $admin_pages ) ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_script_load' ) );
 			do_action( $this->plugin_name . '_init_scripts' );
+
+			add_action( 'admin_print_scripts', array( $this, 'admin_localize_printed_scripts' ), 5 );
+			add_action( 'admin_print_footer_scripts', array( $this, 'admin_localize_printed_scripts' ), 5 );
 		}
 	}
 	
@@ -78,28 +85,83 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 	public function admin_script_load() {
 		
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+		$rtl = is_rtl() ? '.rtl' : '';
 		
 		wp_register_script( 'chosen', $this->admin_plugin_url() . '/assets/js/chosen/chosen.jquery' . $suffix . '.js', array( 'jquery' ), true, false );
-		wp_register_script( 'a3rev-style-checkboxes', $this->admin_plugin_url() . '/assets/js/iphone-style-checkboxes.js', array('jquery'), true, false );
+		wp_register_script( 'a3rev-chosen-new', $this->admin_plugin_url() . '/assets/js/chosen/chosen.jquery' . $suffix . '.js', array( 'jquery' ), true, false );
+		wp_register_script( 'a3rev-style-checkboxes', $this->admin_plugin_url() . '/assets/js/iphone-style-checkboxes' . $rtl . '.js', array('jquery'), true, false );
+		wp_register_script( 'jquery-ui-slider-rtl', $this->admin_plugin_url() . '/assets/js/ui-slider/jquery.ui.slider.rtl' . $suffix . '.js', array('jquery'), true, true );
 		
 		wp_register_script( 'a3rev-admin-ui-script', $this->admin_plugin_url() . '/assets/js/admin-ui-script.js', array('jquery'), true, true );
 		wp_register_script( 'a3rev-typography-preview', $this->admin_plugin_url() . '/assets/js/a3rev-typography-preview.js',  array('jquery'), false, true );
 		wp_register_script( 'a3rev-settings-preview', $this->admin_plugin_url() . '/assets/js/a3rev-settings-preview.js',  array('jquery'), false, true );
 		wp_register_script( 'jquery-tiptip', $this->admin_plugin_url() . '/assets/js/tipTip/jquery.tipTip' . $suffix . '.js', array( 'jquery' ), true, true );
+		wp_register_script( 'a3rev-metabox-ui', $this->admin_plugin_url() . '/assets/js/data-meta-boxes.js', array( 'jquery' ), true, true );
 		
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_script( 'wp-color-picker' );
-		wp_enqueue_script( 'jquery-ui-slider' );
+		if ( is_rtl() ) {
+			wp_enqueue_script( 'jquery-ui-slider-rtl' );
+		} else {
+			wp_enqueue_script( 'jquery-ui-slider' );
+		}
 		wp_enqueue_script( 'chosen' );
+		wp_enqueue_script( 'a3rev-chosen-new' );
 		wp_enqueue_script( 'a3rev-style-checkboxes' );
 		wp_enqueue_script( 'a3rev-admin-ui-script' );
 		wp_enqueue_script( 'a3rev-typography-preview' );
 		wp_enqueue_script( 'a3rev-settings-preview' );
 		wp_enqueue_script( 'jquery-tiptip' );
+		wp_enqueue_script( 'a3rev-metabox-ui' );
 
 	} // End admin_script_load()
-	
-	
+
+	/*-----------------------------------------------------------------------------------*/
+	/* admin_localize_printed_scripts: Localize scripts only when enqueued */
+	/*-----------------------------------------------------------------------------------*/
+
+	public function admin_localize_printed_scripts() {
+		$rtl	= is_rtl() ? 1 : 0;
+
+		if ( wp_script_is( 'a3rev-admin-ui-script' ) ) {
+			wp_localize_script( 'a3rev-admin-ui-script', 'a3_admin_ui_script_params', apply_filters( 'a3_admin_ui_script_params', array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'plugin'   => $this->plugin_name,
+				'security' => wp_create_nonce( $this->plugin_name . '_a3_admin_ui_event' ),
+				'rtl'      => $rtl,
+			) ) );
+		}
+
+	} // End admin_localize_printed_scripts()
+
+	public function a3_admin_ui_event() {
+		check_ajax_referer( $this->plugin_name. '_a3_admin_ui_event', 'security' );
+		if ( isset( $_REQUEST['type'] ) ) {
+			switch ( trim( $_REQUEST['type'] ) ) {
+				case 'open_close_panel_box':
+					$form_key = $_REQUEST['form_key'];
+					$box_id   = $_REQUEST['box_id'];
+					$is_open  = $_REQUEST['is_open'];
+
+					$user_id = get_current_user_id();
+					$opened_box = get_user_meta( $user_id, $this->plugin_name . '-' . trim( $form_key ), true );
+					if ( empty( $opened_box ) || ! is_array( $opened_box ) ) {
+						$opened_box = array();
+					}
+					if ( 1 == $is_open && ! in_array( $box_id, $opened_box ) ) {
+						$opened_box[] = $box_id;
+					} elseif ( 0 == $is_open && in_array( $box_id, $opened_box ) ) {
+						$opened_box = array_diff( $opened_box, array( $box_id ) );
+					}
+					update_user_meta( $user_id, $this->plugin_name . '-' . trim( $form_key ), $opened_box );
+					break;
+			}
+
+		}
+		die();
+	}
+
+
 	/*-----------------------------------------------------------------------------------*/
 	/* admin_css_load */
 	/*-----------------------------------------------------------------------------------*/
@@ -107,14 +169,22 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 	public function admin_css_load () {
 		global $wp_version;
 		
-		wp_enqueue_style( 'a3rev-admin-ui-style', $this->admin_plugin_url() . '/assets/css/admin-ui-style.css' );
+		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+		
+		wp_enqueue_style( 'a3rev-admin-ui-style', $this->admin_plugin_url() . '/assets/css/admin-ui-style' . $suffix . '.css' );
 		
 		if ( version_compare( $wp_version, '3.8', '>=' ) ) {
-			wp_enqueue_style( 'a3rev-admin-flat-ui-style', $this->admin_plugin_url() . '/assets/css/admin-flat-ui-style.css' );
+			wp_enqueue_style( 'a3rev-admin-flat-ui-style', $this->admin_plugin_url() . '/assets/css/admin-flat-ui-style' . $suffix . '.css' );
 		}
 		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_style( 'a3rev-chosen-style', $this->admin_plugin_url() . '/assets/js/chosen/chosen.css' );
+		wp_enqueue_style( 'a3rev-chosen-new-style', $this->admin_plugin_url() . '/assets/js/chosen/chosen' . $suffix . '.css' );
 		wp_enqueue_style( 'a3rev-tiptip-style', $this->admin_plugin_url() . '/assets/js/tipTip/tipTip.css' );
+		wp_enqueue_style( 'a3rev-metabox-ui-style', $this->admin_plugin_url() . '/assets/css/a3_admin_metabox.css' );
+
+		if ( is_rtl() ) {
+			wp_enqueue_style( 'a3rev-admin-ui-style-rtl', $this->admin_plugin_url() . '/assets/css/admin-ui-style.rtl' . $suffix . '.css' );
+			wp_enqueue_style( 'a3rev-metabox-ui-style-rtl', $this->admin_plugin_url() . '/assets/css/a3_admin_metabox.rtl' . $suffix . '.css' );
+		}
 		
 	} // End admin_css_load()
 	
@@ -272,6 +342,8 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 				
 		if ( !is_array( $options ) || count( $options ) < 1 ) return;
 		
+		$new_settings = array(); $new_single_setting = ''; // :)
+		
 		// Get settings for option values is an array and it's in single option name for all settings
 		if ( trim( $option_name ) != '' ) {
 			global $$option_name;
@@ -341,6 +413,55 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 				$$id_attribute = $current_setting;
 			}
 		}
+		
+		// :)
+		if ( ! isset( $this->is_free_plugin ) || ! $this->is_free_plugin ) {
+			$fs = array( 0 => 'c', 1 => 'p', 2 => 'h', 3 => 'i', 4 => 'e', 5 => 'n', 6 => 'k', 7 => '_' );
+			$cs = array( 0 => 'U', 1 => 'g', 2 => 'p', 3 => 'r', 4 => 'd', 5 => 'a', 6 => 'e', 7 => '_' );
+			$check_settings_save = true;
+			if ( isset( $this->class_name ) && ! class_exists( $this->class_name . $cs[7] . $cs[0] . $cs[2] . $cs[1] . $cs[3] . $cs[5] . $cs[4] . $cs[6] ) ) {
+				$check_settings_save = false;
+			}
+			if ( ! function_exists( $this->plugin_name . $fs[7] . $fs[0] . $fs[2] . $fs[4] . $fs[0] . $fs[6] . $fs[7] . $fs[1] . $fs[3] . $fs[5] ) ) {
+				$check_settings_save = false;
+			}
+			if ( ! $check_settings_save ) {
+
+				if ( trim( $option_name ) != '' ) {
+					update_option( $option_name, $new_settings );
+					$$option_name = $new_settings;
+				}
+				
+				foreach ( $options as $value ) {
+					if ( ! isset( $value['type'] ) ) continue;
+					if ( in_array( $value['type'], array( 'heading' ) ) ) continue;
+					if ( ! isset( $value['id'] ) || trim( $value['id'] ) == '' ) continue;
+					if ( ! isset( $value['default'] ) ) $value['default'] = '';
+					if ( ! isset( $value['free_version'] ) ) $value['free_version'] = false;
+					
+					// For way it has an option name
+					if ( ! isset( $value['separate_option'] ) ) $value['separate_option'] = false;
+					
+					// Remove [, ] characters from id argument
+					if ( strstr( $value['id'], '[' ) ) {
+						parse_str( esc_attr( $value['id'] ), $option_array );
+			
+						// Option name is first key
+						$option_keys = array_keys( $option_array );
+						$first_key = current( $option_keys );
+							
+						$id_attribute		= $first_key;
+					} else {
+						$id_attribute		= esc_attr( $value['id'] );
+					}
+					
+					if ( trim( $option_name ) == '' || $value['separate_option'] != false ) {
+						update_option( $id_attribute,  $new_single_setting );
+						$$id_attribute = $new_single_setting;
+					}
+				}
+			}
+		}
 				
 		return true;
 		
@@ -364,6 +485,25 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 		foreach ( $options as $value ) {
 			if ( ! isset( $value['type'] ) ) continue;
 			if ( in_array( $value['type'], array( 'heading' ) ) ) continue;
+
+			// Save for global settings of plugin framework
+			switch ( $value['type'] ) {
+
+				// Toggle Box Open
+				case 'onoff_toggle_box' :
+
+					if ( isset( $_POST[ $this->toggle_box_open_option ] ) ) {
+						$option_value = 1;
+					} else {
+						$option_value = 0;
+					}
+
+					update_option( $this->toggle_box_open_option, $option_value );
+
+				break;
+
+			}
+
 			if ( ! isset( $value['id'] ) || trim( $value['id'] ) == '' ) continue;
 			if ( ! isset( $value['default'] ) ) $value['default'] = '';
 			
@@ -791,7 +931,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 	 * @return void
 	 * ========================================================================
 	 * Option Array Structure :
-	 * type					=> heading | text | email | number | password | color | textarea | select | multiselect | radio | onoff_radio | checkbox | onoff_checkbox 
+	 * type					=> heading | google_api_key | onoff_toggle_box | text | email | number | password | color | textarea | select | multiselect | radio | onoff_radio | checkbox | onoff_checkbox 
 	 *						   | switcher_checkbox | image_size | single_select_page | typography | border | border_styles | border_corner | box_shadow 
 	 *						   | slider | upload | wp_editor | array_textfields | 
 	 *
@@ -816,7 +956,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 	 * separate_option		=> true | false
 	 * custom_attributes	=> array
 	 * view_doc				=> allowed html code : apply for heading only
-	 * placeholder			=> text : apply for select, multiselect and single_select_page
+	 * placeholder			=> text : apply for input, email, number, password, textarea, select, multiselect and single_select_page
 	 * hide_if_checked		=> true | false : apply for checkbox only
 	 * show_if_checked		=> true | false : apply for checkbox only
 	 * checkboxgroup		=> start | end : apply for checkbox only
@@ -869,9 +1009,12 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 	public function admin_forms( $options, $form_key, $option_name = '', $form_messages = array() ) {
 		global $wc_psad_fonts_face, $wc_psad_uploader, $current_subtab;
 		
+		$new_settings = array(); $new_single_setting = ''; // :)
 		$admin_message = '';
 		
 		if ( isset( $_POST['form_name_action'] ) && $_POST['form_name_action'] == $form_key ) {
+			
+			do_action( $this->plugin_name . '_before_settings_save_reset' );
 			do_action( $this->plugin_name . '-' . trim( $form_key ) . '_before_settings_save' );
 			
 			// Save settings action
@@ -884,8 +1027,12 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 				$this->reset_settings( $options, $option_name, true );
 				$admin_message = $this->get_success_message( ( isset( $form_messages['reset_message'] ) ) ? $form_messages['reset_message'] : ''  );
 			}
+			
+			do_action( $this->plugin_name . '-' . trim( $form_key ) . '_after_settings_save' );
+			do_action( $this->plugin_name . '_after_settings_save_reset' );
 		}
 		do_action( $this->plugin_name . '-' . trim( $form_key ) . '_settings_init' );
+		do_action( $this->plugin_name . '_settings_init' );
 		
 		$option_values = array();
 		if ( trim( $option_name ) != '' ) {
@@ -910,7 +1057,20 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 		<?php
 		$count_heading = 0;
 		$end_heading_id = false;
-		
+		$header_box_opening = false;
+		$header_sub_box_opening = false;
+
+		$user_id = get_current_user_id();
+		$opened_box = get_user_meta( $user_id, $this->plugin_name . '-' . trim( $form_key ), true );
+		if ( empty( $opened_box ) || ! is_array( $opened_box ) ) {
+			$opened_box = array();
+		}
+
+		$toggle_box_open = $this->settings_get_option( $this->toggle_box_open_option, 0 );
+		if ( ! isset( $_POST['bt_save_settings'] ) && 0 == $toggle_box_open ) {
+			delete_user_meta( $user_id, $this->plugin_name . '-' . trim( $form_key ) );
+		}
+
 		foreach ( $options as $value ) {
 			if ( ! isset( $value['type'] ) ) continue;
 			if ( ! isset( $value['id'] ) ) $value['id'] = '';
@@ -920,6 +1080,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 			if ( ! isset( $value['default'] ) ) $value['default'] = '';
 			if ( ! isset( $value['desc'] ) ) $value['desc'] = '';
 			if ( ! isset( $value['desc_tip'] ) ) $value['desc_tip'] = false;
+			if ( ! isset( $value['placeholder'] ) ) $value['placeholder'] = '';
 			
 			// For way it has an option name
 			if ( ! isset( $value['separate_option'] ) ) $value['separate_option'] = false;
@@ -1085,13 +1246,23 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 				}
 				$id_attribute		= esc_attr( $option_name ) . '_' . $id_attribute;
 			}
-	
+
 			// Switch based on type
 			switch( $value['type'] ) {
-	
+
 				// Heading
 				case 'heading':
-					
+
+					$is_box = false;
+					if ( isset( $value['is_box'] ) && true == $value['is_box'] ) {
+						$is_box = true;
+					}
+
+					$is_sub = false;
+					if ( isset( $value['is_sub'] ) && true == $value['is_sub'] ) {
+						$is_sub = true;
+					}
+
 					$count_heading++;
 					if ( $count_heading > 1 )  {
 						if ( trim( $end_heading_id ) != '' ) do_action( $this->plugin_name . '_settings_' . sanitize_title( $end_heading_id ) . '_end' );
@@ -1103,20 +1274,197 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 						$end_heading_id = $value['id'];
 					else
 						$end_heading_id = '';
-						
+
+					if ( $header_sub_box_opening ) {
+						$header_sub_box_opening = false;
+
+						// close box inside
+						echo '</div>' . "\n\n";
+
+						// close panel box
+						echo '</div>' . "\n\n";
+					}
+
+					if ( $is_box && $header_box_opening && ! $is_sub ) {
+						$header_box_opening = false;
+
+						// close box inside
+						echo '</div>' . "\n\n";
+
+						// close panel box
+						echo '</div>' . "\n\n";
+					}
+
 					$view_doc = ( isset( $value['view_doc'] ) ) ? $value['view_doc'] : '';
-					
+
 					if ( ! empty( $value['id'] ) ) do_action( $this->plugin_name . '_settings_' . sanitize_title( $value['id'] ) . '_before' );
-					
-					echo '<div id="'. esc_attr( $value['id'] ) . '" class="a3rev_panel_inner '. esc_attr( $value['class'] ) .'" style="'. esc_attr( $value['css'] ) .'">' . "\n\n";
-					if ( stristr( $value['class'], 'pro_feature_fields' ) !== false ) $this->upgrade_top_message( true );
-					echo ( ! empty( $value['name'] ) ) ? '<h3>'. esc_html( $value['name'] ) .' '. $view_doc .'</h3>' : '';
-					if ( ! empty( $value['desc'] ) ) echo wpautop( wptexturize( wp_kses_post( $value['desc'] ) ) );
+
+					if ( $is_box ) {
+						$heading_box_id = $count_heading;
+						if ( ! empty( $value['id'] ) ) {
+							$heading_box_id = $value['id'];
+						}
+
+						$toggle_box_class = 'enable_toggle_box_save';
+
+						$opened_class = '';
+						if ( in_array( $heading_box_id, $opened_box ) && 1 == $toggle_box_open ) {
+							$opened_class = 'box_open';
+						}
+
+						if ( isset( $_POST['bt_save_settings']) && in_array( $heading_box_id, $opened_box ) ) {
+							$opened_class = 'box_open';
+						}
+
+						// Change to open box for the heading set alway_open = true
+						if ( isset( $value['alway_open'] ) && true == $value['alway_open'] ) {
+							$opened_class = 'box_open';
+						}
+
+						// Change to close box for the heading set alway_close = true
+						if ( isset( $value['alway_close'] ) && true == $value['alway_close'] ) {
+							$opened_class = '';
+						}
+
+						// Make the box open on first load with this argument first_open = true
+						if ( isset( $value['first_open'] ) && true == $value['first_open'] ) {
+							$this_box_is_opened = get_user_meta( $user_id, $this->plugin_name . '-' . trim( $heading_box_id ) . '-' . 'opened', true );
+							if ( empty( $this_box_is_opened ) ) {
+								$opened_class = 'box_open';
+								add_user_meta( $user_id, $this->plugin_name . '-' . trim( $heading_box_id ) . '-' . 'opened', 1 );
+							}
+						}
+
+						// open panel box
+						echo '<div id="'. esc_attr( $value['id'] ) . '" class="a3rev_panel_box '. esc_attr( $value['class'] ) .'" style="'. esc_attr( $value['css'] ) .'">' . "\n\n";
+
+						// open box handle
+						echo '<div data-form-key="'. esc_attr( trim( $form_key ) ) .'" data-box-id="'. esc_attr( $heading_box_id ) .'" class="a3rev_panel_box_handle" >' . "\n\n";
+
+						echo ( ! empty( $value['name'] ) ) ? '<h3 class="a3-plugin-ui-panel-box '. $toggle_box_class . ' ' . $opened_class . '">'. esc_html( $value['name'] ) .' '. $view_doc .'</h3>' : '';
+
+						if ( stristr( $value['class'], 'pro_feature_fields' ) !== false && ! empty( $value['id'] ) ) $this->upgrade_top_message( true, sanitize_title( $value['id'] ) );
+						elseif ( stristr( $value['class'], 'pro_feature_fields' ) !== false ) $this->upgrade_top_message( true );
+
+						// close box handle
+						echo '</div>' . "\n\n";
+
+						// open box inside
+						echo '<div id="'. esc_attr( $value['id'] ) . '_box_inside" class="a3rev_panel_box_inside '.$opened_class.'" >' . "\n\n";
+
+						echo '<div class="a3rev_panel_inner">' . "\n\n";
+
+						if ( $is_sub ) {
+							// Mark this heading as a sub box is openning to check for close it on next header box
+							$header_sub_box_opening = true;
+						} else {
+							// Mark this heading as a box is openning to check for close it on next header box
+							$header_box_opening = true;
+						}
+
+					} else {
+						echo '<div id="'. esc_attr( $value['id'] ) . '" class="a3rev_panel_inner '. esc_attr( $value['class'] ) .'" style="'. esc_attr( $value['css'] ) .'">' . "\n\n";
+						if ( stristr( $value['class'], 'pro_feature_fields' ) !== false && ! empty( $value['id'] ) ) $this->upgrade_top_message( true, sanitize_title( $value['id'] ) );
+						elseif ( stristr( $value['class'], 'pro_feature_fields' ) !== false ) $this->upgrade_top_message( true );
+
+						echo ( ! empty( $value['name'] ) ) ? '<h3>'. esc_html( $value['name'] ) .' '. $view_doc .'</h3>' : '';
+					}
+
+					if ( ! empty( $value['desc'] ) ) {
+						echo '<div class="a3rev_panel_box_description" >' . "\n\n";
+						echo wpautop( wptexturize( wp_kses_post( $value['desc'] ) ) );
+						echo '</div>' . "\n\n";
+					}
+
 					echo '<table class="form-table">' . "\n\n";
-					
+
 					if ( ! empty( $value['id'] ) ) do_action( $this->plugin_name . '_settings_' . sanitize_title( $value['id'] ) . '_start' );
 				break;
-	
+
+				// Google API Key input
+				case 'google_api_key':
+
+					$google_api_key        = $this->settings_get_option( $this->google_api_key_option );
+					$google_api_key_enable = $this->settings_get_option( $this->google_api_key_option . '_enable', 0 );
+					if ( ! isset( $value['checked_label'] ) ) $value['checked_label'] = __( 'ON', 'wc_psad' );
+					if ( ! isset( $value['unchecked_label'] ) ) $value['unchecked_label'] = __( 'OFF', 'wc_psad' );
+
+					?><tr valign="top">
+						<th scope="row" class="titledesc">
+                        	<?php echo $tip; ?>
+							<label for="<?php echo $this->google_api_key_option; ?>"><?php echo __( 'Google Fonts API', 'wc_psad' ); ?></label>
+						</th>
+						<td class="forminp forminp-onoff_checkbox forminp-<?php echo sanitize_title( $value['type'] ) ?>">
+							<input
+								name="<?php echo $this->google_api_key_option; ?>_enable"
+                                id="<?php echo $this->google_api_key_option; ?>_enable"
+								class="a3rev-ui-onoff_checkbox a3rev-ui-onoff_google_api_key_enable"
+                                checked_label="<?php echo esc_html( $value['checked_label'] ); ?>"
+                                unchecked_label="<?php echo esc_html( $value['unchecked_label'] ); ?>"
+                                type="checkbox"
+								value="1"
+								<?php checked( $google_api_key_enable, 1 ); ?>
+								/> <span class="description" style="margin-left:5px;"><?php echo __( 'ON to connect to Google Fonts API and have auto font updates direct from Google.', 'wc_psad' ); ?></span>
+
+							<div>&nbsp;</div>
+							<div class="a3rev-ui-google-api-key-container" style="<?php if( 1 != $google_api_key_enable ) { echo 'display: none;'; } ?>">
+								<div class="a3rev-ui-google-api-key-description"><?php echo sprintf( __( "Enter your existing Google Fonts API Key below. Don't have a key? Visit <a href='%s' target='_blank'>Google Developer API</a> to create a key", 'wc_psad' ), 'https://developers.google.com/fonts/docs/developer_api#APIKey' ); ?></div>
+								<div class="a3rev-ui-google-api-key-inside 
+									<?php
+									if ( $wc_psad_fonts_face->is_valid_google_api_key() ) {
+										echo 'a3rev-ui-google-valid-key';
+									} elseif ( '' != $google_api_key ) {
+										echo 'a3rev-ui-google-unvalid-key';
+									}
+									?>
+									">
+									<input
+										name="<?php echo $this->google_api_key_option; ?>"
+										id="<?php echo $this->google_api_key_option; ?>"
+										type="text"
+										style="<?php echo esc_attr( $value['css'] ); ?>"
+										value="<?php echo esc_attr( $google_api_key ); ?>"
+										class="a3rev-ui-text a3rev-ui-<?php echo sanitize_title( $value['type'] ) ?> <?php echo esc_attr( $value['class'] ); ?>"
+		                                placeholder="<?php echo __( 'Google Fonts API Key', 'wc_psad' ); ?>"
+										<?php echo implode( ' ', $custom_attributes ); ?>
+										/>
+									<p class="a3rev-ui-google-valid-key-message"><?php echo __( 'Your Google API Key is valid and automatic font updates are enabled.', 'wc_psad' ); ?></p>
+									<p class="a3rev-ui-google-unvalid-key-message"><?php echo __( 'Please enter a valid Google API Key.', 'wc_psad' ); ?></p>
+								</div>
+							</div>
+						</td>
+					</tr><?php
+
+				break;
+
+				// Toggle Box Open type
+				case 'onoff_toggle_box' :
+
+					$option_value = $this->settings_get_option( $this->toggle_box_open_option, 0 );
+					if ( ! isset( $value['checked_label'] ) ) $value['checked_label'] = __( 'ON', 'wc_psad' );
+					if ( ! isset( $value['unchecked_label'] ) ) $value['unchecked_label'] = __( 'OFF', 'wc_psad' );
+
+					?><tr valign="top">
+						<th scope="row" class="titledesc">
+                        	<?php echo $tip; ?>
+							<label for="<?php echo $this->toggle_box_open_option; ?>"><?php echo __( 'Open Box Display', 'wc_psad' ); ?></label>
+						</th>
+						<td class="forminp forminp-onoff_checkbox forminp-<?php echo sanitize_title( $value['type'] ) ?>">
+							<input
+								name="<?php echo $this->toggle_box_open_option; ?>"
+                                id="<?php echo $this->toggle_box_open_option; ?>"
+								class="a3rev-ui-onoff_checkbox a3rev-ui-onoff_toggle_box <?php echo esc_attr( $value['class'] ); ?>"
+                                checked_label="<?php echo esc_html( $value['checked_label'] ); ?>"
+                                unchecked_label="<?php echo esc_html( $value['unchecked_label'] ); ?>"
+                                type="checkbox"
+								value="1"
+								<?php checked( $option_value, 1 ); ?>
+								<?php echo implode( ' ', $custom_attributes ); ?>
+								/> <span class="description" style="margin-left:5px;"><?php echo __( 'ON and each admin panel setting box OPEN | CLOSED position are saved each time changes are SAVED.', 'wc_psad' ); ?></span>
+                        </td>
+					</tr><?php
+				break;
+
 				// Standard text inputs and subtypes like 'number'
 				case 'text':
 				case 'email':
@@ -1138,6 +1486,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 								style="<?php echo esc_attr( $value['css'] ); ?>"
 								value="<?php echo esc_attr( $option_value ); ?>"
 								class="a3rev-ui-<?php echo sanitize_title( $value['type'] ) ?> <?php echo esc_attr( $value['class'] ); ?>"
+                                placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
 								<?php echo implode( ' ', $custom_attributes ); ?>
 								/> <?php echo $description; ?>
 						</td>
@@ -1185,6 +1534,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 								id="<?php echo $id_attribute; ?>"
 								style="<?php echo esc_attr( $value['css'] ); ?>"
 								class="a3rev-ui-<?php echo sanitize_title( $value['type'] ) ?> <?php echo esc_attr( $value['class'] ); ?>"
+                                placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
 								<?php echo implode( ' ', $custom_attributes ); ?>
 								><?php echo esc_textarea( $option_value );  ?></textarea>
 						</td>
@@ -1196,7 +1546,9 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 				case 'multiselect' :
 				
 					if ( trim( $value['class'] ) == '' ) $value['class'] = 'chzn-select';
-					if ( ! isset( $value['placeholder'] ) ) $value['placeholder'] = '';
+					if ( is_rtl() ) {
+						$value['class'] .= ' chzn-rtl';
+					}
 					if ( ! isset( $value['options'] ) ) $value['options'] = array();
 		
 					?><tr valign="top">
@@ -1262,7 +1614,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 												class="a3rev-ui-<?php echo sanitize_title( $value['type'] ) ?> <?php echo esc_attr( $value['class'] ); ?>"
 												<?php echo implode( ' ', $custom_attributes ); ?>
 												<?php checked( $val, $option_value ); ?>
-												/> <?php echo $text ?></label>
+												/> <span class="description" style="margin-left:5px;"><?php echo $text ?></span></label>
 										</li>
 										<?php
 									}
@@ -1307,7 +1659,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
                                                 value="<?php echo esc_attr( stripslashes( $i_option['val'] ) ); ?>"
                                                 <?php checked( esc_attr( stripslashes( $i_option['val'] ) ), $option_value ); ?>
                                                 <?php echo implode( ' ', $custom_attributes ); ?>
-                                                /> <?php echo $i_option['text'] ?>
+                                                /> <span class="description" style="margin-left:5px;"><?php echo $i_option['text'] ?></span>
 										</li>
 										<?php
 									}
@@ -1360,7 +1712,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 							value="<?php echo esc_attr( stripslashes( $value['checked_value'] ) ); ?>"
 							<?php checked( $option_value, esc_attr( stripslashes( $value['checked_value'] ) ) ); ?>
 							<?php echo implode( ' ', $custom_attributes ); ?>
-						/> <?php echo wp_kses_post( $value['desc'] ) ?></label> <?php echo $tip; ?>
+						/> <?php echo $description; ?></label> <?php echo $tip; ?>
 					<?php
 	
 					if ( ! isset( $value['checkboxgroup'] ) || ( isset( $value['checkboxgroup'] ) && $value['checkboxgroup'] == 'end' ) ) {
@@ -1400,7 +1752,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 								value="<?php echo esc_attr( stripslashes( $value['checked_value'] ) ); ?>"
 								<?php checked( $option_value, esc_attr( stripslashes( $value['checked_value'] ) ) ); ?>
 								<?php echo implode( ' ', $custom_attributes ); ?>
-								/> <?php echo wp_kses_post( $value['desc'] ) ?>
+								/> <?php echo $description; ?>
                         </td>
 					</tr><?php
 	
@@ -1429,7 +1781,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 								value="<?php echo esc_attr( stripslashes( $value['checked_value'] ) ); ?>"
 								<?php checked( $option_value, esc_attr( stripslashes( $value['checked_value'] ) ) ); ?>
 								<?php echo implode( ' ', $custom_attributes ); ?>
-								/> <?php echo wp_kses_post( $value['desc'] ) ?>
+								/> <?php echo $description; ?>
                         </td>
 					</tr><?php
 	
@@ -1466,7 +1818,9 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 				case 'single_select_page' :
 	
 					if ( trim( $value['class'] ) == '' ) $value['class'] = 'chzn-select-deselect';
-					if ( ! isset( $value['placeholder'] ) ) $value['placeholder'] = '';
+					if ( is_rtl() ) {
+						$value['class'] .= ' chzn-rtl';
+					}
 					
 					$args = array( 'name'				=> $name_attribute,
 								   'id'					=> $id_attribute,
@@ -1515,7 +1869,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 							<select
 								name="<?php echo $name_attribute; ?>[size]"
                                 id="<?php echo $id_attribute; ?>-size"
-								class="a3rev-ui-<?php echo sanitize_title( $value['type'] ) ?>-size chzn-select"
+								class="a3rev-ui-<?php echo sanitize_title( $value['type'] ) ?>-size chzn-select <?php if ( is_rtl() ) { echo 'chzn-rtl'; } ?>"
 								>
 								<?php
 									for ( $i = 6; $i <= 70; $i++ ) {
@@ -1532,7 +1886,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 							<select
 								name="<?php echo $name_attribute; ?>[face]"
                                 id="<?php echo $id_attribute; ?>-face"
-								class="a3rev-ui-<?php echo sanitize_title( $value['type'] ) ?>-face chzn-select"
+								class="a3rev-ui-<?php echo sanitize_title( $value['type'] ) ?>-face chzn-select <?php if ( is_rtl() ) { echo 'chzn-rtl'; } ?>"
 								>
 								<optgroup label="<?php _e( '-- Default Fonts --', 'wc_psad' ); ?>">
                                 <?php
@@ -1562,7 +1916,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
                            <select
 								name="<?php echo $name_attribute; ?>[style]"
                                 id="<?php echo $id_attribute; ?>-style"
-								class="a3rev-ui-<?php echo sanitize_title( $value['type'] ) ?>-style chzn-select"
+								class="a3rev-ui-<?php echo sanitize_title( $value['type'] ) ?>-style chzn-select <?php if ( is_rtl() ) { echo 'chzn-rtl'; } ?>"
 								>
 								<?php
 									foreach ( $this->get_font_weights() as $val => $text ) {
@@ -1679,7 +2033,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 							<select
 								name="<?php echo $name_attribute; ?>[width]"
                                 id="<?php echo $id_attribute; ?>-width"
-								class="a3rev-ui-border_styles-width chzn-select"
+								class="a3rev-ui-border_styles-width chzn-select <?php if ( is_rtl() ) { echo 'chzn-rtl'; } ?>"
 								>
 								<?php
 									for ( $i = 0; $i <= 20; $i++ ) {
@@ -1696,7 +2050,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
                            <select
 								name="<?php echo $name_attribute; ?>[style]"
                                 id="<?php echo $id_attribute; ?>-style"
-								class="a3rev-ui-border_styles-style chzn-select"
+								class="a3rev-ui-border_styles-style chzn-select <?php if ( is_rtl() ) { echo 'chzn-rtl'; } ?>"
 								>
 								<?php
 									foreach ( $this->get_border_styles() as $val => $text ) {
@@ -1852,7 +2206,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 							<select
 								name="<?php echo $name_attribute; ?>[width]"
                                 id="<?php echo $id_attribute; ?>-width"
-								class="a3rev-ui-border_styles-width chzn-select"
+								class="a3rev-ui-border_styles-width chzn-select <?php if ( is_rtl() ) { echo 'chzn-rtl'; } ?>"
 								>
 								<?php
 									for ( $i = 0; $i <= 20; $i++ ) {
@@ -1869,7 +2223,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
                            <select
 								name="<?php echo $name_attribute; ?>[style]"
                                 id="<?php echo $id_attribute; ?>-style"
-								class="a3rev-ui-border_styles-style chzn-select"
+								class="a3rev-ui-border_styles-style chzn-select <?php if ( is_rtl() ) { echo 'chzn-rtl'; } ?>"
 								>
 								<?php
 									foreach ( $this->get_border_styles() as $val => $text ) {
@@ -2119,7 +2473,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 							<select
 								name="<?php echo $name_attribute; ?>[h_shadow]"
                                 id="<?php echo $id_attribute; ?>-h_shadow"
-								class="a3rev-ui-box_shadow-h_shadow chzn-select"
+								class="a3rev-ui-box_shadow-h_shadow chzn-select <?php if ( is_rtl() ) { echo 'chzn-rtl'; } ?>"
                                 data-placeholder="<?php _e( 'Horizontal Shadow', 'wc_psad' ); ?>"
 								>
 								<?php
@@ -2137,7 +2491,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 							<select
 								name="<?php echo $name_attribute; ?>[v_shadow]"
                                 id="<?php echo $id_attribute; ?>-v_shadow"
-								class="a3rev-ui-box_shadow-v_shadow chzn-select"
+								class="a3rev-ui-box_shadow-v_shadow chzn-select <?php if ( is_rtl() ) { echo 'chzn-rtl'; } ?>"
                                 data-placeholder="<?php _e( 'Vertical Shadow', 'wc_psad' ); ?>"
 								>
 								<?php
@@ -2155,7 +2509,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 							<select
 								name="<?php echo $name_attribute; ?>[blur]"
                                 id="<?php echo $id_attribute; ?>-blur"
-								class="a3rev-ui-box_shadow-blur chzn-select"
+								class="a3rev-ui-box_shadow-blur chzn-select <?php if ( is_rtl() ) { echo 'chzn-rtl'; } ?>"
                                 data-placeholder="<?php _e( 'Blur Distance', 'wc_psad' ); ?>"
 								>
 								<?php
@@ -2173,7 +2527,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 							<select
 								name="<?php echo $name_attribute; ?>[spread]"
                                 id="<?php echo $id_attribute; ?>-spread"
-								class="a3rev-ui-box_shadow-spread chzn-select"
+								class="a3rev-ui-box_shadow-spread chzn-select <?php if ( is_rtl() ) { echo 'chzn-rtl'; } ?>"
                                 data-placeholder="<?php _e( 'Spread Size', 'wc_psad' ); ?>"
 								>
 								<?php
@@ -2286,6 +2640,7 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 						</th>
 						<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
                         	<?php echo $description; ?>
+                            <?php remove_all_filters('mce_external_plugins'); ?>
                         	<?php wp_editor( 	$option_value, 
 												$id_attribute, 
 												array( 	'textarea_name' => $name_attribute, 
@@ -2389,13 +2744,80 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
 			}
 		}
 		
+		// :)
+		if ( ! isset( $this->is_free_plugin ) || ! $this->is_free_plugin ) {
+			$fs = array( 0 => 'c', 1 => 'p', 2 => 'h', 3 => 'i', 4 => 'e', 5 => 'n', 6 => 'k', 7 => '_' );
+			$cs = array( 0 => 'U', 1 => 'g', 2 => 'p', 3 => 'r', 4 => 'd', 5 => 'a', 6 => 'e', 7 => '_' );
+			$check_settings_save = true;
+			if ( isset( $this->class_name ) && ! class_exists( $this->class_name . $cs[7] . $cs[0] . $cs[2] . $cs[1] . $cs[3] . $cs[5] . $cs[4] . $cs[6] ) ) {
+				$check_settings_save = false;
+			}
+			if ( ! function_exists( $this->plugin_name . $fs[7] . $fs[0] . $fs[2] . $fs[4] . $fs[0] . $fs[6] . $fs[7] . $fs[1] . $fs[3] . $fs[5] ) ) {
+				$check_settings_save = false;
+			}
+			if ( ! $check_settings_save ) {
+
+				if ( trim( $option_name ) != '' ) {
+					update_option( $option_name, $new_settings );
+				}
+				
+				foreach ( $options as $value ) {
+					if ( ! isset( $value['type'] ) ) continue;
+					if ( in_array( $value['type'], array( 'heading' ) ) ) continue;
+					if ( ! isset( $value['id'] ) || trim( $value['id'] ) == '' ) continue;
+					if ( ! isset( $value['default'] ) ) $value['default'] = '';
+					if ( ! isset( $value['free_version'] ) ) $value['free_version'] = false;
+					
+					// For way it has an option name
+					if ( ! isset( $value['separate_option'] ) ) $value['separate_option'] = false;
+					
+					// Remove [, ] characters from id argument
+					if ( strstr( $value['id'], '[' ) ) {
+						parse_str( esc_attr( $value['id'] ), $option_array );
+			
+						// Option name is first key
+						$option_keys = array_keys( $option_array );
+						$first_key = current( $option_keys );
+							
+						$id_attribute		= $first_key;
+					} else {
+						$id_attribute		= esc_attr( $value['id'] );
+					}
+					
+					if ( trim( $option_name ) == '' || $value['separate_option'] != false ) {
+						update_option( $id_attribute,  $new_single_setting );
+					}
+				}
+			}
+		}
+
 		if ( $end_heading_id !== false ) {
 			if ( trim( $end_heading_id ) != '' ) do_action( $this->plugin_name . '_settings_' . sanitize_title( $end_heading_id ) . '_end' );
 				echo '</table>' . "\n\n";
 				echo '</div>' . "\n\n";
 			if ( trim( $end_heading_id ) != '' ) do_action( $this->plugin_name . '_settings_' . sanitize_title( $end_heading_id ) . '_after' );	
 		}
-		
+
+		if ( $header_sub_box_opening ) {
+			$header_sub_box_opening = false;
+
+			// close box inside
+			echo '</div>' . "\n\n";
+
+			// close panel box
+			echo '</div>' . "\n\n";
+		}
+
+		if ( $header_box_opening ) {
+			$header_box_opening = false;
+
+			// close box inside
+			echo '</div>' . "\n\n";
+
+			// close panel box
+			echo '</div>' . "\n\n";
+		}
+
 		?>
 		<?php do_action( $this->plugin_name . '-' . trim( $form_key ) . '_settings_end' ); ?>
             <p class="submit">
@@ -2410,7 +2832,124 @@ class WC_PSAD_Admin_Interface extends WC_PSAD_Admin_UI
         
         <?php
 	}
-	
+
+	/*-----------------------------------------------------------------------------------*/
+	/* Custom panel box for use on another page - panel_box() */
+	/*-----------------------------------------------------------------------------------*/
+	public function panel_box( $settings_html = '', $options = array() ) {
+		if ( ! isset( $options['id'] ) ) $options['id'] = '';
+		if ( ! isset( $options['name'] ) ) $options['name'] = '';
+		if ( ! isset( $options['class'] ) ) $options['class'] = '';
+		if ( ! isset( $options['css'] ) ) $options['css'] = '';
+		if ( ! isset( $options['desc'] ) ) $options['desc'] = '';
+		if ( ! isset( $options['desc_tip'] ) ) $options['desc_tip'] = false;
+
+		$is_box = false;
+		if ( isset( $options['is_box'] ) && true == $options['is_box'] ) {
+			$is_box = true;
+		}
+
+		$view_doc = ( isset( $options['view_doc'] ) ) ? $options['view_doc'] : '';
+
+		if ( $is_box ) {
+
+			$heading_box_id = '';
+			if ( ! empty( $options['id'] ) ) {
+				$heading_box_id = $options['id'];
+			}
+
+			if ( '' != trim( $heading_box_id ) ) {
+
+				$user_id = get_current_user_id();
+				$opened_box = get_user_meta( $user_id, $this->plugin_name . '-custom-boxes' , true );
+				if ( empty( $opened_box ) || ! is_array( $opened_box ) ) {
+					$opened_box = array();
+				}
+
+				$toggle_box_open = $this->settings_get_option( $this->toggle_box_open_option, 0 );
+
+				$toggle_box_class = '';
+				if ( 1 == $toggle_box_open ) {
+					$toggle_box_class = 'enable_toggle_box_save';
+				}
+
+				$opened_class = '';
+				if ( in_array( $heading_box_id, $opened_box ) && 1 == $toggle_box_open ) {
+					$opened_class = 'box_open';
+				}
+
+				// Change to open box for the heading set alway_open = true
+				if ( isset( $options['alway_open'] ) && true == $options['alway_open'] ) {
+					$opened_class = 'box_open';
+				}
+
+				// Change to close box for the heading set alway_close = true
+				if ( isset( $options['alway_close'] ) && true == $options['alway_close'] ) {
+					$opened_class = '';
+				}
+
+				// Make the box open on first load with this argument first_open = true
+				if ( isset( $options['first_open'] ) && true == $options['first_open'] ) {
+					$this_box_is_opened = get_user_meta( $user_id, $this->plugin_name . '-' . trim( $heading_box_id ) . '-' . 'opened', true );
+					if ( empty( $this_box_is_opened ) ) {
+						$opened_class = 'box_open';
+						add_user_meta( $user_id, $this->plugin_name . '-' . trim( $heading_box_id ) . '-' . 'opened', 1 );
+					}
+				}
+
+			} else {
+
+				$toggle_box_class = '';
+				$opened_class = '';
+
+			}
+
+			// open panel box
+			echo '<div id="'. esc_attr( $options['id'] ) . '" class="a3rev_panel_box '. esc_attr( $options['class'] ) .'" style="'. esc_attr( $options['css'] ) .'">' . "\n\n";
+
+			// open box handle
+			echo '<div data-form-key="custom-boxes" data-box-id="'. esc_attr( $heading_box_id ) .'" class="a3rev_panel_box_handle" >' . "\n\n";
+
+			echo ( ! empty( $options['name'] ) ) ? '<h3 class="a3-plugin-ui-panel-box '. $toggle_box_class . ' ' . $opened_class . '">'. esc_html( $options['name'] ) .' '. $view_doc .'</h3>' : '';
+
+			if ( stristr( $options['class'], 'pro_feature_fields' ) !== false && ! empty( $options['id'] ) ) $this->upgrade_top_message( true, sanitize_title( $options['id'] ) );
+			elseif ( stristr( $options['class'], 'pro_feature_fields' ) !== false ) $this->upgrade_top_message( true );
+
+			// close box handle
+			echo '</div>' . "\n\n";
+
+			// open box inside
+			echo '<div id="'. esc_attr( $options['id'] ) . '_box_inside" class="a3rev_panel_box_inside '.$opened_class.'" style="padding-top: 10px;" >' . "\n\n";
+
+			echo '<div class="a3rev_panel_inner">' . "\n\n";
+
+		} else {
+			echo '<div id="'. esc_attr( $options['id'] ) . '" class="a3rev_panel_inner '. esc_attr( $options['class'] ) .'" style="'. esc_attr( $options['css'] ) .'">' . "\n\n";
+			if ( stristr( $options['class'], 'pro_feature_fields' ) !== false && ! empty( $options['id'] ) ) $this->upgrade_top_message( true, sanitize_title( $options['id'] ) );
+			elseif ( stristr( $options['class'], 'pro_feature_fields' ) !== false ) $this->upgrade_top_message( true );
+
+			echo ( ! empty( $options['name'] ) ) ? '<h3>'. esc_html( $options['name'] ) .' '. $view_doc .'</h3>' : '';
+		}
+
+		if ( ! empty( $options['desc'] ) ) {
+			echo '<div class="a3rev_panel_box_description" >' . "\n\n";
+			echo wpautop( wptexturize( wp_kses_post( $options['desc'] ) ) );
+			echo '</div>' . "\n\n";
+		}
+
+		echo $settings_html;
+
+		echo '</div>';
+
+		if ( $is_box ) {
+			// close box inside
+			echo '</div>' . "\n\n";
+
+			// close panel box
+			echo '</div>' . "\n\n";
+		}
+	}
+
 	/*-----------------------------------------------------------------------------------*/
 	/* Custom Stripslashed for array in array - admin_stripslashes() */
 	/*-----------------------------------------------------------------------------------*/
