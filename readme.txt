@@ -4,7 +4,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
 Requires at least: 3.8
 Tested up to: 4.2.2
-Stable tag: 1.2.1
+Stable tag: 1.3.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -199,6 +199,13 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 == Changelog ==
 
+= 1.3.0 - 2015/07/03 =
+* Feature - Major performance upgrade with optimized database queries and in plugin caching
+* Feature - Add new DB Query Cache settings box with option to switch caching ON | OFF and manual clear cache
+* Feature - Add caching for shop page product categories and products queries
+* Tweak - Hook to filter 'woocommerce_product_subcategories_args' tag to remove duplicate the queries to database
+* Tweak - Check and just called queries from Shop page in Responsi Framework
+
 = 1.2.1 - 2015/06/17 =
 * Tweak - Check if a3_admin_ui_script_params is defined to save status of settings box
 * Tweak - Added call 'admin_localize_printed_scripts' on setting panel page to avoid conflicts with other plugins built on a3 Plugin framework
@@ -346,6 +353,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.3.0 =
+Feature Upgrade. Major performance upgrade with optimized database queries and in-plugin caching
 
 = 1.2.1 =
 Maintenance Upgrade. 2 code Tweaks for new a3 Plugin Framework released in version 1.2.0

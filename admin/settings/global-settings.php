@@ -135,6 +135,10 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 			unset($uninstallable_plugins[WC_PSAD_NAME]);
 			update_option('uninstall_plugins', $uninstallable_plugins);
 		}
+		if ( isset( $_POST['bt_save_settings'] ) && isset( $_POST['psad_flush_cached'] )  )  {
+			delete_option( 'psad_flush_cached' );
+			WC_PSAD_Functions::flush_cached();
+		}
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -270,6 +274,45 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 				'unchecked_value'	=> 'no',
 				'checked_label'		=> __( 'SHOW', 'wc_psad' ),
 				'unchecked_label' 	=> __( 'HIDE', 'wc_psad' ),
+			),
+
+			array(
+            	'name' 		=> __( 'DB Query Cache', 'wc_psad' ),
+            	'desc'		=> __( 'Caching applies to product categories and products loading on shop page, (product category and product tags pages in Pro Version). Significantly reduces server resources used in fetching product categories and products. Highly Recommended for sites with more than 20 Product categories' , 'wc_psad' ),
+            	'id'		=> 'psad_queries_cached_box',
+                'type' 		=> 'heading',
+                'is_box'	=> true,
+           	),
+			array(
+				'name' 		=> __( 'Cache Queries', 'wc_psad' ),
+				'desc'		=> __( 'Cache is auto cleared every 24 hours', 'wc_psad' ),
+				'class'		=> 'psad_queries_cached_enable',
+				'id' 		=> 'psad_queries_cached_enable',
+				'default'	=> 'yes',
+				'type' 		=> 'onoff_checkbox',
+				'separate_option'	=> true,
+				'free_version'		=> true,
+				'checked_value'		=> 'yes',
+				'unchecked_value'	=> 'no',
+				'checked_label'		=> __( 'ON', 'wc_psad' ),
+				'unchecked_label' 	=> __( 'OFF', 'wc_psad' ),
+			),
+
+			array(
+                'type' 		=> 'heading',
+				'class'		=> 'psad_queries_cached_enable_container',
+           	),
+           	array(
+				'name' 		=> __( 'Manual Flush', 'wc_psad' ),
+				'desc'		=> __( 'Switch ON and save changes to manually clear Sort and Display Query caching', 'wc_psad' ),
+				'id' 		=> 'psad_flush_cached',
+				'default'	=> '0',
+				'type' 		=> 'onoff_checkbox',
+				'free_version'		=> true,
+				'checked_value'		=> '1',
+				'unchecked_value'	=> '0',
+				'checked_label'		=> __( 'ON', 'wc_psad' ),
+				'unchecked_label' 	=> __( 'OFF', 'wc_psad' ),
 			),
 
 			array(
@@ -598,6 +641,9 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 		} else {
 			$(".psad_explanation_message").hide();
 		}
+		if ( $("input.psad_queries_cached_enable:checked").val() != 'yes') {
+			$(".psad_queries_cached_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
+		}
 		if ( $("input.psad_shop_page_enable:checked").val() != 'yes') {
 			$(".psad_shop_page_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
 		}
@@ -616,6 +662,14 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 				$(".psad_explanation_message").slideDown();
 			} else {
 				$(".psad_explanation_message").slideUp();
+			}
+		});
+		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_queries_cached_enable', function( event, value, status ) {
+			$(".psad_queries_cached_enable_container").attr('style','display:none;');
+			if ( status == 'true' ) {
+				$(".psad_queries_cached_enable_container").slideDown();
+			} else {
+				$(".psad_queries_cached_enable_container").slideUp();
 			}
 		});
 		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_shop_page_enable', function( event, value, status ) {

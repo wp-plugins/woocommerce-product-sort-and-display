@@ -64,6 +64,13 @@ class WC_PSAD_Functions
 			}
 		}
 	}
+
+	public static function flush_cached() {
+		global $wpdb;
+
+		$wpdb->query( $wpdb->prepare( 'DELETE FROM '. $wpdb->options . ' WHERE option_name LIKE %s', '%psad_shop_categories_query%' ) );
+		$wpdb->query( $wpdb->prepare( 'DELETE FROM '. $wpdb->options . ' WHERE option_name LIKE %s', '%psad_shop_list_products_category%' ) );
+	}
 	
 	public static function upgrade_version_1_0_2() {	
 		
