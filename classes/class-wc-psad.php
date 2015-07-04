@@ -44,7 +44,8 @@ class WC_PSAD
 		// For Shop page
 		add_action( 'woocommerce_before_shop_loop', array( $this, 'start_remove_orderby_shop'), 2 );
 		add_action( 'woocommerce_before_shop_loop', array( $this, 'end_remove_orderby_shop'), 40 );
-		add_filter( 'woocommerce_product_subcategories_args', array( $this, 'dont_show_product_on_shop') );
+		add_filter( 'woocommerce_product_subcategories_args', array( $this, 'dont_show_categories_on_shop') );
+		add_action( 'woocommerce_before_shop_loop', array( $this, 'dont_show_product_on_shop'), 41 );
 		add_action( 'woocommerce_after_shop_loop', array( $this, 'rewrite_shop_page'), 12 );
 				
 		//Enqueue Script
@@ -266,23 +267,29 @@ class WC_PSAD
 		}
 	}
 	
-	public function dont_show_product_on_shop( $categories_query_arg ) {
+	public function dont_show_categories_on_shop( $categories_query_arg ) {
 		global $is_shop;
 		if ( $is_shop && get_option('psad_shop_page_enable') == 'yes' ) {
-			global $wp_query;
-
 			// override the arg of get sub categories query for don't get any sub categories on shop page
 			$categories_query_arg['parent'] = -1;
 			$categories_query_arg['number'] = 0;
 			$categories_query_arg['pad_counts'] = false;
+		}
+
+		return $categories_query_arg;
+	}
+
+	public function dont_show_product_on_shop() {
+		global $is_shop;
+		if ( $is_shop && get_option('psad_shop_page_enable') == 'yes' ) {
+			global $wp_query;
 
 			// set 0 to don't get products on shop page from WC
 			$wp_query->post_count  =  0;
 			$wp_query->max_num_pages =  0;
 		}
-
-		return $categories_query_arg;
 	}
+
 	public function rewrite_shop_page() {
 		global $is_shop;
 		global $psad_queries_cached_enable;
