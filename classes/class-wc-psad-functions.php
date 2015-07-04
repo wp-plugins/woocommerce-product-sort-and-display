@@ -18,7 +18,11 @@ class WC_PSAD_Functions
 		// Create sort keys
 		if ( $all_products && count( $all_products ) > 0 ) {
 			foreach ( $all_products as $a_product ) {
-				$product = get_product( $a_product->ID );
+				if ( version_compare( WC()->version, '2.2.0', '<' ) ) {
+					$product 	= get_product( $a_product->ID );
+				} else {
+					$product 	= wc_get_product( $a_product->ID );
+				}
 				if ( $product ) {
 					if ( $product->is_on_sale() ) {
 						update_post_meta( $a_product->ID, '_psad_onsale_order', 2 );
@@ -42,7 +46,11 @@ class WC_PSAD_Functions
 		if ( ! current_user_can( 'edit_post', $post_id ) ) return $post_id;
 		if ( $post->post_type != 'product' ) return $post_id;
 		
-		$product = get_product( $post );
+		if ( version_compare( WC()->version, '2.2.0', '<' ) ) {
+			$product 	= get_product( $post );
+		} else {
+			$product 	= wc_get_product( $post );
+		}
 		if ( $product ) {
 			if ( $product->is_on_sale() ) {
 				update_post_meta( $post_id, '_psad_onsale_order', 2 );
@@ -55,6 +63,13 @@ class WC_PSAD_Functions
 				update_post_meta( $post_id, '_psad_featured_order', 1 );	
 			}
 		}
+	}
+
+	public static function flush_cached() {
+		global $wpdb;
+
+		$wpdb->query( $wpdb->prepare( 'DELETE FROM '. $wpdb->options . ' WHERE option_name LIKE %s', '%psad_shop_categories_query%' ) );
+		$wpdb->query( $wpdb->prepare( 'DELETE FROM '. $wpdb->options . ' WHERE option_name LIKE %s', '%psad_shop_list_products_category%' ) );
 	}
 	
 	public static function upgrade_version_1_0_2() {	
