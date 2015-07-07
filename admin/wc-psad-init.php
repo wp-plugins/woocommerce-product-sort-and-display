@@ -17,7 +17,7 @@ function wc_psad_install()
     $wc_psad_less->plugin_build_sass();
 
     WC_PSAD_Functions::auto_create_order_keys_all_products();
-    update_option('wc_psad_lite_version', '1.3.1');
+    update_option('wc_psad_lite_version', '1.3.2');
     update_option('wc_psad_plugin', 'wc_psad');
     delete_transient("wc_psad_update_info");
     delete_metadata( 'user', 0, $wc_psad_admin_init->plugin_name . '-' . 'psad_plugin_framework_box' . '-' . 'opened', '', true );
@@ -76,6 +76,15 @@ function psad_upgrade_plugin()
         $wc_psad_less->plugin_build_sass();
     }
 
-    update_option('wc_psad_lite_version', '1.3.1');
+    if ( version_compare( get_option( 'wc_psad_lite_version') , '1.3.2' ) === -1 ) {
+        update_option('wc_psad_lite_version', '1.3.2');
+
+        global $wpdb;
+
+        $wpdb->query( $wpdb->prepare( 'DELETE FROM '. $wpdb->options . ' WHERE option_name LIKE %s', '%psad_shop_categories_query%' ) );
+        $wpdb->query( $wpdb->prepare( 'DELETE FROM '. $wpdb->options . ' WHERE option_name LIKE %s', '%psad_shop_list_products_category%' ) );
+    }
+
+    update_option('wc_psad_lite_version', '1.3.2');
 }
 ?>

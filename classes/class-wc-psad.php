@@ -292,8 +292,7 @@ class WC_PSAD
 
 	public function rewrite_shop_page() {
 		global $is_shop;
-		global $psad_queries_cached_enable;
-		
+
 		$woocommerce_db_version = get_option( 'woocommerce_db_version', null );
 		
 		//Check rewrite this for shop page
@@ -318,10 +317,25 @@ class WC_PSAD
 		$psad_shop_category_per_page = get_option('psad_shop_category_per_page', 0);
 		if ( $psad_shop_category_per_page <= 0 ) $psad_shop_category_per_page = 3;
 
+		global $psad_queries_cached_enable;
+
+		$user_roles = '';
+		if ( is_user_logged_in() ) {
+			$user_login = wp_get_current_user();
+			$user_roles_a = $user_login->roles;
+			if ( is_array( $user_roles_a ) && count( $user_roles_a ) > 0 ) {
+				$user_roles = implode( '-', $user_roles_a );
+			}
+		}
+
+		if ( trim( $user_roles ) != '' ) {
+			$user_roles = '_' . $user_roles;
+		}
+
 		$product_categories = false;
 		if ( $psad_queries_cached_enable == 'yes' ) {
 			// Get cached shop categories query results
-			$product_categories = get_transient( 'psad_shop_categories_query' );
+			$product_categories = get_transient( 'a3_s_cat' . $user_roles );
 		}
 
 		if ( ! $product_categories ) {
@@ -339,7 +353,7 @@ class WC_PSAD
 
 			if ( $psad_queries_cached_enable == 'yes' ) {
 				// Set cached shop categories query results for 1 day
-				set_transient( 'psad_shop_categories_query', $product_categories, 86400 );
+				set_transient( 'a3_s_cat' . $user_roles, $product_categories, 86400 );
 			}
 		}
 
@@ -377,7 +391,7 @@ class WC_PSAD
 				$list_products = false;
 				if ( $psad_queries_cached_enable == 'yes' ) {
 					// Get cached shop each category query results
-					$list_products = get_transient( 'psad_shop_list_products_category_'.$category->term_id );
+					$list_products = get_transient( 'a3_s_p_cat_'.$category->term_id . $user_roles );
 				}
 
 				if ( ! $list_products ) {
@@ -545,7 +559,7 @@ class WC_PSAD
 					);
 
 					// Set cached shop each category query results for 1 day
-					set_transient( 'psad_shop_list_products_category_'.$category->term_id, $list_products, 86400 );
+					set_transient( 'a3_s_p_cat_' . $category->term_id . $user_roles, $list_products, 86400 );
 				}
 			}
 		}
