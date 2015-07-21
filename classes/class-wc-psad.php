@@ -27,6 +27,9 @@ class WC_PSAD
 	}
 	
 	public function init () {
+		global $psad_queries_cached_enable;
+		$psad_queries_cached_enable = get_option( 'psad_queries_cached_enable', 'no' );
+
 		add_filter('loop_shop_per_page', array( $this, 'limit_posts_per_page'),99);
 		
 		//Fix Responsi Theme.
@@ -41,6 +44,7 @@ class WC_PSAD
 		// For Shop page
 		add_action( 'woocommerce_before_shop_loop', array( $this, 'start_remove_orderby_shop'), 2 );
 		add_action( 'woocommerce_before_shop_loop', array( $this, 'end_remove_orderby_shop'), 40 );
+		add_filter( 'woocommerce_product_subcategories_args', array( $this, 'dont_show_categories_on_shop') );
 		add_action( 'woocommerce_before_shop_loop', array( $this, 'dont_show_product_on_shop'), 41 );
 		add_action( 'woocommerce_after_shop_loop', array( $this, 'rewrite_shop_page'), 12 );
 				
@@ -82,8 +86,9 @@ class WC_PSAD
 		?>
 		<nav class="wc_pagination woo-pagination woocommerce-pagination">
 			<?php
+				// fixed for 4.1.2
 				echo paginate_links( apply_filters( 'woocommerce_pagination_args', array(
-					'base' 			=> add_query_arg( 'paged', '%#%' ),
+					'base' 			=> esc_url( add_query_arg( 'paged', '%#%' ) ),
 					'format' 		=> '',
 					'current' 		=> max( 1, get_query_var('paged') ),
 					'total' 		=> $wp_query->max_num_pages,
@@ -117,18 +122,24 @@ class WC_PSAD
 	}	
 					
 	public function psad_endless_scroll_shop($show_click_more = true){
+		global $wp_version;
+		$cur_wp_version = preg_replace('/-.*$/', '', $wp_version);
 		?>
 		<script type="text/javascript">
 			jQuery(window).load(function(){
 				//pbc infinitescroll
 				var pbc_nextPage;
 				var pbc_currentPage = jQuery('.pbc_pagination span.current').html();
-				jQuery('.pbc_pagination').find('a.page-numbers').each(function(index){
-					if(jQuery(this).html() == (parseInt(pbc_currentPage) + 1)){
-						pbc_nextPage = jQuery(this);
-					}
-				});
-			
+
+				var pageNumbers = jQuery('.pbc_pagination').find('a.page-numbers');
+				if(pageNumbers.length > 0){
+					pageNumbers.each(function(index){
+						if(jQuery(this).html() == (parseInt(pbc_currentPage) + 1)){
+							pbc_nextPage = jQuery(this);
+						}
+					});
+				}
+
 				if(pbc_nextPage){
 					jQuery('.pbc_content').infinitescroll({
 						navSelector  : 'nav.pbc_pagination',
@@ -138,7 +149,16 @@ class WC_PSAD
 							finishedMsg: '<?php _e( 'No more categories to load.', 'wc_psad');?>',
 							msgText:"<em><?php _e( 'Loading the next set of Categories...', 'wc_psad');?></em>",
 							img: '<?php echo WC_PSAD_JS_URL;?>/masonry/loading-black.gif'
-						}
+						},
+						path:function generatePageUrl(pbc_currentPage){
+							var pageNumbers = jQuery('.pbc_pagination').find('a.page-numbers');
+							var url      = window.location.href;
+							if ( url.indexOf("?") > -1 ) {
+	                        	return [url+"&paged="+pbc_currentPage] ;
+	                        } else {
+	                        	return [url+"?paged="+pbc_currentPage] ;
+	                        }
+	                    }
 					},function( newElements ) {
 						var $newElems = jQuery( newElements ).css({ opacity: 0 });
 						$newElems.animate({ opacity: 1 });
@@ -151,11 +171,22 @@ class WC_PSAD
 							var content_column = <?php echo $content_column_grid;?>;
 
 							jQuery('.box_content').imagesLoaded(function(){
-								jQuery(this).masonry({
+								<?php if ( function_exists( 'a3_lazy_load_enable' ) ) { ?>
+								jQuery(window).lazyLoadXT();
+								<?php } else { ?>
+								jQuery('.box_content').masonry({
 								  itemSelector: '.box_item',
+								  <?php if ( version_compare( $cur_wp_version, '3.9', '<' ) ) { ?>
 								  columnWidth: jQuery('.box_content').width()/content_column,
-								  isAnimated: !Modernizr.csstransitions
+								  <?php } else { ?>
+								  columnWidth: jQuery('#main').width()/content_column,
+								  <?php } ?>
+								  transitionDuration:0.7,
+								  hiddenStyle: { opacity: 0, transform: 'translateY(100%)'},
+				  	  			  visibleStyle: { opacity: 1, transform: 'scale(1)'},
+					  			  "gutter": (jQuery('.box_content').width()-jQuery('#main').width())/content_column
 								});
+								<?php } ?>
 								//Fix Display Table-Cell
 								jQuery('body #main .box_item .entry-item .thumbnail a img').attr('width','').attr('height','');
 								var thumbs = jQuery('.box_content').find('.thumbnail_container');
@@ -169,6 +200,11 @@ class WC_PSAD
 					});
 					<?php if($show_click_more){?>
 					jQuery(window).unbind('.infscr');
+					<?php } ?>
+					<?php if ( function_exists( 'a3_lazy_load_enable' ) ) { ?>
+					jQuery(window).on('lazyload', function(){
+						jQuery('.box_content').masonry('reload');
+					}).lazyLoadXT({});
 					<?php } ?>
 					jQuery('.pbc_content_click_more a').click(function(){
 						jQuery('.pbc_content_click_more').hide();
@@ -209,11 +245,12 @@ class WC_PSAD
 	}
 	
 	public function include_customized_style(){
-		global $is_shop;
-		$enqueue_style = false;
-		if ( is_post_type_archive( 'product' ) && get_option('psad_shop_page_enable') == 'yes' ) $enqueue_style = true;
-		if ( $enqueue_style) {
-			include( WC_PSAD_TEMPLATE_PATH. '/customized_style.php' );
+		if ( is_post_type_archive( 'product' ) && get_option('psad_shop_page_enable', '' ) == 'yes' && get_option('psad_endless_scroll_category_shop', '' ) == 'yes' ) { 
+	?>
+    <style>
+	.wc_content .woocommerce-pagination, .pbc_content .woocommerce-pagination,.wc_content nav, .woocommerce-pagination, .woo-pagination {display:none !important;}
+	</style>
+	<?php 
 		}
 	}
 	
@@ -230,19 +267,32 @@ class WC_PSAD
 		}
 	}
 	
+	public function dont_show_categories_on_shop( $categories_query_arg ) {
+		global $is_shop;
+		if ( $is_shop && get_option('psad_shop_page_enable') == 'yes' ) {
+			// override the arg of get sub categories query for don't get any sub categories on shop page
+			$categories_query_arg['parent'] = -1;
+			$categories_query_arg['number'] = 0;
+			$categories_query_arg['pad_counts'] = false;
+		}
+
+		return $categories_query_arg;
+	}
+
 	public function dont_show_product_on_shop() {
 		global $is_shop;
-		$wp_query->query_vars['offset'] = 0;
 		if ( $is_shop && get_option('psad_shop_page_enable') == 'yes' ) {
 			global $wp_query;
-			$wp_query = new WP_Query( $wp_query->query_vars );
+
+			// set 0 to don't get products on shop page from WC
 			$wp_query->post_count  =  0;
 			$wp_query->max_num_pages =  0;
 		}
 	}
+
 	public function rewrite_shop_page() {
 		global $is_shop;
-		
+
 		$woocommerce_db_version = get_option( 'woocommerce_db_version', null );
 		
 		//Check rewrite this for shop page
@@ -250,7 +300,7 @@ class WC_PSAD
 		
 		//Start Shop
 		global $woocommerce, $wp_query, $wp_rewrite;
-		
+
 		$enable_product_showing_count = get_option('psad_shop_enable_product_showing_count');
 		$product_ids_on_sale = ( ( version_compare( $woocommerce_db_version, '2.1', '<' ) ) ? woocommerce_get_product_ids_on_sale() : wc_get_product_ids_on_sale() );
 		$product_ids_on_sale[] = 0;
@@ -266,18 +316,47 @@ class WC_PSAD
 		if ( get_query_var( 'paged' ) ) $page = get_query_var( 'paged' );
 		$psad_shop_category_per_page = get_option('psad_shop_category_per_page', 0);
 		if ( $psad_shop_category_per_page <= 0 ) $psad_shop_category_per_page = 3;
-		$args = array(
-			'parent' => $parent_id,
-			'child_of'		=> $parent_id,
-			'menu_order'	=> 'ASC',
-			'hide_empty'	=> 1,
-			'hierarchical'	=> 1,
-			'taxonomy'		=> 'product_cat',
-			'pad_counts'	=> 1
-		);
-		
-		$product_categories = get_categories( $args  );
-		
+
+		global $psad_queries_cached_enable;
+
+		$user_roles = '';
+		if ( is_user_logged_in() ) {
+			$user_login = wp_get_current_user();
+			$user_roles_a = $user_login->roles;
+			if ( is_array( $user_roles_a ) && count( $user_roles_a ) > 0 ) {
+				$user_roles = implode( '-', $user_roles_a );
+			}
+		}
+
+		if ( trim( $user_roles ) != '' ) {
+			$user_roles = '_' . $user_roles;
+		}
+
+		$product_categories = false;
+		if ( $psad_queries_cached_enable == 'yes' ) {
+			// Get cached shop categories query results
+			$product_categories = get_transient( 'a3_s_cat' . $user_roles );
+		}
+
+		if ( ! $product_categories ) {
+			$args = array(
+				'parent'       => $parent_id,
+				'child_of'     => $parent_id,
+				'menu_order'   => 'ASC',
+				'hide_empty'   => 1,
+				'hierarchical' => 1,
+				'taxonomy'     => 'product_cat',
+				'pad_counts'   => 1
+			);
+
+			$product_categories = get_categories( $args  );
+
+			if ( $psad_queries_cached_enable == 'yes' ) {
+				// Set cached shop categories query results for 1 day
+				set_transient( 'a3_s_cat' . $user_roles, $product_categories, 86400 );
+			}
+		}
+
 		$numOfItems = $psad_shop_category_per_page;
 		$to = $page * $numOfItems;
 		$current = $to - $numOfItems;
@@ -291,96 +370,134 @@ class WC_PSAD
 		$psad_es_category_item_bt_text = esc_attr( stripslashes( get_option( 'psad_es_category_item_link_text', '' ) ) );
 		$psad_es_category_item_bt_position = get_option('psad_es_category_item_bt_position', 'bottom');
 		
-		$psad_es_category_item_class = '';
 		$class = 'click_more_link';
 		if ( $psad_es_category_item_bt_type == 'button' ) {
 			$class = 'click_more_button';
 			$psad_es_category_item_bt_text = esc_attr( stripslashes( get_option( 'psad_es_category_item_bt_text', '' ) ) );
-			$psad_es_category_item_class = get_option( 'psad_es_category_item_class', '' );
 		}
 		if ( trim( $psad_es_category_item_bt_text ) == '' ) { $psad_es_category_item_bt_text = __('See more...', 'wc_psad'); }
-		if ( trim( $psad_es_category_item_class ) != '' ) { $class .= ' '.trim($psad_es_category_item_class); }
 		
 		echo '<div style="clear:both;"></div>';
 		echo '<div class="pbc_container">';
 		echo '<div style="clear:both;"></div>';
 		echo '<div class="pbc_content">';
 		if ( $product_categories ) {
-			
+			$product_categories = array_values( $product_categories );
+
 			for ( $i = $current ; $i < $to ; ++$i ) {
 				
 				$category = $product_categories[$i];
-				
-				$psad_shop_product_per_page	= get_woocommerce_term_meta( $category->term_id, 'psad_shop_product_per_page', true );
-				if (!$psad_shop_product_per_page || $psad_shop_product_per_page <= 0)
-					$psad_shop_product_per_page = $global_psad_shop_product_per_page;
-				if ( $psad_shop_product_per_page <= 0 )
-					$psad_shop_product_per_page = 3;
-					
-				$psad_shop_product_show_type	= get_woocommerce_term_meta( $category->term_id, 'psad_shop_product_show_type', true );
-				if (!$psad_shop_product_show_type || $psad_shop_product_show_type == '')
-					$psad_shop_product_show_type = $global_psad_shop_product_show_type;
-					
-				$display_type	= get_woocommerce_term_meta( $category->term_id, 'display_type', true );
-				if (!$display_type || $display_type == '')
-					$display_type = $global_display_type;
-				
-				if ($psad_shop_product_show_type == 'none') {
-				} elseif ($psad_shop_product_show_type == 'recent') {
-				} elseif ($psad_shop_product_show_type == 'onsale') {
-					$wp_query->query_vars['post__in'] = $product_ids_on_sale;
-				} elseif ($psad_shop_product_show_type == 'featured') {
-					$wp_query->query_vars['no_found_rows'] = 1;
-					$wp_query->query_vars['post_status'] = 'publish';
-					$wp_query->query_vars['post_type'] = 'product';
-					$wp_query->query_vars['meta_query'] = $woocommerce->query->get_meta_query();
-					$wp_query->query_vars['meta_query'][] = array(
-						'key' => '_featured',
-						'value' => 'yes'
+
+				$list_products = false;
+				if ( $psad_queries_cached_enable == 'yes' ) {
+					// Get cached shop each category query results
+					$list_products = get_transient( 'a3_s_p_cat_'.$category->term_id . $user_roles );
+				}
+
+				if ( ! $list_products ) {
+
+					$psad_shop_product_per_page	= get_woocommerce_term_meta( $category->term_id, 'psad_shop_product_per_page', true );
+					if (!$psad_shop_product_per_page || $psad_shop_product_per_page <= 0)
+						$psad_shop_product_per_page = $global_psad_shop_product_per_page;
+					if ( $psad_shop_product_per_page <= 0 )
+						$psad_shop_product_per_page = 3;
+						
+					$psad_shop_product_show_type	= get_woocommerce_term_meta( $category->term_id, 'psad_shop_product_show_type', true );
+					if (!$psad_shop_product_show_type || $psad_shop_product_show_type == '')
+						$psad_shop_product_show_type = $global_psad_shop_product_show_type;
+
+					$display_type	= get_woocommerce_term_meta( $category->term_id, 'display_type', true );
+					if (!$display_type || $display_type == '')
+						$display_type = $global_display_type;
+
+					if ($psad_shop_product_show_type == 'none') {
+					} elseif ($psad_shop_product_show_type == 'recent') {
+					} elseif ($psad_shop_product_show_type == 'onsale') {
+						$wp_query->query_vars['post__in'] = $product_ids_on_sale;
+					} elseif ($psad_shop_product_show_type == 'featured') {
+						$wp_query->query_vars['no_found_rows'] = 1;
+						$wp_query->query_vars['post_status'] = 'publish';
+						$wp_query->query_vars['post_type'] = 'product';
+						if ( version_compare( $woocommerce_db_version, '2.1', '>' ) ) 
+							$wp_query->query_vars['meta_query'] = WC()->query->get_meta_query();
+						else 
+							$wp_query->query_vars['meta_query'] = $woocommerce->query->get_meta_query();
+						$wp_query->query_vars['meta_query'][] = array(
+							'key' => '_featured',
+							'value' => 'yes'
+						);
+					}
+					$product_args = array(
+						'post_type'				=> 'product',
+						'post_status' 			=> 'publish',
+						'ignore_sticky_posts'	=> 1,
+						'orderby' 				=> $orderby,
+						'order' 				=> $order,
+						'posts_per_page' 		=> $psad_shop_product_per_page,		
+						'meta_query' 			=> array(
+							array(
+								'key' 			=> '_visibility',
+								'value' 		=> array('catalog', 'visible'),
+								'compare' 		=> 'IN'
+							)
+						),
+						'tax_query' 			=> array(
+							array(
+								'taxonomy' 		=> 'product_cat',
+								'terms' 		=> $category->slug ,
+								'include_children' => false ,
+								'field' 		=> 'slug',
+								'operator' 		=> 'IN'
+							)
+						)
 					);
+					
+					$ogrinal_product_args = $product_args;
+					
+					if ( $psad_shop_product_show_type == 'onsale' ) {
+						$product_args['orderby']	= 'meta_value_num';
+						$product_args['order']		= 'DESC';
+						$product_args['meta_key']	= '_psad_onsale_order';
+					} elseif ( $psad_shop_product_show_type == 'featured' ) {
+						$product_args['orderby']	= 'meta_value_num';
+						$product_args['order']		= 'DESC';
+						$product_args['meta_key']	= '_psad_featured_order';
+					}
+					
+					$products = query_posts( $product_args );
+					
+					$psad_shop_drill_down = get_option('psad_shop_drill_down', 'yes');
+					$have_products = false;
+					
+					if ( have_posts() ) {
+						$have_products = true;	
+					} elseif ( $psad_shop_drill_down == 'yes' ) {
+						$product_args['tax_query'] = array(
+							array(
+								'taxonomy' 		=> 'product_cat',
+								'terms' 		=> $category->slug ,
+								'include_children' => true ,
+								'field' 		=> 'slug',
+								'operator' 		=> 'IN'
+							)
+						);
+						$products = query_posts( $product_args );
+						
+						if ( have_posts() ) {
+							$have_products = true;
+						}
+					}
+
+					$count_posts_get = count( $products );
+					$total_posts     = $wp_query->found_posts;
+
+				} else {
+					$have_products   = $list_products['have_products'];
+					$count_posts_get = $list_products['count_products'];
+					$total_posts     = $list_products['total_posts'];
 				}
-				$product_args = array(
-					'post_type'				=> 'product',
-					'post_status' 			=> 'publish',
-					'ignore_sticky_posts'	=> 1,
-					'orderby' 				=> $orderby,
-					'order' 				=> $order,
-					'posts_per_page' 		=> $psad_shop_product_per_page,		
-					'meta_query' 			=> array(
-						array(
-							'key' 			=> '_visibility',
-							'value' 		=> array('catalog', 'visible'),
-							'compare' 		=> 'IN'
-						)
-					),
-					'tax_query' 			=> array(
-						array(
-							'taxonomy' 		=> 'product_cat',
-							'terms' => $category->slug ,
-							'include_children' => false ,
-							'field' 		=> 'slug',
-							'operator' 		=> 'IN'
-						)
-					)
-				);
-				
-				$ogrinal_product_args = $product_args;
-				
-				if ( $psad_shop_product_show_type == 'onsale' ) {
-					$product_args['orderby']	= 'meta_value_num';
-					$product_args['order']		= 'DESC';
-					$product_args['meta_key']	= '_psad_onsale_order';
-				} elseif ( $psad_shop_product_show_type == 'featured' ) {
-					$product_args['orderby']	= 'meta_value_num';
-					$product_args['order']		= 'DESC';
-					$product_args['meta_key']	= '_psad_featured_order';
-				}
-				
-				$products = query_posts( $product_args );
-				if ( have_posts() ) {
-					$total_posts = $wp_query->found_posts;
-					$count_posts_get = count($products);
-				
+
+				if ( $have_products ) {
 					$term_link_html = '';
 					if ( $category->parent > 0 ) {
 					$my_term = get_term($category->parent,'product_cat');
@@ -391,7 +508,7 @@ class WC_PSAD
 					}
 					$term_link_sub_html = get_term_link( $category->slug, 'product_cat' );
 					echo '<div id="products_categories_row_'.$category->term_id.'" class="products_categories_row">';
-					echo '<div class="custom_box responsi_title"><h1 class="title pbc_title">'.$term_link_html.'<a href="'.$term_link_sub_html.'">' .$category->name.'</a></h1>';
+					echo '<div class="custom_box custom_box_archive responsi_title"><h1 class="title pbc_title">'.$term_link_html.'<a href="'.$term_link_sub_html.'">' .$category->name.'</a></h1>';
 					if ( $enable_product_showing_count == 'yes' || ( $count_posts_get < $total_posts && $psad_es_category_item_bt_position == 'top' ) ) {
 						echo '<div class="product_categories_showing_count_container">';
 						if ( $enable_product_showing_count == 'yes' ) echo '<span class="product_categories_showing_count">'.__('Currently viewing', 'wc_psad'). ' 1 - ' .$count_posts_get.' '.__('of', 'wc_psad'). ' '. $total_posts .' '. __('products in this Category', 'wc_psad').'</span> ';
@@ -400,15 +517,27 @@ class WC_PSAD
 					}
 					if( trim($category->description) != '' ) echo '<blockquote class="term-description"><p>'.$category->description.'</p></blockquote>';
 					echo '</div>';
-					
-					woocommerce_product_loop_start();
-					while ( have_posts() ) : the_post();
-						if ( version_compare( $woocommerce_db_version, '2.1', '<' ) )
-							woocommerce_get_template( 'content-product.php' );
-						else
-							wc_get_template( 'content-product.php' );
-					endwhile; 
-					woocommerce_product_loop_end();
+
+					if ( ! $list_products ) {
+
+						ob_start();
+
+						woocommerce_product_loop_start();
+						while ( have_posts() ) : the_post();
+							if ( version_compare( $woocommerce_db_version, '2.1', '<' ) )
+								woocommerce_get_template( 'content-product.php' );
+							else
+								wc_get_template( 'content-product.php' );
+						endwhile;
+						woocommerce_product_loop_end();
+
+						$list_product_output = ob_get_clean();
+
+						echo $list_product_output;
+
+					} else {
+						echo $list_products['products_output'];
+					}
 					
 					if ( $psad_es_category_item_bt_position != 'top' ) {
 						if ( $count_posts_get < $total_posts ) {
@@ -419,6 +548,18 @@ class WC_PSAD
 					}
 					echo '</div>';
 					echo '<div class="psad_seperator products_categories_row" style="clear:both;"></div>';
+				}
+
+				if ( $psad_queries_cached_enable == 'yes' && ! $list_products ) {
+					$list_products = array(
+						'have_products'   => $have_products,
+						'count_products'  => $count_posts_get,
+						'total_posts'     => $total_posts,
+						'products_output' => $list_product_output,
+					);
+
+					// Set cached shop each category query results for 1 day
+					set_transient( 'a3_s_p_cat_' . $category->term_id . $user_roles, $list_products, 86400 );
 				}
 			}
 		}
@@ -439,8 +580,9 @@ class WC_PSAD
 		
 		if ( ceil($total / $numOfItems) > 1 ){
 			echo '<nav class="pagination woo-pagination woocommerce-pagination pbc_pagination">';
+			// fixed for 4.1.2
 			$defaults = array(
-				'base' => add_query_arg( 'paged', '%#%' ),
+				'base' => esc_url( add_query_arg( 'paged', '%#%' ) ),
 				'format' => '',
 				'total' => ceil($total / $numOfItems),
 				'current' => $page,
@@ -451,7 +593,7 @@ class WC_PSAD
 				'mid_size'		=> 3
 			);
 			if( $wp_rewrite->using_permalinks() && ! is_search() )
-				$defaults['base'] = user_trailingslashit( trailingslashit( add_query_arg( array( 'paged' => false, 'orderby' => false ) ) ) . 'page/%#%' );
+				$defaults['base'] = user_trailingslashit( trailingslashit( str_replace( 'page/'.$page , '' , esc_url( add_query_arg( array( 'paged' => false, 'orderby' => false ) ) ) ) ) . 'page/%#%' );
 				
 			echo paginate_links( $defaults );
 			echo '</nav>';
@@ -466,14 +608,11 @@ class WC_PSAD
 				$psad_es_shop_bt_type = get_option( 'psad_es_shop_bt_type' );
 				$psad_es_shop_bt_text = esc_attr( stripslashes( get_option( 'psad_es_shop_link_text', '' ) ) );
 				$class = 'click_more_link';
-				$psad_es_shop_bt_class = '';
 				if ( $psad_es_shop_bt_type == 'button' ) { 
 					$class = 'click_more_button';
 					$psad_es_shop_bt_text = esc_attr( stripslashes( get_option( 'psad_es_shop_bt_text', '' ) ) );
-					$psad_es_shop_bt_class = get_option( 'psad_es_shop_bt_class', '' );
 				}
 				if ( trim( $psad_es_shop_bt_text ) == '' ) { $psad_es_shop_bt_text = __('Click More Categories', 'wc_psad'); }
-				if ( trim($psad_es_shop_bt_class) != '' ) { $class .= ' '.trim($psad_es_shop_bt_class); }
 				echo '<div class="pbc_content_click_more custom_box endless_click_shop"><a href="#"><a class="categories_click '.$class.'" href="#">'.$psad_es_shop_bt_text.'</a></div>';
 			}
 		}
