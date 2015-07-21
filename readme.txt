@@ -4,7 +4,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
 Requires at least: 3.8
 Tested up to: 4.2.2
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -199,6 +199,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 == Changelog ==
 
+= 1.3.3 - 2015/07/21 =
+* Tweak - Defined new trigger for when items are loaded by endless scroll
+
 = 1.3.2 - 2015/07/07 =
 * Tweak - Add DB queries cached for WordPress roles for compatibility with sites that have pre-set product views based on user roles
 * Tweak - Shortened cached names when appended with role name it does not exceed the 45 characters for cached name. See reference here http://codex.wordpress.org/Function_Reference/set_transient
@@ -362,6 +365,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.3.3 =
+Maintenance Upgrade. 1 tweak for full compatibility with plugins or themes have use masonry scripts
 
 = 1.3.2 =
 Maintenance Upgrade. 2 tweaks for full compatibility with plugins that have pre-set product views based on roles. Example product price
