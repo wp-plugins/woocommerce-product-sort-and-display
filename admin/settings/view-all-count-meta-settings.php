@@ -87,8 +87,6 @@ class WC_PSAD_View_All_Count_Meta_Settings extends WC_PSAD_Admin_UI
 			
 		add_action( $this->plugin_name . '_set_default_settings' , array( $this, 'set_default_settings' ) );
 
-		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_init' , array( $this, 'reset_default_settings' ) );
-		
 		//add_action( $this->plugin_name . '_get_all_settings' , array( $this, 'get_settings' ) );
 		
 	}
@@ -111,16 +109,6 @@ class WC_PSAD_View_All_Count_Meta_Settings extends WC_PSAD_Admin_UI
 		global $wc_psad_admin_interface;
 		
 		$wc_psad_admin_interface->reset_settings( $this->form_fields, $this->option_name, false );
-	}
-
-	/*-----------------------------------------------------------------------------------*/
-	/* reset_default_settings()
-	/* Reset default settings with function called from Admin Interface */
-	/*-----------------------------------------------------------------------------------*/
-	public function reset_default_settings() {
-		global $wc_psad_admin_interface;
-		
-		$wc_psad_admin_interface->reset_settings( $this->form_fields, $this->option_name, true, true );
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -389,119 +377,6 @@ class WC_PSAD_View_All_Count_Meta_Settings extends WC_PSAD_Admin_UI
 				'type' 		=> 'color',
 				'default'	=> '#4b6E90',
 				'free_version'		=> true,
-			),
-
-			array(
-            	'name' 		=> __( 'Product Count Text Style', 'wc_psad' ),
-                'type' 		=> 'heading',
-                'class'		=> 'pro_feature_fields',
-                'id'		=> 'psad_count_meta_style_box',
-                'is_box'	=> true,
-           	),
-			array(  
-				'name' 		=> __( 'Padding', 'wc_psad' ),
-				'id' 		=> 'psad_count_meta_padding',
-				'type' 		=> 'array_textfields',
-				'ids'		=> array( 
-	 								array(  'id' 		=> 'psad_count_meta_padding_top',
-	 										'name' 		=> __( 'Top', 'wc_psad' ),
-	 										'css'		=> 'width:40px;',
-	 										'default'	=> 10
-									),
-									array(  'id' 		=> 'psad_count_meta_padding_bottom',
-	 										'name' 		=> __( 'Bottom', 'wc_psad' ),
-	 										'css'		=> 'width:40px;',
-	 										'default'	=> 10
-									),
-	 							)
-			),
-			array(  
-				'name' 		=> __( 'Count Meta Font', 'wc_psad' ),
-				'id' 		=> 'psad_count_meta_font',
-				'type' 		=> 'typography',
-				'default'	=> array( 'size' => '11px', 'face' => 'Arial, sans-serif', 'style' => 'italic', 'color' => '#000000' )
-			),
-
-			// Count Meta Settings
-			array(
-            	'name' 		=> __( 'Category Product Count Dynamic Text', 'wc_psad' ),
-                'type' 		=> 'heading',
-                'class'		=> 'pro_feature_fields',
-                'id'		=> 'psad_categories_count_meta_box',
-                'is_box'	=> true,
-           	),
-			array(  
-				'name' 		=> __( 'Count Meta Text', 'wc_psad' ),
-				'id' 		=> 'psad_count_meta_text',
-				'type' 		=> 'array_textfields',
-				'ids'		=> array( 
-	 								array(  'id' 		=> 'psad_count_meta_text1',
-	 										'name' 		=> __( '%d - %d', 'wc_psad' ),
-	 										'css'		=> 'width:120px;',
-	 										'default'	=> __( 'Showing', 'wc_psad' ) 
-									),
-									array(  'id' 		=> 'psad_count_meta_text2',
-	 										'name' 		=> __( '%d', 'wc_psad' ),
-	 										'css'		=> 'width:60px;',
-	 										'default'	=> __( 'of', 'wc_psad' ) 
-									),
-									array(  'id' 		=> 'psad_count_meta_text3',
-	 										'name' 		=> '',
-	 										'css'		=> 'width:200px;',
-	 										'default'	=> __( 'products in this Category', 'wc_psad' ) 
-									),
-	 							)
-			),
-
-			array(
-            	'name' 		=> __( 'Parent Category Product Count Alignment', 'wc_psad' ),
-                'type' 		=> 'heading',
-                'desc'		=> __( "Parent Categories with display type 'Both' (parent with child Cats) by default show the Product Count and View All Products link under the Parent category products.", 'wc_psad' ),
-                'class'		=> 'pro_feature_fields',
-                'id'		=> 'psad_count_meta_view_all_parent_products_box',
-                'is_box'	=> true,
-           	),
-           	array(
-				'name' 		=> __( 'Horizontal Alignment', 'wc_psad' ),
-				'id' 		=> 'psad_count_meta_view_all_parent_products_align',
-				'css' 		=> 'width:120px;',
-				'type' 		=> 'select',
-				'default'	=> 'center',
-				'options'	=> array(
-						'center'		=> __( 'Center', 'wc_psad' ) ,
-						'left'			=> __( 'Left', 'wc_psad' ) ,
-						'right'			=> __( 'Right', 'wc_psad' ) ,
-					),
-			),
-
-			array(
-            	'name' 		=> __( 'Tag Page Count Dynamic Text', 'wc_psad' ),
-                'type' 		=> 'heading',
-                'class'		=> 'pro_feature_fields',
-                'id'		=> 'psad_tags_count_meta_box',
-                'is_box'	=> true,
-           	),
-			array(  
-				'name' 		=> __( 'Count Meta Text', 'wc_psad' ),
-				'id' 		=> 'psad_tag_count_meta_text',
-				'type' 		=> 'array_textfields',
-				'ids'		=> array( 
-	 								array(  'id' 		=> 'psad_tag_count_meta_text1',
-	 										'name' 		=> __( '%d - %d', 'wc_psad' ),
-	 										'css'		=> 'width:120px;',
-	 										'default'	=> __( 'Showing', 'wc_psad' ) 
-									),
-									array(  'id' 		=> 'psad_tag_count_meta_text2',
-	 										'name' 		=> __( '%d', 'wc_psad' ),
-	 										'css'		=> 'width:60px;',
-	 										'default'	=> __( 'of', 'wc_psad' ) 
-									),
-									array(  'id' 		=> 'psad_tag_count_meta_text3',
-	 										'name' 		=> '',
-	 										'css'		=> 'width:200px;',
-	 										'default'	=> __( 'products in this Tag', 'wc_psad' ) 
-									),
-	 							)
 			),
 
         ));

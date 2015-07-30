@@ -455,11 +455,11 @@ class WC_PSAD
 					$ogrinal_product_args = $product_args;
 
 					if ( $psad_shop_product_show_type == 'onsale' ) {
-						$product_args['orderby']	= 'meta_value_num';
+						$product_args['orderby']	= 'meta_value_num date';
 						$product_args['order']		= 'DESC';
 						$product_args['meta_key']	= '_psad_onsale_order';
 					} elseif ( $psad_shop_product_show_type == 'featured' ) {
-						$product_args['orderby']	= 'meta_value_num';
+						$product_args['orderby']	= 'meta_value_num date';
 						$product_args['order']		= 'DESC';
 						$product_args['meta_key']	= '_psad_featured_order';
 					}
@@ -511,7 +511,7 @@ class WC_PSAD
 					echo '<div class="custom_box custom_box_archive responsi_title"><h1 class="title pbc_title">'.$term_link_html.'<a href="'.$term_link_sub_html.'">' .$category->name.'</a></h1>';
 					if ( $enable_product_showing_count == 'yes' || ( $count_posts_get < $total_posts && $psad_es_category_item_bt_position == 'top' ) ) {
 						echo '<div class="product_categories_showing_count_container">';
-						if ( $enable_product_showing_count == 'yes' ) echo '<span class="product_categories_showing_count">'.__('Currently viewing', 'wc_psad'). ' 1 - ' .$count_posts_get.' '.__('of', 'wc_psad'). ' '. $total_posts .' '. __('products in this Category', 'wc_psad').'</span> ';
+						if ( $enable_product_showing_count == 'yes' ) echo '<span class="product_categories_showing_count">'.__('Showing', 'wc_psad'). ' 1 - ' .$count_posts_get.' '.__('of', 'wc_psad'). ' '. $total_posts .' '. __('products in this Category', 'wc_psad').'</span> ';
 						if ( $count_posts_get < $total_posts && $psad_es_category_item_bt_position == 'top' ) echo '<span class="click_more_each_categories"><a class="categories_click '.$class.'" id="'.$category->term_id.'" href="'.$term_link_sub_html.'">'.$psad_es_category_item_bt_text.'</a></span>';
 						echo '</div>';
 					}

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Product Sort and Display\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-03 17:54+0700\n"
-"PO-Revision-Date: 2015-07-03 17:54+0700\n"
+"POT-Creation-Date: 2015-07-30 12:37+0700\n"
+"PO-Revision-Date: 2015-07-30 12:37+0700\n"
 "Last-Translator: Nguyen Cong Tuan <mr.nguyencongtuan@gmail.com>\n"
 "Language-Team: a3rev\n"
 "Language: en\n"
@@ -87,48 +87,32 @@ msgstr ""
 #: admin/admin-interface.php:1394 admin/admin-interface.php:1449
 #: admin/admin-interface.php:1652 admin/admin-interface.php:1742
 #: admin/admin-interface.php:1771
-#: admin/settings/endless-scroll-settings.php:210
-#: admin/settings/endless-scroll-settings.php:405
-#: admin/settings/endless-scroll-settings.php:587
-#: admin/settings/global-settings.php:249
-#: admin/settings/global-settings.php:297
-#: admin/settings/global-settings.php:314
-#: admin/settings/global-settings.php:335
-#: admin/settings/global-settings.php:353
-#: admin/settings/global-settings.php:396
-#: admin/settings/global-settings.php:416
-#: admin/settings/global-settings.php:469
-#: admin/settings/global-settings.php:486
-#: admin/settings/global-settings.php:497
-#: admin/settings/global-settings.php:532
-#: admin/settings/global-settings.php:581
-#: admin/settings/global-settings.php:601
-#: admin/settings/view-all-count-meta-settings.php:211
-#: admin/settings/view-all-count-meta-settings.php:217
+#: admin/settings/endless-scroll-settings.php:198
+#: admin/settings/global-settings.php:237
+#: admin/settings/global-settings.php:289
+#: admin/settings/global-settings.php:306
+#: admin/settings/global-settings.php:327
+#: admin/settings/global-settings.php:345
+#: admin/settings/global-settings.php:388
+#: admin/settings/global-settings.php:408
+#: admin/settings/view-all-count-meta-settings.php:199
+#: admin/settings/view-all-count-meta-settings.php:205
 msgid "ON"
 msgstr ""
 
 #: admin/admin-interface.php:1395 admin/admin-interface.php:1450
 #: admin/admin-interface.php:1653 admin/admin-interface.php:1743
 #: admin/admin-interface.php:1772
-#: admin/settings/endless-scroll-settings.php:211
-#: admin/settings/endless-scroll-settings.php:406
-#: admin/settings/endless-scroll-settings.php:588
-#: admin/settings/global-settings.php:250
-#: admin/settings/global-settings.php:298
-#: admin/settings/global-settings.php:315
-#: admin/settings/global-settings.php:336
-#: admin/settings/global-settings.php:354
-#: admin/settings/global-settings.php:397
-#: admin/settings/global-settings.php:417
-#: admin/settings/global-settings.php:470
-#: admin/settings/global-settings.php:487
-#: admin/settings/global-settings.php:498
-#: admin/settings/global-settings.php:533
-#: admin/settings/global-settings.php:582
-#: admin/settings/global-settings.php:602
-#: admin/settings/view-all-count-meta-settings.php:212
-#: admin/settings/view-all-count-meta-settings.php:218
+#: admin/settings/endless-scroll-settings.php:199
+#: admin/settings/global-settings.php:238
+#: admin/settings/global-settings.php:290
+#: admin/settings/global-settings.php:307
+#: admin/settings/global-settings.php:328
+#: admin/settings/global-settings.php:346
+#: admin/settings/global-settings.php:389
+#: admin/settings/global-settings.php:409
+#: admin/settings/view-all-count-meta-settings.php:200
+#: admin/settings/view-all-count-meta-settings.php:206
 msgid "OFF"
 msgstr ""
 
@@ -319,329 +303,183 @@ msgstr ""
 msgid "Endless Scroll Settings successfully reseted."
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:151
-#: admin/settings/endless-scroll-settings.php:202
-#: admin/settings/endless-scroll-settings.php:397
-#: admin/settings/endless-scroll-settings.php:579
+#: admin/settings/endless-scroll-settings.php:139
+#: admin/settings/endless-scroll-settings.php:190
 #: admin/tabs/endless-scroll-tab.php:78
 msgid "Endless Scroll"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:196
+#: admin/settings/endless-scroll-settings.php:184
 msgid "Shop Page Scroll"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:203
+#: admin/settings/endless-scroll-settings.php:191
 msgid ""
 "On to activate the Endless Scroll feature for Category groups on Shop page."
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:220
-#: admin/settings/endless-scroll-settings.php:414
-#: admin/settings/endless-scroll-settings.php:596
+#: admin/settings/endless-scroll-settings.php:208
 msgid "Scroll Type"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:227
-#: admin/settings/endless-scroll-settings.php:421
-#: admin/settings/endless-scroll-settings.php:603
+#: admin/settings/endless-scroll-settings.php:215
 msgid "Click More..."
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:228
-#: admin/settings/endless-scroll-settings.php:422
-#: admin/settings/endless-scroll-settings.php:604
+#: admin/settings/endless-scroll-settings.php:216
 msgid "Auto Scroll"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:234
+#: admin/settings/endless-scroll-settings.php:222
 msgid "Shop Page Categories Endless Scroll on Click style"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:241
-#: admin/settings/endless-scroll-settings.php:439
-#: admin/settings/endless-scroll-settings.php:616
-#: admin/settings/view-all-count-meta-settings.php:231
+#: admin/settings/endless-scroll-settings.php:229
+#: admin/settings/view-all-count-meta-settings.php:219
 msgid "Button or Hyperlink Text"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:248
-#: admin/settings/endless-scroll-settings.php:446
-#: admin/settings/endless-scroll-settings.php:623
-#: admin/settings/view-all-count-meta-settings.php:238
+#: admin/settings/endless-scroll-settings.php:236
+#: admin/settings/view-all-count-meta-settings.php:226
 msgid "Linked"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:249
-#: admin/settings/endless-scroll-settings.php:447
-#: admin/settings/endless-scroll-settings.php:624
-#: admin/settings/view-all-count-meta-settings.php:239
+#: admin/settings/endless-scroll-settings.php:237
+#: admin/settings/view-all-count-meta-settings.php:227
 msgid "Button"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:254
-#: admin/settings/endless-scroll-settings.php:451
-#: admin/settings/endless-scroll-settings.php:628
-#: admin/settings/view-all-count-meta-settings.php:244
+#: admin/settings/endless-scroll-settings.php:242
+#: admin/settings/view-all-count-meta-settings.php:232
 msgid "Button Styling"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:259
-#: admin/settings/endless-scroll-settings.php:456
-#: admin/settings/view-all-count-meta-settings.php:249
+#: admin/settings/endless-scroll-settings.php:247
+#: admin/settings/view-all-count-meta-settings.php:237
 msgid "Button Text"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:260
-#: admin/settings/endless-scroll-settings.php:352
+#: admin/settings/endless-scroll-settings.php:248
+#: admin/settings/endless-scroll-settings.php:340
 msgid "Text for Endless Scroll on shop page"
+msgstr ""
+
+#: admin/settings/endless-scroll-settings.php:251
+#: admin/settings/endless-scroll-settings.php:343
+#: classes/class-wc-psad.php:615
+msgid "Click More Categories"
+msgstr ""
+
+#: admin/settings/endless-scroll-settings.php:255
+#: admin/settings/view-all-count-meta-settings.php:249
+msgid "Button Align"
+msgstr ""
+
+#: admin/settings/endless-scroll-settings.php:261
+#: admin/settings/endless-scroll-settings.php:353
+#: admin/settings/view-all-count-meta-settings.php:255
+#: admin/settings/view-all-count-meta-settings.php:356
+msgid "Center"
+msgstr ""
+
+#: admin/settings/endless-scroll-settings.php:262
+#: admin/settings/endless-scroll-settings.php:354
+#: admin/settings/view-all-count-meta-settings.php:256
+#: admin/settings/view-all-count-meta-settings.php:357
+msgid "Left"
 msgstr ""
 
 #: admin/settings/endless-scroll-settings.php:263
 #: admin/settings/endless-scroll-settings.php:355
-#: admin/settings/endless-scroll-settings.php:460
-#: admin/settings/endless-scroll-settings.php:541
-#: classes/class-wc-psad.php:594
-msgid "Click More Categories"
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:267
-#: admin/settings/endless-scroll-settings.php:463
-#: admin/settings/endless-scroll-settings.php:647
-#: admin/settings/view-all-count-meta-settings.php:261
-msgid "Button Align"
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:273
-#: admin/settings/endless-scroll-settings.php:365
-#: admin/settings/endless-scroll-settings.php:469
-#: admin/settings/endless-scroll-settings.php:550
-#: admin/settings/endless-scroll-settings.php:653
-#: admin/settings/endless-scroll-settings.php:741
-#: admin/settings/view-all-count-meta-settings.php:267
-#: admin/settings/view-all-count-meta-settings.php:368
-#: admin/settings/view-all-count-meta-settings.php:471
-msgid "Center"
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:274
-#: admin/settings/endless-scroll-settings.php:366
-#: admin/settings/endless-scroll-settings.php:470
-#: admin/settings/endless-scroll-settings.php:551
-#: admin/settings/endless-scroll-settings.php:654
-#: admin/settings/endless-scroll-settings.php:742
-#: admin/settings/view-all-count-meta-settings.php:268
-#: admin/settings/view-all-count-meta-settings.php:369
-#: admin/settings/view-all-count-meta-settings.php:472
-msgid "Left"
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:275
-#: admin/settings/endless-scroll-settings.php:367
-#: admin/settings/endless-scroll-settings.php:471
-#: admin/settings/endless-scroll-settings.php:552
-#: admin/settings/endless-scroll-settings.php:655
-#: admin/settings/endless-scroll-settings.php:743
-#: admin/settings/view-all-count-meta-settings.php:269
-#: admin/settings/view-all-count-meta-settings.php:370
-#: admin/settings/view-all-count-meta-settings.php:473
+#: admin/settings/view-all-count-meta-settings.php:257
+#: admin/settings/view-all-count-meta-settings.php:358
 msgid "Right"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:280
-#: admin/settings/endless-scroll-settings.php:475
-#: admin/settings/endless-scroll-settings.php:659
-#: admin/settings/view-all-count-meta-settings.php:278
+#: admin/settings/endless-scroll-settings.php:268
+#: admin/settings/view-all-count-meta-settings.php:266
 msgid "Button Padding"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:281
-#: admin/settings/endless-scroll-settings.php:476
-#: admin/settings/endless-scroll-settings.php:660
-#: admin/settings/view-all-count-meta-settings.php:279
+#: admin/settings/endless-scroll-settings.php:269
+#: admin/settings/view-all-count-meta-settings.php:267
 msgid "Padding from Button text to Button border"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:286
-#: admin/settings/endless-scroll-settings.php:481
-#: admin/settings/endless-scroll-settings.php:665
-#: admin/settings/view-all-count-meta-settings.php:284
+#: admin/settings/endless-scroll-settings.php:274
+#: admin/settings/view-all-count-meta-settings.php:272
 msgid "Top/Bottom"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:292
-#: admin/settings/endless-scroll-settings.php:486
-#: admin/settings/endless-scroll-settings.php:670
-#: admin/settings/view-all-count-meta-settings.php:290
+#: admin/settings/endless-scroll-settings.php:280
+#: admin/settings/view-all-count-meta-settings.php:278
 msgid "Left/Right"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:300
-#: admin/settings/endless-scroll-settings.php:492
-#: admin/settings/endless-scroll-settings.php:676
-#: admin/settings/view-all-count-meta-settings.php:298
+#: admin/settings/endless-scroll-settings.php:288
+#: admin/settings/view-all-count-meta-settings.php:286
 msgid "Background Colour"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:301
-#: admin/settings/endless-scroll-settings.php:309
-#: admin/settings/endless-scroll-settings.php:317
-#: admin/settings/endless-scroll-settings.php:380
-#: admin/settings/endless-scroll-settings.php:493
-#: admin/settings/endless-scroll-settings.php:500
-#: admin/settings/endless-scroll-settings.php:507
-#: admin/settings/endless-scroll-settings.php:563
-#: admin/settings/endless-scroll-settings.php:677
-#: admin/settings/endless-scroll-settings.php:684
-#: admin/settings/endless-scroll-settings.php:691
-#: admin/settings/endless-scroll-settings.php:754
-#: admin/settings/view-all-count-meta-settings.php:299
-#: admin/settings/view-all-count-meta-settings.php:307
-#: admin/settings/view-all-count-meta-settings.php:315
-#: admin/settings/view-all-count-meta-settings.php:387
+#: admin/settings/endless-scroll-settings.php:289
+#: admin/settings/endless-scroll-settings.php:297
+#: admin/settings/endless-scroll-settings.php:305
+#: admin/settings/endless-scroll-settings.php:368
+#: admin/settings/view-all-count-meta-settings.php:287
+#: admin/settings/view-all-count-meta-settings.php:295
+#: admin/settings/view-all-count-meta-settings.php:303
+#: admin/settings/view-all-count-meta-settings.php:375
 msgid "Default [default_value]"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:308
-#: admin/settings/endless-scroll-settings.php:499
-#: admin/settings/endless-scroll-settings.php:683
-#: admin/settings/view-all-count-meta-settings.php:306
+#: admin/settings/endless-scroll-settings.php:296
+#: admin/settings/view-all-count-meta-settings.php:294
 msgid "Background Colour Gradient From"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:316
-#: admin/settings/endless-scroll-settings.php:506
-#: admin/settings/endless-scroll-settings.php:690
-#: admin/settings/view-all-count-meta-settings.php:314
+#: admin/settings/endless-scroll-settings.php:304
+#: admin/settings/view-all-count-meta-settings.php:302
 msgid "Background Colour Gradient To"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:324
-#: admin/settings/endless-scroll-settings.php:513
-#: admin/settings/endless-scroll-settings.php:697
-#: admin/settings/view-all-count-meta-settings.php:323
+#: admin/settings/endless-scroll-settings.php:312
+#: admin/settings/view-all-count-meta-settings.php:311
 msgid "Button Border"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:331
-#: admin/settings/endless-scroll-settings.php:519
-#: admin/settings/endless-scroll-settings.php:703
-#: admin/settings/view-all-count-meta-settings.php:330
+#: admin/settings/endless-scroll-settings.php:319
+#: admin/settings/view-all-count-meta-settings.php:318
 msgid "Button Font"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:338
-#: admin/settings/endless-scroll-settings.php:525
-#: admin/settings/endless-scroll-settings.php:709
-#: admin/settings/view-all-count-meta-settings.php:337
+#: admin/settings/endless-scroll-settings.php:326
+#: admin/settings/view-all-count-meta-settings.php:325
 msgid "Button Shadow"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:346
-#: admin/settings/endless-scroll-settings.php:532
-#: admin/settings/endless-scroll-settings.php:716
-#: admin/settings/view-all-count-meta-settings.php:345
+#: admin/settings/endless-scroll-settings.php:334
+#: admin/settings/view-all-count-meta-settings.php:333
 msgid "Linked Text Styling"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:351
-#: admin/settings/endless-scroll-settings.php:537
-#: admin/settings/view-all-count-meta-settings.php:350
+#: admin/settings/endless-scroll-settings.php:339
+#: admin/settings/view-all-count-meta-settings.php:338
 msgid "Linked Text"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:359
-#: admin/settings/endless-scroll-settings.php:544
-#: admin/settings/endless-scroll-settings.php:735
-#: admin/settings/view-all-count-meta-settings.php:362
+#: admin/settings/endless-scroll-settings.php:347
+#: admin/settings/view-all-count-meta-settings.php:350
 msgid "Linked Text Align"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:372
-#: admin/settings/endless-scroll-settings.php:556
-#: admin/settings/endless-scroll-settings.php:747
-#: admin/settings/view-all-count-meta-settings.php:379
+#: admin/settings/endless-scroll-settings.php:360
+#: admin/settings/view-all-count-meta-settings.php:367
 msgid "Hyperlink Font"
 msgstr ""
 
-#: admin/settings/endless-scroll-settings.php:379
-#: admin/settings/endless-scroll-settings.php:753
-#: admin/settings/view-all-count-meta-settings.php:386
+#: admin/settings/endless-scroll-settings.php:367
+#: admin/settings/view-all-count-meta-settings.php:374
 msgid "Hyperlink Hover Colour"
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:390
-msgid "Category Page Scroll"
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:398
-msgid ""
-"On to activate the Endless Scroll feature for Sub Category groups on "
-"Category page."
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:428
-#, php-format
-msgid ""
-"<strong>Note:</strong> Set the <a target='_blank' href='%s'>WooCommerce "
-"Display type</a> to 'Show Both'. Sub Categories of the Parent Category will "
-"show on the parent category page under the Parent Cat products and will use "
-"the global 'Scroll Type' mode you set here on this page."
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:432
-msgid "Categories Endless Scroll on Click Style"
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:457
-#: admin/settings/endless-scroll-settings.php:538
-msgid "Text for Endless Scroll on Category page"
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:562
-msgid "Font Hover Colour"
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:572
-msgid "Parent Cat & Tag Pages Scroll"
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:580
-msgid "On to activate the Endless Scroll feature for Products on Tag page."
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:609
-msgid "Parent Cat & Tag Pages Endless Scroll on Click Style"
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:633
-msgid "Parent Cat Button Text"
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:634
-#: admin/settings/endless-scroll-settings.php:641
-#: admin/settings/endless-scroll-settings.php:722
-#: admin/settings/endless-scroll-settings.php:729
-msgid "Text for Endless Scroll for Products"
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:637
-#: admin/settings/endless-scroll-settings.php:644
-#: admin/settings/endless-scroll-settings.php:725
-#: admin/settings/endless-scroll-settings.php:732
-msgid "Click More Products"
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:640
-msgid "Tag More Product Button Text"
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:721
-msgid "Parent Cat Linked Text"
-msgstr ""
-
-#: admin/settings/endless-scroll-settings.php:728
-msgid "Tag More Product Linked Text"
 msgstr ""
 
 #: admin/settings/global-settings.php:81
@@ -656,102 +494,126 @@ msgstr ""
 msgid "Global Settings successfully reseted."
 msgstr ""
 
-#: admin/settings/global-settings.php:169
+#: admin/settings/global-settings.php:157
 #: admin/tabs/global-settings-tab.php:78
 msgid "Settings"
 msgstr ""
 
-#: admin/settings/global-settings.php:213
+#: admin/settings/global-settings.php:201
 msgid "Plugin Framework Global Settings"
 msgstr ""
 
-#: admin/settings/global-settings.php:220
+#: admin/settings/global-settings.php:208
 msgid "Customize Admin Setting Box Display"
 msgstr ""
 
-#: admin/settings/global-settings.php:221
+#: admin/settings/global-settings.php:209
 msgid ""
 "By default each admin panel will open with all Setting Boxes in the CLOSED "
 "position."
 msgstr ""
 
-#: admin/settings/global-settings.php:228
+#: admin/settings/global-settings.php:216
 msgid "Google Fonts"
 msgstr ""
 
-#: admin/settings/global-settings.php:229
+#: admin/settings/global-settings.php:217
 msgid ""
 "By Default Google Fonts are pulled from a static JSON file in this plugin. "
 "This file is updated but does not have the latest font releases from Google."
 msgstr ""
 
-#: admin/settings/global-settings.php:236
+#: admin/settings/global-settings.php:224
 msgid "House Keeping"
 msgstr ""
 
-#: admin/settings/global-settings.php:240
+#: admin/settings/global-settings.php:228
 msgid "Clean up on Deletion"
 msgstr ""
 
-#: admin/settings/global-settings.php:241
+#: admin/settings/global-settings.php:229
 msgid ""
 "On deletion (not deactivate) the plugin will completely remove all tables "
 "and data it created, leaving no trace it was ever here."
 msgstr ""
 
+#: admin/settings/global-settings.php:241
+msgid "WooCommerce Sort & Display Premium"
+msgstr ""
+
+#: admin/settings/global-settings.php:245
+msgid "Advanced Features"
+msgstr ""
+
+#: admin/settings/global-settings.php:247
+msgid ""
+"The Premium version of this plugin is for those who want Sort and Display "
+"applied to their stores Product Category and Product Tag pages. It has ALL "
+"the features of this Free version - Apply Sort and Display to the shop page "
+"- plus these advanced features:"
+msgstr ""
+
+#: admin/settings/global-settings.php:249
+msgid ""
+"Apply Sort and display to the entire store - Product Category and Product "
+"Tags pages."
+msgstr ""
+
+#: admin/settings/global-settings.php:250
+msgid "Show Sub Categories with products on their Parent Category page."
+msgstr ""
+
+#: admin/settings/global-settings.php:251
+msgid "Set the number of products to show in parent and each child category."
+msgstr ""
+
+#: admin/settings/global-settings.php:252
+msgid "Set Parent Cat to show no products - just show Child cats and products."
+msgstr ""
+
 #: admin/settings/global-settings.php:253
-msgid "Advanced Features Setting Boxes"
-msgstr ""
-
-#: admin/settings/global-settings.php:257
-msgid "Explanation"
-msgstr ""
-
-#: admin/settings/global-settings.php:260
-msgid "This plugin has Pro Version upgrade with advanced features."
-msgstr ""
-
-#: admin/settings/global-settings.php:261
 msgid ""
-"All Pro Version advanced features settings show here on the Lite Version "
-"admin panel."
+"If parent Category has no products because all products are in the child "
+"categories set to show child cats with products."
 msgstr ""
 
-#: admin/settings/global-settings.php:262
+#: admin/settings/global-settings.php:254
 msgid ""
-"The Pro Version settings work on this admin panel but changes are NOT saved "
-"and NOT applied to the front end."
+"Custom Sort Featured and On Sale is added to WooCommerce Sort features for "
+"Category and Tags pages."
 msgstr ""
 
-#: admin/settings/global-settings.php:263
+#: admin/settings/global-settings.php:255
+msgid "Endless Scroll feature for Product Category and Product tag pages."
+msgstr ""
+
+#: admin/settings/global-settings.php:256
 msgid ""
-"Upgrading to a Lifetime License Pro Version of this plugin activates all "
-"settings."
+"Apply all settings globally from the admin dashboard with individual setting "
+"on each category e.g. Sort type, number of products to show."
 msgstr ""
 
-#: admin/settings/global-settings.php:264
-msgid "The Pro Version Lifetime License Fee is a once only payment."
-msgstr ""
-
-#: admin/settings/global-settings.php:265
+#: admin/settings/global-settings.php:258
+#, php-format
 msgid ""
-"No data lost in upgrade. Deactivate the Lite version, install and activate "
-"the Pro Version. All data is preserved."
+"The Premium version is a once only payment Lifetime License plugin (not "
+"annual subscription). View details here on the <a href=\"%s\" target=\"_blank"
+"\">a3rev.com</a> site"
 msgstr ""
 
-#: admin/settings/global-settings.php:275
+#: admin/settings/global-settings.php:267
 msgid "SHOW"
 msgstr ""
 
-#: admin/settings/global-settings.php:276
+#: admin/settings/global-settings.php:268
 msgid "HIDE"
 msgstr ""
 
-#: admin/settings/global-settings.php:280
+#: admin/settings/global-settings.php:272
 msgid "DB Query Cache"
 msgstr ""
 
-#: admin/settings/global-settings.php:281
+#: admin/settings/global-settings.php:273
 msgid ""
 "Caching applies to product categories and products loading on shop page, "
 "(product category and product tags pages in Pro Version). Significantly "
@@ -759,327 +621,137 @@ msgid ""
 "Highly Recommended for sites with more than 20 Product categories"
 msgstr ""
 
-#: admin/settings/global-settings.php:287
+#: admin/settings/global-settings.php:279
 msgid "Cache Queries"
 msgstr ""
 
-#: admin/settings/global-settings.php:288
+#: admin/settings/global-settings.php:280
 msgid "Cache is auto cleared every 24 hours"
 msgstr ""
 
-#: admin/settings/global-settings.php:306
+#: admin/settings/global-settings.php:298
 msgid "Manual Flush"
 msgstr ""
 
-#: admin/settings/global-settings.php:307
+#: admin/settings/global-settings.php:299
 msgid ""
 "Switch ON and save changes to manually clear Sort and Display Query caching"
 msgstr ""
 
-#: admin/settings/global-settings.php:319
+#: admin/settings/global-settings.php:311
 msgid "Shop Page Show Products by Category"
 msgstr ""
 
-#: admin/settings/global-settings.php:322
+#: admin/settings/global-settings.php:314
 #, php-format
 msgid ""
 "These settings when activated over ride the WooCommerce <a target='_blank' "
 "href='%s'>Product Options</a> shop page settings."
 msgstr ""
 
-#: admin/settings/global-settings.php:326
+#: admin/settings/global-settings.php:318
 msgid "Shop Page"
 msgstr ""
 
-#: admin/settings/global-settings.php:327
+#: admin/settings/global-settings.php:319
 #, php-format
 msgid ""
 "Sort and display products by category on Shop pages. Sort categories by drop "
 "and drag at <a target='_blank' href='%s'>Product Categories</a>."
 msgstr ""
 
-#: admin/settings/global-settings.php:345
-#: admin/settings/global-settings.php:479
-#: classes/class-wc-psad-admin-hook.php:165
-#: classes/class-wc-psad-admin-hook.php:282
+#: admin/settings/global-settings.php:337
 msgid "Empty Parent Categories"
 msgstr ""
 
-#: admin/settings/global-settings.php:346
-#: admin/settings/global-settings.php:480
-#: classes/class-wc-psad-admin-hook.php:166
-#: classes/class-wc-psad-admin-hook.php:284
+#: admin/settings/global-settings.php:338
 msgid ""
 "ON and when Parent Cat has no products assigned to it, products from Child "
 "Cats of that Parent will be displayed. If none found the Category is not "
 "displayed."
 msgstr ""
 
-#: admin/settings/global-settings.php:357
+#: admin/settings/global-settings.php:349
 msgid "Categories Per Page"
 msgstr ""
 
-#: admin/settings/global-settings.php:358
+#: admin/settings/global-settings.php:350
 msgid ""
 "Set the number of Category product groups to show per pagination or endless "
 "scroll event."
 msgstr ""
 
-#: admin/settings/global-settings.php:358
-#: admin/settings/global-settings.php:367
-#: admin/settings/global-settings.php:502
-#: admin/settings/global-settings.php:510
-#: admin/settings/global-settings.php:518
-#: admin/settings/global-settings.php:612
+#: admin/settings/global-settings.php:350
+#: admin/settings/global-settings.php:359
 msgid "Default is [default_value]."
 msgstr ""
 
-#: admin/settings/global-settings.php:366
-#: classes/class-wc-psad-admin-hook.php:132
-#: classes/class-wc-psad-admin-hook.php:239
+#: admin/settings/global-settings.php:358
 msgid "Products per Category"
 msgstr ""
 
-#: admin/settings/global-settings.php:367
+#: admin/settings/global-settings.php:359
 msgid ""
 "Set the number of products to show per Category on Shop pages. Can over ride "
 "on a category by category basis from each category edit page."
 msgstr ""
 
-#: admin/settings/global-settings.php:375
-#: admin/settings/global-settings.php:554
-#: admin/settings/global-settings.php:619
-#: classes/class-wc-psad-admin-hook.php:137
-#: classes/class-wc-psad-admin-hook.php:209
-#: classes/class-wc-psad-admin-hook.php:246
-#: classes/class-wc-psad-admin-hook.php:342
+#: admin/settings/global-settings.php:367
 msgid "Product Sort"
 msgstr ""
 
-#: admin/settings/global-settings.php:376
+#: admin/settings/global-settings.php:368
 msgid ""
 "Product type can be set on a Category by category basis with the Pro version"
 msgstr ""
 
-#: admin/settings/global-settings.php:382
-#: admin/settings/global-settings.php:560
-#: admin/settings/global-settings.php:624
-#: classes/class-wc-psad-admin-hook.php:140
-#: classes/class-wc-psad-admin-hook.php:212
-#: classes/class-wc-psad-admin-hook.php:250
-#: classes/class-wc-psad-admin-hook.php:346
+#: admin/settings/global-settings.php:374
 msgid "Default (Recent)"
 msgstr ""
 
-#: admin/settings/global-settings.php:383
-#: admin/settings/global-settings.php:561
-#: admin/settings/global-settings.php:625
-#: classes/class-wc-psad-admin-hook.php:141
-#: classes/class-wc-psad-admin-hook.php:213
-#: classes/class-wc-psad-admin-hook.php:251
-#: classes/class-wc-psad-admin-hook.php:347
+#: admin/settings/global-settings.php:375
 msgid "On Sale"
 msgstr ""
 
-#: admin/settings/global-settings.php:384
-#: admin/settings/global-settings.php:562
-#: admin/settings/global-settings.php:626
-#: classes/class-wc-psad-admin-hook.php:142
-#: classes/class-wc-psad-admin-hook.php:214
-#: classes/class-wc-psad-admin-hook.php:252
-#: classes/class-wc-psad-admin-hook.php:348
+#: admin/settings/global-settings.php:376
 msgid "Featured"
 msgstr ""
 
-#: admin/settings/global-settings.php:388
-#: admin/settings/global-settings.php:525
-#: classes/class-wc-psad-admin-hook.php:188
-#: classes/class-wc-psad-admin-hook.php:315
+#: admin/settings/global-settings.php:380
 msgid "Product Count"
 msgstr ""
 
-#: admin/settings/global-settings.php:389
-#: admin/settings/global-settings.php:526
-#: classes/class-wc-psad-admin-hook.php:189
-#: classes/class-wc-psad-admin-hook.php:317
+#: admin/settings/global-settings.php:381
 msgid "ON to show product count under category title."
 msgstr ""
 
-#: admin/settings/global-settings.php:401
+#: admin/settings/global-settings.php:393
 msgid "Visual Content Separator"
 msgstr ""
 
-#: admin/settings/global-settings.php:407
+#: admin/settings/global-settings.php:399
 msgid "Visual Separator"
 msgstr ""
 
-#: admin/settings/global-settings.php:408
+#: admin/settings/global-settings.php:400
 msgid ""
 "On to show a separator between each category group of products on Shop Page."
 msgstr ""
 
-#: admin/settings/global-settings.php:426
+#: admin/settings/global-settings.php:418
 msgid "Separator Border"
 msgstr ""
 
-#: admin/settings/global-settings.php:433
+#: admin/settings/global-settings.php:425
 msgid "Separator Padding"
 msgstr ""
 
-#: admin/settings/global-settings.php:439
-#: admin/settings/view-all-count-meta-settings.php:407
+#: admin/settings/global-settings.php:431
 msgid "Top"
 msgstr ""
 
-#: admin/settings/global-settings.php:445
-#: admin/settings/view-all-count-meta-settings.php:412
+#: admin/settings/global-settings.php:437
 msgid "Bottom"
-msgstr ""
-
-#: admin/settings/global-settings.php:453
-msgid "Parent / Child Category Page Settings"
-msgstr ""
-
-#: admin/settings/global-settings.php:457
-#, php-format
-msgid ""
-"Please Go to the <a target='_blank' href='%s'>Products Tab</a> and set the "
-"'Default Category Display'. Select 'Show Both' to show Parent Cat products "
-"and Child Cats with Products. Can over ride on a category by category basis "
-"from each category edit page. Use the settings below to configure the "
-"product display."
-msgstr ""
-
-#: admin/settings/global-settings.php:461
-msgid "Product Categories"
-msgstr ""
-
-#: admin/settings/global-settings.php:462
-msgid ""
-"Sort and display products by sub categories on Product category pages. "
-"Feature can be turned ON and OFF from each Category page independent of this "
-"Global setting."
-msgstr ""
-
-#: admin/settings/global-settings.php:490
-#: classes/class-wc-psad-admin-hook.php:169
-#: classes/class-wc-psad-admin-hook.php:288
-msgid "Parent / Child Title"
-msgstr ""
-
-#: admin/settings/global-settings.php:491
-#: classes/class-wc-psad-admin-hook.php:170
-#: classes/class-wc-psad-admin-hook.php:290
-msgid ""
-"ON to show Child Category title as Parent / Child title breadcrumb. OFF to "
-"only show Child Cat name."
-msgstr ""
-
-#: admin/settings/global-settings.php:501
-#: classes/class-wc-psad-admin-hook.php:173
-#: classes/class-wc-psad-admin-hook.php:294
-msgid "Category Products (No Sub Cats)"
-msgstr ""
-
-#: admin/settings/global-settings.php:502
-#: admin/settings/global-settings.php:612
-#: classes/class-wc-psad-admin-hook.php:175
-#: classes/class-wc-psad-admin-hook.php:297
-msgid "The number of products to show per Endless Scroll or pagination."
-msgstr ""
-
-#: admin/settings/global-settings.php:509
-#: classes/class-wc-psad-admin-hook.php:178
-#: classes/class-wc-psad-admin-hook.php:301
-msgid "Parent Category Products"
-msgstr ""
-
-#: admin/settings/global-settings.php:510
-#: classes/class-wc-psad-admin-hook.php:180
-#: classes/class-wc-psad-admin-hook.php:304
-msgid ""
-"Sets the number of Parent Category Products to show before Child Cat Product "
-"Groups."
-msgstr ""
-
-#: admin/settings/global-settings.php:517
-#: classes/class-wc-psad-admin-hook.php:183
-#: classes/class-wc-psad-admin-hook.php:308
-msgid "Sub Categories Per Page"
-msgstr ""
-
-#: admin/settings/global-settings.php:518
-#: classes/class-wc-psad-admin-hook.php:185
-#: classes/class-wc-psad-admin-hook.php:311
-msgid ""
-"Set the number of Sub Category product groups to show per pagination or "
-"endless scroll event."
-msgstr ""
-
-#: admin/settings/global-settings.php:537
-#: classes/class-wc-psad-admin-hook.php:220
-#: classes/class-wc-psad-admin-hook.php:356
-msgid "One Level Up Display"
-msgstr ""
-
-#: admin/settings/global-settings.php:541
-#: classes/class-wc-psad-admin-hook.php:221
-#: classes/class-wc-psad-admin-hook.php:357
-msgid ""
-"Settings apply to this categories display on its Parent Category Page "
-"<strong>IF</strong> this Category is a Sub Category."
-msgstr ""
-
-#: admin/settings/global-settings.php:545
-#: classes/class-wc-psad-admin-hook.php:204
-#: classes/class-wc-psad-admin-hook.php:335
-msgid "Number of Product Displayed"
-msgstr ""
-
-#: admin/settings/global-settings.php:546
-#: classes/class-wc-psad-admin-hook.php:206
-#: classes/class-wc-psad-admin-hook.php:338
-msgid ""
-"Number of products displayed for this category on its Parent Category page "
-"<strong>WHEN</strong> Parent has Sort and Display Feature activated."
-msgstr ""
-
-#: admin/settings/global-settings.php:555
-#: classes/class-wc-psad-admin-hook.php:215
-#: classes/class-wc-psad-admin-hook.php:349
-msgid ""
-"Applies to this Category products on Parent Cat Page <strong>WHEN</strong> "
-"Parent has Sort and Display Feature activated."
-msgstr ""
-
-#: admin/settings/global-settings.php:567
-msgid "Global Category Reset"
-msgstr ""
-
-#: admin/settings/global-settings.php:574
-msgid "Product Category Reset"
-msgstr ""
-
-#: admin/settings/global-settings.php:575
-msgid ""
-"On to reset all custom settings made in the 'a3rev Category Page' settings "
-"on Product Categories."
-msgstr ""
-
-#: admin/settings/global-settings.php:586
-msgid "Tag Page Settings"
-msgstr ""
-
-#: admin/settings/global-settings.php:593
-msgid "Tag Page"
-msgstr ""
-
-#: admin/settings/global-settings.php:594
-msgid "Sort and Display Product tag pages."
-msgstr ""
-
-#: admin/settings/global-settings.php:611
-msgid "Tag Products"
 msgstr ""
 
 #: admin/settings/view-all-count-meta-settings.php:81
@@ -1094,234 +766,94 @@ msgstr ""
 msgid "View All & Count Meta Settings successfully reseted."
 msgstr ""
 
-#: admin/settings/view-all-count-meta-settings.php:151
+#: admin/settings/view-all-count-meta-settings.php:139
 #: admin/tabs/view-all-count-meta-tab.php:78
 msgid "View All & Count Meta"
 msgstr ""
 
-#: admin/settings/view-all-count-meta-settings.php:196
+#: admin/settings/view-all-count-meta-settings.php:184
 msgid "View All Products Link Position"
 msgstr ""
 
-#: admin/settings/view-all-count-meta-settings.php:202
+#: admin/settings/view-all-count-meta-settings.php:190
 msgid "Show at"
 msgstr ""
 
-#: admin/settings/view-all-count-meta-settings.php:210
+#: admin/settings/view-all-count-meta-settings.php:198
 msgid "At top After Category product count meta"
 msgstr ""
 
-#: admin/settings/view-all-count-meta-settings.php:216
+#: admin/settings/view-all-count-meta-settings.php:204
 msgid "At Bottom under category products"
 msgstr ""
 
-#: admin/settings/view-all-count-meta-settings.php:225
+#: admin/settings/view-all-count-meta-settings.php:213
 msgid "View All Products Link Style"
 msgstr ""
 
-#: admin/settings/view-all-count-meta-settings.php:250
-#: admin/settings/view-all-count-meta-settings.php:351
+#: admin/settings/view-all-count-meta-settings.php:238
+#: admin/settings/view-all-count-meta-settings.php:339
 msgid "Text for link in each category"
 msgstr ""
 
-#: admin/settings/view-all-count-meta-settings.php:253
-#: admin/settings/view-all-count-meta-settings.php:354
-#: classes/class-wc-psad.php:357
+#: admin/settings/view-all-count-meta-settings.php:241
+#: admin/settings/view-all-count-meta-settings.php:342
+#: classes/class-wc-psad.php:378
 msgid "See more..."
 msgstr ""
 
-#: admin/settings/view-all-count-meta-settings.php:395
-msgid "Product Count Text Style"
-msgstr ""
-
-#: admin/settings/view-all-count-meta-settings.php:402
-msgid "Padding"
-msgstr ""
-
-#: admin/settings/view-all-count-meta-settings.php:419
-msgid "Count Meta Font"
-msgstr ""
-
-#: admin/settings/view-all-count-meta-settings.php:427
-msgid "Category Product Count Dynamic Text"
-msgstr ""
-
-#: admin/settings/view-all-count-meta-settings.php:434
-#: admin/settings/view-all-count-meta-settings.php:485
-msgid "Count Meta Text"
-msgstr ""
-
-#: admin/settings/view-all-count-meta-settings.php:439
-#: admin/settings/view-all-count-meta-settings.php:490
-#, php-format
-msgid "%d - %d"
-msgstr ""
-
-#: admin/settings/view-all-count-meta-settings.php:441
-#: admin/settings/view-all-count-meta-settings.php:492
-msgid "Showing"
-msgstr ""
-
-#: admin/settings/view-all-count-meta-settings.php:444
-#: admin/settings/view-all-count-meta-settings.php:495
-#, php-format
-msgid "%d"
-msgstr ""
-
-#: admin/settings/view-all-count-meta-settings.php:446
-#: admin/settings/view-all-count-meta-settings.php:497
-#: classes/class-wc-psad.php:493
-msgid "of"
-msgstr ""
-
-#: admin/settings/view-all-count-meta-settings.php:451
-#: classes/class-wc-psad.php:493
-msgid "products in this Category"
-msgstr ""
-
-#: admin/settings/view-all-count-meta-settings.php:457
-msgid "Parent Category Product Count Alignment"
-msgstr ""
-
-#: admin/settings/view-all-count-meta-settings.php:459
-msgid ""
-"Parent Categories with display type 'Both' (parent with child Cats) by "
-"default show the Product Count and View All Products link under the Parent "
-"category products."
-msgstr ""
-
-#: admin/settings/view-all-count-meta-settings.php:465
-msgid "Horizontal Alignment"
-msgstr ""
-
-#: admin/settings/view-all-count-meta-settings.php:478
-msgid "Tag Page Count Dynamic Text"
-msgstr ""
-
-#: admin/settings/view-all-count-meta-settings.php:502
-msgid "products in this Tag"
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:134
-#: classes/class-wc-psad-admin-hook.php:242
-msgid "Set the number of products to show per Category on Shop pages."
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:134
-#: classes/class-wc-psad-admin-hook.php:175
-#: classes/class-wc-psad-admin-hook.php:180
-#: classes/class-wc-psad-admin-hook.php:185
-#: classes/class-wc-psad-admin-hook.php:242
-#: classes/class-wc-psad-admin-hook.php:297
-#: classes/class-wc-psad-admin-hook.php:304
-#: classes/class-wc-psad-admin-hook.php:311
-#: classes/class-wc-psad-admin-hook.php:338
-msgid "Empty to use global settings."
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:139
-#: classes/class-wc-psad-admin-hook.php:211
-#: classes/class-wc-psad-admin-hook.php:249
-#: classes/class-wc-psad-admin-hook.php:345
-msgid "Global Settings"
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:148
-#: classes/class-wc-psad-admin-hook.php:260
-msgid "a3rev Shop Page Categories"
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:149
-#: classes/class-wc-psad-admin-hook.php:261
-msgid ""
-"The WooCommerce 'Display type' settings above do not apply to Shop page "
-"Categories. They do apply to the a3rev Category Page settings below."
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:158
-#: classes/class-wc-psad-admin-hook.php:272
-msgid ""
-"ON to activate Sort and Display products features on this Product category "
-"page."
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:195
-#: classes/class-wc-psad-admin-hook.php:325
-msgid "a3rev Category Page"
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:370
-#, php-format
-msgid ""
-"ON | OFF switch over-rides any <a href='%s' target='_blank'>Global Parent / "
-"Child Category Page Settings</a> for this Product Category. OFF to use the "
-"the WooCommerce 'Display type' for this Category page."
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:371
-msgid ""
-"Set WooCommerce 'Display type' settings: Select 'Both' to enable showing "
-"Parent Cat products and Child Cats with Products on this Category page."
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:372
-msgid ""
-"Use the settings below to configure the Sort and Display feature for this "
-"Category page."
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:374
-msgid "Don't show again"
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:375
-msgid "Dismiss"
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:434
+#: classes/class-wc-psad-admin-hook.php:74
 msgid "Go to Support Forum"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:440
-msgid "WooCommerce Product Sort and Display Pro"
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:446
-msgid "Free WooCommerce Plugins"
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:453
-msgid "Free WordPress Plugins"
-msgstr ""
-
-#: classes/class-wc-psad-admin-hook.php:460
+#: classes/class-wc-psad-admin-hook.php:80
 msgid "Is this plugin is just what you needed? If so"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:461
+#: classes/class-wc-psad-admin-hook.php:81
 msgid "Submit Review for Plugin on WordPress"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:475
+#: classes/class-wc-psad-admin-hook.php:88
+msgid "WooCommerce Product Sort and Display Pro"
+msgstr ""
+
+#: classes/class-wc-psad-admin-hook.php:94
+msgid "Free WooCommerce Plugins"
+msgstr ""
+
+#: classes/class-wc-psad-admin-hook.php:101
+msgid "Free WordPress Plugins"
+msgstr ""
+
+#: classes/class-wc-psad-admin-hook.php:115
 msgid "Documentation"
 msgstr ""
 
-#: classes/class-wc-psad-admin-hook.php:476
+#: classes/class-wc-psad-admin-hook.php:116
 msgid "Support"
 msgstr ""
 
-#: classes/class-wc-psad.php:148
+#: classes/class-wc-psad.php:149
 msgid "No more categories to load."
 msgstr ""
 
-#: classes/class-wc-psad.php:149
+#: classes/class-wc-psad.php:150
 msgid "Loading the next set of Categories..."
 msgstr ""
 
-#: classes/class-wc-psad.php:493
-msgid "Currently viewing"
+#: classes/class-wc-psad.php:514
+msgid "Showing"
 msgstr ""
 
-#: classes/class-wc-psad.php:525
+#: classes/class-wc-psad.php:514
+msgid "of"
+msgstr ""
+
+#: classes/class-wc-psad.php:514
+msgid "products in this Category"
+msgstr ""
+
+#: classes/class-wc-psad.php:546
 msgid "No more products to view in this category"
 msgstr ""

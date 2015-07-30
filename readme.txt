@@ -2,9 +2,9 @@
 
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
-Requires at least: 3.8
-Tested up to: 4.2.2
-Stable tag: 1.3.3
+Requires at least: 4.0
+Tested up to: 4.2.3
+Stable tag: 1.3.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -53,17 +53,12 @@ We decided to build a plugin that would fix that. With WooCommerce Product Sort 
 * Set number of Product category groups to show per endless scroll.
 * Options of auto scroll or scroll on click.
 
-= Shop page Product Category Group Visual Separator =
+= Shop Page Product Category Group Visual Separator =
 
 * Enable/Disable a visual separator between each Product Category group of products.
 * WYSIWYG separator style editor.
 * Set padding in px above and below the separator.
 
->= Sass #dynamic {stytlesheets}=
-
->* All front style is built in [Sass](http://sass-lang.com/) with #dynamic {stylesheets}
->* All admin panel display is created with Sass.
->* Sass loads faster in all browsers that CSS.
 
 = Live Shop Demo =
 
@@ -71,67 +66,25 @@ Visit [Dixie Sourenirs](http://dixiesouvenirs.com/shop-here/) to see how the plu
 
 = Mobile Responsive App style admin interface =
 
-* 100% compatible with WordPress v3.9.0 admin interface.
-* Backward compatibility to WordPress v3.7.0
-* App style admin inteface.
-* Admin interface is optimized for mobiles and tablets.
+* a3 Plugin framework
+* Feature mobile first admin interface
+* Open and closing admin setting boxes give excellent admin UX
+* Admin can set Open and Closed setting box display behaviour when open a tab
 
-= a3rev Plugins Lite & Pro Version Admin Interface =
+= Premium Version =
 
-* All a3rev Lite Version plugins have exactly the same admin interface as the Pro Version.
-* Pro Version setting boxes headers have Green background colour for easy identification.
-* The Pro Version settings are all active on the admin panels But do not save and are not applied to the front end.
-* Upgrading to the Pro version activates all the Pro version Features and Settings and removes the Green settings box header background colour.
+The Premium version of this plugin is for those who want Sort and Display applied to their stores Product Category and Product Tag pages. It has ALL the features of this Free version - Apply Sort and Display to the shop page - plus these advanced features:
 
->= Premium Support =
-
->The a3rev team does not provide support for the WooCommerce Product Sort and Display plugin on the WordPress.org forums. One on one developer support is available via the plugins [a3rev support forum](https://a3rev.com/forums/forum/woocommerce-plugins/product-sort-and-display/) to people who have purchased a [WooCommerce Product Sort and Display Pro](http://a3rev.com/shop/woocommerce-product-sort-and-display/) plugin License.
-
->The Pro Version has lots of extra features (listed below) that coupled with developer support might be well worth your investment!
-
-
-= Pro Version Advanced Features =
-
-* Show Sub Categories with products on Parent Category page.
-* Set the number of products to show from Parent Cat with Endless Scroll - view more products.
-* If Parent Category has no products and have many levels of Child Cats, show set number of products from child Cats to show under parent Title (before first level Child cats)
-* Set the number of products to show per first level Child category, globally (applies to all) or on an individual sub category basis.
+* Apply Sort and display to the entire store - Product Category and Product Tags pages
+* Show Sub Categories with products on their Parent Category page.
+* Set the number of products to show in parent and each child category
 * Set Parent Cat to show no products - just show Child cats and products.
-* Set which products show first from Child category - On Sale, Featured of the default latest. Set globally and on individual sub cats.
-* Set how many sub category groups of products show before pagination or endless scroll loads.
-* Activate Endless scroll feature for your product category pages.
-* Select Auto Endless Scroll or Scroll on Click.
-* Full Scroll on click feature custom style (button or linked text) and position settings.
+* If parent Category has no products because all products are in the child categories set to show child cats with products
+* Custom Sort Featured and On Sale is added to WooCommerce Sort features for Category and Tags pages
+* Endless Scroll feature for Product Category and Product tag pages
+* Apply all settings globally from the admin dashboard with individual setting on each category e.g. Sort type, number of products to show 
 
-= Live Site Pro Features Demo =
-
-Visit [Dixie Souvenirs](http://dixiesouvenirs.com/product-category/flags/) site to see the Pro Version only Product Category Sort and Display features on a Live site. Thanks to the site owner Colin Slark for permission to link to his site.
-
-= More Shop Page Display features =
-
-* Set number of products to display in Categories on a category by category basis (over rides the global setting).
-* Filter the products to show for each category independent of the Global settings on a category by category basis.
-* WYSIWYG Scroll on click feature custom style (button or linked text) and position settings.
-
-= Additional Endless Scroll Features =
-
-* Enable/ Disable on Product Category pages.
-* Set number of Product category groups to show per endless scroll on category pages.
-* Parent Category Page View More Products Scroll on Click feature
-* WYSIWYG Scroll On Click style editor - Button or Link Text.
-
-= 2 Brand New Product Sort Features =
-
-* Auto show any 'On Sale' products first in the Category View on all category pages.
-* Auto show any 'featured' products first in the category View on all category pages.
-
-= Intelligent Browsing =
-
-* Show the current number of products being viewed and total products in Category applies to all category pages.
-* Show the current number of products being viewed and total products in Category.
-* Show count is auto updated on each endless scroll event for each category.
-* Show count is auto updated on each endless scroll event when view products in the parent category.
-* No more product to view message when all products are showing.
+The Premium version is a once only payment Lifetime License plugin (not annual subscription). View details here on the [a3rev.com](http://a3rev.com/shop/woocommerce-product-sort-and-display/) site
 
 = Localization =
 
@@ -141,7 +94,7 @@ Visit [Dixie Souvenirs](http://dixiesouvenirs.com/product-category/flags/) site 
 
 = Plugin Resources =
 
-[PRO Version](http://a3rev.com/shop/woocommerce-product-sort-and-display/) |
+[Premium Version](http://a3rev.com/shop/woocommerce-product-sort-and-display/) |
 [Documentation](http://docs.a3rev.com/user-guides/plugins-extensions/woocommerce/product-sort-and-display/) |
 [Lite Version Support](http://wordpress.org/support/plugin/woocommerce-product-sort-and-display/)
 
@@ -150,10 +103,10 @@ Visit [Dixie Souvenirs](http://dixiesouvenirs.com/product-category/flags/) site 
 
 = Minimum Requirements =
 
-* WordPress 3.7
+* WordPress 4.0
 * WooCommerce 2.1 and later.
 * PHP version 5.2.4 or greater
-* MySQL version 5.0 or greater
+* MySQL version 5.1 or greater
 
 = Automatic installation =
 
@@ -171,7 +124,7 @@ The manual installation method involves downloading our plugin and uploading it 
 == Screenshots ==
 
 1. Show products by category on the WooCommerce Shop page.
-2. Use new Sort types to who your most important products where they should be - first up
+2. Use new Sort types to show your most important products where they should be - first up
 3. If your theme does not support endless scroll - activate the plugins Endless Scroll feature.
 
 
@@ -198,6 +151,16 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Changelog ==
+
+= 1.3.4 - 2015/07/30 =
+* Tweak - Removed all Premium Version settings boxes from that admin panels
+* Tweak - Removed all Premium Version settings boxes from Product Category create and edit pages
+* Tweak - Removed Pro Version setting boxes description from the Plugin Framework setting box
+* Tweak - Added Premium Version feature description to bottom of a3 framework setting box with SHOW | HIDE switch
+* Tweak - Updated the images in admin panel sidebar
+* Tweak - Tested for full compatibility with WooCommerce version 2.3.13
+* Tweak - Tested for full compatibility with WordPress version 4.2.3
+* Fix - Updated orderby = meta_value_num to meta_value_num date to ensure when Featured or On Sale sort is used that other products in the category show in resent order after the Feature or On Sale products.
 
 = 1.3.3 - 2015/07/21 =
 * Tweak - Defined new trigger for when items are loaded by endless scroll
@@ -365,6 +328,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.3.4 =
+Maintenance Upgrade. One custom sort Featured and On Sale bug fix plus Removed all Pro Version setting boxes from admin panels. Tweak for full compatibility with WooCommerce Version 2.3.13 and WP 4.2.3
 
 = 1.3.3 =
 Maintenance Upgrade. 1 tweak for full compatibility with plugins or themes have use masonry scripts

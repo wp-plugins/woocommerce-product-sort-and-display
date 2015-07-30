@@ -245,7 +245,7 @@ if ( $psad_seperator_enable == 'yes' ){
 }
 .product_categories_showing_count {
 	/* Font */
-	<?php echo $wc_psad_fonts_face->generate_font_css( get_option( 'psad_count_meta_font' ) ); ?>
+	<?php echo $wc_psad_fonts_face->generate_font_css( array( 'size' => '11px', 'face' => 'Arial, sans-serif', 'style' => 'italic', 'color' => '#000000' ) ); ?>
 }
 .product_categories_showing_count {
 	margin-right:10px;	
