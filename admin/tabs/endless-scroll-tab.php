@@ -103,9 +103,7 @@ class WC_PSA_Endless_Scroll_Tab extends WC_PSAD_Admin_UI
 	public function settings_include() {
 		
 		// Includes Settings file
-		include_once( $this->admin_plugin_dir() . '/settings/shop-page-scroll-settings.php' );
-		include_once( $this->admin_plugin_dir() . '/settings/cat-pages-scroll-settings.php' );
-		include_once( $this->admin_plugin_dir() . '/settings/parent-cat-tag-page-scroll-settings.php' );
+		include_once( $this->admin_plugin_dir() . '/settings/endless-scroll-settings.php' );
 		
 	}
 	
@@ -117,7 +115,7 @@ class WC_PSA_Endless_Scroll_Tab extends WC_PSAD_Admin_UI
 		global $wc_psad_admin_init;
 		
 		$this->plugin_extension_start();
-		$wc_psad_admin_init->admin_settings_tab( $this->parent_page, $this->tab_data() );
+		wc_psad_endless_scroll_settings_form();
 		$this->plugin_extension_end();
 		
 	}
