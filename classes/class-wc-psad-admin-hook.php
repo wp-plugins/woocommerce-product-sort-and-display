@@ -66,11 +66,11 @@ class WC_PSAD_Settings_Hook
 		die();
 	}
 	
-	public static function a3_wp_admin() {
+	public function a3_wp_admin() {
 		wp_enqueue_style( 'a3rev-wp-admin-style', WC_PSAD_CSS_URL . '/a3_wp_admin.css' );
 	}
 	
-	public static function plugin_extension_box( $boxes = array() ) {
+	public function plugin_extension_box( $boxes = array() ) {
 		$support_box = '<a href="https://wordpress.org/support/plugin/woocommerce-product-sort-and-display" target="_blank" alt="'.__('Go to Support Forum', 'wc_psad').'"><img src="'.WC_PSAD_IMAGES_URL.'/go-to-support-forum.png" /></a>';
 		$boxes[] = array(
 			'content' => $support_box,
@@ -108,7 +108,7 @@ class WC_PSAD_Settings_Hook
 		return $boxes;
 	}
 	
-	public static function plugin_extra_links($links, $plugin_name) {
+	public function plugin_extra_links($links, $plugin_name) {
 		if ( $plugin_name != WC_PSAD_NAME) {
 			return $links;
 		}
@@ -116,5 +116,13 @@ class WC_PSAD_Settings_Hook
 		$links[] = '<a href="http://wordpress.org/support/plugin/woocommerce-product-sort-and-display/" target="_blank">'.__('Support', 'wc_psad').'</a>';
 		return $links;
 	}
+
+	public function settings_plugin_links($actions) {
+		$actions = array_merge( array( 'settings' => '<a href="admin.php?page=wc-sort-display">' . __( 'Settings', 'wc_psad' ) . '</a>' ), $actions );
+
+		return $actions;
+	}
 }
+
+$GLOBALS['wc_psad_settings_hook'] = new WC_PSAD_Settings_Hook();
 ?>

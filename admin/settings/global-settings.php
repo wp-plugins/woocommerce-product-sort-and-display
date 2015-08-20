@@ -280,7 +280,7 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 				'desc'		=> __( 'Cache is auto cleared every 24 hours', 'wc_psad' ),
 				'class'		=> 'psad_queries_cached_enable',
 				'id' 		=> 'psad_queries_cached_enable',
-				'default'	=> 'yes',
+				'default'	=> 'no',
 				'type' 		=> 'onoff_checkbox',
 				'separate_option'	=> true,
 				'free_version'		=> true,
@@ -360,7 +360,7 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 				'id' 		=> 'psad_shop_product_per_page',
 				'type' 		=> 'text',
 				'css' 		=> 'width:40px;',
-				'default'	=> '3',
+				'default'	=> '4',
 				'free_version'		=> true,
 			),
 			array(  

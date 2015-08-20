@@ -1,10 +1,10 @@
 === WooCommerce Product Sort and Display ===
 
-Contributors: a3rev, A3 Revolution Software Development team
+Contributors: a3rev, A3 Revolution Software Development team, nguyencongtuan
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
 Requires at least: 4.0
-Tested up to: 4.2.3
-Stable tag: 1.3.4
+Tested up to: 4.3
+Stable tag: 1.3.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -151,6 +151,17 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Changelog ==
+
+= 1.3.5 - 2015/08/20 =
+* Tweak - include new CSSMin lib from https://github.com/tubalmartin/YUI-CSS-compressor-PHP-port into plugin framework instead of old CSSMin lib from http://code.google.com/p/cssmin/ , to avoid conflict with plugins or themes that have CSSMin lib
+* Tweak - make __construct() function for 'Compile_Less_Sass' class instead of using a method with the same name as the class for compatibility on WP 4.3 and is deprecated on PHP4
+* Tweak - change class name from 'lessc' to 'a3_lessc' so that it does not conflict with plugins or themes that have another Lessc lib
+* Tweak - Plugin Framework DB query optimization. Refactored settings_get_option call for dynamic style elements, example typography, border, border_styles, border_corner, box_shadow
+* Tweak - Tested for full compatibility with WooCommerce Version 2.4.4
+* Tweak - Tested for full compatibility with WordPress major version 4.3.0
+* Fix - Make __construct() function for 'WC_PSAD' class instead of using a method with the same name as the class for compatibility on WP 4.3 and is deprecated on PHP4
+* Fix - Update the plugin framework for setup correct default settings on first installed
+* Fix - Update the plugin framework for reset to correct default settings when hit on 'Reset Settings' button on each settings tab
 
 = 1.3.4 - 2015/07/30 =
 * Tweak - Removed all Premium Version settings boxes from that admin panels
@@ -328,6 +339,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.3.5 =
+Major Maintenance Upgrade. 6 Code Tweaks plus 3 bug fixes for full compatibility with WordPress v 4.3.0 and WooCommerce v 2.4.4
 
 = 1.3.4 =
 Maintenance Upgrade. One custom sort Featured and On Sale bug fix plus Removed all Pro Version setting boxes from admin panels. Tweak for full compatibility with WooCommerce Version 2.3.13 and WP 4.2.3

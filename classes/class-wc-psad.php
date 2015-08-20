@@ -22,7 +22,7 @@
 class WC_PSAD
 {
 
-	public function WC_PSAD() {
+	public function __construct() {
 		$this->init();
 	}
 
