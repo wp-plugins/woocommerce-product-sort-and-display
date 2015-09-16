@@ -86,16 +86,11 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_end', array( $this, 'include_script' ) );
 			
 		add_action( $this->plugin_name . '_set_default_settings' , array( $this, 'set_default_settings' ) );
-		
-		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_init' , array( $this, 'reset_default_settings' ) );
-		
+
 		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_init' , array( $this, 'after_save_settings' ) );
 		
 		//add_action( $this->plugin_name . '_get_all_settings' , array( $this, 'get_settings' ) );
 		
-		// Add yellow border for pro fields
-		add_action( $this->plugin_name . '_settings_pro_psad_category_page_enable_before', array( $this, 'pro_fields_before' ) );
-		add_action( $this->plugin_name . '_settings_pro_psad_tag_product_per_page_after', array( $this, 'pro_fields_after' ) );
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -117,17 +112,7 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 		
 		$wc_psad_admin_interface->reset_settings( $this->form_fields, $this->option_name, false );
 	}
-	
-	/*-----------------------------------------------------------------------------------*/
-	/* reset_default_settings()
-	/* Reset default settings with function called from Admin Interface */
-	/*-----------------------------------------------------------------------------------*/
-	public function reset_default_settings() {
-		global $wc_psad_admin_interface;
-		
-		$wc_psad_admin_interface->reset_settings( $this->form_fields, $this->option_name, true, true );
-	}
-	
+
 	/*-----------------------------------------------------------------------------------*/
 	/* after_save_settings()
 	/* Process when clean on deletion option is un selected */
@@ -137,6 +122,10 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 			$uninstallable_plugins = (array) get_option('uninstall_plugins');
 			unset($uninstallable_plugins[WC_PSAD_NAME]);
 			update_option('uninstall_plugins', $uninstallable_plugins);
+		}
+		if ( isset( $_POST['bt_save_settings'] ) && isset( $_POST['psad_flush_cached'] )  )  {
+			delete_option( 'psad_flush_cached' );
+			WC_PSAD_Functions::flush_cached();
 		}
 	}
 	
@@ -209,9 +198,121 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
 			
 			array(
-            	'name' 		=> __( 'Shop Page Show Products by Category', 'wc_psad' ),
+            	'name' 		=> __( 'Plugin Framework Global Settings', 'wc_psad' ),
+            	'id'		=> 'psad_plugin_framework_box',
                 'type' 		=> 'heading',
-                'desc' 		=> sprintf( __("These settings when activated over ride the WooCommerce <a target='_blank' href='%s'>Catalog Options</a> shop page settings.", 'wc_psad'), admin_url( 'admin.php?page=woocommerce_settings&tab=catalog', 'relative' ) ),
+                'first_open'=> true,
+                'is_box'	=> true,
+           	),
+           	array(
+           		'name'		=> __( 'Customize Admin Setting Box Display', 'wc_psad' ),
+           		'desc'		=> __( 'By default each admin panel will open with all Setting Boxes in the CLOSED position.', 'wc_psad' ),
+                'type' 		=> 'heading',
+           	),
+           	array(
+				'type' 		=> 'onoff_toggle_box',
+			),
+           	array(
+           		'name'		=> __( 'Google Fonts', 'wc_psad' ),
+           		'desc'		=> __( 'By Default Google Fonts are pulled from a static JSON file in this plugin. This file is updated but does not have the latest font releases from Google.', 'wc_psad' ),
+                'type' 		=> 'heading',
+           	),
+           	array(
+                'type' 		=> 'google_api_key',
+           	),
+           	array(
+            	'name' 		=> __( 'House Keeping', 'wc_psad' ),
+                'type' 		=> 'heading',
+            ),
+			array(
+				'name' 		=> __( 'Clean up on Deletion', 'wc_psad' ),
+				'desc' 		=> __( 'On deletion (not deactivate) the plugin will completely remove all tables and data it created, leaving no trace it was ever here.', 'wc_psad'),
+				'id' 		=> 'psad_lite_clean_on_deletion',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> '0',
+				'separate_option'	=> true,
+				'free_version'		=> true,
+				'checked_value'		=> '1',
+				'unchecked_value'	=> '0',
+				'checked_label'		=> __( 'ON', 'wc_psad' ),
+				'unchecked_label' 	=> __( 'OFF', 'wc_psad' ),
+			),
+			array(
+            	'name' 		=> __( 'WooCommerce Sort & Display Premium', 'wc_psad' ),
+                'type' 		=> 'heading',
+            ),
+            array(
+				'name' 		=> __( 'Advanced Features', 'wc_psad' ),
+				'desc' 		=> '</span></td></tr><tr><td colspan="2"><div class="psad_explanation_message" style="clear:both;">
+<div>'.__( 'The Premium version of this plugin is for those who want Sort and Display applied to their stores Product Category and Product Tag pages. It has ALL the features of this Free version - Apply Sort and Display to the shop page - plus these advanced features:', 'wc_psad' ).'</div>
+<ul style="padding-left: 40px;">
+	<li>* ' . __( 'Apply Sort and display to the entire store - Product Category and Product Tags pages.', 'wc_psad' ) . '</li>
+	<li>* ' . __( 'Show Sub Categories with products on their Parent Category page.', 'wc_psad' ) . '</li>
+	<li>* ' . __( 'Set the number of products to show in parent and each child category.', 'wc_psad' ) . '</li>
+	<li>* ' . __( 'Set Parent Cat to show no products - just show Child cats and products.', 'wc_psad' ) . '</li>
+	<li>* ' . __( 'If parent Category has no products because all products are in the child categories set to show child cats with products.', 'wc_psad' ) . '</li>
+	<li>* ' . __( 'Custom Sort Featured and On Sale is added to WooCommerce Sort features for Category and Tags pages.', 'wc_psad' ) . '</li>
+	<li>* ' . __( 'Endless Scroll feature for Product Category and Product tag pages.', 'wc_psad' ) . '</li>
+	<li>* ' . __( 'Apply all settings globally from the admin dashboard with individual setting on each category e.g. Sort type, number of products to show.', 'wc_psad' ) . '</li>
+</ul>
+<div>'. sprintf( __( 'The Premium version is a once only payment Lifetime License plugin (not annual subscription). View details here on the <a href="%s" target="_blank">a3rev.com</a> site', 'wc_psad' ), 'http://a3rev.com/shop/woocommerce-product-sort-and-display/' ).'</div>
+				</div><span>',
+				'class'		=> 'psad_explanation',
+				'id' 		=> 'psad_explanation',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> 'no',
+				'free_version'		=> true,
+				'checked_value'		=> 'yes',
+				'unchecked_value'	=> 'no',
+				'checked_label'		=> __( 'SHOW', 'wc_psad' ),
+				'unchecked_label' 	=> __( 'HIDE', 'wc_psad' ),
+			),
+
+			array(
+            	'name' 		=> __( 'DB Query Cache', 'wc_psad' ),
+            	'desc'		=> __( 'Caching applies to product categories and products loading on shop page, (product category and product tags pages in Pro Version). Significantly reduces server resources used in fetching product categories and products. Highly Recommended for sites with more than 20 Product categories' , 'wc_psad' ),
+            	'id'		=> 'psad_queries_cached_box',
+                'type' 		=> 'heading',
+                'is_box'	=> true,
+           	),
+			array(
+				'name' 		=> __( 'Cache Queries', 'wc_psad' ),
+				'desc'		=> __( 'Cache is auto cleared every 24 hours', 'wc_psad' ),
+				'class'		=> 'psad_queries_cached_enable',
+				'id' 		=> 'psad_queries_cached_enable',
+				'default'	=> 'no',
+				'type' 		=> 'onoff_checkbox',
+				'separate_option'	=> true,
+				'free_version'		=> true,
+				'checked_value'		=> 'yes',
+				'unchecked_value'	=> 'no',
+				'checked_label'		=> __( 'ON', 'wc_psad' ),
+				'unchecked_label' 	=> __( 'OFF', 'wc_psad' ),
+			),
+
+			array(
+                'type' 		=> 'heading',
+				'class'		=> 'psad_queries_cached_enable_container',
+           	),
+           	array(
+				'name' 		=> __( 'Manual Flush', 'wc_psad' ),
+				'desc'		=> __( 'Switch ON and save changes to manually clear Sort and Display Query caching', 'wc_psad' ),
+				'id' 		=> 'psad_flush_cached',
+				'default'	=> '0',
+				'type' 		=> 'onoff_checkbox',
+				'free_version'		=> true,
+				'checked_value'		=> '1',
+				'unchecked_value'	=> '0',
+				'checked_label'		=> __( 'ON', 'wc_psad' ),
+				'unchecked_label' 	=> __( 'OFF', 'wc_psad' ),
+			),
+
+			array(
+            	'name' 		=> __( 'Shop Page Show Products by Category', 'wc_psad' ),
+            	'id'		=> 'psad_shop_page_box',
+                'type' 		=> 'heading',
+                'desc' 		=> sprintf( __("These settings when activated over ride the WooCommerce <a target='_blank' href='%s'>Product Options</a> shop page settings.", 'wc_psad'), admin_url( 'admin.php?page=wc-settings&tab=products&section=display', 'relative' ) ),
+                'is_box'	=> true,
            	),
 			array(  
 				'name' 		=> __( 'Shop Page', 'wc_psad' ),
@@ -229,8 +330,21 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 			
 			array(
                 'type' 		=> 'heading',
+                'id'		=> 'psad_shop_page_enable_container',
 				'class'		=> 'psad_shop_page_enable_container',
            	),
+			array(  
+				'name' 		=> __( 'Empty Parent Categories', 'wc_psad' ),
+				'desc' 		=> __("ON and when Parent Cat has no products assigned to it, products from Child Cats of that Parent will be displayed. If none found the Category is not displayed.", 'wc_psad'),
+				'id' 		=> 'psad_shop_drill_down',
+				'default'	=> 'yes',
+				'type' 		=> 'onoff_checkbox',
+				'free_version'		=> true,
+				'checked_value'		=> 'yes',
+				'unchecked_value'	=> 'no',
+				'checked_label'		=> __( 'ON', 'wc_psad' ),
+				'unchecked_label' 	=> __( 'OFF', 'wc_psad' ),
+			),
 			array(  
 				'name' 		=> __( 'Categories Per Page', 'wc_psad' ),
 				'desc' 		=> __('Set the number of Category product groups to show per pagination or endless scroll event.', 'wc_psad'). ' '. __('Default is [default_value].', 'wc_psad'),
@@ -246,7 +360,7 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 				'id' 		=> 'psad_shop_product_per_page',
 				'type' 		=> 'text',
 				'css' 		=> 'width:40px;',
-				'default'	=> '3',
+				'default'	=> '4',
 				'free_version'		=> true,
 			),
 			array(  
@@ -274,151 +388,16 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 				'checked_label'		=> __( 'ON', 'wc_psad' ),
 				'unchecked_label' 	=> __( 'OFF', 'wc_psad' ),
 			),
-			
-			array(
-            	'name' 		=> __( 'Parent / Child Category Page Settings', 'wc_psad' ),
-                'type' 		=> 'heading',
-				'id'		=> 'pro_psad_category_page_enable',
-                'desc' 		=> sprintf( __("Please Go to the <a target='_blank' href='%s'>Catalog Tab</a> and set the 'Default Category Display'. Select 'Show Both' to show Parent Cat products and Child Cats with Products. Can over ride on a category by category basis from each category edit page. Use the settings below to configure the product display.", 'wc_psad'), admin_url( 'admin.php?page=woocommerce_settings&tab=catalog', 'relative' ) ),
-           	),
-			array(  
-				'name' 		=> __( 'Product Categories', 'wc_psad' ),
-				'desc' 		=> __("Sort and display products by sub categories on Product category pages.", 'wc_psad'),
-				'class'		=> 'psad_category_page_enable',
-				'id' 		=> 'psad_category_page_enable',
-				'default'	=> 'no',
-				'type' 		=> 'onoff_checkbox',
-				'checked_value'		=> 'yes',
-				'unchecked_value'	=> 'no',
-				'checked_label'		=> __( 'ON', 'wc_psad' ),
-				'unchecked_label' 	=> __( 'OFF', 'wc_psad' ),
-			),
-			
-			array(
-                'type' 		=> 'heading',
-				'class'		=> 'psad_category_page_enable_container',
-           	),
-			array(  
-				'name' 		=> __( 'Category Products (No Sub Cats)', 'wc_psad' ),
-				'desc' 		=> __("The number of products to show per Endless Scroll or pagination.", 'wc_psad'). ' '. __('Default is [default_value].', 'wc_psad'),
-				'id' 		=> 'psad_category_product_nosub_per_page',
-				'type' 		=> 'text',
-				'css' 		=> 'width:40px;',
-				'default'	=> '12'
-			),
-			array(  
-				'name' 		=> __( 'Parent Category Products', 'wc_psad' ),
-				'desc' 		=> __("Sets the number of Parent Category Products to show before Child Cat Product Groups.", 'wc_psad'). ' '. __('Default is [default_value].', 'wc_psad'),
-				'id' 		=> 'psad_top_product_per_page',
-				'type' 		=> 'text',
-				'css' 		=> 'width:40px;',
-				'default'	=> '3'
-			),
-			array(  
-				'name' => __( 'Sub Categories Per Page', 'wc_psad' ),
-				'desc' 		=> __('Set the number of Sub Category product groups to show per pagination or endless scroll event.', 'wc_psad'). ' '. __('Default is [default_value].', 'wc_psad'),
-				'id' 		=> 'psad_category_per_page',
-				'type' 		=> 'text',
-				'css' 		=> 'width:40px;',
-				'default'	=> '3'
-			),
-			array(  
-				'name' => __( 'Products Per Sub Category', 'wc_psad' ),
-				'desc' 		=> __('Set the number of products to show per sub Category.', 'wc_psad'). ' '. __('Default is [default_value].', 'wc_psad'),
-				'id' 		=> 'psad_product_per_page',
-				'type' 		=> 'text',
-				'css' 		=> 'width:40px;',
-				'default'	=> '3'
-			),
-			array(  
-				'name' 		=> __( "Product Sort", 'wc_psad' ),
-				'desc' 		=> __('Product type can be set on a Category by category basis with the Pro version', 'wc_psad'),
-				'id' 		=> 'psad_product_show_type',
-				'type' 		=> 'select',
-				'default'	=> 'none',
-				'options'	=> array(
-						'none'			=> __( 'Default (Recent)', 'wc_psad' ) ,							
-						'onsale'		=> __( 'On Sale', 'wc_psad' ) ,
-						'featured'		=> __( 'Featured', 'wc_psad' ) ,
-					),
-			),
-			array(  
-				'name' 		=> __( 'Product Count', 'wc_psad' ),
-				'desc' 		=> __("ON to show product count under category title.", 'wc_psad'),
-				'id' 		=> 'psad_cat_enable_product_showing_count',
-				'default'	=> 'no',
-				'type' 		=> 'onoff_checkbox',
-				'checked_value'		=> 'yes',
-				'unchecked_value'	=> 'no',
-				'checked_label'		=> __( 'ON', 'wc_psad' ),
-				'unchecked_label' 	=> __( 'OFF', 'wc_psad' ),
-			),
-			
-			array(
-            	'name' 		=> __( 'Global Category Reset :', 'wc_psad' ),
-                'type' 		=> 'heading',
-           	),
-			array(  
-				'name' 		=> __( 'Product Category Reset', 'wc_psad' ),
-				'desc' 		=> __( "On to reset all custom settings made in the 'a3rev Category Page' settings on Product Categories.", 'wc_psad'),
-				'id' 		=> 'psad_global_category_reset',
-				'default'	=> 'no',
-				'type' 		=> 'onoff_checkbox',
-				'checked_value'		=> 'yes',
-				'unchecked_value'	=> 'no',
-				'checked_label'		=> __( 'ON', 'wc_psad' ),
-				'unchecked_label' 	=> __( 'OFF', 'wc_psad' ),
-			),
-			
-			array(
-            	'name' 		=> __( 'Tag Page Settings', 'wc_psad' ),
-                'type' 		=> 'heading',
-           	),
-			array(  
-				'name' 		=> __( 'Tag Page', 'wc_psad' ),
-				'desc' 		=> __("Sort and Display Product tag pages.", 'wc_psad'),
-				'class'		=> 'psad_tag_page_enable',
-				'id' 		=> 'psad_tag_page_enable',
-				'default'	=> 'no',
-				'type' 		=> 'onoff_checkbox',
-				'checked_value'		=> 'yes',
-				'unchecked_value'	=> 'no',
-				'checked_label'		=> __( 'ON', 'wc_psad' ),
-				'unchecked_label' 	=> __( 'OFF', 'wc_psad' ),
-			),
-			
-			array(
-                'type' 		=> 'heading',
-				'class'		=> 'psad_tag_page_enable_container',
-				'id'		=> 'pro_psad_tag_product_per_page',
-           	),
-			array(  
-				'name' 		=> __( 'Tag Products', 'wc_psad' ),
-				'desc' 		=> __("The number of products to show per Endless Scroll or pagination.", 'wc_psad'). ' '. __('Default is [default_value].', 'wc_psad'),
-				'id' 		=> 'psad_tag_product_per_page',
-				'type' 		=> 'text',
-				'css' 		=> 'width:40px;',
-				'default'	=> '12'
-			),
-			array(  
-				'name' 		=> __( "Product Sort", 'wc_psad' ),
-				'id' 		=> 'psad_tag_product_show_type',
-				'type' 		=> 'select',
-				'default'	=> 'none',
-				'options'	=> array(
-						'none'			=> __( 'Default (Recent)', 'wc_psad' ) ,							
-						'onsale'		=> __( 'On Sale', 'wc_psad' ) ,
-						'featured'		=> __( 'Featured', 'wc_psad' ) ,
-					),
-			),
-			
+
 			array(
             	'name' 		=> __( 'Visual Content Separator', 'wc_psad' ),
                 'type' 		=> 'heading',
+                'id'		=> 'psad_seperator_box',
+           		'is_box'	=> true,
            	),
 			array(  
 				'name' 		=> __( 'Visual Separator', 'wc_psad' ),
-				'desc' 		=> __("On to show a separator between each category group of products on Shop Page. Add custom Style under the Visual Content Separator sub nav.", 'wc_psad'),
+				'desc' 		=> __("On to show a separator between each category group of products on Shop Page.", 'wc_psad'),
 				'class'		=> 'psad_seperator_enable',
 				'id' 		=> 'psad_seperator_enable',
 				'default'	=> 'no',
@@ -432,17 +411,18 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 			
 			array(
                 'type' 		=> 'heading',
+                'id'		=> 'psad_seperator_enable_container',
 				'class'		=> 'psad_seperator_enable_container',
            	),
 			array(  
-				'name' 		=> __( 'Seperator Border', 'wc_psad' ),
+				'name' 		=> __( 'Separator Border', 'wc_psad' ),
 				'id' 		=> 'psad_seperator_border',
 				'type' 		=> 'border_styles',
 				'free_version'		=> true,
 				'default'	=> array( 'width' => '1px', 'style' => 'solid', 'color' => '#000000' ),
 			),
 			array(  
-				'name' 		=> __( 'Seperator Padding', 'wc_psad' ),
+				'name' 		=> __( 'Separator Padding', 'wc_psad' ),
 				'id' 		=> 'psad_seperator_padding',
 				'type' 		=> 'array_textfields',
 				'free_version'		=> true,
@@ -460,25 +440,7 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 	 										'default'	=> 5 ),
 	 							)
 			),
-			
-			array(
-            	'name' 		=> __( 'House Keeping :', 'wc_psad' ),
-                'type' 		=> 'heading',
-           	),
-			array(  
-				'name' 		=> __( 'Clean up on Deletion', 'wc_psad' ),
-				'desc' 		=> __( 'On deletion (not deactivate) the plugin will completely remove all tables and data it created, leaving no trace it was ever here.', 'wc_psad'),
-				'id' 		=> 'psad_lite_clean_on_deletion',
-				'type' 		=> 'onoff_checkbox',
-				'default'	=> '0',
-				'separate_option'	=> true,
-				'free_version'		=> true,
-				'checked_value'		=> '1',
-				'unchecked_value'	=> '0',
-				'checked_label'		=> __( 'ON', 'wc_psad' ),
-				'unchecked_label' 	=> __( 'OFF', 'wc_psad' ),
-			),
-		
+
         ));
 	}
 	
@@ -488,50 +450,46 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 (function($) {
 	
 	$(document).ready(function() {
-		
-		if ( $("input.psad_shop_page_enable:checked").val() == 'yes') {
-			$(".psad_shop_page_enable_container").css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
+		if ( $("input.psad_explanation:checked").val() == 'yes') {
+			$(".psad_explanation_message").show();
 		} else {
-			$(".psad_shop_page_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
+			$(".psad_explanation_message").hide();
 		}
-		if ( $("input.psad_category_page_enable:checked").val() == 'yes') {
-			$(".psad_category_page_enable_container").css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
-		} else {
-			$(".psad_category_page_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
+		if ( $("input.psad_queries_cached_enable:checked").val() != 'yes') {
+			$(".psad_queries_cached_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
 		}
-		if ( $("input.psad_tag_page_enable:checked").val() == 'yes') {
-			$(".psad_tag_page_enable_container").css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
-		} else {
-			$(".psad_tag_page_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
-		}	
-		if ( $("input.psad_seperator_enable:checked").val() == 'yes') {
-			$(".psad_seperator_enable_container").show();
-		} else {
-			$(".psad_seperator_enable_container").hide();
-		}	
-			
-		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_shop_page_enable', function( event, value, status ) {
+		if ( $("input.psad_shop_page_enable:checked").val() != 'yes') {
+			$(".psad_shop_page_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
+		}
+		if ( $("input.psad_seperator_enable:checked").val() != 'yes') {
+			$(".psad_seperator_enable_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
+		}
+
+		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_explanation', function( event, value, status ) {
 			if ( status == 'true' ) {
-				$(".psad_shop_page_enable_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} ).slideDown();
+				$(".psad_explanation_message").slideDown();
+			} else {
+				$(".psad_explanation_message").slideUp();
+			}
+		});
+		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_queries_cached_enable', function( event, value, status ) {
+			$(".psad_queries_cached_enable_container").attr('style','display:none;');
+			if ( status == 'true' ) {
+				$(".psad_queries_cached_enable_container").slideDown();
+			} else {
+				$(".psad_queries_cached_enable_container").slideUp();
+			}
+		});
+		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_shop_page_enable', function( event, value, status ) {
+			$(".psad_shop_page_enable_container").attr('style','display:none;');
+			if ( status == 'true' ) {
+				$(".psad_shop_page_enable_container").slideDown();
 			} else {
 				$(".psad_shop_page_enable_container").slideUp();
 			}
 		});
-		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_category_page_enable', function( event, value, status ) {
-			if ( status == 'true' ) {
-				$(".psad_category_page_enable_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} ).slideDown();
-			} else {
-				$(".psad_category_page_enable_container").slideUp();
-			}
-		});
-		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_tag_page_enable', function( event, value, status ) {
-			if ( status == 'true' ) {
-				$(".psad_tag_page_enable_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} ).slideDown();
-			} else {
-				$(".psad_tag_page_enable_container").slideUp();
-			}
-		});
 		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_seperator_enable', function( event, value, status ) {
+			$(".psad_seperator_enable_container").attr('style','display:none;');
 			if ( status == 'true' ) {
 				$(".psad_seperator_enable_container").slideDown();
 			} else {

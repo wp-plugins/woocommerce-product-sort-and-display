@@ -221,19 +221,19 @@ $psad_es_category_item_link_font_hover_color = get_option( 'psad_es_category_ite
 /* Separate Style */
 <?php
 $psad_seperator_enable = get_option('psad_seperator_enable');
-$psad_seperator_border = get_option('psad_seperator_border', array( 'width' => '1px', 'style' => 'solid', '#000000' ) );
+$psad_seperator_border = get_option('psad_seperator_border', array( 'width' => '1px', 'style' => 'solid', 'color' => '#000000' ) );
 $psad_seperator_padding_top = get_option('psad_seperator_padding_top');
 $psad_seperator_padding_bottom = get_option('psad_seperator_padding_bottom');
 if ( $psad_seperator_enable == 'yes' ){
 ?>
 .psad_seperator {
 	/*Border*/
-	border-bottom: <?php echo $psad_seperator_border['width']; ?> <?php echo $psad_seperator_border['']; ?> <?php echo $psad_seperator_border['color']; ?> !important;
+	border-bottom: <?php echo $psad_seperator_border['width']; ?> <?php echo $psad_seperator_border['style']; ?> <?php echo $psad_seperator_border['color']; ?> !important;
 	margin: <?php echo $psad_seperator_padding_top; ?>px 0px <?php echo $psad_seperator_padding_bottom; ?>px 0px  !important;
 }
 .wc_content {
 	/*Border*/
-	border-bottom: <?php echo $psad_seperator_border['width']; ?> <?php echo $psad_seperator_border['']; ?> <?php echo $psad_seperator_border['color']; ?> !important;
+	border-bottom: <?php echo $psad_seperator_border['width']; ?> <?php echo $psad_seperator_border['style']; ?> <?php echo $psad_seperator_border['color']; ?> !important;
 	padding-bottom:15px;
 }
 <?php } ?>
@@ -245,7 +245,7 @@ if ( $psad_seperator_enable == 'yes' ){
 }
 .product_categories_showing_count {
 	/* Font */
-	<?php echo $wc_psad_fonts_face->generate_font_css( get_option( 'psad_count_meta_font' ) ); ?>
+	<?php echo $wc_psad_fonts_face->generate_font_css( array( 'size' => '11px', 'face' => 'Arial, sans-serif', 'style' => 'italic', 'color' => '#000000' ) ); ?>
 }
 .product_categories_showing_count {
 	margin-right:10px;	
@@ -254,8 +254,8 @@ if ( $psad_seperator_enable == 'yes' ){
 /* Hide Pagination of Shop Page */
 <?php 
 $psad_endless_scroll_category_shop = get_option('psad_endless_scroll_category_shop', '' );
-if ( is_post_type_archive( 'product' ) && get_option('psad_shop_page_enable', '' ) == 'yes' && $psad_endless_scroll_category_shop == 'yes' ) { 
+if ( get_option('psad_shop_page_enable', '' ) == 'yes' && $psad_endless_scroll_category_shop == 'yes' ) { 
 ?>
-.wc_content .woocommerce-pagination, .pbc_content .woocommerce-pagination,.wc_content nav, .woocommerce-pagination, .woo-pagination {display:none !important;}
+.woocommerce.post-type-archive-product .wc_content .woocommerce-pagination, .woocommerce.post-type-archive-product .pbc_content .woocommerce-pagination,.woocommerce.post-type-archive-product .wc_content nav, .woocommerce.post-type-archive-product .woocommerce-pagination, .woocommerce.post-type-archive-product .woo-pagination {display:none !important;}
 <?php } ?>
 </style>

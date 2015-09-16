@@ -28,7 +28,7 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_PSAD_View_All_Products_Settings extends WC_PSAD_Admin_UI
+class WC_PSAD_View_All_Count_Meta_Settings extends WC_PSAD_Admin_UI
 {
 	
 	/**
@@ -51,7 +51,7 @@ class WC_PSAD_View_All_Products_Settings extends WC_PSAD_Admin_UI
 	 * @var string
 	 * You must change to correct form key that you are working
 	 */
-	public $form_key = 'woo_psad_view_all_products_settings';
+	public $form_key = 'woo_psad_view_all_count_meta_settings';
 	
 	/**
 	 * @var string
@@ -78,15 +78,15 @@ class WC_PSAD_View_All_Products_Settings extends WC_PSAD_Admin_UI
 		$this->subtab_init();
 		
 		$this->form_messages = array(
-				'success_message'	=> __( 'View All Products Settings successfully saved.', 'wc_psad' ),
-				'error_message'		=> __( 'Error: View All Products Settings can not save.', 'wc_psad' ),
-				'reset_message'		=> __( 'View All Products Settings successfully reseted.', 'wc_psad' ),
+				'success_message'	=> __( 'View All & Count Meta Settings successfully saved.', 'wc_psad' ),
+				'error_message'		=> __( 'Error: View All & Count Meta Settings can not save.', 'wc_psad' ),
+				'reset_message'		=> __( 'View All & Count Meta Settings successfully reseted.', 'wc_psad' ),
 			);
 		
 		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_end', array( $this, 'include_script' ) );
 			
 		add_action( $this->plugin_name . '_set_default_settings' , array( $this, 'set_default_settings' ) );
-		
+
 		//add_action( $this->plugin_name . '_get_all_settings' , array( $this, 'get_settings' ) );
 		
 	}
@@ -135,9 +135,9 @@ class WC_PSAD_View_All_Products_Settings extends WC_PSAD_Admin_UI
 	public function subtab_data() {
 		
 		$subtab_data = array( 
-			'name'				=> 'view-all-products',
-			'label'				=> __( 'View All Products', 'wc_psad' ),
-			'callback_function'	=> 'wc_psad_view_all_products_settings_form',
+			'name'				=> 'view-all-count-meta',
+			'label'				=> __( 'View All & Count Meta', 'wc_psad' ),
+			'callback_function'	=> 'wc_psad_view_all_count_meta_settings_form',
 		);
 		
 		if ( $this->subtab_data ) return $this->subtab_data;
@@ -179,29 +179,17 @@ class WC_PSAD_View_All_Products_Settings extends WC_PSAD_Admin_UI
   		// Define settings			
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
 		
+			// View All Settings
 			array(
-            	'name' 		=> __( 'Style for View all Products link in each Category', 'wc_psad' ),
+            	'name' 		=> __( 'View All Products Link Position', 'wc_psad' ),
                 'type' 		=> 'heading',
-           	),
-			array(  
-				'name' 		=> __( 'Button or Hyperlink Text', 'wc_psad' ),
-				'id' 		=> 'psad_es_category_item_bt_type',
-				'class'		=> 'psad_es_category_item_bt_type',
-				'default'	=> 'link',
-				'type' 		=> 'switcher_checkbox',
-				'checked_value'		=> 'link',
-				'unchecked_value'	=> 'button',
-				'checked_label'		=> __( 'Linked', 'wc_psad' ),
-				'unchecked_label' 	=> __( 'Button', 'wc_psad' ),
-			),
-			
-			array(
-            	'name' 		=> __( 'View All Position', 'wc_psad' ),
-                'type' 		=> 'heading',
+                'id'		=> 'psad_view_all_position_box',
+                'is_box'	=> true,
            	),
 			array(  
 				'name' 		=> __( 'Show at', 'wc_psad' ),
 				'id' 		=> 'psad_es_category_item_bt_position',
+				'class'		=> 'psad_es_category_item_bt_position',
 				'type' 		=> 'onoff_radio',
 				'default'	=> 'bottom',
 				'onoff_options'	=> array(
@@ -218,6 +206,26 @@ class WC_PSAD_View_All_Products_Settings extends WC_PSAD_Admin_UI
 						'unchecked_value'	=> __( 'OFF' , 'wc_psad' ),
 					),
 				),
+				'free_version'		=> true,
+			),
+
+			array(
+            	'name' 		=> __( 'View All Products Link Style', 'wc_psad' ),
+                'type' 		=> 'heading',
+                'id'		=> 'psad_view_all_style_box',
+                'is_box'	=> true,
+           	),
+			array(  
+				'name' 		=> __( 'Button or Hyperlink Text', 'wc_psad' ),
+				'id' 		=> 'psad_es_category_item_bt_type',
+				'class'		=> 'psad_es_category_item_bt_type',
+				'default'	=> 'link',
+				'type' 		=> 'switcher_checkbox',
+				'checked_value'		=> 'link',
+				'unchecked_value'	=> 'button',
+				'checked_label'		=> __( 'Linked', 'wc_psad' ),
+				'unchecked_label' 	=> __( 'Button', 'wc_psad' ),
+				'free_version'		=> true,
 			),
 			
 			array(
@@ -231,7 +239,12 @@ class WC_PSAD_View_All_Products_Settings extends WC_PSAD_Admin_UI
 				'id' 		=> 'psad_es_category_item_bt_text',
 				'type' 		=> 'text',
 				'default'	=> __( 'See more...', 'wc_psad' ),
+				'free_version'		=> true,
 			),
+			array(
+                'type' 		=> 'heading',
+				'class'		=> 'psad_es_view_all_bt_align_container',
+           	),
 			array(  
 				'name' 		=> __( 'Button Align', 'wc_psad' ),
 				'id' 		=> 'psad_es_category_item_bt_align',
@@ -243,7 +256,12 @@ class WC_PSAD_View_All_Products_Settings extends WC_PSAD_Admin_UI
 						'left'			=> __( 'Left', 'wc_psad' ) ,	
 						'right'			=> __( 'Right', 'wc_psad' ) ,	
 					),
+				'free_version'		=> true,
 			),
+			array(
+                'type' 		=> 'heading',
+				'class'		=> 'psad_es_view_all_click_more_bt_container',
+           	),
 			array(  
 				'name' 		=> __( 'Button Padding', 'wc_psad' ),
 				'desc' 		=> __( 'Padding from Button text to Button border', 'wc_psad' ),
@@ -253,34 +271,40 @@ class WC_PSAD_View_All_Products_Settings extends WC_PSAD_Admin_UI
 	 								array(  'id' 		=> 'psad_es_view_all_bt_padding_tb',
 	 										'name' 		=> __( 'Top/Bottom', 'wc_psad' ),
 	 										'css'		=> 'width:40px;',
-	 										'default'	=> 5 ),
+	 										'default'	=> 5,
+	 										'free_version'		=> true ),
 	 
 	 								array(  'id' 		=> 'psad_es_view_all_bt_padding_lr',
 	 										'name' 		=> __( 'Left/Right', 'wc_psad' ),
 	 										'css'		=> 'width:40px;',
-	 										'default'	=> 5 ),
-	 							)
+	 										'default'	=> 5,
+	 										'free_version'		=> true ),
+	 							),
+				'free_version'		=> true,
 			),
 			array(  
 				'name' 		=> __( 'Background Colour', 'wc_psad' ),
 				'desc' 		=> __('Default [default_value]', 'wc_psad'),
 				'id' 		=> 'psad_es_category_item_bt_bg',
 				'type' 		=> 'color',
-				'default'	=> '#7497B9'
+				'default'	=> '#7497B9',
+				'free_version'		=> true,
 			),
 			array(  
 				'name' 		=> __( 'Background Colour Gradient From', 'wc_psad' ),
 				'desc' 		=> __('Default [default_value]', 'wc_psad'),
 				'id' 		=> 'psad_es_category_item_bt_bg_from',
 				'type' 		=> 'color',
-				'default'	=> '#7497B9'
+				'default'	=> '#7497B9',
+				'free_version'		=> true,
 			),
 			array(  
 				'name' 		=> __( 'Background Colour Gradient To', 'wc_psad' ),
 				'desc' 		=> __('Default [default_value]', 'wc_psad'),
 				'id' 		=> 'psad_es_category_item_bt_bg_to',
 				'type' 		=> 'color',
-				'default'	=> '#4b6E90'
+				'default'	=> '#4b6E90',
+				'free_version'		=> true,
 			),
 			
 			array(  
@@ -288,27 +312,23 @@ class WC_PSAD_View_All_Products_Settings extends WC_PSAD_Admin_UI
 				'id' 		=> 'psad_es_category_item_bt_border',
 				'type' 		=> 'border',
 				'default'	=> array( 'width' => '1px', 'style' => 'solid', 'color' => '#7497B9', 'corner' => 'rounded' , 'top_left_corner' => 3 , 'top_right_corner' => 3 , 'bottom_left_corner' => 3 , 'bottom_right_corner' => 3 ),
+				'free_version'		=> true,
 			),
 			array(  
 				'name' 		=> __( 'Button Font', 'wc_psad' ),
 				'id' 		=> 'psad_es_category_item_bt_font',
 				'type' 		=> 'typography',
-				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'bold', 'color' => '#FFFFFF' )
+				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'bold', 'color' => '#FFFFFF' ),
+				'free_version'		=> true,
 			),
 			array(  
 				'name' 		=> __( 'Button Shadow', 'wc_psad' ),
 				'id' 		=> 'psad_es_view_all_bt_shadow',
 				'type' 		=> 'box_shadow',
-				'default'	=> array( 'enable' => 0, 'h_shadow' => '5px' , 'v_shadow' => '5px', 'blur' => '2px' , 'spread' => '2px', 'color' => '#999999', 'inset' => '' )
+				'default'	=> array( 'enable' => 0, 'h_shadow' => '5px' , 'v_shadow' => '5px', 'blur' => '2px' , 'spread' => '2px', 'color' => '#999999', 'inset' => '' ),
+				'free_version'		=> true,
 			),
-			array(  
-				'name' 		=> __( 'CSS Class', 'wc_psad' ),
-				'desc' 		=> __('Enter your own button CSS class', 'wc_psad'),
-				'id' 		=> 'psad_es_category_item_bt_class',
-				'type' 		=> 'text',
-				'default'	=> ''
-			),
-			
+
 			array(
             	'name' 		=> __( 'Linked Text Styling', 'wc_psad' ),
                 'type' 		=> 'heading',
@@ -320,7 +340,12 @@ class WC_PSAD_View_All_Products_Settings extends WC_PSAD_Admin_UI
 				'id' 		=> 'psad_es_category_item_link_text',
 				'type' 		=> 'text',
 				'default'	=> __( 'See more...', 'wc_psad' ),
+				'free_version'		=> true,
 			),
+			array(
+                'type' 		=> 'heading',
+				'class'		=> 'psad_es_view_all_linked_align_container',
+           	),
 			array(  
 				'name' 		=> __( 'Linked Text Align', 'wc_psad' ),
 				'id' 		=> 'psad_es_category_item_link_align',
@@ -332,12 +357,18 @@ class WC_PSAD_View_All_Products_Settings extends WC_PSAD_Admin_UI
 						'left'			=> __( 'Left', 'wc_psad' ) ,	
 						'right'			=> __( 'Right', 'wc_psad' ) ,	
 					),
+				'free_version'		=> true,
 			),
+			array(
+                'type' 		=> 'heading',
+				'class'		=> 'psad_es_view_all_click_more_linked_container',
+           	),
 			array(  
 				'name' 		=> __( 'Hyperlink Font', 'wc_psad' ),
 				'id' 		=> 'psad_es_category_item_link_font',
 				'type' 		=> 'typography',
-				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'bold', 'color' => '#7497B9' )
+				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'bold', 'color' => '#7497B9' ),
+				'free_version'		=> true,
 			),
 			array(  
 				'name' 		=> __( 'Hyperlink Hover Colour', 'wc_psad' ),
@@ -345,8 +376,9 @@ class WC_PSAD_View_All_Products_Settings extends WC_PSAD_Admin_UI
 				'id' 		=> 'psad_es_category_item_link_font_hover_color',
 				'type' 		=> 'color',
 				'default'	=> '#4b6E90',
+				'free_version'		=> true,
 			),
-			
+
         ));
 	}
 	
@@ -354,45 +386,82 @@ class WC_PSAD_View_All_Products_Settings extends WC_PSAD_Admin_UI
 	?>
 <script>
 (function($) {
-	
+
 	$(document).ready(function() {
-		
+
+		// View All Settings
 		if ( $("input.psad_es_category_item_bt_type:checked").val() == 'link') {
-			$(".psad_es_view_all_click_more_linked_container").css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
-			$(".psad_es_view_all_click_more_bt_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
+			$(".psad_es_view_all_click_more_bt_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
+			if ( $("input.psad_es_category_item_bt_position:checked").val() == 'bottom') {
+				$(".psad_es_view_all_bt_align_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
+			}
 		} else {
-			$(".psad_es_view_all_click_more_linked_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
-			$(".psad_es_view_all_click_more_bt_container").css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
+			$(".psad_es_view_all_click_more_linked_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
+			if ( $("input.psad_es_category_item_bt_position:checked").val() == 'bottom') {
+				$(".psad_es_view_all_linked_align_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
+			}
 		}
-			
+
+		if ( $("input.psad_es_category_item_bt_position:checked").val() != 'bottom') {
+			$(".psad_es_view_all_linked_align_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
+			$(".psad_es_view_all_bt_align_container").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px'} );
+		}
+
 		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.psad_es_category_item_bt_type', function( event, value, status ) {
+			$(".psad_es_view_all_click_more_linked_container").attr('style','display:none;');
+			$(".psad_es_view_all_click_more_bt_container").attr('style','display:none;');
+			$(".psad_es_view_all_linked_align_container").attr('style','display:none;');
+			$(".psad_es_view_all_bt_align_container").attr('style','display:none;');
 			if ( status == 'true' ) {
-				$(".psad_es_view_all_click_more_linked_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} ).slideDown();
+				$(".psad_es_view_all_click_more_linked_container").slideDown();
 				$(".psad_es_view_all_click_more_bt_container").slideUp();
+				if ( $("input.psad_es_category_item_bt_position:checked").val() == 'bottom') {
+					$(".psad_es_view_all_linked_align_container").slideDown();
+					$(".psad_es_view_all_bt_align_container").slideUp();
+				}
 			} else {
 				$(".psad_es_view_all_click_more_linked_container").slideUp();
-				$(".psad_es_view_all_click_more_bt_container").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} ).slideDown();
+				$(".psad_es_view_all_click_more_bt_container").slideDown();
+				if ( $("input.psad_es_category_item_bt_position:checked").val() == 'bottom') {
+					$(".psad_es_view_all_linked_align_container").slideUp();
+					$(".psad_es_view_all_bt_align_container").slideDown();
+				}
 			}
 		});
-		
+
+		$(document).on( "a3rev-ui-onoff_radio-switch", '.psad_es_category_item_bt_position', function( event, value, status ) {
+			$(".psad_es_view_all_linked_align_container").attr('style','display:none;');
+			$(".psad_es_view_all_bt_align_container").attr('style','display:none;');
+			if ( value == 'bottom' && status == 'true' ) {
+				if ( $("input.psad_es_category_item_bt_type:checked").val() == 'link') {
+					$(".psad_es_view_all_linked_align_container").slideDown();
+				} else {
+					$(".psad_es_view_all_bt_align_container").slideDown();
+				}
+			} else {
+				$(".psad_es_view_all_linked_align_container").slideUp();
+				$(".psad_es_view_all_bt_align_container").slideUp();
+			}
+		});
+
 	});
-	
+
 })(jQuery);
 </script>
-    <?php	
+    <?php
 	}
 }
 
-global $wc_psad_view_all_products_settings;
-$wc_psad_view_all_products_settings = new WC_PSAD_View_All_Products_Settings();
+global $wc_psad_view_all_count_meta_settings;
+$wc_psad_view_all_count_meta_settings = new WC_PSAD_View_All_Count_Meta_Settings();
 
-/** 
- * wc_psad_view_all_products_settings_form()
+/**
+ * wc_psad_view_all_count_meta_settings_form()
  * Define the callback function to show subtab content
  */
-function wc_psad_view_all_products_settings_form() {
-	global $wc_psad_view_all_products_settings;
-	$wc_psad_view_all_products_settings->settings_form();
+function wc_psad_view_all_count_meta_settings_form() {
+	global $wc_psad_view_all_count_meta_settings;
+	$wc_psad_view_all_count_meta_settings->settings_form();
 }
 
 ?>
