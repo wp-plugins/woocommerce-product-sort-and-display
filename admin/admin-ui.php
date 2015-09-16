@@ -37,6 +37,12 @@ class WC_PSAD_Admin_UI
 	public $toggle_box_open_option = 'wc_psad_toggle_box_open';
 
 	public $is_free_plugin = true;
+	public $version_transient = 'wc_psad_update_info';
+
+	public $plugin_option_key = 'wc_psad_plugin';
+
+	public $support_url = 'https://a3rev.com/forums/forum/woocommerce-plugins/product-sort-and-display/';
+
 
 	/**
 	 * @var string
@@ -207,6 +213,44 @@ class WC_PSAD_Admin_UI
 		$message = apply_filters( $this->plugin_name . '_blue_message_box', $message );
 
 		return $message;
+	}
+
+	/*-----------------------------------------------------------------------------------*/
+	/* get_version_message() */
+	/* Get new version message, also include error connect
+	/*-----------------------------------------------------------------------------------*/
+	public function get_version_message() {
+		$version_message = '';
+
+		//Getting version number
+		$version_transient = get_transient( $this->version_transient );
+		if ( false !== $version_transient ) {
+			$transient_timeout = '_transient_timeout_' . $this->version_transient;
+			$timeout = get_option( $transient_timeout, false );
+			if ( false === $timeout ) {
+				$version_message = __( 'You should check now to see if have any new version is available', 'wc_psad' );
+			} elseif ( 'cannot_connect_api' == $version_transient ) {
+				$version_message = sprintf( __( 'Connection Failure! Please try again. If this issue persists please create a support request on the plugin <a href="%s" target="_blank">a3rev support forum</a>.', 'wc_psad' ), $this->support_url );
+			} else {
+				$version_info = explode( '||', $version_transient );
+				if ( FALSE !== stristr( $version_transient, '||' )
+					&& is_array( $version_info )
+					&& isset( $version_info[1] ) && $version_info[1] == 'valid'
+					&& version_compare( get_option('wc_psad_version') , $version_info[0], '<' ) ) {
+
+						$version_message = sprintf( __( 'There is a new version <span class="a3rev-ui-new-plugin-version">%s</span> available, <a href="%s" target="_blank">update now</a> or download direct from <a href="%s" target="_blank">My Account</a> on a3rev.com', 'wc_psad' ),
+							$version_info[0],
+							wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' . WC_PSAD_NAME ), 'upgrade-plugin_' . WC_PSAD_NAME ),
+							'https://a3rev.com/my-account/downloads/'
+						);
+				}
+			}
+
+		} else {
+			$version_message = __( 'You should check now to see if have any new version is available', 'wc_psad' );
+		}
+
+		return $version_message;
 	}
 
 }

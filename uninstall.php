@@ -177,10 +177,6 @@ if (get_option('psad_lite_clean_on_deletion') == 1) {
 
     delete_option('psad_lite_clean_on_deletion');
 
-    $metadata = array('psad_category_per_page', 'psad_top_product_per_page', 'psad_shop_product_per_page', 'psad_product_per_page', 'psad_shop_product_show_type', 'psad_product_show_type', 'psad_category_product_nosub_per_page');
-    foreach ($metadata as $meta_key) {
-        delete_metadata('woocommerce_term', '', $meta_key, '', true);
-    }
 }
 
 // Delete the queries cached

@@ -8,7 +8,6 @@
  * init()
  * limit_posts_per_page()
  * remove_woocommerce_pagination()
- * woocommerce_pagination()
  * remove_responsi_action()
  * psad_endless_scroll_shop()
  * check_shop_page()
@@ -36,7 +35,6 @@ class WC_PSAD
 		add_action( 'woo_head', array( $this, 'remove_responsi_action'), 11 );
 		add_action( 'a3rev_head', array( $this, 'remove_responsi_action'), 11 );
 		add_action( 'wp_head', array( $this, 'remove_woocommerce_pagination'), 10 );
-		add_action( 'woocommerce_after_shop_loop', array( $this, 'woocommerce_pagination') );
 
 		//Check if shop page
 		add_action( 'woocommerce_before_shop_loop', array( $this, 'check_shop_page'), 1 );
@@ -57,6 +55,21 @@ class WC_PSAD
 
 	}
 
+	public function get_sort_options() {
+		$sort_options = array(
+			'menu_order' => __( 'Default sorting (custom ordering + name)', 'woocommerce' ),
+			'popularity' => __( 'Popularity (sales)', 'woocommerce' ),
+			'rating'     => __( 'Average Rating', 'woocommerce' ),
+			'date'       => __( 'Sort by most recent', 'woocommerce' ),
+			'price'      => __( 'Sort by price (asc)', 'woocommerce' ),
+			'price-desc' => __( 'Sort by price (desc)', 'woocommerce' ),
+			'onsale'     => __( 'Sort by On Sale: Show first', 'wc_psad' ),
+			'featured'   => __( 'Sort by Featured: Show first', 'wc_psad' ),
+		);
+
+		return $sort_options;
+	}
+
 	public function limit_posts_per_page() {
 		global $wp_query;
 		if(!is_admin()){
@@ -73,34 +86,6 @@ class WC_PSAD
 		if( ($is_shop && get_option('psad_shop_page_enable') == 'yes') ){
 			remove_action( 'woocommerce_after_shop_loop', 'woocommerce_pagination', 10 );
 			remove_action( 'woocommerce_after_main_content', 'canvas_commerce_pagination', 01, 0 );
-		}
-	}
-
-	public function woocommerce_pagination(){
-		global $wp_query;
-		$is_shop = is_post_type_archive( 'product' );
-		if( !$is_shop ){
-
-		if ( $wp_query->max_num_pages <= 1 )
-			return;
-		?>
-		<nav class="wc_pagination woo-pagination woocommerce-pagination">
-			<?php
-				// fixed for 4.1.2
-				echo paginate_links( apply_filters( 'woocommerce_pagination_args', array(
-					'base' 			=> esc_url( add_query_arg( 'paged', '%#%' ) ),
-					'format' 		=> '',
-					'current' 		=> max( 1, get_query_var('paged') ),
-					'total' 		=> $wp_query->max_num_pages,
-					'prev_text' 	=> '&larr;',
-					'next_text' 	=> '&rarr;',
-					'type'			=> 'list',
-					'end_size'		=> 3,
-					'mid_size'		=> 3
-				) ) );
-			?>
-		</nav>
-        <?php
 		}
 	}
 
@@ -304,8 +289,8 @@ class WC_PSAD
 		$enable_product_showing_count = get_option('psad_shop_enable_product_showing_count');
 		$product_ids_on_sale = ( ( version_compare( $woocommerce_db_version, '2.1', '<' ) ) ? woocommerce_get_product_ids_on_sale() : wc_get_product_ids_on_sale() );
 		$product_ids_on_sale[] = 0;
-		$global_psad_shop_product_per_page = get_option('psad_shop_product_per_page', 0);
-		$global_psad_shop_product_show_type = get_option('psad_shop_product_show_type', '');
+		$global_psad_shop_product_per_page = get_option('psad_shop_product_per_page', 4 );
+		$global_psad_shop_product_show_type = get_option('psad_shop_product_show_type', 'menu_order');
 		$global_display_type = get_option('woocommerce_category_archive_display', '');
 
 		$term 			= get_queried_object();
@@ -361,8 +346,8 @@ class WC_PSAD
 		$to = $page * $numOfItems;
 		$current = $to - $numOfItems;
 		$total = sizeof($product_categories);
-		$orderby = 'date';
-		$order = 'DESC';
+		$orderby = 'menu_order title';
+		$order = 'ASC';
 
 		if ($to > count ($product_categories) ) $to = count($product_categories);
 
@@ -388,31 +373,31 @@ class WC_PSAD
 
 				$category = $product_categories[$i];
 
+				$psad_shop_product_per_page = $global_psad_shop_product_per_page;
+				if ( $psad_shop_product_per_page <= 0 ) {
+					$psad_shop_product_per_page = 4;
+				}
+
+				$psad_shop_product_show_type = $global_psad_shop_product_show_type;
+
 				$list_products = false;
-				if ( $psad_queries_cached_enable == 'yes' ) {
+				$transient_name = 'a3_s_p_cat_'.$category->term_id . $psad_shop_product_show_type . $psad_shop_product_per_page . $user_roles;
+				$get_from_cached = true;
+				if ( strlen( $transient_name ) > 45 ) {
+					$get_from_cached = false;
+				}
+				if ( $psad_queries_cached_enable == 'yes' && $get_from_cached ) {
 					// Get cached shop each category query results
-					$list_products = get_transient( 'a3_s_p_cat_'.$category->term_id . $user_roles );
+					$list_products = get_transient( $transient_name );
 				}
 
 				if ( ! $list_products ) {
-
-					$psad_shop_product_per_page	= get_woocommerce_term_meta( $category->term_id, 'psad_shop_product_per_page', true );
-					if (!$psad_shop_product_per_page || $psad_shop_product_per_page <= 0)
-						$psad_shop_product_per_page = $global_psad_shop_product_per_page;
-					if ( $psad_shop_product_per_page <= 0 )
-						$psad_shop_product_per_page = 3;
-
-					$psad_shop_product_show_type	= get_woocommerce_term_meta( $category->term_id, 'psad_shop_product_show_type', true );
-					if (!$psad_shop_product_show_type || $psad_shop_product_show_type == '')
-						$psad_shop_product_show_type = $global_psad_shop_product_show_type;
 
 					$display_type	= get_woocommerce_term_meta( $category->term_id, 'display_type', true );
 					if (!$display_type || $display_type == '')
 						$display_type = $global_display_type;
 
-					if ($psad_shop_product_show_type == 'none') {
-					} elseif ($psad_shop_product_show_type == 'recent') {
-					} elseif ($psad_shop_product_show_type == 'onsale') {
+					if ($psad_shop_product_show_type == 'onsale') {
 						$wp_query->query_vars['post__in'] = $product_ids_on_sale;
 					} elseif ($psad_shop_product_show_type == 'featured') {
 						$wp_query->query_vars['no_found_rows'] = 1;
@@ -454,14 +439,31 @@ class WC_PSAD
 
 					$ogrinal_product_args = $product_args;
 
-					if ( $psad_shop_product_show_type == 'onsale' ) {
-						$product_args['orderby']	= 'meta_value_num date';
-						$product_args['order']		= 'DESC';
-						$product_args['meta_key']	= '_psad_onsale_order';
-					} elseif ( $psad_shop_product_show_type == 'featured' ) {
-						$product_args['orderby']	= 'meta_value_num date';
-						$product_args['order']		= 'DESC';
-						$product_args['meta_key']	= '_psad_featured_order';
+					if ( in_array( $psad_shop_product_show_type , array( 'onsale', 'featured' ) ) ) {
+						$ordering_args = array();
+						switch ( $psad_shop_product_show_type ) {
+							case 'onsale' :
+								$ordering_args['orderby']  = array( 'meta_value_num' => 'DESC', 'menu_order' => 'ASC', 'title' => 'ASC' );
+								$ordering_args['order']    = 'DESC';
+								$ordering_args['meta_key'] = '_psad_onsale_order';
+								break;
+							case 'featured' :
+								$ordering_args['orderby']  = array( 'meta_value_num' => 'DESC', 'menu_order' => 'ASC', 'title' => 'ASC' );
+								$ordering_args['order']    = 'DESC';
+								$ordering_args['meta_key'] = '_psad_featured_order';
+								break;
+						}
+						$product_args = array_merge( $product_args, $ordering_args );
+					} else {
+						if ( false !== stristr( $psad_shop_product_show_type, '-' ) ) {
+							// Get order + orderby args from string
+							$orderby_value               = explode( '-', $psad_shop_product_show_type );
+							$psad_shop_product_show_type = esc_attr( $orderby_value[0] );
+							$order                       = ! empty( $orderby_value[1] ) ? $orderby_value[1] : $order;
+						}
+						remove_all_actions( 'woocommerce_get_catalog_ordering_args' );
+						$ordering_args = WC()->query->get_catalog_ordering_args( $psad_shop_product_show_type, $order );
+						$product_args = array_merge( $product_args, $ordering_args );
 					}
 
 					$products = query_posts( $product_args );
@@ -550,7 +552,7 @@ class WC_PSAD
 					echo '<div class="psad_seperator products_categories_row" style="clear:both;"></div>';
 				}
 
-				if ( $psad_queries_cached_enable == 'yes' && ! $list_products ) {
+				if ( $psad_queries_cached_enable == 'yes' && ! $list_products && $get_from_cached ) {
 					$list_products = array(
 						'have_products'   => $have_products,
 						'count_products'  => $count_posts_get,
@@ -559,7 +561,7 @@ class WC_PSAD
 					);
 
 					// Set cached shop each category query results for 1 day
-					set_transient( 'a3_s_p_cat_' . $category->term_id . $user_roles, $list_products, 86400 );
+					set_transient( $transient_name, $list_products, 86400 );
 				}
 			}
 		}

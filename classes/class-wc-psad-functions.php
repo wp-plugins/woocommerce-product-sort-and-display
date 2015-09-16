@@ -6,6 +6,8 @@
  *
  * auto_create_order_keys_all_products()
  * update_orders_value()
+ * add_custom_options_sort()
+ * change_orderby_query()
  */
 class WC_PSAD_Functions 
 {	
@@ -63,6 +65,37 @@ class WC_PSAD_Functions
 				update_post_meta( $post_id, '_psad_featured_order', 1 );	
 			}
 		}
+	}
+
+	public static function add_custom_options_sort( $woocommerce_catalog_orderby = array() ) {
+		$woocommerce_catalog_orderby['onsale'] = __('Sort by On Sale: Show first', 'wc_psad');
+		$woocommerce_catalog_orderby['featured'] = __('Sort by Featured: Show first', 'wc_psad');
+		
+		return $woocommerce_catalog_orderby;
+	}
+
+	public static function change_orderby_query( $ordering_args ) {
+		$woocommerce_db_version = get_option( 'woocommerce_db_version', null );
+		
+		if ( version_compare( $woocommerce_db_version, '2.1', '<' ) ) {
+			$orderby_value = isset( $_GET['orderby'] ) ? woocommerce_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
+		} else {
+			$orderby_value = isset( $_GET['orderby'] ) ? wc_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
+		}
+		switch ( $orderby_value ) {
+			case 'onsale' :
+				$ordering_args['orderby']  = array( 'meta_value_num' => 'DESC', 'menu_order' => 'ASC', 'title' => 'ASC' );
+				$ordering_args['order']    = 'DESC';
+				$ordering_args['meta_key'] = '_psad_onsale_order';
+				break;
+			case 'featured' :
+				$ordering_args['orderby']  = array( 'meta_value_num' => 'DESC', 'menu_order' => 'ASC', 'title' => 'ASC' );
+				$ordering_args['order']    = 'DESC';
+				$ordering_args['meta_key'] = '_psad_featured_order';
+				break;
+		}
+		
+		return $ordering_args;
 	}
 
 	public static function flush_cached() {

@@ -17,9 +17,8 @@ function wc_psad_install()
     $wc_psad_less->plugin_build_sass();
 
     WC_PSAD_Functions::auto_create_order_keys_all_products();
-    update_option('wc_psad_lite_version', '1.3.5');
+    update_option('wc_psad_lite_version', '1.4.0');
     update_option('wc_psad_plugin', 'wc_psad');
-    delete_transient("wc_psad_update_info");
     delete_metadata( 'user', 0, $wc_psad_admin_init->plugin_name . '-' . 'psad_plugin_framework_box' . '-' . 'opened', '', true );
 
     // Remove house keeping option of another version
@@ -62,6 +61,12 @@ add_action( 'plugin_action_links_' . WC_PSAD_NAME, array( $wc_psad_settings_hook
 // Update Onsale order and Featured order value
 add_action('save_post', array('WC_PSAD_Functions', 'update_orders_value'), 101, 2);
 
+// Add custom options Onsale and Featured into woocommerce default sort dropdown
+add_filter( 'woocommerce_catalog_orderby', array( 'WC_PSAD_Functions', 'add_custom_options_sort' ), 101 );
+
+// Update orderby query for custom sort
+add_filter( 'woocommerce_get_catalog_ordering_args', array( 'WC_PSAD_Functions', 'change_orderby_query' ), 101 );
+
 // Check upgrade functions
 add_action('plugins_loaded', 'psad_upgrade_plugin');
 function psad_upgrade_plugin()
@@ -88,6 +93,6 @@ function psad_upgrade_plugin()
         $wpdb->query( $wpdb->prepare( 'DELETE FROM '. $wpdb->options . ' WHERE option_name LIKE %s', '%psad_shop_list_products_category%' ) );
     }
 
-    update_option('wc_psad_lite_version', '1.3.5');
+    update_option('wc_psad_lite_version', '1.4.0');
 }
 ?>

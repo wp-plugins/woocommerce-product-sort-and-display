@@ -90,7 +90,6 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_init' , array( $this, 'after_save_settings' ) );
 		
 		//add_action( $this->plugin_name . '_get_all_settings' , array( $this, 'get_settings' ) );
-		
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -193,6 +192,16 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 	/* Init all fields of this form */
 	/*-----------------------------------------------------------------------------------*/
 	public function init_form_fields() {
+		$sort_options = array(
+			'menu_order' => __( 'Default sorting (custom ordering + name)', 'woocommerce' ),
+			'popularity' => __( 'Popularity (sales)', 'woocommerce' ),
+			'rating'     => __( 'Average Rating', 'woocommerce' ),
+			'date'       => __( 'Sort by most recent', 'woocommerce' ),
+			'price'      => __( 'Sort by price (asc)', 'woocommerce' ),
+			'price-desc' => __( 'Sort by price (desc)', 'woocommerce' ),
+			'onsale'     => __( 'Sort by On Sale: Show first', 'wc_psad' ),
+			'featured'   => __( 'Sort by Featured: Show first', 'wc_psad' ),
+		);
 		
   		// Define settings			
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
@@ -368,13 +377,10 @@ class WC_PSAD_Global_Settings extends WC_PSAD_Admin_UI
 				'desc' 		=> __('Product type can be set on a Category by category basis with the Pro version', 'wc_psad'),
 				'id' 		=> 'psad_shop_product_show_type',
 				'type' 		=> 'select',
-				'default'	=> 'none',
+				'default'	=> 'menu_order',
 				'free_version'		=> true,
-				'options'	=> array(
-						'none'			=> __( 'Default (Recent)', 'wc_psad' ) ,							
-						'onsale'		=> __( 'On Sale', 'wc_psad' ) ,
-						'featured'		=> __( 'Featured', 'wc_psad' ) ,
-					),
+				'css'		=> 'width: auto;',
+				'options'	=> $sort_options,
 			),
 			array(  
 				'name' 		=> __( 'Product Count', 'wc_psad' ),

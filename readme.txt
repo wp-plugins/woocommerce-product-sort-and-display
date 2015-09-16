@@ -3,8 +3,8 @@
 Contributors: a3rev, A3 Revolution Software Development team, nguyencongtuan
 Tags: WooCommerce, WooCommerce Shop Page, WooCommerce Products, WooCommerce Product Display, WooCommerce Product sort.
 Requires at least: 4.0
-Tested up to: 4.3
-Stable tag: 1.3.5
+Tested up to: 4.3.1
+Stable tag: 1.4.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -82,7 +82,7 @@ The Premium version of this plugin is for those who want Sort and Display applie
 * If parent Category has no products because all products are in the child categories set to show child cats with products
 * Custom Sort Featured and On Sale is added to WooCommerce Sort features for Category and Tags pages
 * Endless Scroll feature for Product Category and Product tag pages
-* Apply all settings globally from the admin dashboard with individual setting on each category e.g. Sort type, number of products to show 
+* Apply all settings globally from the admin dashboard with individual setting on each category e.g. Sort type, number of products to show
 
 The Premium version is a once only payment Lifetime License plugin (not annual subscription). View details here on the [a3rev.com](http://a3rev.com/shop/woocommerce-product-sort-and-display/) site
 
@@ -151,6 +151,15 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Changelog ==
+
+= 1.4.0 - 2015/09/16 =
+* Feature - Support all sort options of WooCommerce Settings for show products on Shop Page
+* Feature - Hook into 'woocommerce_default_catalog_orderby_options' filter tag for add 'Sort by On Sale' and 'Sort by Featured' options into Default Product Sort setting of WooCommerce
+* Feature - Still show 'Sort by On Sale' and 'Sort by Featured' from sort dropdown on Shop Page and Category Page when the disabled Sort & Display for Shop Page or Category Page from Plugin Settings
+* Tweak - Change the default sort from 'Recent' to new WooCommerce version 2.4.0 'Custom ordering + Name' with backward compatibility
+* Tweak - Update the transient name with addition 'orderby' and 'order' with make transient name for list products cached
+* Tweak - Tested for full compatibility with WordPress Version 4.3.1
+* Fix - Pagination show duplicated on Category page
 
 = 1.3.5 - 2015/08/20 =
 * Tweak - include new CSSMin lib from https://github.com/tubalmartin/YUI-CSS-compressor-PHP-port into plugin framework instead of old CSSMin lib from http://code.google.com/p/cssmin/ , to avoid conflict with plugins or themes that have CSSMin lib
@@ -339,6 +348,9 @@ On any WordPress install that has the WooCommerce plugin installed and activated
 
 
 == Upgrade Notice ==
+
+= 1.4.0 =
+Feature Upgrade. 3 new features including support for all WC sort options for Shop page plus for new WC default sort plus 1 bug fix. Also full compatibility with WordPress version 4.3.1
 
 = 1.3.5 =
 Major Maintenance Upgrade. 6 Code Tweaks plus 3 bug fixes for full compatibility with WordPress v 4.3.0 and WooCommerce v 2.4.4

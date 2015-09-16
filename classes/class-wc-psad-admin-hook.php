@@ -21,6 +21,9 @@ class WC_PSAD_Settings_Hook
 
 		// Include google fonts into header
 		add_action( 'wp_head', array( $this, 'add_google_fonts'), 11 );
+
+		//Add sort into Settings of WC
+		add_filter( 'woocommerce_default_catalog_orderby_options', array( $this, 'add_options_into_default_catalog_orderby') );
 		
 		// AJAX hide yellow message dontshow
 		add_action('wp_ajax_psad_yellow_message_dontshow', array( $this, 'psad_yellow_message_dontshow' ) );
@@ -48,6 +51,13 @@ class WC_PSAD_Settings_Hook
 		$google_fonts = apply_filters( 'wc_psad_google_fonts', $google_fonts );
 		
 		$wc_psad_fonts_face->generate_google_webfonts( $google_fonts );
+	}
+
+	public function add_options_into_default_catalog_orderby( $default_catalog_orderby_options ) {
+		$default_catalog_orderby_options['onsale'] = __('Sort by On Sale: Show first', 'wc_psad');
+		$default_catalog_orderby_options['featured'] = __('Sort by Featured: Show first', 'wc_psad');
+
+		return $default_catalog_orderby_options;
 	}
 
 	public function psad_yellow_message_dontshow() {
